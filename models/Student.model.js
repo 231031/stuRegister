@@ -10,6 +10,10 @@ const Student = sequelize.define('Student',{
         allowNull: false,
         primaryKey: true,
     },
+    password : {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     firstName : {
         type: DataTypes.STRING,
         allowNull: false,
@@ -32,7 +36,7 @@ Student.hasMany(Eduhistory, {foreignKey: 'student_id', onUpdate: 'cascade', onDe
 Eduhistory.belongsTo(Student, {foreignKey: 'student_id', onUpdate: 'cascade', onDelete: 'cascade' });
 
 Student.hasMany(Sturegister, {foreignKey: 'student_id', onUpdate: 'cascade' });
-Sturegister.belongsTo(Student, {foreignKey: 'student_id', onUpdate: 'cascade' });
+Sturegister.belongsTo(Student, { foreignKey: 'student_id', onUpdate: 'cascade' });
 
 Student.hasMany(Projectstu, {foreignKey: 'student_id', onUpdate: 'cascade' });
 Projectstu.belongsTo(Student, {foreignKey: 'student_id', onUpdate: 'cascade' });

@@ -17,24 +17,42 @@ import { Project } from './models/Project.model.js';
 import { Projectstu } from './models/Projectstu.model.js';
 import { Projectteacher } from './models/Projectteacher.model.js';
 
-Course.sync();
-Teacher.sync();
-Student.sync();
-Eduhistory.sync();
-Sturegister.sync();
-Project.sync();
-Projectstu.sync();
-Projectteacher.sync();
-Coursedetail.sync();
+Course.sync({ force: false, alter: true }).then(() => {console.log('Table synced successfully');})
+.catch((error) => { console.error('Error syncing database:', error); });
+
+Teacher.sync({ force: false, alter: true }).then(() => {console.log('Table synced successfully');})
+.catch((error) => { console.error('Error syncing database:', error); });
+
+Student.sync({ force: false, alter: true }).then(() => {console.log('Table synced successfully');})
+.catch((error) => { console.error('Error syncing database:', error); });
+
+Eduhistory.sync({ force: false, alter: true }).then(() => {console.log('Table synced successfully');})
+.catch((error) => { console.error('Error syncing database:', error); });
+
+Sturegister.sync({ force: false, alter: true }).then(() => {console.log('Table synced successfully');})
+.catch((error) => { console.error('Error syncing database:', error); });
+
+Project.sync({ force: false, alter: true }).then(() => {console.log('Table synced successfully');})
+.catch((error) => { console.error('Error syncing database:', error); });
+
+Projectstu.sync({ force: false, alter: true }).then(() => {console.log('Table synced successfully');})
+.catch((error) => { console.error('Error syncing database:', error); });
+
+Projectteacher.sync({ force: false, alter: true }).then(() => {console.log('Table synced successfully');})
+.catch((error) => { console.error('Error syncing database:', error); });
+
+Coursedetail.sync({ force: false, alter: true }).then(() => {console.log('Table synced successfully');})
+.catch((error) => { console.error('Error syncing database:', error); });
+// sequelize.sync({ force: false, alter: true })
+//   .then(() => {
+//     console.log('Database synced successfully');
+//   })
+//   .catch((error) => {
+//     console.error('Error syncing database:', error);
+//   });
 
 const app = express();
-// sequelize.sync( )
-// .then(() => {
-//   console.log('sync database done');
-// })
-// .catch(error => {
-//   console.log(error.message);
-// });
+
 
 const ENV = 'development';
 const DOMAIN = ENV === 'development' ? 'localhost' : '';

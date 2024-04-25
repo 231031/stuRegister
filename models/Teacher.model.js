@@ -8,6 +8,10 @@ const Teacher = sequelize.define('Teacher',{
         allowNull: false,
         primaryKey: true,
     },
+    password : {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     firstName : {
         type: DataTypes.STRING,
         allowNull: false,
@@ -26,7 +30,7 @@ const Teacher = sequelize.define('Teacher',{
 Teacher.hasMany(Student, {foreignKey: 'teacher_id', onUpdate: 'cascade' });
 Student.belongsTo(Teacher, {foreignKey: 'teacher_id', onUpdate: 'cascade' });
 
-Projectteacher.hasMany(Teacher, {foreignKey: 'teacher_id', onUpdate: 'cascade' });
-Teacher.belongsTo(Projectteacher, {foreignKey: 'teacher_id', onUpdate: 'cascade' });
+Teacher.hasMany(Projectteacher, { foreignKey: 'teacher_id', onUpdate: 'cascade' });
+Projectteacher.belongsTo(Teacher, {foreignKey: 'teacher_id', onUpdate: 'cascade' });
 
 export { Teacher };

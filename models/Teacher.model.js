@@ -24,9 +24,9 @@ const Teacher = sequelize.define('Teacher',{
 
 
 Teacher.hasMany(Student, {foreignKey: 'teacher_id', onUpdate: 'cascade' });
-// Student.belongsTo(Teacher, {foreignKey: 'teacher_id', onUpdate: 'cascade' });
+Student.belongsTo(Teacher, {foreignKey: 'teacher_id', onUpdate: 'cascade' });
 
 Projectteacher.hasMany(Teacher, {foreignKey: 'teacher_id', onUpdate: 'cascade' });
-// Teacher.belongsTo(Projectteacher, {foreignKey: 'teacher_id', onUpdate: 'cascade' });
+Teacher.belongsTo(Projectteacher, {foreignKey: 'teacher_id', onUpdate: 'cascade' });
 
 export { Teacher };

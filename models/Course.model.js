@@ -22,6 +22,6 @@ Course.hasMany(Coursedetail, {foreignKey: 'course_id'}, { onUpdate: 'cascade', o
 Coursedetail.belongsTo(Course, {foreignKey: 'course_id'}, { onUpdate: 'cascade', onDelete: 'cascade' });
 
 Course.hasMany(Sturegister, {foreignKey: 'course_id'}, { onUpdate: 'cascade' });
-// Sturegister.belongsTo(Course, {foreignKey: 'course_id'}, { onUpdate: 'cascade' });
+Sturegister.belongsTo(Course, {foreignKey: 'course_id'}, { onUpdate: 'cascade' });
 export { Course };
 

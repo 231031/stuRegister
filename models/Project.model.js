@@ -24,8 +24,8 @@ const Project = sequelize.define('Project',{
 });
 
 Project.hasMany(Projectstu, { foreignKey: 'project_id', onUpdate: 'cascade' });
-// Projectstu.belongsTo(Project, { foreignKey: 'project_id', onUpdate: 'cascade' });
+Projectstu.belongsTo(Project, { foreignKey: 'project_id' });
 
 Project.hasMany(Projectteacher, { foreignKey: 'project_id', onUpdate: 'cascade' });
-// Projectteacher.belongsTo(Project, { foreignKey: 'project_id', onUpdate: 'cascade' });
+Projectteacher.belongsTo(Project, { foreignKey: 'project_id', onUpdate: 'cascade' });
 export { Project };

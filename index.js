@@ -17,15 +17,15 @@ import { Project } from './models/Project.model.js';
 import { Projectstu } from './models/Projectstu.model.js';
 import { Projectteacher } from './models/Projectteacher.model.js';
 
-Course.sync({ force: false });
-Teacher.sync({ force: false });
-Student.sync({ force: false });
-Eduhistory.sync({ force: false });
-Sturegister.sync({ force: false });
-Project.sync({ force: false });
-Projectstu.sync({ force: false });
-Projectteacher.sync({ force: false });
-Coursedetail.sync({ force: false });
+Course.sync();
+Teacher.sync();
+Student.sync();
+Eduhistory.sync();
+Sturegister.sync();
+Project.sync();
+Projectstu.sync();
+Projectteacher.sync();
+Coursedetail.sync();
 
 const app = express();
 // sequelize.sync( )

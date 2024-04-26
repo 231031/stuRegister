@@ -7,41 +7,65 @@ import routerOA from './router/oaRouter.js';
 import routerAll from './router/allRouter.js';
 import cors from 'cors';
 
+import { Availablecourse } from './models/Avilablecourse.model.js';
+import { Department } from './models/Department.model.js';
 import { Course } from './models/Course.model.js';
-import { Coursedetail } from './models/Coursedetail.model.js';
-import { Student } from './models/Student.model.js';
-import { Eduhistory } from './models/Eduhistory.model.js';
-import { Sturegister } from './models/Sturegister.model.js';
+import { Faculty } from './models/Faculty.model.js';
 import { Teacher } from './models/Teacher.model.js';
+import { Student } from './models/Student.model.js';
 import { Project } from './models/Project.model.js';
+import { Scholarhistory } from './models/Scholarhistory.model.js';
+import { Scholarship } from './models/Scholarship.model.js';
+
+import { Eduhistory } from './models/Eduhistory.model.js';
+import { Coursedetail } from './models/Coursedetail.model.js';
+import { Sturegister } from './models/Sturegister.model.js';
+
 import { Projectstu } from './models/Projectstu.model.js';
 import { Projectteacher } from './models/Projectteacher.model.js';
 
-Course.sync({ force: false, alter: true }).then(() => {console.log('Table synced successfully');})
+
+
+Course.sync({ force: false, alter: true }).then(() => {console.log('C synced successfully');})
 .catch((error) => { console.error('Error syncing database:', error); });
 
-Teacher.sync({ force: false, alter: true }).then(() => {console.log('Table synced successfully');})
+Teacher.sync({ force: false, alter: true }).then(() => {console.log('T synced successfully');})
 .catch((error) => { console.error('Error syncing database:', error); });
 
-Student.sync({ force: false, alter: true }).then(() => {console.log('Table synced successfully');})
+Student.sync({ force: false, alter: true }).then(() => {console.log('S synced successfully');})
 .catch((error) => { console.error('Error syncing database:', error); });
 
-Eduhistory.sync({ force: false, alter: true }).then(() => {console.log('Table synced successfully');})
+Scholarship.sync({ force: false, alter: true }).then(() => {console.log('ss synced successfully');})
 .catch((error) => { console.error('Error syncing database:', error); });
 
-Sturegister.sync({ force: false, alter: true }).then(() => {console.log('Table synced successfully');})
+Faculty.sync({ force: false, alter: true }).then(() => {console.log('F synced successfully');})
 .catch((error) => { console.error('Error syncing database:', error); });
 
-Project.sync({ force: false, alter: true }).then(() => {console.log('Table synced successfully');})
+Department.sync({ force: false, alter: true }).then(() => {console.log('D synced successfully');})
 .catch((error) => { console.error('Error syncing database:', error); });
 
-Projectstu.sync({ force: false, alter: true }).then(() => {console.log('Table synced successfully');})
+Availablecourse.sync({ force: false, alter: true }).then(() => {console.log('ac synced successfully');})
 .catch((error) => { console.error('Error syncing database:', error); });
 
-Projectteacher.sync({ force: false, alter: true }).then(() => {console.log('Table synced successfully');})
+Scholarhistory.sync({ force: false, alter: true }).then(() => {console.log('sh synced successfully');})
 .catch((error) => { console.error('Error syncing database:', error); });
 
-Coursedetail.sync({ force: false, alter: true }).then(() => {console.log('Table synced successfully');})
+Eduhistory.sync({ force: false, alter: true }).then(() => {console.log('E synced successfully');})
+.catch((error) => { console.error('Error syncing database:', error); });
+
+Sturegister.sync({ force: false, alter: true }).then(() => {console.log('sr synced successfully');})
+.catch((error) => { console.error('Error syncing database:', error); });
+
+Project.sync({ force: false, alter: true }).then(() => {console.log('P synced successfully');})
+.catch((error) => { console.error('Error syncing database:', error); });
+
+Projectstu.sync({ force: false, alter: true }).then(() => {console.log('ps synced successfully');})
+.catch((error) => { console.error('Error syncing database:', error); });
+
+Projectteacher.sync({ force: false, alter: true }).then(() => {console.log('pt synced successfully');})
+.catch((error) => { console.error('Error syncing database:', error); });
+
+Coursedetail.sync({ force: false, alter: true }).then(() => {console.log('cd synced successfully');})
 .catch((error) => { console.error('Error syncing database:', error); });
 // sequelize.sync({ force: false, alter: true })
 //   .then(() => {

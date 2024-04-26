@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Formik, Field, Form } from "formik";
 import tw from 'twin.macro';
@@ -10,6 +10,10 @@ import { updateStudent } from '../helpers/stuhelper';
 
 const Alert = tw.div`text-red-700 text-sm`;
 export default function Studentupdate() {
+
+    useEffect(() => {
+        // fetch student information
+    });
 
     const token = localStorage.getItem('token');
     console.log(token);

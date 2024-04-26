@@ -13,11 +13,28 @@ const Coursedetail = sequelize.define('Coursedetail',{
         allowNull: false,
         primaryKey: true,
     },
+    teacher_id : {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    startTime : {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    finishTime : {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    limit : {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
 },{
-    tableName: 'course_detail', // Define the table name
-    timestamps: false, // Exclude createdAt and updatedAt fields
+    tableName: 'course_detail',
+    updatedAt: false,
+    timestamps: false,
     underscored: true,
 })
 
-// Coursedetail.belongsTo(Course)
+
 export { Coursedetail };

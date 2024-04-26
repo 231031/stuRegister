@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 // years-- faculty-- filed-- major- number---
-const student_id_pattern = /^(6[0-6]|0[0-9]|1[0-5])(0[0-9]|1[0-9])([0-9]{2})([01])([0-9]{3})$/;
+const student_id_pattern = /^(6[0-6])([A-Z]{3}|[A-Z]{2})([0-9]{3})$/;
 const course_id_pattern = /^([A-Z]{3})([0-9]{3})$/;
 const time_pattern = /^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/;
 
@@ -17,6 +17,22 @@ const NameSchema = Yup.object().shape({
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
         .required('Last Name Required'),
+});
+
+const FacSchema = Yup.object().shape({
+    faculty: Yup.array().of(
+        Yup.object().shape({
+            faculty_id: Yup.string()
+                .matches(/^[A-Z]+$/, 'All must be Capitalize letters')
+                .min(1, 'Too Short!')
+                .required('ID Required'),
+            facultyName: Yup.string()
+                .matches(/^[A-Za-z]+$/, 'All must be letters')
+                .min(2, 'Too Short!')
+                .max(30, 'Too Long!')
+                .required('Name Required'),
+        })
+      )
 });
 
 const StudentSchema = Yup.object().shape({
@@ -40,11 +56,17 @@ const UpdateSchema = Yup.object().shape({
 });
 
 const CourseSchema = Yup.object().shape({
-    course_id: Yup.string()
-        .matches(course_id_pattern, 'Course ID does not match pattern XXX000')
-        .required('Required'),
-    courseName: Yup.string()
-        .required('Required'),
+    course: Yup.array().of(
+        Yup.object().shape({
+            course_id: Yup.string()
+                .matches(course_id_pattern, 'Course ID does not match pattern XXX000')
+                .required('Required'),
+            courseName: Yup.string().required('Required'),
+            credit: Yup.number().required('Required'),
+            department_id: Yup.string().required('Required'),
+        })
+    )
+    
 });
 
 const DetailSchema = Yup.object().shape({
@@ -72,5 +94,5 @@ const DetailSchema = Yup.object().shape({
 
 
 
-export { StudentSchema, LoginSchema, UpdateSchema, CourseSchema, DetailSchema };
+export { StudentSchema, LoginSchema, UpdateSchema, CourseSchema, DetailSchema, FacSchema };
 

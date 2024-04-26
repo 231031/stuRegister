@@ -2,11 +2,52 @@
 // import { Sturegister } from "../entity/Sturegister.entity.js";
 import { Coursedetail } from "../models/Coursedetail.model.js";
 import { Course } from "../models/Course.model.js";
+import { Faculty } from "../models/Faculty.model.js";
+import { Department } from "../models/Department.model.js";
+import { Student } from "../models/Student.model.js";
+import { Teacher } from "../models/Teacher.model.js";
 
 export async function addCourse(req, res) {
     try {
-        await Course.create(req.body);
+        await Course.bulkCreate(req.body.course);
         return res.status(200).send({ msg : 'Add Course successfully'});
+    } catch (error) {
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+// add in form of array
+export async function addFaculty(req, res) {
+    try {
+        await Faculty.bulkCreate(req.body.faculty);
+        return res.status(200).send({ msg : 'Add Faculty successfully'});
+    } catch (error) {
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function addDepartment(req, res) {
+    try {
+        await Department.bulkCreate(req.body);
+        return res.status(200).send({ msg : 'Add Department successfully'});
+    } catch (error) {
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function addStudent(req, res) {
+    try {
+        await Student.bulkCreate(req.body);
+        return res.status(200).send({ msg : 'Add Student successfully'});
+    } catch (error) {
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function addTeacher(req, res) {
+    try {
+        await Teacher.bulkCreate(req.body);
+        return res.status(200).send({ msg : 'Add Teacher successfully'});
     } catch (error) {
         return res.status(404).send({ error: error.message });
     }

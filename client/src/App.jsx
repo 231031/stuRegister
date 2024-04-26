@@ -13,6 +13,9 @@ import Courseregister from'./components/Courseregister';
 import Coursedetail from'./components/Coursedetail'; 
 import Courseedit from'./components/Courseedit'; 
 import Coursetable from'./components/Coursetable'; 
+import Admintablefac from'./components/Admintablefac'; 
+import Adminaddstu from'./components/Adminaddstu'; 
+import Adminaddfac from'./components/Adminaddfac'; 
 
 // oa components
 import Studentinfo from'./components/Studentinfo'; 
@@ -54,6 +57,18 @@ const router = createBrowserRouter(
     {
       path: '/admin/selcourse',
       element : <Coursetable/>
+    },
+    {
+      path: '/admin/addstu',
+      element : <Adminaddstu/>
+    },
+    {
+      path: '/admin/addfac',
+      element : <Adminaddfac/>
+    },
+    {
+      path: '/admin/selfac',
+      element : <Admintablefac/>
     },
   ]
 );

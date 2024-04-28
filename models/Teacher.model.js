@@ -11,7 +11,7 @@ const Teacher = sequelize.define('Teacher',{
         allowNull: false,
         primaryKey: true,
     },
-    course_id : {
+    department_id : {
         type: DataTypes.STRING,
         allowNull: false,
     },

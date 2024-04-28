@@ -1,15 +1,19 @@
 import React from 'react'
 import { Formik, Field, Form } from "formik";
+import { useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import tw from 'twin.macro';
 
-import { loginStudent } from '../helpers/stuhelper';
-import { LoginSchema } from '../Validations/validation';
+import { loginStudent } from '../../helpers/stuhelper';
+import { LoginSchema } from '../../Validations/validation';
 
 const Alert = tw.div`text-red-700 text-sm`;
 export default function Studentlogin() {
+
+    const navigate = useNavigate();
+
   return (
     <div className='container text-lg'>
     <Toaster position='top-center' reverseOrder={false}></Toaster>
@@ -29,9 +33,13 @@ export default function Studentlogin() {
                     else if (res.error) toast.error(res.error);
                     else {
                       if (res) {
-                      localStorage.setItem('token', res.username);
-                      toast.success("Login Successful");
-                      // navigate('/student/home');
+                        localStorage.setItem('token', res.username);
+                        toast.success(res.msg);
+                     
+                        if (!res.setPass) {
+                            navigate('/student/personal');
+                        } 
+                        else navigate('/student/home');
                       }
                     }
                 } catch (error) {

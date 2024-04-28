@@ -33,7 +33,7 @@ Teacher.sync({ force: false, alter: true }).then(() => {console.log('T synced su
 .catch((error) => { console.error('Error syncing database:', error); });
 
 Student.sync({ force: false, alter: true }).then(() => {console.log('S synced successfully');})
-.catch((error) => { console.error('Error syncing database:', error); });
+.catch((error) => { console.error('Error syncing database:', error); });  
 
 Scholarship.sync({ force: false, alter: true }).then(() => {console.log('ss synced successfully');})
 .catch((error) => { console.error('Error syncing database:', error); });
@@ -76,6 +76,7 @@ Coursedetail.sync({ force: false, alter: true }).then(() => {console.log('cd syn
 //   });
 
 const app = express();
+app.use(cors());
 
 
 const ENV = 'development';
@@ -84,7 +85,6 @@ const PORT = 6001;
 
 // middleware
 app.use(express.json());
-app.use(cors());
 
 app.use('/admin', routerAdmin);
 app.use('/teacher', routerTeacher);

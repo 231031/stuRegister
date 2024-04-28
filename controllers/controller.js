@@ -4,6 +4,8 @@ import { Coursedetail } from "../models/Coursedetail.model.js";
 import { Course } from "../models/Course.model.js";
 import { Faculty } from "../models/Faculty.model.js";
 import { Department } from "../models/Department.model.js";
+import { Teacher } from "../models/Teacher.model.js";
+
 export async function getAllStudents(req, res) {
     try {
         const students = await Course.findAll();
@@ -48,6 +50,16 @@ export async function getAllDepartments(req, res) {
     try {
         const department = await Department.findAll();
         res.json(department)
+        
+    } catch (error) {
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function getAllTeachers(req, res) {
+    try {
+        const teachers = await Teacher.findAll();
+        res.json(teachers)
         
     } catch (error) {
         return res.status(404).send({ error: error.message });

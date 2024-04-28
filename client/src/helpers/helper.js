@@ -49,3 +49,13 @@ export async function getFacDe() {
         return Promise.reject(error);
       }
 }
+
+export async function getTeacher() {
+    try {
+        const response = await fetch('http://localhost:6001/teachers');    
+        const teachers = await response.json();
+        return Promise.resolve(teachers);
+      } catch (error) {
+        return Promise.reject(error);
+      }
+}

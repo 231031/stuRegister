@@ -29,6 +29,11 @@ const Coursedetail = sequelize.define('Coursedetail',{
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    count : {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+    }
 },{
     tableName: 'course_detail',
     updatedAt: false,

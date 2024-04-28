@@ -37,12 +37,37 @@ const FacSchema = Yup.object().shape({
 
 const StudentSchema = Yup.object().shape({
     ...NameSchema.fields,
-    student_id: Yup.string()
-        .matches(student_id_pattern, 'Student ID does not match')
-        .required('Required'),
     password: Yup.string()
         .min(8, 'Please Enter less then 8 letters')
         .required('Password Required'),
+    newPassword: Yup.string()
+        .required('Required')
+        .oneOf([Yup.ref('password'), null], 'Passwords do not match'),
+    salary: Yup.number()
+        .required('Required'),
+});
+
+const AddStuSchema = Yup.object().shape({
+    year: Yup.number()
+        .min(60, "too low!")
+        .max(99, 'too high!')
+        .required('Required'),
+    teacher_id: Yup.string()
+        .required('Required'),
+    number: Yup.number()
+        .required('Required')
+        .min(1, "too low!")
+        .max(999, 'too high!')
+});
+
+const TeacherSchema = Yup.object().shape({
+    teacher: Yup.array().of(
+        Yup.object().shape({
+            teacher_id: Yup.string()
+                .min(3, 'Too Short!')
+                .required('ID Required'),
+        })
+    )
 });
 
 const LoginSchema = Yup.object().shape({
@@ -59,40 +84,66 @@ const CourseSchema = Yup.object().shape({
     course: Yup.array().of(
         Yup.object().shape({
             course_id: Yup.string()
-                .matches(course_id_pattern, 'Course ID does not match pattern XXX000')
+                .matches(course_id_pattern, 'Course ID pattern XXX000')
                 .required('Required'),
             courseName: Yup.string().required('Required'),
-            credit: Yup.number().required('Required'),
-            department_id: Yup.string().required('Required'),
+            credit: Yup.number().required('Required'),   
+            teacher_id: Yup.string().required('Required'),
+        })
+    )
+    
+});
+
+const AvailableSchema = Yup.object().shape({
+    available: Yup.array().of(
+        Yup.object().shape({
+            course_id: Yup.string()
+                .required('Required'),
+            year: Yup.number().required('Required'),
+        })
+    )
+    
+});
+
+const DepartmentSchema = Yup.object().shape({
+    course: Yup.array().of(
+        Yup.object().shape({
+            department_id: Yup.string().required('Required')
+                .matches(/^[A-Z]+$/, 'All must be Capitalize letters'),
+            departmentName: Yup.string().required('Required').min(3, 'Too Short!')
+                .matches(/^[A-Za-z]+$/, 'All must be letters'),
         })
     )
     
 });
 
 const DetailSchema = Yup.object().shape({
-    teacher_id: Yup.string()
-        .required('Required'),
-    class_id: Yup.string()
-        .required('Required'),
-    major: Yup.string()
-        .required('Required'), 
-    group: Yup.number()
-        .required('Required'), 
-    limit: Yup.number()
-        .required('Required'),
-    day: Yup.string()
-        .required('Required'),
-    startTime: Yup.string()
-        .matches(time_pattern, 'Time does not match pattern 00:00 - 23:59')
-        .required('Required'), 
-    finishTime: Yup.string()
-        .matches(time_pattern, 'Time does not match pattern 00:00 - 23:59')
-        .required('Required'), 
+    course_de: Yup.array().of(
+        Yup.object().shape({
+            teacher_id: Yup.string().required('Required'),
+            class_id: Yup.string()
+                .required('Required'),
+            group: Yup.number()
+                .required('Required')
+                .min(1, 'group number > 0').max(5, 'too many!'), 
+            limit: Yup.number()
+                .required('Required'),
+            day: Yup.string().required('Required'),
+            startTime: Yup.string()
+                .matches(time_pattern, 'pattern 00:00 - 23:59')
+                .required('Required'), 
+            finishTime: Yup.string()
+                .matches(time_pattern, 'pattern 00:00 - 23:59')
+                .required('Required'),
+        })
+    )
+     
 });
 
 
 
 
 
-export { StudentSchema, LoginSchema, UpdateSchema, CourseSchema, DetailSchema, FacSchema };
+export { StudentSchema, LoginSchema, UpdateSchema, CourseSchema, DetailSchema, FacSchema, DepartmentSchema, TeacherSchema,
+        AddStuSchema, AvailableSchema  };
 

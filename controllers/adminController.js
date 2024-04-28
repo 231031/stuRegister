@@ -6,11 +6,22 @@ import { Faculty } from "../models/Faculty.model.js";
 import { Department } from "../models/Department.model.js";
 import { Student } from "../models/Student.model.js";
 import { Teacher } from "../models/Teacher.model.js";
+import { Availablecourse } from "../models/Avilablecourse.model.js";
+import bcrypt from 'bcrypt';
 
 export async function addCourse(req, res) {
     try {
         await Course.bulkCreate(req.body.course);
         return res.status(200).send({ msg : 'Add Course successfully'});
+    } catch (error) {
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function addAvailableCourse(req, res) {
+    try {
+        await Availablecourse.bulkCreate(req.body.available);
+        return res.status(200).send({ msg : 'Add Available successfully'});
     } catch (error) {
         return res.status(404).send({ error: error.message });
     }
@@ -28,7 +39,7 @@ export async function addFaculty(req, res) {
 
 export async function addDepartment(req, res) {
     try {
-        await Department.bulkCreate(req.body);
+        await Department.bulkCreate(req.body.department);
         return res.status(200).send({ msg : 'Add Department successfully'});
     } catch (error) {
         return res.status(404).send({ error: error.message });
@@ -46,8 +57,34 @@ export async function addStudent(req, res) {
 
 export async function addTeacher(req, res) {
     try {
-        await Teacher.bulkCreate(req.body);
+        await Teacher.bulkCreate(req.body.teacher);
         return res.status(200).send({ msg : 'Add Teacher successfully'});
+    } catch (error) {
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function getDeTeacher(req, res) {
+    try {
+        const teachers = await Teacher.findAll({
+            where: {
+              department_id: req.body.department_id
+            },
+        });
+        return res.status(200).send(teachers);
+    } catch (error) {
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function getDeInFac(req, res) {
+    try {
+        const departments = await Department.findAll({
+            where: {
+              faculty_id: req.body.faculty_id,
+            },
+        });
+        return res.status(200).send(departments);
     } catch (error) {
         return res.status(404).send({ error: error.message });
     }
@@ -72,7 +109,7 @@ export async function editCourse(req, res) {
 
 export async function addDetail(req, res) {
     try {
-        await Coursedetail.create(req.body);
+        await Coursedetail.bulkCreate(req.body.course_de);
         return res.status(200).send({ msg : 'Add Detail successfully'});
     } catch (error) {
         return res.status(404).send({ error: error.message });

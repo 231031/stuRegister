@@ -6,7 +6,7 @@ import ENV from './fig.js';
 //     dialect: "mysql",
 //   });
 
-export const sequelize = new Sequelize("test", ENV.USER, "", {
+export const sequelize = new Sequelize("stu_regis", ENV.USER, "", {
     host: "localhost",
     dialect: "mysql",
   });

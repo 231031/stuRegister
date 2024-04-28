@@ -3,14 +3,15 @@ import tw from 'twin.macro';
 import { Field, FieldArray, Form, Formik, getIn } from "formik";
 import toast, { Toaster } from 'react-hot-toast';
 
-import { FacSchema } from '../Validations/validation';
-import { addFaculty } from '../helpers/adminHelper';
+import { FacSchema } from '../../Validations/validation';
+import { addFaculty } from '../../helpers/adminHelper';
 
 const Alert = tw.p`text-red-700 text-sm`;
 export default function Adminaddfac() {
   return (
     <div className='container'>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
+        <h2 className='text-center py-2'>Faculty Registration</h2>
       <Formik
         initialValues={{
           faculty: [
@@ -32,7 +33,7 @@ export default function Adminaddfac() {
         }}
       >
         {({ values, touched, errors }) => (
-          <Form className='flex flex-col items-center w-full'>
+          <Form className='flex flex-col items-center w-full text-sm'>
             <FieldArray name="faculty">
               {({ push, remove }) => (
                 <div>
@@ -49,14 +50,14 @@ export default function Adminaddfac() {
                       <div key={index} className='flex flex-row my-4'>
                         <div className='flex flex-col'>
                             <Field className='rounded-md my-2 mx-1 border-2 border-sky-700' 
-                                    type='text' name={faculty_id} value={p.faculty_id}></Field>
+                                    type='text' name={faculty_id} value={p.faculty_id} placeholder='Faculty ID'></Field>
                             {errorId && touchedId && (
                                 <Alert>{errorId}</Alert>
                                 )}
                         </div>
                         <div className='flex flex-col'>
                             <Field className='rounded-md my-2 mx-1 border-2 border-sky-700' 
-                                    type='text' name={facultyName} value={p.facultyName}></Field>
+                                    type='text' name={facultyName} value={p.facultyName} placeholder='Faculty Name'></Field>
                             {errorName && touchedName && (
                                 <Alert>{errorName}</Alert>
                                 )}
@@ -67,11 +68,11 @@ export default function Adminaddfac() {
                       </div>
                     );
                   })}
-                  <button className='border-2 border-blue-500 px-4 rounded-md' type='button' onClick={() => push({ faculty_id: '', facultyName: '' })}>Add</button>
+                  <button className='border-2 bg-blue-500 px-4 rounded-md' type='button' onClick={() => push({ faculty_id: '', facultyName: '' })}>Add</button>
                 </div>
               )}
             </FieldArray>
-            <button className='border-2 border-green-500 px-4 rounded-md' type="submit">submit</button>
+            <button className='border-2 bg-green-500 px-4 rounded-md' type="submit">submit</button>
           </Form>
         )}
       </Formik>

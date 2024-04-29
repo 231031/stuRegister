@@ -35,7 +35,7 @@ const FacSchema = Yup.object().shape({
       )
 });
 
-const StudentSchema = Yup.object().shape({
+const PersonalSchema = Yup.object().shape({
     ...NameSchema.fields,
     password: Yup.string()
         .min(8, 'Please Enter less then 8 letters')
@@ -72,7 +72,8 @@ const TeacherSchema = Yup.object().shape({
 
 const LoginSchema = Yup.object().shape({
     username: Yup.string()
-        .matches(student_id_pattern, 'Student ID does not match pattern')
+        .required('Required'),
+    password: Yup.string()
         .required('Required'),
 });
 
@@ -144,6 +145,6 @@ const DetailSchema = Yup.object().shape({
 
 
 
-export { StudentSchema, LoginSchema, UpdateSchema, CourseSchema, DetailSchema, FacSchema, DepartmentSchema, TeacherSchema,
+export { PersonalSchema, LoginSchema, UpdateSchema, CourseSchema, DetailSchema, FacSchema, DepartmentSchema, TeacherSchema,
         AddStuSchema, AvailableSchema  };
 

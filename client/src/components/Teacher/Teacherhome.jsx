@@ -1,14 +1,13 @@
 import React from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
-export default function Adminlogin() {
+export default function Teacherhome() {
   return (
     <HelmetProvider>
-      <div>
         <Helmet>
-            <title>A | Login</title>
+            <title>T | Home</title>
         </Helmet>
-      </div>
+        <div>Teacherhome</div>
     </HelmetProvider>
   )
 }

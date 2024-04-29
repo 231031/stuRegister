@@ -7,6 +7,11 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { faTwitter, faFontAwesome } from '@fortawesome/free-brands-svg-icons';
 library.add(fas, faTwitter, faFontAwesome );
 
+// teacher components
+import Teacherlogin from './components/Teacher/Teacherlogin';
+import Teacherpersonal from './components/Teacher/Teacherpersonal';
+import Teacherhome from './components/Teacher/Teacherhome';
+
 // stu components
 import Landing from'./components/Landing'; 
 import Studentpersonal from'./components/Student/Studentpersonal'; 
@@ -16,6 +21,7 @@ import Studentupdate from'./components/Student/Studentupdate';
 
 
 // admin components
+import AdminLogin from './components/Admin/Adminlogin';
 import Courseregister from'./components/Admin/Courseregister'; 
 import Coursedetail from'./components/Admin/Coursedetail'; 
 import Courseedit from'./components/Courseedit'; 
@@ -27,9 +33,7 @@ import Adminaddfac from'./components/Admin/Adminaddfac';
 import Adminaddteacher from'./components/Admin/Adminaddteacher'; 
 import Adminadddepart from'./components/Admin/Adminadddepart'; 
 import Adminaddavailable from './components/Admin/Adminaddavailable';
-
-// oa components
-import Studentinfo from'./components/Studentinfo'; 
+import Studentinfo from'./components/Admin/Studentinfo'; 
 
 const router = createBrowserRouter(
   [
@@ -38,24 +42,36 @@ const router = createBrowserRouter(
       element : <Landing></Landing>
     },
     {
-      path: '/oa/students',
-      element : <Studentinfo></Studentinfo>
+      path: '/teacher/login',
+      element : <Teacherlogin/>
+    },
+    {
+      path: '/teacher/personal',
+      element : <Teacherpersonal/>
+    },
+    {
+      path: '/teacher/home',
+      element : <Teacherhome/>
     },
     {
       path: '/student/personal',
-      element : <Studentpersonal></Studentpersonal>
+      element : <Studentpersonal/>
     },
     {
       path: '/student/login',
-      element : <Studentlogin></Studentlogin>
+      element : <Studentlogin/>
     },
     {
       path: '/student/home',
-      element : <Studenthome></Studenthome>
+      element : <Studenthome/>
     },
     {
       path: '/student/update',
       element : <Studentupdate/>
+    },
+    {
+      path: '/admin/login',
+      element : <AdminLogin/>
     },
     {
       path: '/admin/addcourse',
@@ -76,6 +92,10 @@ const router = createBrowserRouter(
     {
       path: '/admin/addstu',
       element : <Adminaddstu/>
+    },
+    {
+      path: '/admin/students',
+      element : <Studentinfo/>
     },
     {
       path: '/admin/addavailable',

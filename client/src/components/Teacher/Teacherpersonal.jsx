@@ -1,34 +1,31 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Formik, Field, Form } from "formik";
 import tw from 'twin.macro';
 import { Toaster } from 'react-hot-toast';
 import toast from "react-hot-toast";
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
+import { updateTeacher } from '../../helpers/teacherHelper';
 import { PersonalSchema } from '../../Validations/validation';
-import { updateStudent } from '../../helpers/stuhelper';
 
 const Alert = tw.div`text-red-700 text-sm`;
-export default function Studentpersonal() {
-    const navigate = useNavigate();
-    const token = localStorage.getItem('token');
-    console.log(token);
-    if (!token) {
-        return <Navigate to={'/student/login'} replace={true}></Navigate>
-    }
+export default function Teacherpersonal() {
+
+  const navigate = useNavigate();
+
   return (
     <HelmetProvider>
-        <div className='container text-lg'>
-            <Toaster position='top-center' reverseOrder={false}></Toaster>
-            <Helmet>
-            <title>Stu | FillPersonal</title>
-            </Helmet>
-            <h3 className='text-center py-4'>Student Personal Information</h3>
+      <div className='container text-lg'>
+        <Toaster position='top-center' reverseOrder={false}></Toaster>
+        <Helmet>
+            <title>T | FillPersonal</title>
+        </Helmet>
+        <h3 className='text-center py-4'>Teacher Personal Information</h3>
             <div className='register-form'>
                 <Formik 
                     initialValues={{
-                        student_id: '',
+                        teacher_id: '',
                         firstName: '',
                         lastName: '',
                         salary: '',
@@ -38,13 +35,12 @@ export default function Studentpersonal() {
                     validationSchema={PersonalSchema}
                     onSubmit={async (values) => {
                         try {
-                            values.student_id = localStorage.getItem('token');
-                            const res = await updateStudent(values);
+                            values.teacher_id = localStorage.getItem('token');
+                            const res = await updateTeacher(values);
+                            navigate('/teacher/home');
                             toast.success(res.msg);
-                            navigate('/student/home');
-
                         } catch (error) {
-                            toast.error('Student registration was failed');
+                            toast.error('Teacher registration was failed');
                             console.error(error);
                         }
                     }}  
@@ -77,9 +73,7 @@ export default function Studentpersonal() {
                     )}
                 </Formik>
             </div>
-        </div>
+      </div>
     </HelmetProvider>
   )
 }
-
-

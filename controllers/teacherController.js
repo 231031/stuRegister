@@ -45,6 +45,17 @@ export async function loginTeacher(req, res) {
     }
 }
 
+export async function getInfo(req, res) {
+    try {
+        const user = await Teacher.findByPk(req.body.teacher_id, {
+            attributes: ['teacher_id', 'firstName', 'lastName', 'position', 'department_id']
+        });
+        res.json(user);
+    } catch (error) {
+        return res.status(404).send({ error: error.message });
+    }
+}
+
 export async function updateTeacher(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];

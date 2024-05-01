@@ -9,8 +9,10 @@ library.add(fas, faTwitter, faFontAwesome );
 
 // teacher components
 import Teacherlogin from './components/Teacher/Teacherlogin';
+import Teachernewpass from './components/Teacher/Teachernewpass';
 import Teacherpersonal from './components/Teacher/Teacherpersonal';
 import Teacherhome from './components/Teacher/Teacherhome';
+import Teachertablecourse from './components/Teacher/Teachertablecourse';
 
 // stu components
 import Landing from'./components/Landing'; 
@@ -29,6 +31,7 @@ import Courseedit from'./components/Courseedit';
 import Coursetable from'./components/Admin/Coursetable'; 
 import Admintablefac from'./components/Admin/Admintablefac'; 
 import Admintabledepart from'./components/Admin/Admintabledepart'; 
+import Admintablescholarstu from'./components/Admin/Admintablescholarstu'; 
 import Adminaddstu from'./components/Admin/Adminaddstu'; 
 import Adminaddfac from'./components/Admin/Adminaddfac'; 
 import Adminaddteacher from'./components/Admin/Adminaddteacher'; 
@@ -47,12 +50,20 @@ const router = createBrowserRouter(
       element : <Teacherlogin/>
     },
     {
+      path: '/teacher/newpassword',
+      element : <Teachernewpass/>
+    },
+    {
       path: '/teacher/personal',
       element : <Teacherpersonal/>
     },
     {
       path: '/teacher/home',
       element : <Teacherhome/>
+    },
+    {
+      path: '/teacher/selcourse',
+      element : <Teachertablecourse/>
     },
     {
       path: '/student/personal',
@@ -93,6 +104,14 @@ const router = createBrowserRouter(
     {
       path: '/admin/selcourse',
       element : <Coursetable/>
+    },
+    {
+      path: '/admin/selstudent',
+      element : <Studentinfo/>
+    },
+    {
+      path: '/admin/selscholar',
+      element : <Admintablescholarstu/>
     },
     {
       path: '/admin/addstu',

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Formik, Field, Form } from "formik";
 import tw from 'twin.macro';
 import { Toaster } from 'react-hot-toast';
@@ -6,17 +6,35 @@ import toast from "react-hot-toast";
 import { useNavigate, Navigate } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
+import Headerstu from './Headerstu';
 import { PersonalSchema } from '../../Validations/validation';
-import { updateStudent } from '../../helpers/stuhelper';
+import { updateStudent, getInfo } from '../../helpers/stuhelper';
 
 const Alert = tw.div`text-red-700 text-sm`;
 export default function Studentpersonal() {
+
     const navigate = useNavigate();
-    const token = localStorage.getItem('token');
-    console.log(token);
-    if (!token) {
-        return <Navigate to={'/student/login'} replace={true}></Navigate>
-    }
+    const [data, setData] = useState('');
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            return <Navigate to={'/student/login'} replace={true}></Navigate>
+        }
+        const apiInfo = async () => {
+            try {
+              const res = await getInfo(localStorage.getItem('token'));
+              setData(res);
+    
+            } catch (error) {
+                toast.error('Cannot Get Information');
+                console.error(error);
+            } 
+        };
+        apiInfo();
+    }, []);
+
+    
   return (
     <HelmetProvider>
         <div className='container text-lg'>
@@ -24,6 +42,7 @@ export default function Studentpersonal() {
             <Helmet>
             <title>Stu | FillPersonal</title>
             </Helmet>
+            <Headerstu data={data}/>
             <h3 className='text-center py-4'>Student Personal Information</h3>
             <div className='register-form'>
                 <Formik 

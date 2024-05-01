@@ -8,7 +8,9 @@ import { Teacher } from "../models/Teacher.model.js";
 
 export async function getAllStudents(req, res) {
     try {
-        const students = await Course.findAll();
+        const students = await Student.findAll({
+            attributes: ['student_id', 'firstName', 'lastName', 'year']
+        });
         res.json(students)
         
     } catch (error) {
@@ -58,7 +60,9 @@ export async function getAllDepartments(req, res) {
 
 export async function getAllTeachers(req, res) {
     try {
-        const teachers = await Teacher.findAll();
+        const teachers = await Teacher.findAll({
+            attributes: ['teacher_id', 'firstName', 'lastName', 'year']
+        });
         res.json(teachers)
         
     } catch (error) {

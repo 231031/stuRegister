@@ -56,7 +56,7 @@ export default function Headeradmin() {
           </Dropdown>
           
           <Btn>
-            <NavLink to='/admin/students'>Student</NavLink>
+            <NavLink to='/admin/selstudent'>Student</NavLink>
           </Btn>
 
           <Dropdown>
@@ -64,7 +64,7 @@ export default function Headeradmin() {
             <div className={isSOpen ? 'block' : 'hidden'}>
               <List>
                 <li><NavLink to='/admin/addscholarship'>Add Scholarship</NavLink></li>
-                <li><NavLink to='/admin/scholarships'>All Scholarship</NavLink></li>
+                <li><NavLink to='/admin/selscholar'>All Scholarship</NavLink></li>
               </List>
             </div>
           </Dropdown>
@@ -74,7 +74,7 @@ export default function Headeradmin() {
           </Btn>
 
           <Btn>
-            <NavLink to='/admin/teachers'>Course</NavLink>
+            <NavLink to='/admin/selcourse'>Course</NavLink>
           </Btn>
 
           {/* <Dropdown>

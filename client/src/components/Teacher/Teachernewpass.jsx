@@ -7,10 +7,10 @@ import { useNavigate } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import { updateTeacher } from '../../helpers/teacherHelper';
-import { PersonalSchema } from '../../Validations/validation';
+import { PasswordSchema } from '../../Validations/validation';
 
 const Alert = tw.div`text-red-700 text-sm`;
-export default function Teacherpersonal() {
+export default function Teachernewpass() {
 
   const navigate = useNavigate();
 
@@ -25,12 +25,10 @@ export default function Teacherpersonal() {
             <div className='register-form'>
                 <Formik 
                     initialValues={{
-                        teacher_id: '',
-                        firstName: '',
-                        lastName: '',
-                        salary: '',
+                        password: '',
+                        newPassword: '',
                     }}
-                    validationSchema={PersonalSchema}
+                    validationSchema={PasswordSchema}
                     onSubmit={async (values) => {
                         try {
                             values.teacher_id = localStorage.getItem('token');
@@ -45,17 +43,13 @@ export default function Teacherpersonal() {
                 >  
                     {({ errors, touched }) => (
                         <Form className='flex flex-col items-center '>
-                            <Field className='border-2 border-sky-500 rounded-md my-3 w-1/3' type='text' name='firstName' placeholder='first name'></Field>
-                            {errors.firstName && touched.firstName ? (
-                                <Alert>{errors.firstName}</Alert>
+                            <Field className='border-2 border-sky-500 rounded-md my-3 w-1/3' type='password' name='password' placeholder='new password'></Field>
+                            {errors.password && touched.password ? (
+                                <Alert>{errors.password}</Alert>
                             ) : null}
-                            <Field className='border-2 border-sky-500 rounded-md my-3 w-1/3' type='text' name='lastName' placeholder='last name'></Field>
-                            {errors.lastName && touched.lastName ? (
-                                <Alert>{errors.lastName}</Alert>
-                            ) : null}
-                            <Field className='border-2 border-sky-500 rounded-md my-3 w-1/3' type='number' name='salary' placeholder='salary'></Field>
-                            {errors.salary && touched.salary ? (
-                                <Alert>{errors.salary}</Alert>
+                            <Field className='border-2 border-sky-500 rounded-md my-3 w-1/3' type='password' name='newPassword' placeholder='confirm password'></Field>
+                            {errors.newPassword && touched.newPassword ? (
+                                <Alert>{errors.newPassword}</Alert>
                             ) : null}
 
                             <button type="submit" className="btn border-2 bg-green-500 rounded-md my-3 w-1/3">SUBMIT</button>

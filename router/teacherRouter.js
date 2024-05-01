@@ -6,6 +6,7 @@ const router = Router();
 
 // post
 router.route('/login').post(controller.loginTeacher);
+router.route('/info').post(controller.getInfo);
 
 // get
 router.route("/updategrade").get(controller.updateGrade);

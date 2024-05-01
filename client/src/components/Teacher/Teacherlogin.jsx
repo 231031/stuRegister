@@ -39,7 +39,7 @@ export default function Teacherlogin() {
                                 toast.success(res.msg);
                             
                                 if (!res.setPass) {
-                                    navigate('/teacher/personal');
+                                    navigate('/teacher/newpassword');
                                 } 
                                 else navigate('/teacher/home');
                             }

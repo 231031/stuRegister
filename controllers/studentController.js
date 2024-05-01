@@ -77,7 +77,9 @@ export async function updateStudent(req, res) {
 
 export async function getInfo(req, res) {
     try {
-        const user = await Student.findOne({ where: { student_id: username } });
+        const user = await Student.findByPk(req.body.student_id, {
+            attributes: ['student_id', 'firstName', 'lastName', 'year', 'department_id']
+        });
         res.json(user);
     } catch (error) {
         return res.status(404).send({ error: error.message });

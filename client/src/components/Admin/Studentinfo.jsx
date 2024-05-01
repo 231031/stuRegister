@@ -4,7 +4,6 @@ import toast, { Toaster } from 'react-hot-toast';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import { getStudent } from '../../helpers/stuhelper';
-import Headerstu from '../Student/Headerstu';
 import Headeradmin from './Headeradmin';
 
 const Row = tw.td`border border-slate-600 p-1 text-sm`;
@@ -16,6 +15,7 @@ export default function Studentinfo() {
         try {
           const res = await getStudent();
           setData(res);
+
         } catch (error) {
             toast.error('Cannot Get Information');
             console.error(error);
@@ -28,7 +28,6 @@ export default function Studentinfo() {
       <HelmetProvider>
         <div className='bg-indigo-200 h-screen'>
           <Toaster position='top-center' reverseOrder={false}></Toaster>
-          <Headerstu/>
           <Helmet>
             <title>A | TableStu</title>
           </Helmet>

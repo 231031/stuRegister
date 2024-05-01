@@ -17,6 +17,16 @@ const Scholarhistory = sequelize.define('Scholarhistory',{
         allowNull: false,
         primaryKey: true,
     },
+    status : {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false,
+    },
+    approve : {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false,
+    }
 },{
     tableName: 'scholar_history',
     timestamps: false, 

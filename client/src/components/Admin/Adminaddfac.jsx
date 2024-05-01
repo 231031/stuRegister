@@ -6,6 +6,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import { FacSchema } from '../../Validations/validation';
 import { addFaculty } from '../../helpers/adminHelper';
+import Headeradmin from './Headeradmin';
 
 const Alert = tw.p`text-red-700 text-sm`;
 export default function Adminaddfac() {
@@ -16,6 +17,7 @@ export default function Adminaddfac() {
           <Helmet>
               <title>A | AddFaculty</title>
           </Helmet>
+          <Headeradmin/>
           <h2 className='text-center py-2'>Faculty Registration</h2>
         <Formik
           initialValues={{

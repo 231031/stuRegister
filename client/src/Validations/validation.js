@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 
 // years-- faculty-- filed-- major- number---
 const student_id_pattern = /^(6[0-6])([A-Z]{3}|[A-Z]{2})([0-9]{3})$/;
+const teacher_id_pattern = /^([T])(6[0-8])([A-Z]{3}|[A-Z]{2})([0-9]{3})$/;
 const course_id_pattern = /^([A-Z]{3})([0-9]{3})$/;
 const time_pattern = /^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/;
 
@@ -37,35 +38,43 @@ const FacSchema = Yup.object().shape({
 
 const PersonalSchema = Yup.object().shape({
     ...NameSchema.fields,
+    salary: Yup.number()
+        .required('Required'),
+    parentFirstName: Yup.string()
+        .required('required'),
+    parentLastName: Yup.string()
+        .required('required'),
+    parentSalary: Yup.number()
+        .required('required'),
+});
+
+const PasswordSchema = Yup.object().shape({
     password: Yup.string()
         .min(8, 'Please Enter less then 8 letters')
         .required('Password Required'),
     newPassword: Yup.string()
         .required('Required')
         .oneOf([Yup.ref('password'), null], 'Passwords do not match'),
-    salary: Yup.number()
-        .required('Required'),
 });
 
 const AddStuSchema = Yup.object().shape({
-    year: Yup.number()
-        .min(60, "too low!")
-        .max(99, 'too high!')
-        .required('Required'),
-    teacher_id: Yup.string()
-        .required('Required'),
-    number: Yup.number()
-        .required('Required')
-        .min(1, "too low!")
-        .max(999, 'too high!')
+    student: Yup.array().of(
+        Yup.object().shape({
+            ...NameSchema.fields,
+        })
+    )
+    
 });
 
 const TeacherSchema = Yup.object().shape({
     teacher: Yup.array().of(
         Yup.object().shape({
+            ...NameSchema.fields,
             teacher_id: Yup.string()
-                .min(3, 'Too Short!')
-                .required('ID Required'),
+                .required('Required')
+                .matches(teacher_id_pattern, 'Teacher ID pattern ex. T67EE001'),
+            position: Yup.string()
+                .required('Required')
         })
     )
 });
@@ -146,5 +155,5 @@ const DetailSchema = Yup.object().shape({
 
 
 export { PersonalSchema, LoginSchema, UpdateSchema, CourseSchema, DetailSchema, FacSchema, DepartmentSchema, TeacherSchema,
-        AddStuSchema, AvailableSchema  };
+        AddStuSchema, AvailableSchema, NameSchema, PasswordSchema  };
 

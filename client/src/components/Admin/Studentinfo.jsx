@@ -3,9 +3,9 @@ import tw from 'twin.macro';
 import toast, { Toaster } from 'react-hot-toast';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
-import Header from '../Header';
 import { getStudent } from '../../helpers/stuhelper';
 import Headerstu from '../Student/Headerstu';
+import Headeradmin from './Headeradmin';
 
 const Row = tw.td`border border-slate-600 p-1 text-sm`;
 export default function Studentinfo() {
@@ -32,7 +32,7 @@ export default function Studentinfo() {
           <Helmet>
             <title>A | TableStu</title>
           </Helmet>
-          <Header/>
+          <Headeradmin/>
           <div className='flex justify-center mt-2'>
           {
               data? (

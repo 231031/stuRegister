@@ -16,6 +16,10 @@ const Availablecourse = sequelize.define('Availablecourse',{
     year : {
         type: DataTypes.INTEGER,
         allowNull: false,
+    },
+    term :{
+        type: DataTypes.INTEGER,
+        allowNull: false,
     }
 },{
     tableName: 'available_course',

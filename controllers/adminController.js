@@ -57,7 +57,7 @@ export async function addStudent(req, res) {
 
 export async function addTeacher(req, res) {
     try {
-        await Teacher.bulkCreate(req.body.teacher);
+        await Teacher.bulkCreate(req.body);
         return res.status(200).send({ msg : 'Add Teacher successfully'});
     } catch (error) {
         return res.status(404).send({ error: error.message });

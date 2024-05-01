@@ -8,6 +8,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import { loginStudent } from '../../helpers/stuhelper';
 import { LoginSchema } from '../../Validations/validation';
+import Headerstu from './Headerstu';
 
 const Alert = tw.div`text-red-700 text-sm`;
 export default function Studentlogin() {
@@ -20,6 +21,7 @@ export default function Studentlogin() {
             <Helmet>
                 <title>Stu | Login</title>
             </Helmet>
+            <Headerstu/>
             <h3 className='text-center py-4'>Student Login</h3>
             <div className='register-form'>
                 <Formik 
@@ -40,7 +42,7 @@ export default function Studentlogin() {
                                 toast.success(res.msg);
                             
                                 if (!res.setPass) {
-                                    navigate('/student/personal');
+                                    navigate('/student/newpassword');
                                 } 
                                 else navigate('/student/home');
                             }

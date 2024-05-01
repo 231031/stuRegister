@@ -18,6 +18,7 @@ import Studentpersonal from'./components/Student/Studentpersonal';
 import Studentlogin from'./components/Student/Studentlogin'; 
 import Studenthome from'./components/Student/Studenthome'; 
 import Studentupdate from'./components/Student/Studentupdate'; 
+import Studentnewpass from'./components/Student/Studentnewpass'; 
 
 
 // admin components
@@ -60,6 +61,10 @@ const router = createBrowserRouter(
     {
       path: '/student/login',
       element : <Studentlogin/>
+    },
+    {
+      path: '/student/newpassword',
+      element : <Studentnewpass/>
     },
     {
       path: '/student/home',

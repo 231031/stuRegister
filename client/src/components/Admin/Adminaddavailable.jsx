@@ -8,7 +8,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { addAvailableCourse } from '../../helpers/adminHelper';
 import { getAllCourse } from '../../helpers/helper';
 import { AvailableSchema } from '../../Validations/validation';
-import Header from '../Header';
+import Headeradmin from './Headeradmin';
 
 const Fill = tw.div`flex flex-col items-center`;
 const Alert = tw.div`text-red-700 text-sm mt-1`;
@@ -46,7 +46,7 @@ export default function Adminaddavailable() {
             <Helmet>
                 <title>A | AddAvailableC</title>
             </Helmet>
-            <Header/>
+            <Headeradmin/>
             <h3 className='text-center py-4'>Available Course of Department {de}</h3>
             <div className='register-form'>
                 <Formik 

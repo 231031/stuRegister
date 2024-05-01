@@ -1,7 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../dbcon.js";
 import { Student } from "./Student.model.js";
-import { Projectteacher } from "./Projectteacher.model.js";
 import { Scholarship } from "./Scholarship.model.js";
 import { Coursedetail } from "./Coursedetail.model.js";
 
@@ -27,6 +26,10 @@ const Teacher = sequelize.define('Teacher',{
         type: DataTypes.STRING,
         allowNull: false,
     },
+    position : {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
 },{
     tableName: 'Teacher',
     timestamps: false,
@@ -37,9 +40,6 @@ const Teacher = sequelize.define('Teacher',{
 
 Teacher.hasMany(Student, {foreignKey: 'teacher_id', onUpdate: 'cascade' });
 Student.belongsTo(Teacher, {foreignKey: 'teacher_id', onUpdate: 'cascade' });
-
-Teacher.hasMany(Projectteacher, { foreignKey: 'teacher_id', onUpdate: 'cascade' });
-Projectteacher.belongsTo(Teacher, {foreignKey: 'teacher_id', onUpdate: 'cascade' });
 
 Teacher.hasMany(Scholarship, { foreignKey: 'teacher_id', onUpdate: 'cascade' });
 Scholarship.belongsTo(Teacher, {foreignKey: 'teacher_id', onUpdate: 'cascade' });

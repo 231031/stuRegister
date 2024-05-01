@@ -8,6 +8,8 @@ import { addDetail, getDeTeacher } from '../../helpers/adminHelper';
 import { useNavigate } from 'react-router-dom'
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
+import Headeradmin from './Headeradmin';
+
 const Fill = tw.div`flex flex-col items-center`;
 const Alert = tw.div`text-red-700 text-sm mt-1`;
 export default function Coursedetail() {
@@ -48,6 +50,7 @@ export default function Coursedetail() {
             <Helmet>
                 <title>A | AddCourseD</title>
             </Helmet>
+            <Headeradmin/>
             <h3 className='text-center py-4'>Course Registration</h3>
             <div className='register-form'>
                 <Formik 

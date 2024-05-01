@@ -2,8 +2,9 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "../dbcon.js";
 import { Eduhistory } from "./Eduhistory.model.js";
 import { Sturegister } from "./Sturegister.model.js";
-import { Projectstu } from "./Projectstu.model.js";
 import { Scholarhistory } from "./Scholarhistory.model.js";
+import { Eduterm } from "./Eduterm.model.js";
+
 const Student = sequelize.define('Student',{
     student_id : {
         type: DataTypes.STRING,
@@ -26,12 +27,28 @@ const Student = sequelize.define('Student',{
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    salary : {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
     teacher_id : {
         type: DataTypes.STRING,
         allowNull: false,
     },
     department_id : {
         type: DataTypes.STRING,
+        allowNull: false,
+    },
+    parentFirstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    parentLastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    parentSalary: {
+        type: DataTypes.INTEGER,
         allowNull: false,
     }
 },{
@@ -47,10 +64,10 @@ Eduhistory.belongsTo(Student, {foreignKey: 'student_id', onUpdate: 'cascade', on
 Student.hasMany(Sturegister, {foreignKey: 'student_id', onUpdate: 'cascade', onDelete: 'restrict' });
 Sturegister.belongsTo(Student, { foreignKey: 'student_id', onUpdate: 'cascade', onDelete: 'restrict' });
 
-Student.hasMany(Projectstu, {foreignKey: 'student_id', onUpdate: 'cascade', onDelete: 'restrict' });
-Projectstu.belongsTo(Student, {foreignKey: 'student_id', onUpdate: 'cascade', onDelete: 'restrict' });
-
 Student.hasMany(Scholarhistory, {foreignKey: 'student_id', onUpdate: 'cascade', onDelete: 'restrict' });
 Scholarhistory.belongsTo(Student, {foreignKey: 'student_id', onUpdate: 'cascade', onDelete: 'restrict' });
+
+Student.hasMany(Eduterm, {foreignKey: 'student_id', onUpdate: 'cascade', onDelete: 'cascade' });
+Eduterm.belongsTo(Student, {foreignKey: 'student_id', onUpdate: 'cascade', onDelete: 'cascade' });
 
 export { Student };

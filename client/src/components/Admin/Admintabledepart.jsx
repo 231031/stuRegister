@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import { getDeInFac } from '../../helpers/adminHelper';
-import Header from '../Header';
+import Headeradmin from './Headeradmin';
 
 const Row = tw.td`border border-slate-600 py-1 px-2 text-sm`;
 
@@ -29,11 +29,8 @@ export default function Admintabledepart() {
     useEffect(() => {
         const apiDe = async () => {
             try {
-            console.log(fac);
-
               const department = await getDeInFac(fac);
               setDe(department);
-              console.log(de);
 
             } catch (error) {
                 toast.error('Cannot Get Information');
@@ -66,7 +63,7 @@ export default function Admintabledepart() {
           <Helmet>
               <title>A | TableDepartment</title>
           </Helmet>
-          <Header/>
+          <Headeradmin/>
           <div className='flex justify-center mt-2'>
           {
               de.length > 0? (

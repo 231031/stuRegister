@@ -12,8 +12,8 @@ import { Department } from './models/Department.model.js';
 import { Course } from './models/Course.model.js';
 import { Faculty } from './models/Faculty.model.js';
 import { Teacher } from './models/Teacher.model.js';
+import { Eduterm } from './models/Eduterm.model.js';
 import { Student } from './models/Student.model.js';
-import { Project } from './models/Project.model.js';
 import { Scholarhistory } from './models/Scholarhistory.model.js';
 import { Scholarship } from './models/Scholarship.model.js';
 
@@ -21,15 +21,13 @@ import { Eduhistory } from './models/Eduhistory.model.js';
 import { Coursedetail } from './models/Coursedetail.model.js';
 import { Sturegister } from './models/Sturegister.model.js';
 
-import { Projectstu } from './models/Projectstu.model.js';
-import { Projectteacher } from './models/Projectteacher.model.js';
-
-
-
 Course.sync({ force: false, alter: true }).then(() => {console.log('C synced successfully');})
 .catch((error) => { console.error('Error syncing database:', error); });
 
 Teacher.sync({ force: false, alter: true }).then(() => {console.log('T synced successfully');})
+.catch((error) => { console.error('Error syncing database:', error); });
+
+Eduterm.sync({ force: false, alter: true }).then(() => {console.log('Et synced successfully');})
 .catch((error) => { console.error('Error syncing database:', error); });
 
 Student.sync({ force: false, alter: true }).then(() => {console.log('S synced successfully');})
@@ -54,15 +52,6 @@ Eduhistory.sync({ force: false, alter: true }).then(() => {console.log('E synced
 .catch((error) => { console.error('Error syncing database:', error); });
 
 Sturegister.sync({ force: false, alter: true }).then(() => {console.log('sr synced successfully');})
-.catch((error) => { console.error('Error syncing database:', error); });
-
-Project.sync({ force: false, alter: true }).then(() => {console.log('P synced successfully');})
-.catch((error) => { console.error('Error syncing database:', error); });
-
-Projectstu.sync({ force: false, alter: true }).then(() => {console.log('ps synced successfully');})
-.catch((error) => { console.error('Error syncing database:', error); });
-
-Projectteacher.sync({ force: false, alter: true }).then(() => {console.log('pt synced successfully');})
 .catch((error) => { console.error('Error syncing database:', error); });
 
 Coursedetail.sync({ force: false, alter: true }).then(() => {console.log('cd synced successfully');})

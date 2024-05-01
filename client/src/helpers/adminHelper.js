@@ -140,21 +140,30 @@ export async function getDeInFac(info) {
 }
 
 export async function addStudent(info) {
-  console.log(info.year);
+    const currentYear = ((new Date().getFullYear())+543) - 2500;
+
     function generateStudentId(year, department_id, index) {
       // Format: yyCPE0001
       const yearString = year.toString().slice(-2);
       return `${yearString}${department_id}${index.toString().padStart(3, '0')}`;
     }
 
+    function generatePassword(length) {
+      const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      return Array.from({ length }, () => charset.charAt(Math.floor(Math.random() * charset.length))).join('');
+    }
+  
     const students = [];
-    for (let i = 1; i <= info.number; i++) {
-        const studentId = generateStudentId(info.year, info.department_id, i);
-        students.push({ student_id: studentId, password: studentId, year: info.year,
-                        department_id: info.department_id, teacher_id: info.teacher_id });
+    for (let i = 0; i < info.student.length; i++) {
+        const pass = generatePassword(7);
+        const studentId = generateStudentId(info.student[i].year, info.student[i].department_id, i+1);
+        students.push({ student_id: studentId, password: pass, year: currentYear - info.student[i].year, 
+                        firstName: info.student[i].firstName, lastName: info.student[i].lastName,
+                        department_id: info.student[i].department_id, teacher_id: info.student[i].teacher_id });
     }
 
     try {
+      console.log(info);
         const response = await fetch('http://localhost:6001/admin/addstudent', {
           method: 'POST',
           headers: {
@@ -174,14 +183,27 @@ export async function addStudent(info) {
 }
 
 export async function addTeacher(info) {
+
+  function generatePassword(length) {
+    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    return Array.from({ length }, () => charset.charAt(Math.floor(Math.random() * charset.length))).join('');
+  }
+
+  const teachers = [];
+    for (let i = 0; i < info.teacher.length; i++) {
+        const pass = generatePassword(7);
+        teachers.push({ teacher_id: info.teacher[i].teacher_id, password: pass,
+                        firstName: info.teacher[i].firstName, lastName: info.teacher[i].lastName,
+                        department_id: info.teacher[i].department_id, position: info.teacher[i].position });
+    }
+
   try {
-      console.log(info);
       const response = await fetch('http://localhost:6001/admin/addteacher', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(info),
+        body: JSON.stringify(teachers),
       });
       const data = await response.json();
       if (response.status === 404) {

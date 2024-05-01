@@ -7,6 +7,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import { CourseSchema } from '../../Validations/validation';
 import { addCourse, getDeTeacher } from '../../helpers/adminHelper';
+import Headeradmin from './Headeradmin';
 
 const Alert = tw.div`text-red-700 text-sm`;
 const Fill = tw.div`flex flex-col items-center`;
@@ -45,6 +46,7 @@ export default function Courseregister() {
             <Helmet>
                 <title>A | AddCourse</title>
             </Helmet>
+            <Headeradmin/>
             <h3 className='text-center py-4'>Course Registration</h3>
             <div className='register-form'>
                 <Formik 

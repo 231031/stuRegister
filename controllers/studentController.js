@@ -25,7 +25,7 @@ export async function loginStudent(req, res) {
             },
         });
         if (user !== null) {
-            if (password === user.password && username === user.password) {
+            if (password === user.password && 7 === user.password.length) {
                 change = false;
                 return res.status(200).send({
                     msg : "Please change password and Fill personal information",

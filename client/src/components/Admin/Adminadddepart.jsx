@@ -7,6 +7,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import { DepartmentSchema } from '../../Validations/validation';
 import { addDepartment } from '../../helpers/adminHelper';
+import Headeradmin from './Headeradmin';
 
 const Alert = tw.div`text-red-700 text-sm`;
 export default function Adminadddepart() {
@@ -20,8 +21,10 @@ export default function Adminadddepart() {
             setFac(faculty_id);
         }    
         else navigate('/admin/selfac');
+        
       }, []);
 
+      
   return (
     <HelmetProvider>
         <div className='container text-lg'>
@@ -29,6 +32,7 @@ export default function Adminadddepart() {
             <Helmet>
                 <title>A | AddDepartment</title>
             </Helmet>
+            <Headeradmin/>
             <h3 className='text-center py-2'>Department Registration</h3>
             <h4 className='text-center'>Faculty of {faculty_id}</h4>
             <div className='register-form'>

@@ -110,6 +110,7 @@ const AvailableSchema = Yup.object().shape({
             course_id: Yup.string()
                 .required('Required'),
             year: Yup.number().required('Required'),
+            term: Yup.number().required('Required'),
         })
     )
     

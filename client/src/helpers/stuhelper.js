@@ -94,3 +94,47 @@ export async function getInfo(info) {
     return Promise.reject(error);
   }
 }
+
+export async function getStuRegister(de, year) {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await fetch('http://localhost:6001/student/getsturegister', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify({ department_id: de, year: year }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
+export async function getAvailableCourse(de, year) {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await fetch('http://localhost:6001/student/getavailable', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify({ department_id: de, year: year }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}

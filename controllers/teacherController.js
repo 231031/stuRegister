@@ -60,7 +60,7 @@ export async function updateTeacher(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
         if (token) {
-            await Teacher.findOne({ where: { teacher_id: token } });
+            await Teacher.findByPk(token);
             if (req.body.password) {
                 const hashPass = await bcrypt.hash(req.body.password, 10); // Hash the password
                 req.body.password = hashPass;

@@ -1,30 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast';
 import Headerstu from './Headerstu';
-import { getInfo } from '../../helpers/stuhelper';
 
 export default function Studenthome() {
   
+  const navigate = useNavigate();
   const [data, setData] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
-        return <Navigate to={'/student/login'} replace={true}></Navigate>
+      navigate('/student/login');
     }
-    const apiInfo = async () => {
-        try {
-          const res = await getInfo(localStorage.getItem('token'));
-          setData(res);
-
-        } catch (error) {
-            toast.error('Cannot Get Information');
-            console.error(error);
-        } 
-    };
-    apiInfo();
+    const [department_id, year, student_id] = token.split('-');
+    setData({
+      department_id: department_id,
+      year: year,
+      student_id: student_id,
+    });
   }, []);
 
   return (

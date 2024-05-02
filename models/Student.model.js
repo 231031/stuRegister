@@ -4,6 +4,7 @@ import { Eduhistory } from "./Eduhistory.model.js";
 import { Sturegister } from "./Sturegister.model.js";
 import { Scholarhistory } from "./Scholarhistory.model.js";
 import { Eduterm } from "./Eduterm.model.js";
+import { Arractivity } from "./Arractivity.model.js";
 
 const Student = sequelize.define('Student',{
     student_id : {
@@ -69,5 +70,9 @@ Scholarhistory.belongsTo(Student, {foreignKey: 'student_id', onUpdate: 'cascade'
 
 Student.hasMany(Eduterm, {foreignKey: 'student_id', onUpdate: 'cascade', onDelete: 'cascade' });
 Eduterm.belongsTo(Student, {foreignKey: 'student_id', onUpdate: 'cascade', onDelete: 'cascade' });
+
+Student.hasMany(Arractivity, {foreignKey: 'student_id', onUpdate: 'cascade', onDelete: 'cascade' });
+Arractivity.belongsTo(Student, {foreignKey: 'student_id', onUpdate: 'cascade', onDelete: 'cascade' });
+
 
 export { Student };

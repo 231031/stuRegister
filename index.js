@@ -1,5 +1,4 @@
 import express from 'express';
-import { sequelize } from "./dbcon.js";
 import router from './router/studentRouter.js';
 import routerAdmin from './router/adminRouter.js';
 import routerTeacher from './router/teacherRouter.js';
@@ -12,6 +11,8 @@ import { Department } from './models/Department.model.js';
 import { Course } from './models/Course.model.js';
 import { Faculty } from './models/Faculty.model.js';
 import { Teacher } from './models/Teacher.model.js';
+import { Activity } from './models/Activity.model.js';
+import { Arractivity } from './models/Arractivity.model.js';
 import { Eduterm } from './models/Eduterm.model.js';
 import { Student } from './models/Student.model.js';
 import { Scholarhistory } from './models/Scholarhistory.model.js';
@@ -21,41 +22,56 @@ import { Eduhistory } from './models/Eduhistory.model.js';
 import { Coursedetail } from './models/Coursedetail.model.js';
 import { Sturegister } from './models/Sturegister.model.js';
 
-Course.sync({ force: false, alter: true }).then(() => {console.log('C synced successfully');})
-.catch((error) => { console.error('Error syncing database:', error); });
 
-Teacher.sync({ force: false, alter: true }).then(() => {console.log('T synced successfully');})
-.catch((error) => { console.error('Error syncing database:', error); });
+async function syncModels() {
+  try {
+    await Course.sync({ force: false, alter: true });
+    console.log('C synced successfully');
 
-Eduterm.sync({ force: false, alter: true }).then(() => {console.log('Et synced successfully');})
-.catch((error) => { console.error('Error syncing database:', error); });
+    await Teacher.sync({ force: false, alter: true });
+    console.log('T synced successfully');
 
-Student.sync({ force: false, alter: true }).then(() => {console.log('S synced successfully');})
-.catch((error) => { console.error('Error syncing database:', error); });  
+    await Eduterm.sync({ force: false, alter: true });
+    console.log('Et synced successfully');
 
-Scholarship.sync({ force: false, alter: true }).then(() => {console.log('ss synced successfully');})
-.catch((error) => { console.error('Error syncing database:', error); });
+    await Activity.sync({ force: false, alter: true });
+    console.log('A synced successfully');
 
-Faculty.sync({ force: false, alter: true }).then(() => {console.log('F synced successfully');})
-.catch((error) => { console.error('Error syncing database:', error); });
+    await Arractivity.sync({ force: false, alter: true });
+    console.log('Aa synced successfully');
 
-Department.sync({ force: false, alter: true }).then(() => {console.log('D synced successfully');})
-.catch((error) => { console.error('Error syncing database:', error); });
+    await Student.sync({ force: false, alter: true });
+    console.log('S synced successfully');
 
-Availablecourse.sync({ force: false, alter: true }).then(() => {console.log('ac synced successfully');})
-.catch((error) => { console.error('Error syncing database:', error); });
+    await Scholarship.sync({ force: false, alter: true });
+    console.log('ss synced successfully');
 
-Scholarhistory.sync({ force: false, alter: true }).then(() => {console.log('sh synced successfully');})
-.catch((error) => { console.error('Error syncing database:', error); });
+    await Faculty.sync({ force: false, alter: true });
+    console.log('F synced successfully');
 
-Eduhistory.sync({ force: false, alter: true }).then(() => {console.log('E synced successfully');})
-.catch((error) => { console.error('Error syncing database:', error); });
+    await Department.sync({ force: false, alter: true });
+    console.log('D synced successfully');
 
-Sturegister.sync({ force: false, alter: true }).then(() => {console.log('sr synced successfully');})
-.catch((error) => { console.error('Error syncing database:', error); });
+    await Availablecourse.sync({ force: false, alter: true });
+    console.log('ac synced successfully');
 
-Coursedetail.sync({ force: false, alter: true }).then(() => {console.log('cd synced successfully');})
-.catch((error) => { console.error('Error syncing database:', error); });
+    await Scholarhistory.sync({ force: false, alter: true });
+    console.log('sh synced successfully');
+
+    await Eduhistory.sync({ force: false, alter: true });
+    console.log('E synced successfully');
+
+    await Sturegister.sync({ force: false, alter: true });
+    console.log('sr synced successfully');
+
+    await Coursedetail.sync({ force: false, alter: true });
+    console.log('cd synced successfully');
+  } catch (error) {
+    console.error('Error syncing database:', error);
+  }
+}
+syncModels();
+
 // sequelize.sync({ force: false, alter: true })
 //   .then(() => {
 //     console.log('Database synced successfully');
@@ -80,15 +96,6 @@ app.use('/teacher', routerTeacher);
 app.use('/student', router);
 app.use('/oa', routerOA);
 app.use('/', routerAll);
-
-// app.get('/api', (req, res) => {
-//   try {
-//     await Course.create({ "course_id": 'cpe', "courseName":"hello"})
-//     res.json(mockData);
-//   } catch (err) {
-//     res.status(500).json({error: err.message });
-//   }
-// });
 
 app.post('/test', async (req, res) => {
   try {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Formik, Field, Form } from "formik";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast';
 import tw from 'twin.macro';
@@ -36,7 +36,8 @@ export default function Studentlogin() {
                             else if (res.error) toast.error(res.error);
                             else {
                             if (res) {
-                                localStorage.setItem('token', res.username);
+                                const token = `${res.department_id}-${res.year}-${res.student_id}`;
+                                localStorage.setItem('token', token);
                                 toast.success(res.msg);
                             
                                 if (!res.setPass) {

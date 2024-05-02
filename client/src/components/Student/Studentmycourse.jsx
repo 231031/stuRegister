@@ -5,9 +5,8 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 import Headerstu from './Headerstu';
-import { getInfo } from '../../helpers/stuhelper';
 
-export default function Studentpersonal() {
+export default function Studentmycourse() {
 
     const navigate = useNavigate();
     const [data, setData] = useState('');
@@ -17,17 +16,12 @@ export default function Studentpersonal() {
           navigate('/student/login');
         }
         const [department_id, year, student_id] = token.split('-');
-        
-        const apiInfo = async() => {
-        try {
-            const res = await getInfo(student_id);
-            setData(res);
-        } catch (error) {
-            console.log(error);
-        }
-        }
-        if (student_id) apiInfo();
-    }, []);
+        setData({
+          department_id: department_id,
+          year: year,
+          student_id: student_id,
+        });
+      }, []);
 
   return (
     <HelmetProvider>
@@ -38,7 +32,7 @@ export default function Studentpersonal() {
         </Helmet>
         <Headerstu data={data}/>
         <div>
-            {/* display personal information and button for link to edit personal page */}
+            {/* display all course register of this student */}
         </div>
       </div>
     </HelmetProvider>

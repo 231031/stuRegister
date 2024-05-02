@@ -74,7 +74,8 @@ export default function Headerstu({ data }) {
             <div className={isCourseOpen ? 'block' : 'hidden'}>
               <List>
                 <li><NavLink to='/student/courses'>Course Detail</NavLink></li>
-                <li><NavLink to='/student/register'>Course Register</NavLink></li>
+                <li><NavLink to='/student/regiscourse'>Register Course</NavLink></li>
+                <li><NavLink to='/student/mycourse'>My Course</NavLink></li>
               </List>
             </div>
           </Dropdown>
@@ -83,7 +84,8 @@ export default function Headerstu({ data }) {
             <Btn onClick={toggleActivity}>Activity<FontAwesomeIcon className='ml-2' icon="fa-solid fa-caret-down" /></Btn>
             <div className={isActivityOpen ? 'block' : 'hidden'}>
               <List className='w-46'>
-                <li><NavLink to='/student/activity'>Attended Activity</NavLink></li>
+                <li><NavLink to='/student/activity'>All Activity</NavLink></li>
+                <li><NavLink to='/student/myactivity'>Attended Activity</NavLink></li>
                 <li><NavLink to='/student/evaluate'>Evaluate Activity</NavLink></li>
               </List>
             </div>

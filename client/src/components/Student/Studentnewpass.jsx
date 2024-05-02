@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Formik, Field, Form } from "formik";
 import tw from 'twin.macro';
 import { Toaster } from 'react-hot-toast';
 import toast from "react-hot-toast";
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import { PasswordSchema } from '../../Validations/validation';
@@ -12,11 +12,17 @@ import { updateStudent } from '../../helpers/stuhelper';
 const Alert = tw.div`text-red-700 text-sm`;
 export default function Studentnewpass() {
     const navigate = useNavigate();
-    const token = localStorage.getItem('token');
-    console.log(token);
-    if (!token) {
-        return <Navigate to={'/student/login'} replace={true}></Navigate>
-    }
+    const [id, setId] = useState('');
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        const [department_id, year, student_id] = token.split('-');
+        setId(student_id);
+        if (!token) {
+            navigate('/student/login');
+        }
+    }, []);
+    
   return (
     <HelmetProvider>
         <div className='container text-lg'>
@@ -34,7 +40,8 @@ export default function Studentnewpass() {
                     validationSchema={PasswordSchema}
                     onSubmit={async (values) => {
                         try {
-                            values.student_id = localStorage.getItem('token');
+
+                            values.student_id = id;
                             const res = await updateStudent(values);
                             toast.success(res.msg);
                             navigate('/student/home');

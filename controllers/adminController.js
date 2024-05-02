@@ -9,6 +9,23 @@ import { Teacher } from "../models/Teacher.model.js";
 import { Availablecourse } from "../models/Avilablecourse.model.js";
 import bcrypt from 'bcrypt';
 
+export async function login(req, res) {
+    try {
+        // adminkeykmutt23231010
+        const key = 'adminkeykmutt23231010';
+        if (req.body.key === key) {
+            return res.status(200).send({
+                msg : "Login successful",
+                role : 'admin',
+            }) 
+        }
+        else return res.status(401).send({ error : "invalid key!"});
+
+    } catch (error) {
+        return res.status(404).send({ error: error.message });
+    }
+}
+
 export async function addCourse(req, res) {
     try {
         await Course.bulkCreate(req.body.course);

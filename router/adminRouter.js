@@ -12,7 +12,7 @@ const router = Router();
 // query
 router.route("/getdeteacher").post(controller.getDeTeacher);
 router.route("/getdeinfac").post(controller.getDeInFac);
-
+router.route('/login').post(controller.login);
 // insert
 router.route("/addcourse").post(controller.addCourse);
 router.route("/adddetail").post(controller.addDetail);

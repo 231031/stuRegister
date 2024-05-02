@@ -56,6 +56,7 @@ export default function Adminaddavailable() {
                                 course_id: '',
                                 year: '',
                                 department_id: '',
+                                term: '',
                             }
                         ]    
                     }}
@@ -86,12 +87,17 @@ export default function Adminaddavailable() {
                                     const touchedYear = getIn(touched, year);
                                     const errorYear = getIn(errors, year);
 
+                                    const term = `available[${index}].term`;
+                                    const touchedTerm = getIn(touched, term);
+                                    const errorTerm = getIn(errors, term);
+
                                     return (
-                                    <div key={index} className='flex flex-row my-2'>
+                                    <div key={index} className='flex flex-row my-3'>
                                         <Fill>
+                                            <label for='course'>Course</label>
                                             {
                                                 (course.length > 0)  ? (
-                                                    <Field className='rounded-md mx-1 border-2 border-sky-700' type='text' name={course_id} value={p.course_id} as='select'>
+                                                    <Field id='course' className='rounded-md mx-1 border-2 border-sky-700 w-20' type='text' name={course_id} value={p.course_id} as='select'>
                                                         <option value=''></option>
                                                         {
                                                             course.map((courseList, index) => (
@@ -108,7 +114,8 @@ export default function Adminaddavailable() {
                                             )}
                                         </Fill>
                                         <Fill>
-                                            <Field className='rounded-md mx-1 border-2 border-sky-700' type='number' name={year} value={p.year} as='select'>
+                                            <label for='year'>Year</label>
+                                            <Field id='year' className='rounded-md mx-1 border-2 border-sky-700 w-20' type='number' name={year} value={p.year} as='select'>
                                                 <option value=''></option>
                                                 <option value='1'>1</option>
                                                 <option value='2'>2</option>
@@ -119,14 +126,25 @@ export default function Adminaddavailable() {
                                                     <Alert>{errorYear}</Alert>
                                             )}
                                         </Fill>
-                                        <button type='button' className='px-1 rounded-md border-2 bg-red-500' onClick={() => remove(index)} 
+                                        <Fill>
+                                            <label for='term'>Semester</label>
+                                            <Field id='term' className='rounded-md mx-1 border-2 border-sky-700 w-20' type='number' name={term} value={p.term} as='select'>
+                                                <option value=''></option>
+                                                <option value='1'>1</option>
+                                                <option value='2'>2</option> 
+                                            </Field>
+                                            {errorTerm && touchedTerm && (
+                                                    <Alert>{errorTerm}</Alert>
+                                            )}
+                                        </Fill>
+                                        <button type='button' className='mx-2 px-1 rounded-md border-2 bg-red-500' onClick={() => remove(index)} 
                                             disabled={values.available.length === 1}> X </button>
                                         
                                     </div>
                                     );
                                 })}
                                 <button className='border-2 bg-yellow-500 px-4 rounded-md' type='button' 
-                                onClick={() => push({ course_id: '', department_id: de, year: '' })}>Add</button>
+                                onClick={() => push({ course_id: '', department_id: de, year: '', term: '' })}>Add</button>
                                 </div>
                             )}
                             </FieldArray>

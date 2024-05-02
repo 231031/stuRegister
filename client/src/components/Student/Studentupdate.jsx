@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { Formik, Field, Form } from "formik";
 import tw from 'twin.macro';
 import { Toaster } from 'react-hot-toast';
@@ -8,19 +7,27 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import { UpdateSchema } from '../../Validations/validation';
 import { updateStudent } from '../../helpers/stuhelper';
+import Headerstu from './Headerstu';
+import { useNavigate } from 'react-router-dom';
 
 const Alert = tw.div`text-red-700 text-sm`;
 export default function Studentupdate() {
 
-    useEffect(() => {
-        // fetch student information
-    }, []);
+    const navigate = useNavigate();
+    const [data, setData] = useState('');
 
-    const token = localStorage.getItem('token');
-    console.log(token);
-    if (!token) {
-        return <Navigate to={'/'} replace={true}></Navigate>
-    }
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/student/login');
+        }
+        const [department_id, year, student_id] = token.split('-');
+        setData({
+            department_id: department_id,
+            year: year,
+            student_id: student_id,
+        });
+    }, []);
 
   return (
     <HelmetProvider>
@@ -29,6 +36,7 @@ export default function Studentupdate() {
             <Helmet>
             <title>Stu | UpdateInfo</title>
             </Helmet>
+            <Headerstu data={data}/>
             <h3 className='text-center py-4'>Update Profile</h3>
             <div className='register-form'>
                 <Formik 

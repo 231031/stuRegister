@@ -11,36 +11,40 @@ export default function Headeradmin() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSOpen, setIsSOpen] = useState(false);
   const [isActivityOpen, setIsActivityOpen] = useState(false);
+  const [isCourseOpen, setIsCourseOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
     setIsSOpen(false);
     setIsActivityOpen(false);
+    setIsCourseOpen(false);
   };
 
-  // const toggleCourse = () => {
-  //   setIsCourseOpen(!isCourseOpen);
-  //   setIsDropdownOpen(false);
-  //   setIsSOpen(false);
-  //   setIsActivityOpen(false);
-  // };
+  const toggleCourse = () => {
+    setIsCourseOpen(!isCourseOpen);
+    setIsDropdownOpen(false);
+    setIsSOpen(false);
+    setIsActivityOpen(false);
+  };
 
   const toggleScholar = () => {
     setIsDropdownOpen(false);
     setIsActivityOpen(false);
+    setIsCourseOpen(false);
     setIsSOpen(!isSOpen);
   };
 
   const toggleActivity = () => {
     setIsDropdownOpen(false);
     setIsSOpen(false);
+    setIsCourseOpen(false);
     setIsActivityOpen(!isActivityOpen);
   };
 
   return (
     <div>
        <nav>
-        <ul className='flex flex-wrap bg-sky-800 justify-center divide-x-2'>
+        <ul className='flex flex-wrap bg-sky-800 justify-center divide-x-2 text-sm'>
           <Btn>
             <NavLink to='/admin/home'>Home</NavLink>
           </Btn>
@@ -73,19 +77,15 @@ export default function Headeradmin() {
             <NavLink to='/admin/teachers'>Teacher</NavLink>
           </Btn>
 
-          <Btn>
-            <NavLink to='/admin/selcourse'>Course</NavLink>
-          </Btn>
-
-          {/* <Dropdown>
+          <Dropdown>
             <Btn onClick={toggleCourse}>Course<FontAwesomeIcon className='ml-2' icon="fa-solid fa-caret-down" /></Btn>
             <div className={isCourseOpen ? 'block' : 'hidden'}>
               <List>
-                <li><NavLink to='/admin/addcourse'>Add Course</NavLink></li>
-                <li><NavLink to='/admin/courses'>All Course</NavLink></li>
+                <li><NavLink to='/admin/selcourse'>All Course</NavLink></li>
+                <li><NavLink to='/admin/tableavailable'>Available Course</NavLink></li>
               </List>
             </div>
-          </Dropdown> */}
+          </Dropdown>
 
           <Dropdown>
             <Btn onClick={toggleActivity}>Activity<FontAwesomeIcon className='ml-2' icon="fa-solid fa-caret-down" /></Btn>

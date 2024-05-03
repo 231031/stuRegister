@@ -14,12 +14,12 @@ export default function Teacherlogin() {
   const navigate = useNavigate();
   return (
     <HelmetProvider>
-      <div className='container text-lg'>
+      <div className='flex justify-center flex-col h-screen'>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <Helmet>
             <title>T | Login</title>
         </Helmet>
-        <h3 className='text-center py-4'>Teacher Login</h3>
+        <h3 className='text-center py-5 text-3xl'>Teacher Login</h3>
         <div className='register-form'>
                 <Formik 
                     initialValues={{
@@ -51,14 +51,25 @@ export default function Teacherlogin() {
                     }}  
                 >  
                     {({ errors, touched }) => (
-                        <Form className='flex flex-col items-center '>
-                            <Field className='border-2 border-sky-500 rounded-md my-3 w-1/3' type='text' name='username' placeholder='username'></Field>
-                            {errors.username && touched.username ? (
-                                <Alert>{errors.username}</Alert>
-                            ) : null}
-                            <Field className='border-2 border-sky-500 rounded-md my-3 w-1/3' type='password' name='password' placeholder='password'></Field>
-                            <button type="submit" className="btn border-2 bg-sky-500 rounded-md my-3 w-1/3">SUBMIT</button>
+                        <div className='flex justify-center'>
+                        <Form >
+                            <div className='flex flex-col w-96'>
+                                    <Field className='my-3 p-5 w-full h-16 rounded-full bg-gray-200 ' type='text' name='username' placeholder='username'></Field>
+                                    <div className='flex justify-end pr-6'>
+                                        {errors.username && touched.username ? (
+                                            <Alert>{errors.username}</Alert>
+                                        ) : null}
+                                    </div>
+                                    <Field className='my-3 p-5 w-full h-16 rounded-full bg-gray-200 ' type='password' name='password' placeholder='password'></Field>
+                                    <div className='flex justify-end pr-6'>
+                                        <a href=''>Reset Password</a>
+                                    </div>
+                                    <div className='flex justify-center'>
+                                        <button type="submit" className="my-3 w-1/3 h-10 rounded-full bg-gray-500 text-white ">Login</button>
+                                    </div>
+                            </div>
                         </Form>
+                        </div>
                     )}
                 </Formik>
             </div>

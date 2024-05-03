@@ -3,9 +3,9 @@ import { NavLink } from 'react-router-dom'
 import tw from 'twin.macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Btn = tw.p` px-8 py-2 text-green-200 cursor-pointer text-base hover:text-yellow-400  border-opacity-50 border-gray-400`;
-const List = tw.ul`bg-blue-400 text-gray-900 rounded-md p-1 absolute w-40 flex flex-col items-center bg-opacity-90`;
-const Dropdown = tw.div`flex flex-col border-opacity-50 border-gray-400`;
+const Btn = tw.p` px-8 py-2 text-lowyellow cursor-pointer text-base hover:text-greendark  border-opacity-50 border-lowyellow`;
+const List = tw.ul`bg-sky text-lowyellow rounded-md p-1 absolute w-40 flex flex-col items-center bg-opacity-90`;
+const Dropdown = tw.div`flex flex-col border-opacity-50 border-lowyellow`;
 export default function Headerstu({ data }) {
 
   const [isInfoOpen, setIsInfoOpen] = useState(false);
@@ -43,7 +43,7 @@ export default function Headerstu({ data }) {
 
   return (
     <div>
-       <nav className=' bg-sky-800'>
+       <nav className=' bg-sky'>
         <ul className='flex flex-wrap justify-center items-center divide-x-2'>
           <Btn>
             <NavLink to='/student/home'>Home</NavLink>

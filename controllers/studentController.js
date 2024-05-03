@@ -99,7 +99,7 @@ export async function getStuRegister(req, res) {
 export async function getAvailableCourse(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
-        const { department_id, year } = req.body;
+        const { department_id, year, type } = req.body;
         const month = new Date().getMonth();
         let term = 2;
         if (month >= 7) term = 1; // after august term 1
@@ -129,6 +129,7 @@ export async function getAvailableCourse(req, res) {
                           course_id: {
                             [Op.in]: course,
                           },
+                          type: type,
                         },
                         include: {
                             model: Coursedetail,
@@ -152,6 +153,7 @@ export async function getAvailableCourse(req, res) {
                           course_id: {
                             [Op.in]: course,
                           },
+                          type: type,
                         },
                         include: {
                             model: Coursedetail,
@@ -206,6 +208,9 @@ export async function addCourse(req, res) {
             await course.increment('count', { transaction : tran });
 
         });
+
+
+        
         return res.status(200).send({ msg : 'Add course successfully'});
     } catch (error) {
         return res.status(404).send({ error: error.message });

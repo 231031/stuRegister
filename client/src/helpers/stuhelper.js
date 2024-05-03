@@ -117,7 +117,7 @@ export async function getStuRegister(de, year) {
   }
 }
 
-export async function getAvailableCourse(de, year) {
+export async function getAvailableCourse(de, year, type) {
   try {
     const token = localStorage.getItem('token');
     const response = await fetch('http://localhost:6001/student/getavailable', {
@@ -126,7 +126,7 @@ export async function getAvailableCourse(de, year) {
         'Content-Type': 'application/json',
         "Authorization": `Bearer ${token}`,
       },
-      body: JSON.stringify({ department_id: de, year: year }),
+      body: JSON.stringify({ department_id: de, year: year, type: type }),
     });
     const data = await response.json();
     if (response.status === 404) {

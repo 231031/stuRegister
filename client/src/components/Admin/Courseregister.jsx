@@ -92,10 +92,6 @@ export default function Courseregister() {
                                     const touchedCredit = getIn(touched, credit);
                                     const errorCredit = getIn(errors, credit);
 
-                                    const teacher_id = `course[${index}].teacher_id`;
-                                    const touchedTeacher = getIn(touched, teacher_id);
-                                    const errorTeacher = getIn(errors, teacher_id);
-
                                     const type = `course[${index}].type`;
                                     const touchedType = getIn(touched, type);
                                     const errorType = getIn(errors, type);
@@ -115,27 +111,7 @@ export default function Courseregister() {
                                             {errorName && touchedName && (
                                                 <Alert>{errorName}</Alert>
                                             )}
-                                        </Fill>
-                                        <Fill>
-                                            {
-                                                (teacher.length > 0)  ? (
-                                                    <Field className='rounded-md mx-1 border-2 border-sky-700' type='text' name={teacher_id} value={p.teacher_id} as='select'>
-                                                        <option value=''></option>
-                                                        {
-                                                            teacher.map((teacherList, index) => (
-                                                                <option key={index} value={teacherList.teacher_id}>{teacherList.teacher_id}</option>
-                                                            ))
-                                                        }
-                                                    </Field>
-                                                ) : (
-                                                        <h4>No teacher Available</h4>
-                                                    )
-                                            }
-                                            {errorTeacher && touchedTeacher && (
-                                                <Alert>{errorTeacher}</Alert>
-                                            )}
-                                        </Fill>
-                                        
+                                        </Fill>     
                                         <Fill>
                                             <Field className='rounded-md mx-1 border-2 border-sky-700' 
                                             name={credit} value={p.credit} placeholder='credit'></Field>

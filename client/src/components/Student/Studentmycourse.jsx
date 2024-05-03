@@ -25,13 +25,13 @@ export default function Studentmycourse() {
 
   return (
     <HelmetProvider>
-      <div className='container'>
+      <div className='container' >
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <Helmet>
             <title>Stu | EditPersonal</title>
-        </Helmet>
+        </Helmet> 
         <Headerstu data={data}/>
-        <div>
+        <div className='bg-lowyellow'> 
             {/* display all course register of this student */}
         </div>
       </div>

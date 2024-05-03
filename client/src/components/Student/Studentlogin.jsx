@@ -9,13 +9,13 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { loginStudent } from '../../helpers/stuhelper';
 import { LoginSchema } from '../../Validations/validation';
 
-const Alert = tw.div`text-red-700 text-sm`;
+const Alert = tw.div`text-sm`;
 export default function Studentlogin() {
 
     const navigate = useNavigate();
   return (
     <HelmetProvider>
-        <div className='container text-lg'>
+        <div className='container text-lg '>
             <Toaster position='top-center' reverseOrder={false}></Toaster>
             <Helmet>
                 <title>Stu | Login</title>
@@ -54,12 +54,12 @@ export default function Studentlogin() {
                 >  
                     {({ errors, touched }) => (
                         <Form className='flex flex-col items-center '>
-                            <Field className='border-2 border-sky-500 rounded-md my-3 w-1/3' type='text' name='username' placeholder='username'></Field>
+                            <Field className='border-2 border-sky rounded-md my-3 w-1/3' type='text' name='username' placeholder='username'></Field>
                             {errors.username && touched.username ? (
                                 <Alert>{errors.username}</Alert>
                             ) : null}
-                            <Field className='border-2 border-sky-500 rounded-md my-3 w-1/3' type='password' name='password' placeholder='password'></Field>
-                            <button type="submit" className="btn border-2 bg-sky-500 rounded-md my-3 w-1/3">SUBMIT</button>
+                            <Field className='border-2 border-sky rounded-md my-3 w-1/3' type='password' name='password' placeholder='password'></Field>
+                            <button type="submit" className="btn border-2 bg-sky rounded-md my-3 w-1/3">SUBMIT</button>
                         </Form>
                     )}
                 </Formik>

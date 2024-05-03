@@ -13,8 +13,7 @@ export default {
       'lowyellow': '#FFF5E0',
       'lowgreen': '8DECB4',
       'black': '#000000',
-      'white': '#FFF7FC',
-      'coral': '#FF7F50',
+      'white': '#FFF7FC'
     },},
   },
   plugins: [],

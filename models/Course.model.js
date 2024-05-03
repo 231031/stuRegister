@@ -20,6 +20,10 @@ const Course = sequelize.define('Course',{
     credit : {
         type: DataTypes.FLOAT,
         allowNull: false,
+    },
+    type : {
+        type: DataTypes.STRING,
+        allowNull: false,
     }
 },{
     tableName: 'Course',

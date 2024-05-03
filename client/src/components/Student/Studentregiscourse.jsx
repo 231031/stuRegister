@@ -6,7 +6,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import Headerstu from './Headerstu';
 import { getAvailableCourse, getStuRegister } from '../../helpers/stuhelper';
-
+import sry from '../../assets/sry.png';
 export default function Studentregiscourse() {
 
   const navigate = useNavigate();
@@ -37,10 +37,11 @@ export default function Studentregiscourse() {
           if (month == 4 && date < 15) {
             const detail = await getAvailableCourse(data.department_id, data.year);
             setAvailable(detail); 
-          } else {
-            const res = await getStuRegister(data.department_id, data.year);
-            setAvailable(res);
-          }
+          } 
+          // else {
+          //   const res = await getStuRegister(data.department_id, data.year);
+          //   setAvailable(res);
+          // }
         } catch (error) {
             toast.error('Cannot Get Information');
             console.error(error);
@@ -50,9 +51,13 @@ export default function Studentregiscourse() {
       console.log(available);
   }, [data]);
 
+  function handleClick() {
+    navigate('/student/courses')
+  }
+
   return (
     <HelmetProvider>
-      <div className='container'>
+      <div className='container '>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <Helmet>
             <title>Stu | RegisterCourse</title>
@@ -62,22 +67,18 @@ export default function Studentregiscourse() {
           (month == 4 && date < 15) ? (
             <div>
               {/* form for register course from course detail in available*/}
+              {/* elective select from department course of department_id eng social */}
+              {/* out of this be compulsory */}
             </div>
           ) : (
-            <div className='flex flex-col items-center my-5'>
-              <p>Not Period for Course Register</p>
-              {
-                (available.length > 0)? (
-                  <div>
-                    {/* display course already register in this semester*/}
-                  </div>
-                ) : (
-                  <p>Not Have Course already register in this semester</p>
-                )
-              }
+            <div className='h-screen flex flex-col items-center justify-center'>
+              <img src={sry} className='w-1/6'/>
+              <p className='my-5'>Sorry, we're not in registration period</p>
+              <button className='p-3 bg-slate-400 text-white rounded-md' type='button' onClick={(e)=>handleClick()}>Preview Course Detail</button>
             </div>
           )
         }
+        
       </div>
     </HelmetProvider>
   )

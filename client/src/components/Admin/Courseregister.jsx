@@ -56,8 +56,8 @@ export default function Courseregister() {
                                 course_id: '',
                                 courseName: '',
                                 department_id: '',
-                                teacher_id: '',
                                 credit: '',
+                                type: '',
                             }
                         ]    
                     }}
@@ -95,6 +95,10 @@ export default function Courseregister() {
                                     const teacher_id = `course[${index}].teacher_id`;
                                     const touchedTeacher = getIn(touched, teacher_id);
                                     const errorTeacher = getIn(errors, teacher_id);
+
+                                    const type = `course[${index}].type`;
+                                    const touchedType = getIn(touched, type);
+                                    const errorType = getIn(errors, type);
 
                                     return (
                                     <div key={index} className='flex flex-row my-2'>
@@ -139,6 +143,16 @@ export default function Courseregister() {
                                                 <Alert>{errorCredit}</Alert>
                                             )}
                                         </Fill>
+                                        <Fill>
+                                            <Field className='rounded-md mx-1 border-2 border-sky-700' as="select" name={type} value={p.type}>
+                                                <option></option>
+                                                <option value="elective">elective</option>
+                                                <option value="compulsory">compulsory</option>
+                                            </Field>
+                                            {errorType && touchedType && (
+                                                <Alert>{errorType}</Alert>
+                                            )}
+                                        </Fill>
                                         <button type='button' className='px-1 rounded-md border-2 bg-red-500' onClick={() => remove(index)} 
                                             disabled={values.course.length === 1}> X </button>
                                         
@@ -146,7 +160,7 @@ export default function Courseregister() {
                                     );
                                 })}
                                 <button className='border-2 bg-yellow-500 px-4 rounded-md' type='button' 
-                                onClick={() => push({ course_id: '', courseName: '', department_id: de, credit: '', teacher_id: '' })}>Add</button>
+                                onClick={() => push({ course_id: '', courseName: '', department_id: de, credit: '', type: '' })}>Add</button>
                                 </div>
                             )}
                             </FieldArray>

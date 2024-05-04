@@ -113,30 +113,20 @@ export default function Courseregister() {
                                             )}
                                         </Fill>     
                                         <Fill>
-                                            {
-                                                (teacher.length > 0)  ? (
-                                                    <Field className='rounded-md mx-1 border-2 border-sky-700' type='text' name={teacher_id} value={p.teacher_id} as='select'>
-                                                        <option value=''></option>
-                                                        {
-                                                            teacher.map((teacherList, index) => (
-                                                                <option key={index} value={teacherList.teacher_id}>{teacherList.teacher_id}</option>
-                                                            ))
-                                                        }
-                                                    </Field>
-                                                ) : (
-                                                        <h4>No teacher Available</h4>
-                                                    )
-                                            }
-                                            {errorTeacher && touchedTeacher && (
-                                                <Alert>{errorTeacher}</Alert>
-                                            )}
-                                        </Fill>
-                                        
-                                        <Fill>
-                                            <Field className='rounded-md mx-1 border-2 border-sky-700' 
+                                            <Field className='rounded-md mx-1 border-2 border-sky' 
                                             name={credit} value={p.credit} placeholder='credit'></Field>
                                             {errorCredit && touchedCredit && (
                                                 <Alert>{errorCredit}</Alert>
+                                            )}
+                                        </Fill>
+                                        <Fill>
+                                            <Field className='rounded-md mx-1 border-2 border-sky' as="select" name={type} value={p.type}>
+                                                <option></option>
+                                                <option value="elective">elective</option>
+                                                <option value="compulsory">compulsory</option>
+                                            </Field>
+                                            {errorType && touchedType && (
+                                                <Alert>{errorType}</Alert>
                                             )}
                                         </Fill>
                                         <button type='button' className='px-1 rounded-md border-2 bg-red-500' onClick={() => remove(index)} 

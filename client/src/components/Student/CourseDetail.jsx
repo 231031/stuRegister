@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Headerstu from './Headerstu';
 
-export default function Studentmycourse() {
+export default function Detailcourse() {
 
     const navigate = useNavigate();
     const [data, setData] = useState('');
@@ -28,7 +28,7 @@ export default function Studentmycourse() {
       <div>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <Helmet>
-            <title>Stu | EditPersonal</title>
+            <title>Stu | CourseDetail</title>
         </Helmet> 
         <Headerstu data={data}/>
         <div className='bg-lowyellow'> 

@@ -46,7 +46,7 @@ export default function Studentscholar() {
 
   return (
     <HelmetProvider>
-      <div className='container'>
+      <div>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
       <Helmet>
           <title>Stu | Scholarship</title>
@@ -67,7 +67,6 @@ export default function Studentscholar() {
         </h1>
         <h3>Get free scholarship for every level of education that every <br/>
         student who achieves for a bright future can get</h3>
-        <button class="mt-8 px-4 py-2 bg-gray-600 rounded">learn more</button>
       </div>
     </div>
     </div>
@@ -82,7 +81,7 @@ export default function Studentscholar() {
       </div> */}
       <div class="flex flex-wrap sm:flex-row flex-col py-6 mb-12">
         <h1 class="sm:w-2/5 text-black font-medium title-font text-2xl mb-2 sm:mb-0"> News  Sholarships </h1>
-        <p class="sm:w-3/5 leading-relaxed text-base sm:pl-10 pl-0">Street art subway tile salvia four dollar toast bitters selfies quinoa yuccie synth meditation iPhone intelligentsia prism tofu. Viral gochujang bitters dreamcatcher.</p>
+        <p class="sm:w-3/5 leading-relaxed text-base sm:pl-10 pl-0">Exciting scholarship opportunity! Support your education until 2025 with financial aid and internships worldwide. Don't miss out!</p>
       </div>
     </div>
     <div class="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">

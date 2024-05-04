@@ -31,7 +31,7 @@ export default function Studentpersonal() {
 
   return (
     <HelmetProvider>
-      <div className='container'>
+      <div>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <Helmet>
             <title>Stu | EditPersonal</title>

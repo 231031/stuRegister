@@ -43,7 +43,7 @@ export default function Studenthome() {
 
   return (
     <HelmetProvider>
-      <div className='container h-screen bg-sky-100'>
+      <div >
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <Helmet>
             <title>Stu | Home</title>

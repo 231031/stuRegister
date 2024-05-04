@@ -59,14 +59,9 @@ export default function Headerstu({ data }) {
             </div>
           </Dropdown>
 
-          <Dropdown>
-            <Btn onClick={toggleScholar}>Scholarship<FontAwesomeIcon className='ml-2' icon="fa-solid fa-caret-down" /></Btn>
-            <div className={isSOpen ? 'block' : 'hidden'}>
-              <List>
-                <li><NavLink to='/student/scholarship'>All Scholarship</NavLink></li>
-              </List>
-            </div>
-          </Dropdown>
+          <Btn>
+            <NavLink to='/student/scholarship'>Scholarship</NavLink>
+          </Btn>
 
           <Dropdown>
             <Btn onClick={toggleCourse}>Course<FontAwesomeIcon className='ml-2' icon="fa-solid fa-caret-down" /></Btn>

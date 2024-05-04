@@ -24,6 +24,11 @@ import Studentnewpass from'./components/Student/Studentnewpass';
 import Studentregiscourse from'./components/Student/Studentregiscourse'; 
 import Studentmycourse from'./components/Student/Studentmycourse'; 
 import Studentscholar from './components/Student/Studentscholar';
+import Studenteditpersonal from './components/Student/Studenteditpersonal';
+import Detailcourse from './components/Student/CourseDetail';
+import AllActivity from './components/Student/StudentallAc';
+import AttendedActivity from './components/Student/StudentAtten';
+import EvaluateActivity from './components/Student/StudentEvaActivity';
 
 
 // admin components
@@ -97,10 +102,35 @@ const router = createBrowserRouter(
       path: '/student/mycourse',
       element : <Studentmycourse/>
     },
+    
     {
       path: '/student/scholarship',
       element : <Studentscholar/>
     },
+
+    {
+      path: '/student/eduhis',
+      element : <Studenteditpersonal/>
+    },
+    {
+      path: '/student/courses',
+      element : <Detailcourse/>
+    },
+    {
+      path: '/student/activity',
+      element : <AllActivity/>
+    },
+    {
+      path: '/student/myactivity',
+      element : <AttendedActivity/>
+    },
+    {
+      path: '/student/evaluate',
+      element : <EvaluateActivity/>
+    },
+
+    
+
     {
       path: '/admin/login',
       element : <AdminLogin/>

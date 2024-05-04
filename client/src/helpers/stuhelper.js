@@ -9,27 +9,6 @@ export async function getStudent() {
       }
 }
 
-// export async function updateStudent(info) {
-
-//     try {
-//         const response = await fetch('http://localhost:6001/student/update', {
-//           method: 'POST',
-//           headers: {
-//             'Content-Type': 'application/json',
-//           },
-//           body: JSON.stringify(info),
-//         });
-//         const data = await response.json();
-//         if (response.status === 404) {
-//           console.log(data);
-//           return Promise.reject(data);
-//         }
-//         return Promise.resolve(data);
-//       } catch (error) {
-//         return Promise.reject(error);
-//       }
-// }
-
 export async function loginStudent(user) {
 
     try {
@@ -127,6 +106,36 @@ export async function getAvailableCourse(de, year, type) {
         "Authorization": `Bearer ${token}`,
       },
       body: JSON.stringify({ department_id: de, year: year, type: type }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
+export async function registerCourse(info, year, id) {
+  const courses = [];
+  const month = new Date().getMonth();
+  let term = 2;
+  if (month >= 7) term = 1;
+  for (let i = 0; i < info.length; i++) {
+      courses.push({ student_id: id, year: year, group: info[i].group, 
+                      term: term, course_id: info[i].course_id });
+  }
+  try {
+    const token = localStorage.getItem('token');
+    const response = await fetch('http://localhost:6001/student/register/course', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify({ regis : courses }),
     });
     const data = await response.json();
     if (response.status === 404) {

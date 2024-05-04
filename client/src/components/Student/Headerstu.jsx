@@ -10,34 +10,23 @@ export default function Headerstu({ data }) {
 
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isCourseOpen, setIsCourseOpen] = useState(false);
-  const [isSOpen, setIsSOpen] = useState(false);
   const [isActivityOpen, setIsActivityOpen] = useState(false);
 
   const toggleInfo = () => {
     setIsInfoOpen(!isInfoOpen);
     setIsCourseOpen(false);
-    setIsSOpen(false);
     setIsActivityOpen(false);
   };
 
   const toggleCourse = () => {
     setIsCourseOpen(!isCourseOpen);
     setIsInfoOpen(false);
-    setIsSOpen(false);
     setIsActivityOpen(false);
-  };
-
-  const toggleScholar = () => {
-    setIsCourseOpen(false);
-    setIsInfoOpen(false);
-    setIsActivityOpen(false);
-    setIsSOpen(!isSOpen);
   };
 
   const toggleActivity = () => {
     setIsCourseOpen(false);
     setIsInfoOpen(false);
-    setIsSOpen(false);
     setIsActivityOpen(!isActivityOpen);
   };
 

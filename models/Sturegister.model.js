@@ -13,7 +13,7 @@ const Sturegister = sequelize.define('Sturegister',{
         primaryKey: true,
     },
     year : {
-        type: DataTypes.DATE,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
     },

@@ -170,20 +170,41 @@ export async function getAvailableCourse(req, res) {
     }
 }
 
+// student register course 
+// transaction modify tb student_register, modify tb course_detail
 export async function registerCourse(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
-        if (token) {
-            await Sturegister.bulkCreate(req.body);
-            // search course and group from course_detail count+1;
-
+        if (!token) {
             return res.status(200).send({ msg : 'Register course successfully'});
         }
-        
+        const { regis } = req.body;
+        console.log(regis);
+        const result = await sequelize.transaction(async t => {
+            await Sturegister.bulkCreate(
+                regis,
+                { transaction: t },
+            );
+
+            for (let i = 0; i < regis.length; i++) {
+                const course = await Coursedetail.findOne({ 
+                    where: { 
+                        course_id: regis[i].course_id,
+                        group: regis[i].group 
+                    } 
+                }, { transaction : t });
+
+                await course.increment('count', { transaction : t });
+            }
+        });
+        console.log(result);
+        return res.status(200).send({ msg : 'Register course successfully'});
     } catch (error) {
         return res.status(404).send({ error: error.message });
     }
 }
+
+
 
 // transaction
 // modify Studentregister (group), Coursedetail (count)

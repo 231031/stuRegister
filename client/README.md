@@ -10,3 +10,6 @@ Currently, two official plugins are available:
 -color sky name same as old one sky-600 and it causes error
 -sky-xxx not have any color too
 -already fixed color code
+
+-back student register courses transaction
+-display in personal

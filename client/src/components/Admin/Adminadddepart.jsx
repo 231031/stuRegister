@@ -76,20 +76,20 @@ export default function Adminadddepart() {
                                     return (
                                     <div key={index} className='flex flex-row my-4'>
                                         <div className='flex flex-col'>
-                                            <Field className='rounded-md mx-1 border-2 border-sky-700' 
+                                            <Field className='rounded-md mx-1 border-2 border-sky' 
                                             name={department_id} value={p.department_id} placeholder='Department ID'></Field>
                                             {errorId && touchedId && (
                                                 <Alert>{errorId}</Alert>
                                                 )}
                                         </div>
                                         <div className='flex flex-col'>
-                                            <Field className='rounded-md mx-1 border-2 border-sky-700' 
+                                            <Field className='rounded-md mx-1 border-2 border-sky' 
                                             name={departmentName} value={p.departmentName} placeholder='Department Name'></Field>
                                             {errorName && touchedName && (
                                                 <Alert>{errorName}</Alert>
                                             )}
                                         </div>
-                                        <button type='button' className='px-1 rounded-md border-2 border-red-700' onClick={() => remove(index)} 
+                                        <button type='button' className='px-1 rounded-md border-2 border-red' onClick={() => remove(index)} 
                                             disabled={values.department.length === 1}> X </button>
                                         
                                     </div>

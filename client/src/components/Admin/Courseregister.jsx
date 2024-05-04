@@ -56,8 +56,8 @@ export default function Courseregister() {
                                 course_id: '',
                                 courseName: '',
                                 department_id: '',
-                                teacher_id: '',
                                 credit: '',
+                                type: '',
                             }
                         ]    
                     }}
@@ -92,51 +92,49 @@ export default function Courseregister() {
                                     const touchedCredit = getIn(touched, credit);
                                     const errorCredit = getIn(errors, credit);
 
-                                    const teacher_id = `course[${index}].teacher_id`;
-                                    const touchedTeacher = getIn(touched, teacher_id);
-                                    const errorTeacher = getIn(errors, teacher_id);
+                                    const type = `course[${index}].type`;
+                                    const touchedType = getIn(touched, type);
+                                    const errorType = getIn(errors, type);
 
                                     return (
                                     <div key={index} className='flex flex-row my-2'>
                                         <Fill>
-                                            <Field className='rounded-md mx-1 border-2 border-sky-700' 
+                                            <Field className='rounded-md mx-1 border-2 border-sky' 
                                             name={course_id} value={p.course_id} placeholder='Course ID - XXX000'></Field>
                                             {errorId && touchedId && (
                                                 <Alert>{errorId}</Alert>
                                                 )}
                                         </Fill>
                                         <Fill>
-                                            <Field className='rounded-md mx-1 border-2 border-sky-700 ' 
+                                            <Field className='rounded-md mx-1 border-2 border-sky ' 
                                             name={courseName} value={p.courseName} placeholder='Course Name'></Field>
                                             {errorName && touchedName && (
                                                 <Alert>{errorName}</Alert>
                                             )}
-                                        </Fill>
+                                        </Fill>     
                                         <Fill>
-                                            {
-                                                (teacher.length > 0)  ? (
-                                                    <Field className='rounded-md mx-1 border-2 border-sky-700' type='text' name={teacher_id} value={p.teacher_id} as='select'>
-                                                        <option value=''></option>
-                                                        {
-                                                            teacher.map((teacherList, index) => (
-                                                                <option key={index} value={teacherList.teacher_id}>{teacherList.teacher_id}</option>
-                                                            ))
-                                                        }
-                                                    </Field>
-                                                ) : (
-                                                        <h4>No teacher Available</h4>
-                                                    )
-                                            }
-                                            {errorTeacher && touchedTeacher && (
-                                                <Alert>{errorTeacher}</Alert>
-                                            )}
-                                        </Fill>
-                                        
-                                        <Fill>
+<<<<<<< Updated upstream
+                                            <Field className='rounded-md mx-1 border-2 border-sky' 
+=======
                                             <Field className='rounded-md mx-1 border-2 border-sky-700' 
+>>>>>>> Stashed changes
                                             name={credit} value={p.credit} placeholder='credit'></Field>
                                             {errorCredit && touchedCredit && (
                                                 <Alert>{errorCredit}</Alert>
+                                            )}
+                                        </Fill>
+                                        <Fill>
+<<<<<<< Updated upstream
+                                            <Field className='rounded-md mx-1 border-2 border-sky' as="select" name={type} value={p.type}>
+=======
+                                            <Field className='rounded-md mx-1 border-2 border-sky-700' as="select" name={type} value={p.type}>
+>>>>>>> Stashed changes
+                                                <option></option>
+                                                <option value="elective">elective</option>
+                                                <option value="compulsory">compulsory</option>
+                                            </Field>
+                                            {errorType && touchedType && (
+                                                <Alert>{errorType}</Alert>
                                             )}
                                         </Fill>
                                         <button type='button' className='px-1 rounded-md border-2 bg-red-500' onClick={() => remove(index)} 
@@ -146,7 +144,7 @@ export default function Courseregister() {
                                     );
                                 })}
                                 <button className='border-2 bg-yellow-500 px-4 rounded-md' type='button' 
-                                onClick={() => push({ course_id: '', courseName: '', department_id: de, credit: '', teacher_id: '' })}>Add</button>
+                                onClick={() => push({ course_id: '', courseName: '', department_id: de, credit: '', type: '' })}>Add</button>
                                 </div>
                             )}
                             </FieldArray>

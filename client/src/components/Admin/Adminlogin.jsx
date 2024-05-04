@@ -30,16 +30,23 @@ export default function Adminlogin() {
 
   return (
     <HelmetProvider>
-      <div className='container'>
+      <div className='flex justify-center flex-col h-screen'>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <Helmet>
             <title>A | Login</title>
         </Helmet>
-        <h3>Admin Login</h3>
-        <form onSubmit={(e)=>handleSubmit(e)}>
-          <input className='border-2 border-blue-800' type='text' id='key' onChange={(e)=>setKey(e.target.value)}/>
-          <button type='submit'>SUBMIT</button>
-        </form>
+        <h3 className='text-center py-5 text-3xl'>Admin Login</h3>
+        <div className='flex justify-center'>
+          <form onSubmit={(e)=>handleSubmit(e)}>
+            <div className='flex flex-col w-96'>
+            <input className='my-3 p-5 w-full h-16 rounded-full bg-gray-200' type='text' id='key' onChange={(e)=>setKey(e.target.value)}/>
+              <div className='flex justify-center'>
+                  <button type="submit" className="my-3 w-1/3 h-10 rounded-full bg-gray-500 text-white ">Login</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        
       </div>
     </HelmetProvider>
   )

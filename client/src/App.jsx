@@ -23,6 +23,7 @@ import Studentupdate from'./components/Student/Studentupdate';
 import Studentnewpass from'./components/Student/Studentnewpass'; 
 import Studentregiscourse from'./components/Student/Studentregiscourse'; 
 import Studentmycourse from'./components/Student/Studentmycourse'; 
+import Studentscholar from './components/Student/Studentscholar';
 
 
 // admin components
@@ -95,6 +96,10 @@ const router = createBrowserRouter(
     {
       path: '/student/mycourse',
       element : <Studentmycourse/>
+    },
+    {
+      path: '/student/scholarship',
+      element : <Studentscholar/>
     },
     {
       path: '/admin/login',

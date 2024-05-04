@@ -25,12 +25,12 @@ export default function Studentnewpass() {
     
   return (
     <HelmetProvider>
-        <div className='container text-lg'>
+        <div className='flex flex-col justify-center h-screen'>
             <Toaster position='top-center' reverseOrder={false}></Toaster>
             <Helmet>
             <title>Stu | FillPassword</title>
             </Helmet>
-            <h3 className='text-center py-4'>Student New Password</h3>
+            <h3 className='text-center py-5 text-3xl'>Student New Password</h3>
             <div className='register-form'>
                 <Formik 
                     initialValues={{
@@ -53,18 +53,28 @@ export default function Studentnewpass() {
                     }}  
                 >  
                     {({ errors, touched }) => (
-                        <Form className='flex flex-col items-center '>
-                            <Field className='border-2 border-sky-500 rounded-md my-3 w-1/3' type='password' name='password' placeholder='new password'></Field>
-                            {errors.password && touched.password ? (
-                                <Alert>{errors.password}</Alert>
-                            ) : null}
-                            <Field className='border-2 border-sky-500 rounded-md my-3 w-1/3' type='password' name='newPassword' placeholder='confirm password'></Field>
-                            {errors.newPassword && touched.newPassword ? (
-                                <Alert>{errors.newPassword}</Alert>
-                            ) : null}
-
-                            <button type="submit" className="btn border-2 bg-green-500 rounded-md my-3 w-1/3">SUBMIT</button>
-                        </Form>
+                        <div className='flex justify-center'>
+                            <Form>
+                                <div className='flex flex-col w-96'>
+                                    <Field className='my-3 p-5 w-full h-16 rounded-full bg-gray-200 ' type='password' name='password' placeholder='new password'></Field>
+                                    <div className='flex justify-end pr-6'>
+                                        {errors.password && touched.password ? (
+                                            <Alert>{errors.password}</Alert>
+                                        ) : null}
+                                    </div>
+                                    <Field className='my-3 p-5 w-full h-16 rounded-full bg-gray-200 ' type='password' name='newPassword' placeholder='confirm password'></Field>
+                                    <div className='flex justify-end pr-6'>
+                                        {errors.newPassword && touched.newPassword ? (
+                                            <Alert>{errors.newPassword}</Alert>
+                                        ) : null}
+                                    </div>
+                                </div>
+                                <div className='flex justify-center'>
+                                        <button type="submit" className="my-3 w-1/3 h-10 rounded-full bg-gray-500 text-white ">Login</button>
+                                </div>
+                            </Form>
+                        </div>
+                        
                     )}
                 </Formik>
             </div>

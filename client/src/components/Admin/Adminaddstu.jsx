@@ -132,14 +132,14 @@ export default function Adminaddstu() {
                         return (
                             <div key={index} className='flex flex-row my-4'>
                                 <div className='flex flex-col'>
-                                    <Field className='rounded-md my-2 mx-1 border-2 border-sky-700' 
+                                    <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
                                             type='text' name={firstName} value={p.firstName} placeholder='First Name'></Field>
                                     {errorFirst && touchedFirst && (
                                         <Alert>{errorFirst}</Alert>
                                         )}
                                 </div>
                                 <div className='flex flex-col'>
-                                    <Field className='rounded-md my-2 mx-1 border-2 border-sky-700' 
+                                    <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
                                             type='text' name={lastName} value={p.lastName} placeholder='Last Name'></Field>
                                     {errorLast && touchedLast && (
                                         <Alert>{errorLast}</Alert>

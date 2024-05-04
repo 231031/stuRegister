@@ -25,6 +25,14 @@ const Coursedetail = sequelize.define('Coursedetail',{
         type: DataTypes.STRING,
         allowNull: false,
     },
+    day : {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    class_id : {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     limit : {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -33,7 +41,7 @@ const Coursedetail = sequelize.define('Coursedetail',{
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
-    }
+    },
 },{
     tableName: 'course_detail',
     updatedAt: false,

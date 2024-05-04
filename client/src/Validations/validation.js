@@ -98,7 +98,7 @@ const CourseSchema = Yup.object().shape({
                 .required('Required'),
             courseName: Yup.string().required('Required'),
             credit: Yup.number().required('Required'),   
-            teacher_id: Yup.string().required('Required'),
+            type: Yup.string().required('Required'),
         })
     )
     

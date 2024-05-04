@@ -19,6 +19,7 @@ export async function login(info) {
 }
 
 export async function addCourse(info) {
+    console.log(info);
     try {
         const response = await fetch('http://localhost:6001/admin/addcourse', {
           method: 'POST',

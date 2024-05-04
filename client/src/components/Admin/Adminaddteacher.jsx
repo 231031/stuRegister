@@ -85,14 +85,14 @@ export default function Adminaddteacher() {
                                 return (
                                     <div key={index} className='flex flex-row my-4'>
                                         <div className='flex flex-col'>
-                                            <Field className='rounded-md my-2 mx-1 border-2 border-sky-700' 
+                                            <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
                                                     type='text' name={firstName} value={p.firstName} placeholder='First Name'></Field>
                                             {errorFirst && touchedFirst && (
                                                 <Alert>{errorFirst}</Alert>
                                                 )}
                                         </div>
                                         <div className='flex flex-col'>
-                                            <Field className='rounded-md my-2 mx-1 border-2 border-sky-700' 
+                                            <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
                                                     type='text' name={lastName} value={p.lastName} placeholder='Last Name'></Field>
                                             {errorLast && touchedLast && (
                                                 <Alert>{errorLast}</Alert>
@@ -100,7 +100,7 @@ export default function Adminaddteacher() {
                                         </div>
 
                                         <div className='flex flex-col'>
-                                            <Field className='rounded-md my-2 mx-1 border-2 border-sky-700' 
+                                            <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
                                                     type='text' name={teacher_id} value={p.teacher_id} placeholder='Teacher ID'></Field>
                                             {errorId && touchedId && (
                                                 <Alert>{errorId}</Alert>
@@ -108,7 +108,7 @@ export default function Adminaddteacher() {
                                         </div>
 
                                         <div className='flex flex-col'>
-                                            <Field className='rounded-md my-2 mx-1 border-2 border-sky-700' 
+                                            <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
                                                     type='text' name={position} value={p.position} placeholder='Position'></Field>
                                             {errorPos && touchedPos && (
                                                 <Alert>{errorPos}</Alert>

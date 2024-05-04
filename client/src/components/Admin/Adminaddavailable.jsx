@@ -115,7 +115,7 @@ export default function Adminaddavailable() {
                                         </Fill>
                                         <Fill>
                                             <label for='year'>Year</label>
-                                            <Field id='year' className='rounded-md mx-1 border-2 border-sky-700 w-20' type='number' name={year} value={p.year} as='select'>
+                                            <Field id='year' className='rounded-md mx-1 border-2 border-sky w-20' type='number' name={year} value={p.year} as='select'>
                                                 <option value=''></option>
                                                 <option value='1'>1</option>
                                                 <option value='2'>2</option>
@@ -128,7 +128,7 @@ export default function Adminaddavailable() {
                                         </Fill>
                                         <Fill>
                                             <label for='term'>Semester</label>
-                                            <Field id='term' className='rounded-md mx-1 border-2 border-sky-700 w-20' type='number' name={term} value={p.term} as='select'>
+                                            <Field id='term' className='rounded-md mx-1 border-2 border-sky w-20' type='number' name={term} value={p.term} as='select'>
                                                 <option value=''></option>
                                                 <option value='1'>1</option>
                                                 <option value='2'>2</option> 

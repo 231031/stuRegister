@@ -9,7 +9,7 @@ import Headerstu from './Headerstu';
 import { getAvailableCourse, getInfo } from '../../helpers/stuhelper';
 import sry from '../../assets/sry.png';
 
-const Row = tw.td`border-2 border-sky-600 py-0 text-sm`;
+const Row = tw.td`border-2 border-sky py-0 text-sm`;
 export default function Studentregiscourse() {
 
   const navigate = useNavigate();
@@ -103,7 +103,7 @@ export default function Studentregiscourse() {
         <div className='flex flex-row'>
           <div className='w-1/4 bg-slate-300 h-[calc(100vh-40px)] p-10'>
             <div className='flex flex-col items-center my-10'>
-              <img className='rounded-full w-1/2 h-1/2 border-2 border-blue-900' src={sry}/>
+              <img className='rounded-full w-1/2 h-1/2 border-2 border-sky' src={sry}/>
             </div>
             <div className='flex flex-row justify-between'>
                 <p>Student ID</p>
@@ -126,7 +126,7 @@ export default function Studentregiscourse() {
               {
                 (available.length > 0)? (
                   <div className='w-full flex flex-col justify-center items-center'>
-                    <table className='text-center w-11/12 border-2 border-sky-600'>
+                    <table className='text-center w-11/12 border-2 border-sky'>
                     <thead>
                       <tr>
                         <Row>ID</Row>
@@ -144,7 +144,7 @@ export default function Studentregiscourse() {
                           <Row>{aList.course_id}</Row>
                           <Row>{aList.courseName}</Row>
                           <Row>
-                            <select className='border-2 border-sky-600 rounded-md my-3 w-1/3' 
+                            <select className='border-2 border-sky rounded-md my-3 w-1/3' 
                             type='text'  id='group' onChange={(e)=>selCourseGroup(aList.course_id, e.target.value, e.target.selectedIndex, ind)}>
                                 <option value=''></option>
                                 { 

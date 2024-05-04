@@ -56,14 +56,14 @@ export default function Adminaddfac() {
                       return (
                         <div key={index} className='flex flex-row my-4'>
                           <div className='flex flex-col'>
-                              <Field className='rounded-md my-2 mx-1 border-2 border-sky-700' 
+                              <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
                                       type='text' name={faculty_id} value={p.faculty_id} placeholder='Faculty ID'></Field>
                               {errorId && touchedId && (
                                   <Alert>{errorId}</Alert>
                                   )}
                           </div>
                           <div className='flex flex-col'>
-                              <Field className='rounded-md my-2 mx-1 border-2 border-sky-700' 
+                              <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
                                       type='text' name={facultyName} value={p.facultyName} placeholder='Faculty Name'></Field>
                               {errorName && touchedName && (
                                   <Alert>{errorName}</Alert>

@@ -4,13 +4,24 @@ import { useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
 import Headerstu from './Headerstu';
-import imagee from '../../assets/sc1.png';
 
+const text_UNV = {
+  UNV1: 'Oxbridge      28/8/2024',
+  UNV2: 'michigan University      11/7/2024',
+  UNV3: 'Oxford University      2/12/2024',
 
-const firstcard = {
-      text1: 'Free Scholarships For Every Bright Student In KMUTT !'
+  UNV1_de: 'Oxbridge, synonymous with excellence, thrives in the historic cities of Oxford and Cambridge, nestled in the idyllic English countryside.',
+  UNV2_de: 'Michigan, a state of diverse landscapes and vibrant cities, boasts the iconic Great Lakes and bustling urban centers the American Midwest. ',
+  UNV3_de: 'Oxford University, nestled in the historic city of Oxford, England, is a renowned bastion of learning and scholarship.'
 
 }
+
+
+// image all
+import imagee from '../../assets/sc1.png';
+import imageU1 from '../../assets/oxbridge.jpeg';
+import imageU2 from '../../assets/U2.webp'
+import imageU3 from '../../assets/U3.jpeg';
 
 
 export default function Studentscholar() {
@@ -41,13 +52,12 @@ export default function Studentscholar() {
           <title>Stu | Scholarship</title>
       </Helmet>
       <Headerstu data={data}/>
-      {/* <h3>{firstcard.text1}</h3> */}
-        {/* <img src={imagee}></img> */}
+      
 
 
 
     <header>
-    {/* <!-- Section Hero --> */}
+    {/* <!-- Section 1 --> */}
     <div class="flex flex-row">
     <div class="container mx-auto px-5 mt-5 h-96 rounded-md flex items-center" style={{ backgroundImage: `url(${imagee})` }}>
       <div class="sm:ml-20 text-gray-40 text-center sm:text-left">
@@ -57,38 +67,68 @@ export default function Studentscholar() {
         </h1>
         <h3>Get free scholarship for every level of education that every <br/>
         student who achieves for a bright future can get</h3>
-        <p class="text-lg inline-block sm:block">The largest online community to rent saunas in Finland.</p>
-        <button class="mt-8 px-4 py-2 bg-gray-600 rounded">Browse saunas</button>
+        <button class="mt-8 px-4 py-2 bg-gray-600 rounded">learn more</button>
       </div>
     </div>
-    
     </div>
     
+    {/* <!-- Section 2 --> */}
   </header>
-  <div class="py-16 container mx-auto px-6 md:px-0">
-    <section>
-      <h1 class="text-3xl font-bold text-gray-600 mb-10"> News  Sholarships </h1>
-      <div class="grid sm:grid-cols-3 gap-4 grid-cols-2">
-        <div>
-          <div class="bg-gray-300 h-44"></div>
-          <h3 class="text-lg font-semibold text-gray-500 mt-2">Saunas in <span class="text-gray-700">Helsinki</span></h3>
-        </div>
-        <div>
-          <div class="bg-gray-300 h-44"></div>
-          <h3 class="text-lg font-semibold text-gray-500 mt-2">Saunas in <span class="text-gray-700">Rovaniemi</span></h3>
-        </div>
-        <div>
-          <div class="bg-gray-300 h-44"></div>
-          <h3 class="text-lg font-semibold text-gray-500 mt-2">Saunas in <span class="text-gray-700">Ruka</span></h3>
-        </div>
+  <section class="text-gray-400 bg-white-900 body-font">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="flex flex-col">
+      {/* <div class="h-1 bg-gray-800 rounded overflow-hidden">
+        <div class="w-24 h-full bg-indigo-500"></div>
+      </div> */}
+      <div class="flex flex-wrap sm:flex-row flex-col py-6 mb-12">
+        <h1 class="sm:w-2/5 text-black font-medium title-font text-2xl mb-2 sm:mb-0"> News  Sholarships </h1>
+        <p class="sm:w-3/5 leading-relaxed text-base sm:pl-10 pl-0">Street art subway tile salvia four dollar toast bitters selfies quinoa yuccie synth meditation iPhone intelligentsia prism tofu. Viral gochujang bitters dreamcatcher.</p>
       </div>
-      <hr class="w-40 my-14 border-4 rounded-md sm:mx-0 mx-auto" />
-    </section>
     </div>
-      
-
-      
+    <div class="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
+      <div class="p-4 md:w-1/3 sm:mb-0 mb-6">
+        <div class="rounded-lg h-64 overflow-hidden">
+          <img alt="content" class="object-cover object-center h-full w-full" src={imageU1}/>
+        </div>
+        <h2 class="text-xl font-medium title-font text-black mt-5">{text_UNV.UNV1}</h2>
+        <p class="text-base leading-relaxed mt-2">{text_UNV.UNV1_de}</p>
+        <a class="text-indigo-400 inline-flex items-center mt-3">Learn More
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </a>
       </div>
+      <div class="p-4 md:w-1/3 sm:mb-0 mb-6">
+        <div class="rounded-lg h-64 overflow-hidden">
+          <img alt="content" class="object-cover object-center h-full w-full" src={imageU2}/>
+        </div>
+        <h2 class="text-xl font-medium title-font text-black mt-5">{text_UNV.UNV2}</h2>
+        <p class="text-base leading-relaxed mt-2">{text_UNV.UNV2_de}</p>
+        <a class="text-indigo-400 inline-flex items-center mt-3">Learn More
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+      <div class="p-4 md:w-1/3 sm:mb-0 mb-6">
+        <div class="rounded-lg h-64 overflow-hidden">
+          <img alt="content" class="object-cover object-center h-full w-full" src={imageU3}/>
+        </div>
+        <h2 class="text-xl font-medium title-font text-black mt-5">{text_UNV.UNV3}</h2>
+        <p class="text-base leading-relaxed mt-2">{text_UNV.UNV3_de}</p>
+        <a class="text-indigo-400 inline-flex items-center mt-3">Learn More
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+    </div>
+
+    {/* <!-- Section 3 --> */}
+      
     </HelmetProvider>
   )
 }

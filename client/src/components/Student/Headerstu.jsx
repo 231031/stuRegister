@@ -10,34 +10,23 @@ export default function Headerstu({ data }) {
 
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isCourseOpen, setIsCourseOpen] = useState(false);
-  const [isSOpen, setIsSOpen] = useState(false);
   const [isActivityOpen, setIsActivityOpen] = useState(false);
 
   const toggleInfo = () => {
     setIsInfoOpen(!isInfoOpen);
     setIsCourseOpen(false);
-    setIsSOpen(false);
     setIsActivityOpen(false);
   };
 
   const toggleCourse = () => {
     setIsCourseOpen(!isCourseOpen);
     setIsInfoOpen(false);
-    setIsSOpen(false);
     setIsActivityOpen(false);
-  };
-
-  const toggleScholar = () => {
-    setIsCourseOpen(false);
-    setIsInfoOpen(false);
-    setIsActivityOpen(false);
-    setIsSOpen(!isSOpen);
   };
 
   const toggleActivity = () => {
     setIsCourseOpen(false);
     setIsInfoOpen(false);
-    setIsSOpen(false);
     setIsActivityOpen(!isActivityOpen);
   };
 
@@ -59,14 +48,9 @@ export default function Headerstu({ data }) {
             </div>
           </Dropdown>
 
-          <Dropdown>
-            <Btn onClick={toggleScholar}>Scholarship<FontAwesomeIcon className='ml-2' icon="fa-solid fa-caret-down" /></Btn>
-            <div className={isSOpen ? 'block' : 'hidden'}>
-              <List>
-                <li><NavLink to='/student/scholarship'>All Scholarship</NavLink></li>
-              </List>
-            </div>
-          </Dropdown>
+          <Btn>
+            <NavLink to='/student/scholarship'>Scholarship</NavLink>
+          </Btn>
 
           <Dropdown>
             <Btn onClick={toggleCourse}>Course<FontAwesomeIcon className='ml-2' icon="fa-solid fa-caret-down" /></Btn>

@@ -6,7 +6,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import tw from 'twin.macro';
 
 import Headerstu from './Headerstu';
-import { getAvailableCourse, getInfo } from '../../helpers/stuhelper';
+import { getAvailableCourse, getInfo, registerCourse } from '../../helpers/stuhelper';
 import sry from '../../assets/sry.png';
 
 const Row = tw.td`border-2 border-sky py-0 text-sm`;
@@ -86,9 +86,13 @@ export default function Studentregiscourse() {
     });
   }
 
-  function handleSubmit() {
-    // sent sel object to register course in model Sturegister
-    // do not forgot push student_id in each object of array
+  async function handleSubmit() {
+    try {
+      const res = await registerCourse(sel, data.year, data.student_id);
+      toast.success(res.msg);
+    } catch (error) {
+      console.log(error);
+    }
   }
   
 
@@ -126,7 +130,8 @@ export default function Studentregiscourse() {
               {
                 (available.length > 0)? (
                   <div className='w-full flex flex-col justify-center items-center'>
-                    <table className='text-center w-11/12 border-2 border-sky'>
+                    <p className='text-lg'>Compulsory Courses</p>
+                    <table className='text-center w-11/12 border-2 border-sky mt-10'>
                     <thead>
                       <tr>
                         <Row>ID</Row>

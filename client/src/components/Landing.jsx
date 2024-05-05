@@ -20,26 +20,26 @@ export default function Landing() {
   }
   return (
     <HelmetProvider>
-      <div className='container flex flex-col items-center bg-stone-300 h-screen w-full'>
+      <div className='container flex flex-col justify-center items-center  h-screen w-full'>
         <Helmet>
           <title>Registration</title>
         </Helmet>
-        <h2 className='mt-8 text-2xl'>Registration System</h2>
-        <div className='flex flex-row justify-center mt-24'>
+        <h2 className='text-4xl text-bold'>Registration System</h2>
+        <div className='flex flex-row justify-center mt-14'>
           <Btn>
             <FontAwesomeIcon onClick={(e)=>admin()}
-            className='size-2/5 mx-8 bg-sky-600 p-4 border-4 rounded-md cursor-pointer hover:border-orange-800' icon="fa-solid fa-user-tie" />
-            <p>Admin</p>
+            className='size-20 mx-8 p-10 rounded-full bg-orange-300 cursor-pointer hover:bg-orange-500' icon="fa-solid fa-user-tie " />
+            <p className='mt-4 text-orange-800 text-2xl '>Admin</p>
           </Btn>
           <Btn>
             <FontAwesomeIcon onClick={(e)=>teacher()}
-            className='size-2/5 mx-8 bg-sky-600 p-4 border-4 rounded-md cursor-pointer hover:border-blue-800' icon="fa-solid fa-person-chalkboard" />
-            <p>Teacher</p>
+            className='size-20 mx-8 p-10 rounded-full bg-blue-300 cursor-pointer hover:bg-blue-500' icon="fa-solid fa-person-chalkboard" />
+            <p className='mt-4 text-blue-800 text-2xl'>Teacher</p>
           </Btn>
           <Btn>
             <FontAwesomeIcon onClick={(e)=>student()}
-            className='size-2/5 mx-8 bg-sky-600 p-4 border-4 rounded-md cursor-pointer hover:border-lime-800' icon="fa-solid fa-user-graduate" />
-            <p>Student</p>
+            className='size-20 mx-8 p-10 rounded-full bg-lime-300 cursor-pointer hover:bg-lime-500' icon="fa-solid fa-user-graduate" />
+            <p className='mt-4 text-lime-800 text-2xl '>Student</p>
           </Btn>
           
         </div>

@@ -35,13 +35,15 @@ export default function Adminlogin() {
         <Helmet>
             <title>A | Login</title>
         </Helmet>
-        <h3 className='text-center py-5 text-3xl'>Admin Login</h3>
+        <h3 className='text-center py-5 text-4xl text-bold'>Admin Login</h3>
         <div className='flex justify-center'>
           <form onSubmit={(e)=>handleSubmit(e)}>
             <div className='flex flex-col w-96'>
-            <input className='my-3 p-5 w-full h-16 rounded-full bg-gray-200' type='text' id='key' onChange={(e)=>setKey(e.target.value)}/>
+            <input className='my-3 p-5 w-full h-16 rounded-full 
+            bg-gray-200 hover:outline-none hover:ring hover:bg-orange-500 hover:ring-orange-500 hover:placeholder:text-white
+            focus:outline-none focus:ring focus:bg-gray-50 focus:ring-orange-500 focus:placeholder:text-gray-500 ' type='text' id='key' placeholder='Id Key' onChange={(e)=>setKey(e.target.value)}/>
               <div className='flex justify-center'>
-                  <button type="submit" className="my-3 w-1/3 h-10 rounded-full bg-gray-500 text-white ">Login</button>
+                  <button type="submit" className="my-3 w-1/3 h-10 rounded-full hover:bg-orange-500 text-white bg-orange-800">Login</button>
               </div>
             </div>
           </form>

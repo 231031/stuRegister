@@ -49,14 +49,14 @@ export default function Admintablefac() {
           <div className='flex justify-center mt-2'>
           {
               data.length > 0? (
-                  <table className='my-2 table-fixed border-collapse border border-slate-500'>
+                  <table className='my-2 table-fixed border-collapse border border-slate-500 text-center'>
                       <thead>
                         <tr>
                           <Row>Num</Row>
                           <Row>Faculty ID (Select)</Row>
                           <Row>Faculty Name</Row>
-                          <Row>Add</Row>
-                          <Row>Del</Row>
+                          <Row>Add Department</Row>
+                          <Row>Del Department</Row>
                         </tr>
                       </thead>
                       <tbody>
@@ -66,8 +66,8 @@ export default function Admintablefac() {
                                 <Row>{index+1}</Row>
                                 <Row onClick={(e) => departTable(facList.faculty_id)} className='cursor-pointer hover:bg-cyan-600'>{facList.faculty_id}</Row>
                                 <Row>{facList.facultyName}</Row>
-                                <Row><button className='text-green-600' onClick={(e) => handleAdd(facList.faculty_id)}>Add</button></Row>
-                                <Row><button className='text-red-600' onClick={(e) => handleDel(facList.faculty_id)}>Del</button></Row>
+                                <Row className='cursor-pointer hover:bg-blue-300'><button className='text-green-600 ' onClick={(e) => handleAdd(facList.faculty_id)}>Add</button></Row>
+                                <Row className='cursor-pointer hover:bg-red-300'><button className='text-red-600 ' onClick={(e) => handleDel(facList.faculty_id)}>Del</button></Row>
                               </tr>
                           ))
                       }

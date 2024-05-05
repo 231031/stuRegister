@@ -6,6 +6,7 @@ import { sequelize } from "../dbcon.js";
 import { Op } from 'sequelize';
 import bcrypt from 'bcrypt';
 import { Availablecourse } from "../models/Avilablecourse.model.js";
+import { Scholarhistory } from "../models/Scholarhistory.model.js";
 
 export async function loginStudent(req, res) {
     try {
@@ -79,6 +80,14 @@ export async function getInfo(req, res) {
     }
 }
 
+export async function registerScholar(req, res) {
+    const token = req.headers.authorization.split(" ")[1];
+    if (token) {
+        await  Scholarhistory.create(req.body);
+        return res.status(200).send({ msg: 'Scholarship registration success' });
+    }
+}
+
 export async function getStuRegister(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
@@ -99,7 +108,7 @@ export async function getStuRegister(req, res) {
 export async function getAvailableCourse(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
-        const { department_id, year } = req.body;
+        const { department_id, year, type } = req.body;
         const month = new Date().getMonth();
         let term = 2;
         if (month >= 7) term = 1; // after august term 1
@@ -109,7 +118,6 @@ export async function getAvailableCourse(req, res) {
                 where: {student_id: token, year: year, term: term }
             });
             const register = resRegister.map(course => course.course_id);
-
             if (register) {
                 const resCourse = await Availablecourse.findAll({
                     where: {
@@ -129,6 +137,7 @@ export async function getAvailableCourse(req, res) {
                           course_id: {
                             [Op.in]: course,
                           },
+                          type: type,
                         },
                         include: {
                             model: Coursedetail,
@@ -152,6 +161,7 @@ export async function getAvailableCourse(req, res) {
                           course_id: {
                             [Op.in]: course,
                           },
+                          type: type,
                         },
                         include: {
                             model: Coursedetail,
@@ -168,20 +178,39 @@ export async function getAvailableCourse(req, res) {
     }
 }
 
+// student register course 
+// transaction modify tb student_register, modify tb course_detail
 export async function registerCourse(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
-        if (token) {
-            await Sturegister.bulkCreate(req.body);
-            // search course and group from course_detail count+1;
-
+        if (!token) {
             return res.status(200).send({ msg : 'Register course successfully'});
         }
-        
+        const { regis } = req.body;
+        const result = await sequelize.transaction(async t => {
+            await Sturegister.bulkCreate(
+                regis,
+                { transaction: t },
+            );
+
+            for (let i = 0; i < regis.length; i++) {
+                const course = await Coursedetail.findOne({ 
+                    where: { 
+                        course_id: regis[i].course_id,
+                        group: regis[i].group 
+                    } 
+                }, { transaction : t });
+
+                await course.increment('count', { transaction : t });
+            }
+        });
+        return res.status(200).send({ msg : 'Register course successfully'});
     } catch (error) {
         return res.status(404).send({ error: error.message });
     }
 }
+
+
 
 // transaction
 // modify Studentregister (group), Coursedetail (count)
@@ -206,6 +235,9 @@ export async function addCourse(req, res) {
             await course.increment('count', { transaction : tran });
 
         });
+
+
+        
         return res.status(200).send({ msg : 'Add course successfully'});
     } catch (error) {
         return res.status(404).send({ error: error.message });

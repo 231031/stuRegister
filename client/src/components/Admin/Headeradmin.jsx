@@ -44,7 +44,7 @@ export default function Headeradmin() {
   return (
     <div>
        <nav>
-        <ul className='flex flex-wrap bg-sky-800 justify-center divide-x-2 text-sm'>
+        <ul className='flex flex-wrap bg-sky justify-center divide-x-2 text-sm'>
           <Btn>
             <NavLink to='/admin/home'>Home</NavLink>
           </Btn>

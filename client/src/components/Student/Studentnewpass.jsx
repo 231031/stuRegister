@@ -9,6 +9,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { PasswordSchema } from '../../Validations/validation';
 import { updateStudent } from '../../helpers/stuhelper';
 
+// reset password for first login and link to fill personal information (Studentpersonal) after reset
 const Alert = tw.div`text-red-700 text-sm`;
 export default function Studentnewpass() {
     const navigate = useNavigate();
@@ -43,9 +44,8 @@ export default function Studentnewpass() {
 
                             values.student_id = id;
                             const res = await updateStudent(values);
+                            navigate('/student/personal');
                             toast.success(res.msg);
-                            navigate('/student/home');
-
                         } catch (error) {
                             toast.error('Student registration was failed');
                             console.error(error);

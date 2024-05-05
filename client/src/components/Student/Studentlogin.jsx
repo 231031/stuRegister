@@ -9,13 +9,13 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { loginStudent } from '../../helpers/stuhelper';
 import { LoginSchema } from '../../Validations/validation';
 
-const Alert = tw.div`text-red-700 text-sm`;
+const Alert = tw.div`text-sm`;
 export default function Studentlogin() {
 
     const navigate = useNavigate();
   return (
     <HelmetProvider>
-        <div className='flex justify-center flex-col h-screen'>
+        <div className='flex justify-center flex-col h-screen '>
             <Toaster position='top-center' reverseOrder={false}></Toaster>
             <Helmet>
                 <title>Stu | Login</title>

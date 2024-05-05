@@ -25,14 +25,14 @@ export default function Adminaddteacher() {
 
   return (
     <HelmetProvider>
-        <div className='container text-lg'>
+        <div>
             <Toaster position='top-center' reverseOrder={false}></Toaster>
             <Helmet>
                 <title>A | AddTeacher</title>
             </Helmet>
             <Headeradmin/>
-            <h3 className='text-center py-2'>Teacher Registration</h3>
-            <h4 className='text-center'>Department of {de}</h4>
+            <h3 className='text-lg text-center py-2'>Teacher Registration</h3>
+            <h4 className='text-lg text-center'>Department of {de}</h4>
             <div className='register-form'>
                 <Formik 
                     initialValues={{
@@ -42,13 +42,13 @@ export default function Adminaddteacher() {
                                 firstName: '',
                                 lastName: '',
                                 teacher_id: '',
+                                position: '',
                             }
                         ]    
                     }}
                     validationSchema={TeacherSchema}
                     onSubmit={async (values) => {
                         try {
-                            console.log(de);
                             values.teacher[0].department_id = de;
                             const res = await addTeacher(values);
                             toast.success(res.msg);
@@ -83,16 +83,16 @@ export default function Adminaddteacher() {
                                 const errorPos = getIn(errors, position);
 
                                 return (
-                                    <div key={index} className='flex flex-row my-4'>
+                                    <div key={index} className='flex flex-wrap flex-row my-4'>
                                         <div className='flex flex-col'>
-                                            <Field className='rounded-md my-2 mx-1 border-2 border-sky-700' 
+                                            <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
                                                     type='text' name={firstName} value={p.firstName} placeholder='First Name'></Field>
                                             {errorFirst && touchedFirst && (
                                                 <Alert>{errorFirst}</Alert>
                                                 )}
                                         </div>
                                         <div className='flex flex-col'>
-                                            <Field className='rounded-md my-2 mx-1 border-2 border-sky-700' 
+                                            <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
                                                     type='text' name={lastName} value={p.lastName} placeholder='Last Name'></Field>
                                             {errorLast && touchedLast && (
                                                 <Alert>{errorLast}</Alert>
@@ -100,7 +100,7 @@ export default function Adminaddteacher() {
                                         </div>
 
                                         <div className='flex flex-col'>
-                                            <Field className='rounded-md my-2 mx-1 border-2 border-sky-700' 
+                                            <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
                                                     type='text' name={teacher_id} value={p.teacher_id} placeholder='Teacher ID'></Field>
                                             {errorId && touchedId && (
                                                 <Alert>{errorId}</Alert>
@@ -108,7 +108,7 @@ export default function Adminaddteacher() {
                                         </div>
 
                                         <div className='flex flex-col'>
-                                            <Field className='rounded-md my-2 mx-1 border-2 border-sky-700' 
+                                            <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
                                                     type='text' name={position} value={p.position} placeholder='Position'></Field>
                                             {errorPos && touchedPos && (
                                                 <Alert>{errorPos}</Alert>

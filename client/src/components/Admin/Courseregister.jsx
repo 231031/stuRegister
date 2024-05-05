@@ -41,13 +41,13 @@ export default function Courseregister() {
 
   return (
     <HelmetProvider>
-        <div className='container text-lg'>
+        <div>
             <Toaster position='top-center' reverseOrder={false}></Toaster>
             <Helmet>
                 <title>A | AddCourse</title>
             </Helmet>
             <Headeradmin/>
-            <h3 className='text-center py-4'>Course Registration</h3>
+            <h3 className='text-lg text-center py-4'>Course Registration</h3>
             <div className='register-form'>
                 <Formik 
                     initialValues={{
@@ -92,59 +92,35 @@ export default function Courseregister() {
                                     const touchedCredit = getIn(touched, credit);
                                     const errorCredit = getIn(errors, credit);
 
-                                    const teacher_id = `course[${index}].teacher_id`;
-                                    const touchedTeacher = getIn(touched, teacher_id);
-                                    const errorTeacher = getIn(errors, teacher_id);
-
                                     const type = `course[${index}].type`;
                                     const touchedType = getIn(touched, type);
                                     const errorType = getIn(errors, type);
 
                                     return (
-                                    <div key={index} className='flex flex-row my-2'>
+                                    <div key={index} className='flex flex-wrap flex-row my-2'>
                                         <Fill>
-                                            <Field className='rounded-md mx-1 border-2 border-sky-700' 
+                                            <Field className='rounded-md mx-1 border-2 border-sky' 
                                             name={course_id} value={p.course_id} placeholder='Course ID - XXX000'></Field>
                                             {errorId && touchedId && (
                                                 <Alert>{errorId}</Alert>
                                                 )}
                                         </Fill>
                                         <Fill>
-                                            <Field className='rounded-md mx-1 border-2 border-sky-700 ' 
+                                            <Field className='rounded-md mx-1 border-2 border-sky ' 
                                             name={courseName} value={p.courseName} placeholder='Course Name'></Field>
                                             {errorName && touchedName && (
                                                 <Alert>{errorName}</Alert>
                                             )}
-                                        </Fill>
+                                        </Fill>     
                                         <Fill>
-                                            {
-                                                (teacher.length > 0)  ? (
-                                                    <Field className='rounded-md mx-1 border-2 border-sky-700' type='text' name={teacher_id} value={p.teacher_id} as='select'>
-                                                        <option value=''></option>
-                                                        {
-                                                            teacher.map((teacherList, index) => (
-                                                                <option key={index} value={teacherList.teacher_id}>{teacherList.teacher_id}</option>
-                                                            ))
-                                                        }
-                                                    </Field>
-                                                ) : (
-                                                        <h4>No teacher Available</h4>
-                                                    )
-                                            }
-                                            {errorTeacher && touchedTeacher && (
-                                                <Alert>{errorTeacher}</Alert>
-                                            )}
-                                        </Fill>
-                                        
-                                        <Fill>
-                                            <Field className='rounded-md mx-1 border-2 border-sky-700' 
+                                            <Field className='rounded-md mx-1 border-2 border-sky' 
                                             name={credit} value={p.credit} placeholder='credit'></Field>
                                             {errorCredit && touchedCredit && (
                                                 <Alert>{errorCredit}</Alert>
                                             )}
                                         </Fill>
                                         <Fill>
-                                            <Field className='rounded-md mx-1 border-2 border-sky-700' as="select" name={type} value={p.type}>
+                                            <Field className='rounded-md mx-1 border-2 border-sky' as="select" name={type} value={p.type}>
                                                 <option></option>
                                                 <option value="elective">elective</option>
                                                 <option value="compulsory">compulsory</option>

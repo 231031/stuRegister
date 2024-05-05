@@ -41,9 +41,6 @@ const Teacher = sequelize.define('Teacher',{
 Teacher.hasMany(Student, {foreignKey: 'teacher_id', onUpdate: 'cascade' });
 Student.belongsTo(Teacher, {foreignKey: 'teacher_id', onUpdate: 'cascade' });
 
-Teacher.hasMany(Scholarship, { foreignKey: 'teacher_id', onUpdate: 'cascade' });
-Scholarship.belongsTo(Teacher, {foreignKey: 'teacher_id', onUpdate: 'cascade' });
-
 Teacher.hasMany(Coursedetail, { foreignKey: 'teacher_id', onUpdate: 'cascade', onDelete: 'restrict' });
 Coursedetail.belongsTo(Teacher, {foreignKey: 'teacher_id', onUpdate: 'cascade', onDelete: 'restrict' });
 

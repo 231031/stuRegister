@@ -12,14 +12,6 @@ const Scholarship = sequelize.define('Scholarship',{
         type: DataTypes.STRING,
         allowNull: false,
     },
-    teacher_id : {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    money : {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
     limit : {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -34,6 +26,14 @@ const Scholarship = sequelize.define('Scholarship',{
         type: DataTypes.FLOAT,
         allowNull: false,
         defaultValue: 3,
+    },
+    start: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+    },
+    end : {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
     }
 },{
     tableName: 'Scholarship',

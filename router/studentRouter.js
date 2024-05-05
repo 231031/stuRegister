@@ -7,6 +7,7 @@ const router = Router();
 // post insert
 router.route("/login").post(controller.loginStudent);
 router.route("/register/course").post(controller.registerCourse);
+router.route("/register/scholar").post(controller.registerScholar);
 // post query
 router.route('/info').post(controller.getInfo);
 router.route('/getsturegister').post(controller.getStuRegister);

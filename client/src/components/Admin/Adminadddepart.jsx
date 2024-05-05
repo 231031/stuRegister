@@ -27,7 +27,7 @@ export default function Adminadddepart() {
       
   return (
     <HelmetProvider>
-        <div className='container text-lg'>
+        <div className='text-lg'>
             <Toaster position='top-center' reverseOrder={false}></Toaster>
             <Helmet>
                 <title>A | AddDepartment</title>
@@ -76,26 +76,26 @@ export default function Adminadddepart() {
                                     return (
                                     <div key={index} className='flex flex-row my-4'>
                                         <div className='flex flex-col'>
-                                            <Field className='rounded-md mx-1 border-2 border-sky-700' 
+                                            <Field className='rounded-md mx-1 border-2 border-sky' 
                                             name={department_id} value={p.department_id} placeholder='Department ID'></Field>
                                             {errorId && touchedId && (
                                                 <Alert>{errorId}</Alert>
                                                 )}
                                         </div>
                                         <div className='flex flex-col'>
-                                            <Field className='rounded-md mx-1 border-2 border-sky-700' 
+                                            <Field className='rounded-md mx-1 border-2 border-sky' 
                                             name={departmentName} value={p.departmentName} placeholder='Department Name'></Field>
                                             {errorName && touchedName && (
                                                 <Alert>{errorName}</Alert>
                                             )}
                                         </div>
-                                        <button type='button' className='px-1 rounded-md border-2 border-red-700' onClick={() => remove(index)} 
+                                        <button type='button' className='px-1 rounded-md border-2 border-red-400' onClick={() => remove(index)} 
                                             disabled={values.department.length === 1}> X </button>
                                         
                                     </div>
                                     );
                                 })}
-                                <button className='border-2 bg-sky-500 px-4 rounded-md' type='button' 
+                                <button className='border-2 border-sky px-4 rounded-md' type='button' 
                                 onClick={() => push({ department_id: '', departmentName: '', faculty_id: faculty_id })}>Add</button>
                                 </div>
                             )}

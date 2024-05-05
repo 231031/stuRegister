@@ -10,7 +10,7 @@ import Headerstu from './Headerstu';
 import { PersonalSchema } from '../../Validations/validation';
 import { updateStudent, getInfo } from '../../helpers/stuhelper';
 
-
+// display information and can edit some information
 const Alert = tw.div`text-red-700 text-sm`;
 export default function Studenteditpersonal() {
 
@@ -39,10 +39,10 @@ export default function Studenteditpersonal() {
     
   return (
     <HelmetProvider>
-        <div className='container text-lg'>
+        <div>
             <Toaster position='top-center' reverseOrder={false}></Toaster>
             <Helmet>
-            <title>Stu | FillPersonal</title>
+            <title>Stu | EditPersonal</title>
             </Helmet>
             <Headerstu data={data}/>
             <h3 className='text-center py-4'>Student Personal Information</h3>
@@ -70,19 +70,19 @@ export default function Studenteditpersonal() {
                 >  
                     {({ errors, touched }) => (
                         <Form className='flex flex-col items-center '>
-                            <Field className='border-2 border-sky-500 rounded-md my-3 w-1/3' type='number' name='salary' placeholder='salary'></Field>
+                            <Field className='border-2 border-sky rounded-md my-3 w-1/3' type='number' name='salary' placeholder='salary'></Field>
                             {errors.salary && touched.salary ? (
                                 <Alert>{errors.salary}</Alert>
                             ) : null}
-                            <Field className='border-2 border-sky-500 rounded-md my-3 w-1/3' type='text' name='parentFirstName' placeholder='parent first name'></Field>
+                            <Field className='border-2 border-sky rounded-md my-3 w-1/3' type='text' name='parentFirstName' placeholder='parent first name'></Field>
                             {errors.parentFirstName && touched.parentFirstName ? (
                                 <Alert>{errors.parentFirstName}</Alert>
                             ) : null}
-                            <Field className='border-2 border-sky-500 rounded-md my-3 w-1/3' type='text' name='parentLastName' placeholder='parent last name'></Field>
+                            <Field className='border-2 border-sky rounded-md my-3 w-1/3' type='text' name='parentLastName' placeholder='parent last name'></Field>
                             {errors.parentLastName && touched.parentLastName ? (
                                 <Alert>{errors.parentLastName}</Alert>
                             ) : null}
-                            <Field className='border-2 border-sky-500 rounded-md my-3 w-1/3' type='text' name='parentSalary' placeholder='parent salary'></Field>
+                            <Field className='border-2 border-sky rounded-md my-3 w-1/3' type='text' name='parentSalary' placeholder='parent salary'></Field>
                             {errors.parentSalary && touched.parentSalary ? (
                                 <Alert>{errors.parentSalary}</Alert>
                             ) : null}

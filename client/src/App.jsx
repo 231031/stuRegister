@@ -31,6 +31,7 @@ import Detailcourse from './components/Student/CourseDetail';
 import AllActivity from './components/Student/StudentallAc';
 import AttendedActivity from './components/Student/StudentAtten';
 import EvaluateActivity from './components/Student/StudentEvaActivity';
+import Scholarform from './components/Student/StudentScholarform'; 
 
 
 // admin components
@@ -49,7 +50,8 @@ import Adminaddteacher from'./components/Admin/Adminaddteacher';
 import Adminadddepart from'./components/Admin/Adminadddepart'; 
 import Adminaddscholar from './components/Admin/Adminaddscholar';
 import Adminaddavailable from './components/Admin/Adminaddavailable';
-import Studentinfo from'./components/Admin/Studentinfo'; 
+import Studentinfo from'./components/Admin/Studentinfo';
+
 
 const router = createBrowserRouter(
   [
@@ -139,8 +141,10 @@ const router = createBrowserRouter(
       path: '/student/evaluate',
       element : <EvaluateActivity/>
     },
-
-    
+    {
+      path: '/student/StudentScholarform',
+      element : <Scholarform/>
+    },
 
     {
       path: '/admin/login',

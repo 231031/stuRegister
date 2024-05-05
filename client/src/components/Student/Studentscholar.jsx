@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 import Headerstu from './Headerstu';
+
 
 const text_UNV = {
   UNV1: 'Oxbridge      28/8/2024',
@@ -91,11 +93,12 @@ export default function Studentscholar() {
         </div>
         <h2 class="text-xl font-medium title-font text-black mt-5">{text_UNV.UNV1}</h2>
         <p class="text-base leading-relaxed mt-2">{text_UNV.UNV1_de}</p>
-        <a class="text-indigo-400 inline-flex items-center mt-3">Learn More
-          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg>
-        </a>
+
+        <button className="bg-sky hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 border border-sky hover:border-transparent rounded flex flex-reverse">
+        <Link to="/student/StudentScholarform" className="block w-full h-full">
+          Get Start
+        </Link>
+        </button>
       </div>
       <div class="p-4 md:w-1/3 sm:mb-0 mb-6">
         <div class="rounded-lg h-64 overflow-hidden">
@@ -103,11 +106,11 @@ export default function Studentscholar() {
         </div>
         <h2 class="text-xl font-medium title-font text-black mt-5">{text_UNV.UNV2}</h2>
         <p class="text-base leading-relaxed mt-2">{text_UNV.UNV2_de}</p>
-        <a class="text-indigo-400 inline-flex items-center mt-3">Learn More
-          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg>
-        </a>
+        <button className="bg-sky hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 border border-sky hover:border-transparent rounded">
+        <Link to="/student/StudentScholarform" className="block w-full h-full">
+          Get Start
+        </Link>
+        </button>
       </div>
       <div class="p-4 md:w-1/3 sm:mb-0 mb-6">
         <div class="rounded-lg h-64 overflow-hidden">
@@ -115,11 +118,11 @@ export default function Studentscholar() {
         </div>
         <h2 class="text-xl font-medium title-font text-black mt-5">{text_UNV.UNV3}</h2>
         <p class="text-base leading-relaxed mt-2">{text_UNV.UNV3_de}</p>
-        <a class="text-indigo-400 inline-flex items-center mt-3">Learn More
-          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg>
-        </a>
+        <button className="bg-sky hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 border border-sky hover:border-transparent rounded">
+        <Link to="/student/StudentScholarform" className="block w-full h-full">
+          Get Start
+        </Link>
+        </button>
       </div>
     </div>
   </div>

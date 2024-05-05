@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import Headerstu from './Headerstu';
 import { useNavigate } from 'react-router-dom';
 
+
 export default function Studentaddeduhis() {
 
   const navigate = useNavigate();
@@ -25,12 +26,15 @@ export default function Studentaddeduhis() {
 
   return (
     <HelmetProvider>
-      <div className='container'>
+      <div>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <Helmet>
             <title>Stu | AddEduHis</title>
         </Helmet>
         <Headerstu data={data}/>
+        <div>
+          {/* formik form for add education history of student */}
+        </div>
       </div>
     </HelmetProvider>
   )

@@ -27,7 +27,7 @@ export default function Adminadddepart() {
       
   return (
     <HelmetProvider>
-        <div className='container text-lg'>
+        <div className='text-lg'>
             <Toaster position='top-center' reverseOrder={false}></Toaster>
             <Helmet>
                 <title>A | AddDepartment</title>
@@ -89,13 +89,13 @@ export default function Adminadddepart() {
                                                 <Alert>{errorName}</Alert>
                                             )}
                                         </div>
-                                        <button type='button' className='px-1 rounded-md border-2 border-red' onClick={() => remove(index)} 
+                                        <button type='button' className='px-1 rounded-md border-2 border-red-400' onClick={() => remove(index)} 
                                             disabled={values.department.length === 1}> X </button>
                                         
                                     </div>
                                     );
                                 })}
-                                <button className='border-2 bg-sky-500 px-4 rounded-md' type='button' 
+                                <button className='border-2 border-sky px-4 rounded-md' type='button' 
                                 onClick={() => push({ department_id: '', departmentName: '', faculty_id: faculty_id })}>Add</button>
                                 </div>
                             )}

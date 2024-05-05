@@ -9,6 +9,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { PasswordSchema } from '../../Validations/validation';
 import { updateStudent } from '../../helpers/stuhelper';
 
+// reset password for first login and link to fill personal information (Studentpersonal) after reset
 const Alert = tw.div`text-red-700 text-sm`;
 export default function Studentnewpass() {
     const navigate = useNavigate();

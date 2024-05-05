@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 // years-- faculty-- filed-- major- number---
 const student_id_pattern = /^(6[0-6])([A-Z]{3}|[A-Z]{2})([0-9]{3})$/;
-const teacher_id_pattern = /^([T])(6[0-8])([A-Z]{3}|[A-Z]{2})([0-9]{3})$/;
+const teacher_id_pattern = /^([T])([3-6][0-9])([A-Z]{3}|[A-Z]{2})([0-9]{3})$/;
 const course_id_pattern = /^([A-Z]{3}|[A-Z]{2})([0-9]{3})$/;
 const time_pattern = /^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/;
 

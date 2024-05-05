@@ -9,6 +9,7 @@ import Headerstu from './Headerstu';
 import { getAvailableCourse, getInfo, registerCourse } from '../../helpers/stuhelper';
 import sry from '../../assets/sry.png';
 
+// for student register compulsory courses and courses in tb stu_register will not display in available courses
 const Row = tw.td`border-2 border-sky py-0 text-sm`;
 export default function Studentregiscourse() {
 
@@ -98,13 +99,13 @@ export default function Studentregiscourse() {
 
   return (
     <HelmetProvider>
-      <div className='container'>
+      <div>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <Helmet>
             <title>Stu | RegisterCourse</title>
         </Helmet>
         <Headerstu data={data}/>
-        <div className='flex flex-row'>
+        <div className='container flex flex-row'>
           <div className='w-1/4 bg-slate-300 h-[calc(100vh-40px)] p-10'>
             <div className='flex flex-col items-center my-10'>
               <img className='rounded-full w-1/2 h-1/2 border-2 border-sky' src={sry}/>

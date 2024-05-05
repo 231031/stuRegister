@@ -109,7 +109,6 @@ export async function getAvailableCourse(req, res) {
                 where: {student_id: token, year: year, term: term }
             });
             const register = resRegister.map(course => course.course_id);
-
             if (register) {
                 const resCourse = await Availablecourse.findAll({
                     where: {
@@ -179,7 +178,6 @@ export async function registerCourse(req, res) {
             return res.status(200).send({ msg : 'Register course successfully'});
         }
         const { regis } = req.body;
-        console.log(regis);
         const result = await sequelize.transaction(async t => {
             await Sturegister.bulkCreate(
                 regis,
@@ -197,7 +195,6 @@ export async function registerCourse(req, res) {
                 await course.increment('count', { transaction : t });
             }
         });
-        console.log(result);
         return res.status(200).send({ msg : 'Register course successfully'});
     } catch (error) {
         return res.status(404).send({ error: error.message });

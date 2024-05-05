@@ -41,13 +41,13 @@ export default function Courseregister() {
 
   return (
     <HelmetProvider>
-        <div className='container text-lg'>
+        <div>
             <Toaster position='top-center' reverseOrder={false}></Toaster>
             <Helmet>
                 <title>A | AddCourse</title>
             </Helmet>
             <Headeradmin/>
-            <h3 className='text-center py-4'>Course Registration</h3>
+            <h3 className='text-lg text-center py-4'>Course Registration</h3>
             <div className='register-form'>
                 <Formik 
                     initialValues={{
@@ -97,7 +97,7 @@ export default function Courseregister() {
                                     const errorType = getIn(errors, type);
 
                                     return (
-                                    <div key={index} className='flex flex-row my-2'>
+                                    <div key={index} className='flex flex-wrap flex-row my-2'>
                                         <Fill>
                                             <Field className='rounded-md mx-1 border-2 border-sky' 
                                             name={course_id} value={p.course_id} placeholder='Course ID - XXX000'></Field>

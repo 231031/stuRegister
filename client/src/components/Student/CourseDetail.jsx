@@ -32,7 +32,7 @@ export default function Detailcourse() {
         </Helmet> 
         <Headerstu data={data}/>
         <div className='bg-lowyellow'> 
-            {/* display all course register of this student */}
+            {/* display course detail of selected course ?? */}
         </div>
       </div>
     </HelmetProvider>

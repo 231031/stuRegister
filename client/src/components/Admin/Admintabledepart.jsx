@@ -103,8 +103,8 @@ export default function Admintabledepart() {
                   </table>   
               ) : (
                   <div className='my-5 h-72'>
-                      <h3 className='ml-7 text-xl text-blue-900'>faculty Lists</h3>
-                      <h2 className='my-4 ml-7 text-md text-blue-600 flex justify-center'>Not Have faculty Lists Now</h2>
+                      <h3 className='ml-7 text-xl text-blue-900'>Department Lists</h3>
+                      <h2 className='my-4 ml-7 text-md text-blue-600 flex justify-center'>Not Have Department Lists Now</h2>
                   </div>
               )
           }

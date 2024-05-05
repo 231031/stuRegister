@@ -10,6 +10,7 @@ import { updateStudent } from '../../helpers/stuhelper';
 import Headerstu from './Headerstu';
 import { useNavigate } from 'react-router-dom';
 
+// for fill parent information ??
 const Alert = tw.div`text-red-700 text-sm`;
 export default function Studentupdate() {
 
@@ -31,7 +32,7 @@ export default function Studentupdate() {
 
   return (
     <HelmetProvider>
-        <div className='container text-lg'>
+        <div>
             <Toaster position='top-center' reverseOrder={false}></Toaster>
             <Helmet>
             <title>Stu | UpdateInfo</title>

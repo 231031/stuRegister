@@ -42,7 +42,7 @@ export default function Headerstu({ data }) {
             <Btn onClick={toggleInfo}>Information<FontAwesomeIcon className='ml-2' icon="fa-solid fa-caret-down" /></Btn>
             <div className={isInfoOpen ? 'block' : 'hidden'}>
               <List>
-                <li><NavLink to='/student/personal'>Personal</NavLink></li>
+                <li><NavLink to='/student/update'>Personal</NavLink></li>
                 <li><NavLink to='/student/eduhis'>Education</NavLink></li>
               </List>
             </div>

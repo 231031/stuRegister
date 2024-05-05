@@ -45,13 +45,13 @@ export default function Coursedetail() {
 
   return (
     <HelmetProvider>
-        <div className='container text-lg'>
+        <div>
             <Toaster position='top-center' reverseOrder={false}></Toaster>
             <Helmet>
                 <title>A | AddCourseD</title>
             </Helmet>
             <Headeradmin/>
-            <h3 className='text-center py-4'>Course Registration</h3>
+            <h3 className='text-lg text-center py-4'>Course Registration</h3>
             <div className='register-form'>
                 <Formik 
                     initialValues={{

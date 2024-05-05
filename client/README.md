@@ -13,3 +13,8 @@ Currently, two official plugins are available:
 
 -back student register courses transaction
 -display in personal
+
+-edit sending token of student
+-edit routes of student -> Studentpersonal-fill information after resetting password first login, Studentupdate-update some personal information, Studenteditpersonal-student can fill information of parent, Studentaddeduhis-add education history
+-edit information nav of student
+-edit container, update color code, flex wrap of form in component

@@ -9,6 +9,7 @@ import edit from '../../assets/edit.png';
 import Headerstu from './Headerstu';
 import { getInfo } from '../../helpers/stuhelper';
 
+// for login first time
 export default function Studentpersonal() {
 
     const navigate = useNavigate();
@@ -40,7 +41,7 @@ export default function Studentpersonal() {
       <div>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <Helmet>
-            <title>Stu | EditPersonal</title>
+            <title>Stu | FillPersonal</title>
         </Helmet>
         <Headerstu data={data}/>
         <div className='flex flex-row'>

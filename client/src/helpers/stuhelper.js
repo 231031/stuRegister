@@ -34,11 +34,12 @@ export async function updateStudent(info) {
 
     try {
         const token = localStorage.getItem('token');
+        const [department_id, year, student_id] = token.split('-');
         const response = await fetch('http://localhost:6001/student/update', {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
-            "Authorization": `Bearer ${token}`,
+            "Authorization": `Bearer ${student_id}`,
           },
           body: JSON.stringify(info),
         });
@@ -77,11 +78,12 @@ export async function getInfo(info) {
 export async function getStuRegister(de, year) {
   try {
     const token = localStorage.getItem('token');
+    const [department_id, year, student_id] = token.split('-');
     const response = await fetch('http://localhost:6001/student/getsturegister', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        "Authorization": `Bearer ${token}`,
+        "Authorization": `Bearer ${student_id}`,
       },
       body: JSON.stringify({ department_id: de, year: year }),
     });
@@ -99,11 +101,12 @@ export async function getStuRegister(de, year) {
 export async function getAvailableCourse(de, year, type) {
   try {
     const token = localStorage.getItem('token');
+    const [department_id, year, student_id] = token.split('-');
     const response = await fetch('http://localhost:6001/student/getavailable', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        "Authorization": `Bearer ${token}`,
+        "Authorization": `Bearer ${student_id}`,
       },
       body: JSON.stringify({ department_id: de, year: year, type: type }),
     });
@@ -129,11 +132,12 @@ export async function registerCourse(info, year, id) {
   }
   try {
     const token = localStorage.getItem('token');
+    const [department_id, year, student_id] = token.split('-');
     const response = await fetch('http://localhost:6001/student/register/course', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        "Authorization": `Bearer ${token}`,
+        "Authorization": `Bearer ${student_id}`,
       },
       body: JSON.stringify({ regis : courses }),
     });

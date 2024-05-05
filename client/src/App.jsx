@@ -47,6 +47,7 @@ import Adminaddteacher from'./components/Admin/Adminaddteacher';
 import Adminadddepart from'./components/Admin/Adminadddepart'; 
 import Adminaddavailable from './components/Admin/Adminaddavailable';
 import Studentinfo from'./components/Admin/Studentinfo'; 
+import Studentaddeduhis from './components/Student/Studentaddeduhis';
 
 const router = createBrowserRouter(
   [
@@ -74,10 +75,8 @@ const router = createBrowserRouter(
       path: '/teacher/selcourse',
       element : <Teachertablecourse/>
     },
-    {
-      path: '/student/personal',
-      element : <Studentpersonal/>
-    },
+
+
     {
       path: '/student/login',
       element : <Studentlogin/>
@@ -85,6 +84,14 @@ const router = createBrowserRouter(
     {
       path: '/student/newpassword',
       element : <Studentnewpass/>
+    },
+    {
+      path: '/student/personal',
+      element : <Studentpersonal/>
+    },
+    {
+      path: '/student/editpersonal',
+      element : <Studenteditpersonal/>
     },
     {
       path: '/student/home',
@@ -101,16 +108,14 @@ const router = createBrowserRouter(
     {
       path: '/student/mycourse',
       element : <Studentmycourse/>
-    },
-    
+    }, 
     {
       path: '/student/scholarship',
       element : <Studentscholar/>
     },
-
     {
       path: '/student/eduhis',
-      element : <Studenteditpersonal/>
+      element : <Studentaddeduhis/>
     },
     {
       path: '/student/courses',

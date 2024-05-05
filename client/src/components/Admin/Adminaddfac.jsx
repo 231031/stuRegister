@@ -12,7 +12,7 @@ const Alert = tw.p`text-red-700 text-sm`;
 export default function Adminaddfac() {
   return (
     <HelmetProvider>
-      <div className='container'>
+      <div>
           <Toaster position='top-center' reverseOrder={false}></Toaster>
           <Helmet>
               <title>A | AddFaculty</title>

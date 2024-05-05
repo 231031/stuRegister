@@ -6,7 +6,7 @@ import Headeradmin from './Headeradmin';
 export default function Adminaddscholar() {
   return (
     <HelmetProvider>
-      <div className='container'>
+      <div>
         <Helmet>
           <title>A | AddScholar</title>
         </Helmet>

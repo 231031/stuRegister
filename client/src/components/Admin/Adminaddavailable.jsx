@@ -41,14 +41,14 @@ export default function Adminaddavailable() {
 
   return (
     <HelmetProvider>
-        <div className='container text-lg'>
+        <div>
             <Toaster position='top-center' reverseOrder={false}></Toaster>
             <Helmet>
                 <title>A | AddAvailableC</title>
             </Helmet>
             <Headeradmin/>
-            <h3 className='text-center py-4'>Available Course of Department {de}</h3>
-            <div className='register-form'>
+            <h3 className=' text-center py-4'>Available Course of Department {de}</h3>
+            <div className='text-lg register-form'>
                 <Formik 
                     initialValues={{
                         available : [

@@ -56,18 +56,18 @@ export default function Adminaddstu() {
 
   return (
     <HelmetProvider>
-        <div className='container text-lg'>
+        <div>
             <Toaster position='top-center' reverseOrder={false}></Toaster>
             <Helmet>
                 <title>A | AddStudent</title>
             </Helmet>
             <Headeradmin/>
-            <h3 className='text-center py-4'>Student Registration</h3>
+            <h3 className='text-center py-4 text-lg'>Student Registration</h3>
             <div className='flex flex-col items-center w-full text-sm'>
                 <p>Teacher</p>
                 {   
                     (teacher.length > 0)  ? (
-                            <select className='border-2 border-sky-500 rounded-md my-3 w-1/3' 
+                            <select className='border-2 border-sky rounded-md my-3 w-1/3' 
                             type='text'  id='teacher_id' onChange={(e)=>setSelTeacher(e.target.value)}>
                                 <option value=''></option>
                                 {
@@ -83,7 +83,7 @@ export default function Adminaddstu() {
                             )
                         
                 }
-                <input className='w-1/4 rounded-md my-2 mx-1 border-2 border-sky-700' id='year' placeholder='Year' onChange={(e)=>{setYear(e.target.value)}}/>
+                <input className='w-1/4 rounded-md my-2 mx-1 border-2 border-sky' id='year' placeholder='Year' onChange={(e)=>{setYear(e.target.value)}}/>
             </div>
             
             <Formik

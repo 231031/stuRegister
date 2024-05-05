@@ -18,3 +18,7 @@ Currently, two official plugins are available:
 -edit routes of student -> Studentpersonal-fill information after resetting password first login, Studentupdate-update some personal information, Studenteditpersonal-student can fill information of parent, Studentaddeduhis-add education history
 -edit information nav of student
 -edit container, update color code, flex wrap of form in component
+
+-student register elective courses
+-admin add scholarship page 
+-edit model - Scholarship->not have teacher, Teacher->remove relation with scholarship, Coursedetail->edit data type 

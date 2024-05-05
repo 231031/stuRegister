@@ -18,11 +18,11 @@ const Coursedetail = sequelize.define('Coursedetail',{
         allowNull: false,
     },
     startTime : {
-        type: DataTypes.STRING,
+        type: DataTypes.TIME,
         allowNull: false,
     },
     finishTime : {
-        type: DataTypes.STRING,
+        type: DataTypes.TIME,
         allowNull: false,
     },
     day : {

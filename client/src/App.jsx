@@ -22,9 +22,11 @@ import Studenthome from'./components/Student/Studenthome';
 import Studentupdate from'./components/Student/Studentupdate'; 
 import Studentnewpass from'./components/Student/Studentnewpass'; 
 import Studentregiscourse from'./components/Student/Studentregiscourse'; 
+import Studentregiselective from'./components/Student/Studentregiselective'; 
 import Studentmycourse from'./components/Student/Studentmycourse'; 
 import Studentscholar from './components/Student/Studentscholar';
 import Studenteditpersonal from './components/Student/Studenteditpersonal';
+import Studentaddeduhis from './components/Student/Studentaddeduhis';
 import Detailcourse from './components/Student/CourseDetail';
 import AllActivity from './components/Student/StudentallAc';
 import AttendedActivity from './components/Student/StudentAtten';
@@ -45,9 +47,9 @@ import Adminaddstu from'./components/Admin/Adminaddstu';
 import Adminaddfac from'./components/Admin/Adminaddfac'; 
 import Adminaddteacher from'./components/Admin/Adminaddteacher'; 
 import Adminadddepart from'./components/Admin/Adminadddepart'; 
+import Adminaddscholar from './components/Admin/Adminaddscholar';
 import Adminaddavailable from './components/Admin/Adminaddavailable';
 import Studentinfo from'./components/Admin/Studentinfo'; 
-import Studentaddeduhis from './components/Student/Studentaddeduhis';
 
 const router = createBrowserRouter(
   [
@@ -106,6 +108,10 @@ const router = createBrowserRouter(
       element : <Studentregiscourse/>
     },
     {
+      path: '/student/regiselective',
+      element : <Studentregiselective/>
+    },
+    {
       path: '/student/mycourse',
       element : <Studentmycourse/>
     }, 
@@ -160,14 +166,16 @@ const router = createBrowserRouter(
       path: '/admin/selcourse',
       element : <Coursetable/>
     },
+
     {
-      path: '/admin/selstudent',
-      element : <Studentinfo/>
+      path: '/admin/addscholarship',
+      element : <Adminaddscholar/>
     },
     {
       path: '/admin/selscholar',
       element : <Admintablescholarstu/>
     },
+
     {
       path: '/admin/addstu',
       element : <Adminaddstu/>
@@ -176,6 +184,11 @@ const router = createBrowserRouter(
       path: '/admin/students',
       element : <Studentinfo/>
     },
+    {
+      path: '/admin/selstudent',
+      element : <Studentinfo/>
+    },
+    
     {
       path: '/admin/addavailable',
       element : <Adminaddavailable/>
@@ -193,13 +206,15 @@ const router = createBrowserRouter(
       element : <Adminadddepart/>
     },
     {
-      path: '/admin/addteacher',
-      element : <Adminaddteacher/>
-    },
-    {
       path: '/admin/departments',
       element : <Admintabledepart/>
     },
+
+    {
+      path: '/admin/addteacher',
+      element : <Adminaddteacher/>
+    },
+
   ]
 );
 

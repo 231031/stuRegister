@@ -1,10 +1,15 @@
 import * as Yup from 'yup';
 
-// years-- faculty-- filed-- major- number---
-const student_id_pattern = /^(6[0-6])([A-Z]{3}|[A-Z]{2})([0-9]{3})$/;
+// years-- department_id--- number---
+// const student_id_pattern = /^(6[0-6])([A-Z]{3}|[A-Z]{2})([0-9]{3})$/;
+
+// T years-- department_id--- number---
 const teacher_id_pattern = /^([T])([3-6][0-9])([A-Z]{3}|[A-Z]{2})([0-9]{3})$/;
+
+// department_id--- number---
 const course_id_pattern = /^([A-Z]{3}|[A-Z]{2})([0-9]{3})$/;
 const time_pattern = /^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/;
+const scholar_id_pattern = /^([S])([0-9]{3})$/;
 
 
 const NameSchema = Yup.object().shape({
@@ -28,7 +33,7 @@ const FacSchema = Yup.object().shape({
                 .min(1, 'Too Short!')
                 .required('ID Required'),
             facultyName: Yup.string()
-                .matches(/^[A-Za-z]+$/, 'All must be letters')
+                .matches(/^[A-Za-z ]+$/, 'All must be letters')
                 .min(2, 'Too Short!')
                 .max(30, 'Too Long!')
                 .required('Name Required'),
@@ -57,10 +62,33 @@ const PasswordSchema = Yup.object().shape({
         .oneOf([Yup.ref('password'), null], 'Passwords do not match'),
 });
 
+
 const AddStuSchema = Yup.object().shape({
     student: Yup.array().of(
         Yup.object().shape({
             ...NameSchema.fields,
+        })
+    )
+    
+});
+
+const ScholarshipSchema = Yup.object().shape({
+    scholarship: Yup.array().of(
+        Yup.object().shape({
+            scholarship_id: Yup.string()
+                .required('Required')
+                .matches(scholar_id_pattern, 'ID pattern ex. S001'),
+            scholarshipName: Yup.string()
+                .required('Required'),
+            limit: Yup.number()
+                .required('Required'),
+            lowGrade: Yup.number()
+                .required('Required'),
+            start: Yup.date()
+                .required('Required'),
+            end: Yup.date()
+                .required('Required'),
+
         })
     )
     
@@ -117,12 +145,12 @@ const AvailableSchema = Yup.object().shape({
 });
 
 const DepartmentSchema = Yup.object().shape({
-    course: Yup.array().of(
+    department: Yup.array().of(
         Yup.object().shape({
             department_id: Yup.string().required('Required')
                 .matches(/^[A-Z]+$/, 'All must be Capitalize letters'),
             departmentName: Yup.string().required('Required').min(3, 'Too Short!')
-                .matches(/^[A-Za-z]+$/, 'All must be letters'),
+                .matches(/^[A-Za-z ]+$/, 'All must be letters'),
         })
     )
     
@@ -156,5 +184,5 @@ const DetailSchema = Yup.object().shape({
 
 
 export { PersonalSchema, LoginSchema, UpdateSchema, CourseSchema, DetailSchema, FacSchema, DepartmentSchema, TeacherSchema,
-        AddStuSchema, AvailableSchema, NameSchema, PasswordSchema  };
+        AddStuSchema, AvailableSchema, NameSchema, PasswordSchema, ScholarshipSchema  };
 

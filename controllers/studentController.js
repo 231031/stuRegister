@@ -6,6 +6,7 @@ import { sequelize } from "../dbcon.js";
 import { Op } from 'sequelize';
 import bcrypt from 'bcrypt';
 import { Availablecourse } from "../models/Avilablecourse.model.js";
+import { Scholarhistory } from "../models/Scholarhistory.model.js";
 
 export async function loginStudent(req, res) {
     try {
@@ -76,6 +77,14 @@ export async function getInfo(req, res) {
         res.json(user);
     } catch (error) {
         return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function registerScholar(req, res) {
+    const token = req.headers.authorization.split(" ")[1];
+    if (token) {
+        await  Scholarhistory.create(req.body);
+        return res.status(200).send({ msg: 'Scholarship registration success' });
     }
 }
 

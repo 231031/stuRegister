@@ -10,9 +10,9 @@ import { getAvailableCourse, getInfo, registerCourse } from '../../helpers/stuhe
 import profile from '../../assets/profile.png';
 import sry from '../../assets/sry.png';
 
-// for student register compulsory courses and courses in tb stu_register will not display in available courses
+// for student register elective courses and courses in tb stu_register will not display in available courses
 const Row = tw.td`border-2 border-sky py-0 text-sm`;
-export default function Studentregiscourse() {
+export default function Studentregiselective() {
 
   const navigate = useNavigate();
   const [data, setData] = useState('');
@@ -47,7 +47,7 @@ export default function Studentregiscourse() {
       const apiCourse = async () => {
         try {
           if (month == 4 && date < 15) {
-            const detail = await getAvailableCourse(data.department_id, data.year, 'compulsory');
+            const detail = await getAvailableCourse(data.department_id, data.year, 'elective');
             setAvailable(detail); 
           } 
         } catch (error) {
@@ -90,15 +90,14 @@ export default function Studentregiscourse() {
 
   async function handleSubmit() {
     try {
-      if (sel.length === available.length) {
-        const res = await registerCourse(sel, data.year, data.student_id);
-        navigate('/student/regiselective')
-        toast.success(res.msg);
-      } else {
-        toast.error('Please Select Group of All Courses')
-      }
+        if (sel.length > 0) {
+            const res = await registerCourse(sel, data.year, data.student_id);
+            toast.success(res.msg);
+        } else {
+            toast.error('Select Group of Some Courses Before Submit');   
+        }
     } catch (error) {
-      console.log(error);
+        console.log(error);
     }
   }
   
@@ -137,7 +136,7 @@ export default function Studentregiscourse() {
               {
                 (available.length > 0)? (
                   <div className='w-full flex flex-col justify-center items-center'>
-                    <p className='text-lg'>Compulsory Courses</p>
+                    <p className='text-lg'>Elective Courses</p>
                     <table className='text-center w-11/12 border-2 border-sky mt-10'>
                     <thead>
                       <tr>

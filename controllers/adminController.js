@@ -8,6 +8,7 @@ import { Student } from "../models/Student.model.js";
 import { Teacher } from "../models/Teacher.model.js";
 import { Availablecourse } from "../models/Avilablecourse.model.js";
 import bcrypt from 'bcrypt';
+import { Scholarship } from "../models/Scholarship.model.js";
 
 export async function login(req, res) {
     try {
@@ -58,6 +59,15 @@ export async function addDepartment(req, res) {
     try {
         await Department.bulkCreate(req.body.department);
         return res.status(200).send({ msg : 'Add Department successfully'});
+    } catch (error) {
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function addScholarship(req, res) {
+    try {
+        await Scholarship.bulkCreate(req.body.scholarship);
+        return res.status(200).send({ msg : 'Add Scholarships successfully'});
     } catch (error) {
         return res.status(404).send({ error: error.message });
     }

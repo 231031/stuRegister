@@ -42,13 +42,13 @@ export default function Adminaddteacher() {
                                 firstName: '',
                                 lastName: '',
                                 teacher_id: '',
+                                position: '',
                             }
                         ]    
                     }}
                     validationSchema={TeacherSchema}
                     onSubmit={async (values) => {
                         try {
-                            console.log(de);
                             values.teacher[0].department_id = de;
                             const res = await addTeacher(values);
                             toast.success(res.msg);

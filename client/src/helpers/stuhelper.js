@@ -151,3 +151,33 @@ export async function registerCourse(info, year, id) {
     return Promise.reject(error);
   }
 }
+
+export async function registerScholar(data, info) {
+  const application = {
+    student_id: data.student_id,
+    getYear: data.year,
+    scholarship_id: info.scholarship_id,
+    // other
+  }
+
+  try {
+    const token = localStorage.getItem('token');
+    const [department_id, year, student_id] = token.split('-');
+    const response = await fetch('http://localhost:6001/student/register/course', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${student_id}`,
+      },
+      body: JSON.stringify(application),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}

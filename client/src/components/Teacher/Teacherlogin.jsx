@@ -61,7 +61,7 @@ export default function Teacherlogin() {
                                             <Alert>{errors.username}</Alert>
                                         ) : null}
                                     </div>
-                                    <Field className='my-3 p-5 w-full h-16 rounded-full bg-gray-200 hover:placeholder:text-slate-50 hover:outline-none hover:ring hover:bg-blue-500 hover:ring-blue-50
+                                    <Field className='my-3 p-5 w-full h-16 rounded-full bg-gray-200 hover:placeholder:text-slate-50 hover:outline-none hover:ring hover:bg-blue-500 hover:ring-blue-500
                                                       focus:outline-none focus:ring focus:bg-gray-50 focus:ring-blue-500 focus:placeholder:text-gray-500' type='password' name='password' placeholder='password'></Field>
                                     <div className='flex justify-end pr-6'>
                                         <a href=''>Reset Password</a>

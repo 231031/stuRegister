@@ -7,6 +7,7 @@ import { Op } from 'sequelize';
 import bcrypt from 'bcrypt';
 import { Availablecourse } from "../models/Avilablecourse.model.js";
 import { Scholarhistory } from "../models/Scholarhistory.model.js";
+import { Scholarship } from "../models/Scholarship.model.js";
 
 export async function loginStudent(req, res) {
     try {
@@ -71,7 +72,8 @@ export async function updateStudent(req, res) {
 export async function getInfo(req, res) {
     try {
         const user = await Student.findByPk(req.body.student_id, {
-            attributes: ['student_id', 'firstName', 'lastName', 'year', 'department_id', 'salary', 'parentFirstName',
+            attributes: ['student_id', 'firstName', 'lastName', 'year', 'department_id', 'gender', 'dob', 'email', 'city', 'zipCode', 'state', 'address',
+                            'salary', 'parentFirstName', 'phone',
                             'parentLastName', 'parentSalary']
         });
         res.json(user);
@@ -80,12 +82,48 @@ export async function getInfo(req, res) {
     }
 }
 
-export async function registerScholar(req, res) {
-    const token = req.headers.authorization.split(" ")[1];
-    if (token) {
-        await  Scholarhistory.create(req.body);
-        return res.status(200).send({ msg: 'Scholarship registration success' });
+export async function getScholar(req, res) {
+    const date = new Date();
+    try {
+        const scholar = await Scholarship.findAll({
+            where: { 
+                start : { [Op.lte]: date }, // start date less than present date
+                end : { [Op.gte]: date }, // end date more than or equal present date - end date until 23:59
+                // filter low grade (from GPAX) ???
+            },
+            attributes: ['scholarship_id', 'scholarshipName']
+        });
+        res.json(scholar);
+    } catch (error) {
+        return res.status(404).send({ error: error.message });
     }
+}
+
+// not test
+// update student, register scholarship
+export async function registerScholar(req, res) {
+    try {
+        const token = req.headers.authorization.split(" ")[1];
+        await sequelize.transaction(async t => {
+            await Student.update(
+                req.body.info,
+                {
+                  where: {
+                    student_id: token,
+                  },
+                }, { transaction : t }
+            );
+    
+            await Scholarhistory.create(
+                req.body.apply,
+                { transaction : t }
+            );
+        });
+        return res.status(200).send({ msg : 'Register scholarship and Update successfully'});
+    } catch (error) {
+        return res.status(404).send({ error: error.message });
+    }
+    
 }
 
 export async function getStuRegister(req, res) {
@@ -183,9 +221,6 @@ export async function getAvailableCourse(req, res) {
 export async function registerCourse(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
-        if (!token) {
-            return res.status(200).send({ msg : 'Register course successfully'});
-        }
         const { regis } = req.body;
         const result = await sequelize.transaction(async t => {
             await Sturegister.bulkCreate(

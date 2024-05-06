@@ -29,7 +29,7 @@ const Student = sequelize.define('Student',{
         allowNull: false,
     },
     salary : {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     teacher_id : {
@@ -37,6 +37,47 @@ const Student = sequelize.define('Student',{
         allowNull: false,
     },
     department_id : {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    gender: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    idCard: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    phone: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    dob: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+    },
+    age: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+
+    address: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+    },
+    city: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    state: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    zipCode: {
         type: DataTypes.STRING,
         allowNull: false,
     },

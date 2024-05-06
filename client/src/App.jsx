@@ -31,7 +31,12 @@ import Detailcourse from './components/Student/CourseDetail';
 import AllActivity from './components/Student/StudentallAc';
 import AttendedActivity from './components/Student/StudentAtten';
 import EvaluateActivity from './components/Student/StudentEvaActivity';
+import Scholarform from './components/Student/StudentScholarform'; 
 
+// -----scholar page----
+import SCLM1 from './components/Student/StudentscholarLM1';
+import SCLM2 from './components/Student/StudentscholarLM2';
+import SCLM3 from './components/Student/StudentscholarLM3';
 
 // admin components
 import AdminLogin from './components/Admin/Adminlogin';
@@ -49,7 +54,8 @@ import Adminaddteacher from'./components/Admin/Adminaddteacher';
 import Adminadddepart from'./components/Admin/Adminadddepart'; 
 import Adminaddscholar from './components/Admin/Adminaddscholar';
 import Adminaddavailable from './components/Admin/Adminaddavailable';
-import Studentinfo from'./components/Admin/Studentinfo'; 
+import Studentinfo from'./components/Admin/Studentinfo';
+
 
 const router = createBrowserRouter(
   [
@@ -139,8 +145,24 @@ const router = createBrowserRouter(
       path: '/student/evaluate',
       element : <EvaluateActivity/>
     },
+    {
+      path: '/student/StudentScholarform',
+      element : <Scholarform/>
+    },
+    {
+      path: '/student/StudentScholarLM1',
+      element : <SCLM1/>
+    },
 
-    
+    {
+      path: '/student/StudentScholarLM2',
+      element : <SCLM2/>
+    },
+
+    {
+      path: '/student/StudentScholarLM3',
+      element : <SCLM3/>
+    },
 
     {
       path: '/admin/login',

@@ -124,7 +124,7 @@ export default function AllActivity() {
         </button>
 
         <button className="bg-Slate-100 hover:bg-[#6b7280] text-[#0d9488] font-semibold hover:text-white py-2 px-4 border border-[#0d9488] hover:border-transparent rounded ml-auto">
-          <Link to="" className="block w-full h-full">
+          <Link to="/Student/StudentAC1" className="block w-full h-full">
             Learn More
           </Link>
         </button>
@@ -153,7 +153,7 @@ export default function AllActivity() {
           </button>
 
           <button className="bg-Slate-100 hover:bg-[#6b7280] text-[#0d9488] font-semibold hover:text-white py-2 px-4 border border-[#0d9488] hover:border-transparent rounded ml-auto">
-          <Link to="" className="block w-full h-full">
+          <Link to="/Student/StudentAC2" className="block w-full h-full">
             Learn More
           </Link>
         </button>
@@ -182,7 +182,7 @@ export default function AllActivity() {
           </button>
 
           <button className="bg-Slate-100 hover:bg-[#6b7280] text-[#0d9488] font-semibold hover:text-white py-2 px-4 border border-[#0d9488] hover:border-transparent rounded ml-auto">
-          <Link to="/student/StudentscholarLM3" className="block w-full h-full">
+          <Link to="/Student/StudentAC3" className="block w-full h-full">
             Learn More
           </Link>
         </button>
@@ -206,7 +206,7 @@ export default function AllActivity() {
           </button>
 
           <button className="bg-Slate-100 hover:bg-[#6b7280] text-[#0d9488] font-semibold hover:text-white py-2 px-4 border border-[#0d9488] hover:border-transparent rounded ml-auto">
-          <Link to="/student/StudentscholarLM3" className="block w-full h-full">
+          <Link to="/Student/StudentAC4" className="block w-full h-full">
             Learn More
           </Link>
         </button>
@@ -230,7 +230,7 @@ export default function AllActivity() {
           </button>
 
           <button className="bg-Slate-100 hover:bg-[#6b7280] text-[#0d9488] font-semibold hover:text-white py-2 px-4 border border-[#0d9488] hover:border-transparent rounded ml-auto">
-          <Link to="/student/StudentscholarLM3" className="block w-full h-full">
+          <Link to="/Student/StudentAC5" className="block w-full h-full">
             Learn More
           </Link>
         </button>
@@ -255,7 +255,7 @@ export default function AllActivity() {
           </button>
 
           <button className="bg-Slate-100 hover:bg-[#6b7280] text-[#0d9488] font-semibold hover:text-white py-2 px-4 border border-[#0d9488] hover:border-transparent rounded ml-auto">
-          <Link to="/student/StudentscholarLM3" className="block w-full h-full">
+          <Link to="/Student/StudentAC6" className="block w-full h-full">
             Learn More
           </Link>
         </button>

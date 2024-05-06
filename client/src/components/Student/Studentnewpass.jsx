@@ -31,7 +31,7 @@ export default function Studentnewpass() {
             <Helmet>
             <title>Stu | FillPassword</title>
             </Helmet>
-            <h3 className='text-center py-5 text-3xl'>Student New Password</h3>
+            <h3 className='text-center py-5 text-4xl text-bold'>Student New Password</h3>
             <div className='register-form'>
                 <Formik 
                     initialValues={{
@@ -56,13 +56,15 @@ export default function Studentnewpass() {
                         <div className='flex justify-center'>
                             <Form>
                                 <div className='flex flex-col w-96'>
-                                    <Field className='my-3 p-5 w-full h-16 rounded-full bg-gray-200 ' type='password' name='password' placeholder='new password'></Field>
+                                    <Field className='my-3 p-5 w-full h-16 rounded-full bg-gray-200 hover:placeholder:text-slate-50 hover:outline-none hover:ring hover:bg-lime-500 hover:ring-lime-500
+                                                      focus:outline-none focus:ring focus:bg-gray-50 focus:ring-lime-500 focus:placeholder:text-gray-500' type='password' name='password' placeholder='new password'></Field>
                                     <div className='flex justify-end pr-6'>
                                         {errors.password && touched.password ? (
                                             <Alert>{errors.password}</Alert>
                                         ) : null}
                                     </div>
-                                    <Field className='my-3 p-5 w-full h-16 rounded-full bg-gray-200 ' type='password' name='newPassword' placeholder='confirm password'></Field>
+                                    <Field className='my-3 p-5 w-full h-16 rounded-full bg-gray-200 hover:placeholder:text-slate-50 hover:outline-none hover:ring hover:bg-lime-500 hover:ring-lime-500
+                                                      focus:outline-none focus:ring focus:bg-gray-50 focus:ring-lime-500 focus:placeholder:text-gray-500' type='password' name='newPassword' placeholder='confirm password'></Field>
                                     <div className='flex justify-end pr-6'>
                                         {errors.newPassword && touched.newPassword ? (
                                             <Alert>{errors.newPassword}</Alert>
@@ -70,7 +72,7 @@ export default function Studentnewpass() {
                                     </div>
                                 </div>
                                 <div className='flex justify-center'>
-                                        <button type="submit" className="my-3 w-1/3 h-10 rounded-full bg-gray-500 text-white ">Login</button>
+                                        <button type="submit" className="my-3 w-1/3 h-10 rounded-full hover:bg-lime-500 text-white bg-lime-800 ">Login</button>
                                 </div>
                             </Form>
                         </div>

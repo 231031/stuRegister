@@ -20,11 +20,11 @@ export default function Landing() {
   }
   return (
     <HelmetProvider>
-      <div className='container flex flex-col justify-center items-center  h-screen w-full'>
+      <div className='flex flex-col justify-center items-center h-screen w-full '>
         <Helmet>
-          <title>Registration</title>
+          <title >Registration</title>
         </Helmet>
-        <h2 className='text-4xl text-bold'>Registration System</h2>
+        <h2 className='text-4xl text-bold '>Registration System</h2>
         <div className='flex flex-row justify-center mt-14'>
           <Btn>
             <FontAwesomeIcon onClick={(e)=>admin()}
@@ -38,7 +38,7 @@ export default function Landing() {
           </Btn>
           <Btn>
             <FontAwesomeIcon onClick={(e)=>student()}
-            className='size-20 mx-8 p-10 rounded-full bg-lime-300 cursor-pointer hover:bg-lime-500' icon="fa-solid fa-user-graduate" />
+            className='size-20 mx-8 p-10 rounded-full bg-lime-300 cursor-pointer hover:bg-lime-500 ' icon="fa-solid fa-user-graduate" />
             <p className='mt-4 text-lime-800 text-2xl '>Student</p>
           </Btn>
           

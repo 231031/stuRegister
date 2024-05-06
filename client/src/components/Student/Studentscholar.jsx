@@ -60,10 +60,10 @@ export default function Studentscholar() {
 
     <header>
     {/* <!-- Section 1 --> */}
-    <div class="flex flex-row">
-    <div class="container mx-auto px-5 mt-9 h-96 rounded-md flex items-center" style={{ backgroundImage: `url(${imagee})` }}>
-      <div class="sm:ml-20 text-gray-40 text-center sm:text-left">
-        <h1 class="text-5xl font-bol mb-4">
+    <div className="flex flex-row">
+    <div className="container mx-auto px-5 mt-9 h-96 rounded-md flex items-center" style={{ backgroundImage: `url(${imagee})` }}>
+      <div className="sm:ml-20 text-gray-40 text-center sm:text-left">
+        <h1 className="text-5xl font-bol mb-4">
         Free Scholarships For Every Bright <br />
         Student In KMUTT ! 
         </h1>
@@ -75,24 +75,24 @@ export default function Studentscholar() {
     
     {/* <!-- Section 2 --> */}
   </header>
-  <section class="text-gray-400 bg-white-900 body-font">
-  <div class="container px-2 py-24 mx-auto">
-    <div class="flex flex-col">
-      {/* <div class="h-1 bg-gray-800 rounded overflow-hidden">
-        <div class="w-24 h-full bg-indigo-500"></div>
+  <section className="text-gray-400 bg-white-900 body-font">
+  <div className="container px-2 py-24 mx-auto">
+    <div className="flex flex-col">
+      {/* <div className="h-1 bg-gray-800 rounded overflow-hidden">
+        <div className="w-24 h-full bg-indigo-500"></div>
       </div> */}
-      <div class="flex flex-wrap sm:flex-row flex-col py-6 mb-12">
-        <h1 class="sm:w-2/5 text-black font-medium title-font text-2xl mb-2 sm:mb-0"> News  Sholarships </h1>
-        <p class="sm:w-3/5 leading-relaxed text-base sm:pl-10 pl-0">Exciting scholarship opportunity! Support your education until 2025 with financial aid and internships worldwide. Don't miss out!</p>
+      <div className="flex flex-wrap sm:flex-row flex-col py-6 mb-12">
+        <h1 className="sm:w-2/5 text-black font-medium title-font text-2xl mb-2 sm:mb-0"> News  Sholarships </h1>
+        <p className="sm:w-3/5 leading-relaxed text-base sm:pl-10 pl-0">Exciting scholarship opportunity! Support your education until 2025 with financial aid and internships worldwide. Don't miss out!</p>
       </div>
     </div>
-    <div class="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
-      <div class="p-4 md:w-1/3 sm:mb-0 mb-6">
-        <div class="rounded-lg h-64 overflow-hidden">
-          <img alt="content" class="object-cover object-center h-full w-full" src={imageU1}/>
+    <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
+      <div className="p-4 md:w-1/3 sm:mb-0 mb-6">
+        <div className="rounded-lg h-64 overflow-hidden">
+          <img alt="content" className="object-cover object-center h-full w-full" src={imageU1}/>
         </div>
-        <h2 class="text-xl font-medium title-font text-black mt-5">{text_UNV.UNV1}</h2>
-        <p class="text-base leading-relaxed mt-2">{text_UNV.UNV1_de}</p>
+        <h2 className="text-xl font-medium title-font text-black mt-5">{text_UNV.UNV1}</h2>
+        <p className="text-base leading-relaxed mt-2">{text_UNV.UNV1_de}</p>
         
         <div className='mt-3 flex flex-row-reverse'>
         <div className="mb-4">
@@ -116,12 +116,12 @@ export default function Studentscholar() {
 
       {/* <---section3---> */}
       </div>
-      <div class="p-4 md:w-1/3 sm:mb-0 mb-6">
-        <div class="rounded-lg h-64 overflow-hidden">
-          <img alt="content" class="object-cover object-center h-full w-full" src={imageU2}/>
+      <div className="p-4 md:w-1/3 sm:mb-0 mb-6">
+        <div className="rounded-lg h-64 overflow-hidden">
+          <img alt="content" className="object-cover object-center h-full w-full" src={imageU2}/>
         </div>
-        <h2 class="text-xl font-medium title-font text-black mt-5">{text_UNV.UNV2}</h2>
-        <p class="text-base leading-relaxed mt-2">{text_UNV.UNV2_de}</p>
+        <h2 className="text-xl font-medium title-font text-black mt-5">{text_UNV.UNV2}</h2>
+        <p className="text-base leading-relaxed mt-2">{text_UNV.UNV2_de}</p>
 
         <div className='mt-3 flex flex-row-reverse'>
           <div className="mb-4">
@@ -145,12 +145,12 @@ export default function Studentscholar() {
         
         
       </div>
-      <div class="p-4 md:w-1/3 sm:mb-0 mb-6">
-        <div class="rounded-lg h-64 overflow-hidden">
-          <img alt="content" class="object-cover object-center h-full w-full" src={imageU3}/>
+      <div className="p-4 md:w-1/3 sm:mb-0 mb-6">
+        <div className="rounded-lg h-64 overflow-hidden">
+          <img alt="content" className="object-cover object-center h-full w-full" src={imageU3}/>
         </div>
-        <h2 class="text-xl font-medium title-font text-black mt-5">{text_UNV.UNV3}</h2>
-        <p class="text-base leading-relaxed mt-2">{text_UNV.UNV3_de}</p>
+        <h2 className="text-xl font-medium title-font text-black mt-5">{text_UNV.UNV3}</h2>
+        <p className="text-base leading-relaxed mt-2">{text_UNV.UNV3_de}</p>
 
         <div className='mt-3 flex flex-row-reverse'>
           <div className="mb-4">

@@ -15,7 +15,7 @@ export default function Studentlogin() {
     const navigate = useNavigate();
   return (
     <HelmetProvider>
-        <div className='flex justify-center flex-col h-screen '>
+        <div className='flex justify-center flex-col h-screen'>
             <Toaster position='top-center' reverseOrder={false}></Toaster>
             <Helmet>
                 <title>Stu | Login</title>
@@ -58,7 +58,7 @@ export default function Studentlogin() {
                             <div className='flex flex-col w-96'>
                                     <Field className='my-3 p-5 w-full h-16 rounded-full bg-gray-200 hover:placeholder:text-slate-50 hover:outline-none hover:ring hover:bg-lime-500 hover:ring-lime-500
                                                       focus:outline-none focus:ring focus:bg-gray-50 focus:ring-lime-500 focus:placeholder:text-gray-500' type='text' name='username' placeholder='username'></Field>
-                                    <div className='flex justify-end pr-6'>
+                                    <div className='flex justify-end pr-6 text-red-700'>
                                         {errors.username && touched.username ? (
                                             <Alert>{errors.username}</Alert>
                                         ) : null}

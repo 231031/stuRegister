@@ -3,6 +3,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Headerstu from './Headerstu';
 
@@ -55,7 +56,11 @@ export default function SCLM2() {
                 <div className="w-1/2">
                     <h1 className="text-5xl font-medium mb-6" style={{color: 'white'}}>michigan University</h1>
                     <p className="text-xl mb-12" style={{color: 'white'}}>The University of Michigan, located in Ann Arbor, is one of the leading public research universities in the United States. Renowned for its academic excellence, diverse student body, and robust research programs, Michigan offers a wide range of undergraduate, graduate, and professional degree programs across various disciplines.</p>
-                    <a href="#" className="bg-indigo-500 text-white py-4 px-12 rounded-full hover:bg-indigo-600">Get start</a>
+                    <button className="bg-indigo-500 text-white py-4 px-12 rounded-full hover:bg-indigo-600">
+                    <Link to="/student/StudentScholarform" className="block w-full h-full">
+                    Get Start
+                    </Link>
+                    </button>
                 </div>
                 <div className="w-1/2 pl-16">
                 </div>

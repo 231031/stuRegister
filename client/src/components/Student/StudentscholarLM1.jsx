@@ -3,6 +3,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Headerstu from './Headerstu';
 
@@ -58,7 +59,14 @@ export default function SCLM1() {
                 <div className="w">
                     <h1 className="text-5xl font-medium mb-6" style={{color: 'white'}}>Oxbridge University</h1>
                     <p className="text-xl mb-12" style={{color: 'white'}}>Oxbridge University is a colloquial term used to refer collectively to the two oldest and most prestigious universities in the United Kingdom: the University of Oxford and the University of Cambridge. These institutions are renowned worldwide for their academic excellence, historic traditions, and significant contributions to research and education across various fields. The term "Oxbridge" is often used to signify a high standard of education and intellectual rigor.</p>
-                    <a href="#" className="bg-indigo-500 text-white py-4 px-12 rounded-full hover:bg-indigo-600">Get start</a>
+
+                    <button className="bg-indigo-500 text-white py-4 px-12 rounded-full hover:bg-indigo-600">
+                    <Link to="/student/StudentScholarform" className="block w-full h-full">
+                    Get Start
+                    </Link>
+                    </button>
+
+
                 </div>
                 <div className="w-1/2 pl-16">
                 </div>

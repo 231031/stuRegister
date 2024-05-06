@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { act, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 // import icon
@@ -37,6 +37,14 @@ import Scholarform from './components/Student/StudentScholarform';
 import SCLM1 from './components/Student/StudentscholarLM1';
 import SCLM2 from './components/Student/StudentscholarLM2';
 import SCLM3 from './components/Student/StudentscholarLM3';
+// ----activity page----
+import ACT1 from './components/Student/StudentAC1';
+import ACT2 from './components/Student/StudentAC2';
+import ACT3 from './components/Student/StudentAC3';
+import ACT4 from './components/Student/StudentAC4';
+import ACT5 from './components/Student/StudentAC5';
+import ACT6 from './components/Student/StudentAC6';
+
 
 // admin components
 import AdminLogin from './components/Admin/Adminlogin';
@@ -163,6 +171,20 @@ const router = createBrowserRouter(
       path: '/student/StudentScholarLM3',
       element : <SCLM3/>
     },
+
+    // <---activity page--->
+
+    {
+      path: '/Student/StudentAC1',
+      element : <ACT1/>
+    },
+
+    {
+      path: '/Student/StudentAC2',
+      element : <ACT2/>
+    },
+
+
 
     {
       path: '/admin/login',

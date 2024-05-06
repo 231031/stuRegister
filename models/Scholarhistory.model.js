@@ -13,7 +13,7 @@ const Scholarhistory = sequelize.define('Scholarhistory',{
         primaryKey: true,
     },
     getYear : {
-        type: DataTypes.DATE,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
     },

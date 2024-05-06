@@ -52,15 +52,20 @@ export default function Scholarform() {
           state: data?.state || '',
           zipCode: data?.zipCode || '',
           address: data?.address || '',
-          // scholarship_id: '',
+          scholarship_id: '',
       },
       validationSchema: UpdateSchema,
       onSubmit: async (values) => {
           try {
+            if (values.scholarship_id == '') {
+              toast.error('Please Select Scholarship');
+            } else {
               const res = await registerScholar(data, values);
-              // console.log(values);
+              toast.success(res.msg);
+            }
           } catch (error) {
               console.log(error);
+              toast.error('You registered this scholarship');
           }
       },
       enableReinitialize: true,
@@ -82,7 +87,7 @@ export default function Scholarform() {
         <div className="mt-10 md:container md:mx-auto">
         <label className="block uppercase tracking-wide text-gray-700 text-xl font-bold mb-2" htmlFor="Agent Register">
         Agent Register
-         </label>
+        </label>
         {/* <div lassName="w-full max-w-lg"> */}
           <div className="flex flex-wrap mt-10 -mx-3 mb-6">
             <div className="w-300px  px-3 mb-6 md:mb-0">
@@ -115,6 +120,7 @@ export default function Scholarform() {
               {/* </div> */}
             </div>
 
+            {/* salary */}
             <div className="w-300px px-3 ">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-salary">
                 Salary
@@ -139,10 +145,10 @@ export default function Scholarform() {
               </div>
             </div>
 
-
           </div>
 
 
+          {/* email */}
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-400px px-3">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-email">
@@ -230,6 +236,7 @@ export default function Scholarform() {
           
 
           </div>
+
           <div className="flex flex-wrap -mx-3 mb-2">
             <div className="w-200  px-3 mb-6 md:mb-0">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
@@ -304,27 +311,37 @@ export default function Scholarform() {
          </label>
 
          <div className="w-300px px-3 relative">
-    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-salary">
-    Choose a scholarship
-    </label>
-    <div className="relative">
-        <select 
-            name="salary"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.salary}
-            className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-            <option value='Oxbridge University'>Oxbridge University</option>
-            <option value='michigan University '>michigan University</option>
-            <option value='Pacific University'> michigan University</option>
-        </select>
-        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-            </svg>
-        </div>
-    </div>
-</div>
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-salary">
+            Choose a scholarship
+            </label>
+            <div className="relative">
+            {
+              (scholar.length > 0) ? (
+              <select 
+              name="scholarship_id"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.scholarship_id}
+              className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 
+              rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                <option value=''></option>
+              {
+                scholar.map((scholarList, index) => (
+                    <option key={index} value={scholarList.scholarship_id}>{scholarList.scholarshipName}</option>
+                ))
+              }
+              </select>
+              ) : (
+                <p className="text-red-500 text-xs italic">No Scholarship Available Now</p>
+              )
+            }
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                  </svg>
+              </div>
+            </div>
+          </div>
 
 
         <div className="mt-8 mb-8">

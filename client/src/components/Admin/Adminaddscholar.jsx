@@ -9,6 +9,7 @@ import Headeradmin from './Headeradmin';
 import { ScholarshipSchema } from '../../Validations/validation';
 import { addScholarship } from '../../helpers/adminHelper';
 
+const Alert = tw.div`text-red-700 text-sm`;
 export default function Adminaddscholar() {
   return (
     <HelmetProvider>

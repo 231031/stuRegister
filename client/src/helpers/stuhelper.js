@@ -135,13 +135,14 @@ export async function getAvailableCourse(de, year, type) {
 }
 
 export async function registerCourse(info, year, id) {
+  console.log(info);
   const courses = [];
   const month = new Date().getMonth();
   let term = 2;
   if (month >= 7) term = 1;
   for (let i = 0; i < info.length; i++) {
       courses.push({ student_id: id, year: year, group: info[i].group, 
-                      term: term, course_id: info[i].course_id });
+                      term: term, course_id: info[i].course_id, credit: info[i].credit });
   }
   try {
     const token = localStorage.getItem('token');
@@ -174,24 +175,24 @@ export async function registerScholar(data, info) {
     scholarship_id: info.scholarship_id,
   }
 
-  // try {
-  //   const token = localStorage.getItem('token');
-  //   const [department_id, year, student_id] = token.split('-');
-  //   const response = await fetch('http://localhost:6001/student/register/scholarship', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       "Authorization": `Bearer ${student_id}`,
-  //     },
-  //     body: JSON.stringify({ apply : application, info : info }),
-  //   });
-  //   const data = await response.json();
-  //   if (response.status === 404) {
-  //     console.log(data);
-  //     return Promise.reject(data);
-  //   }
-  //   return Promise.resolve(data);
-  // } catch (error) {
-  //   return Promise.reject(error);
-  // }
+  try {
+    const token = localStorage.getItem('token');
+    const [department_id, year, student_id] = token.split('-');
+    const response = await fetch('http://localhost:6001/student/register/scholarship', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${student_id}`,
+      },
+      body: JSON.stringify({ apply : application, info : info }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
 }

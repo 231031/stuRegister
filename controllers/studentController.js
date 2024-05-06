@@ -8,6 +8,7 @@ import bcrypt from 'bcrypt';
 import { Availablecourse } from "../models/Avilablecourse.model.js";
 import { Scholarhistory } from "../models/Scholarhistory.model.js";
 import { Scholarship } from "../models/Scholarship.model.js";
+import { Eduterm } from "../models/Eduterm.model.js";
 
 export async function loginStudent(req, res) {
     try {
@@ -177,8 +178,9 @@ export async function getAvailableCourse(req, res) {
                           },
                           type: type,
                         },
-                        include: {
+                        include: { 
                             model: Coursedetail,
+                            right: true, // inner join
                         }
                     });
                     res.json(resDetail);
@@ -217,9 +219,10 @@ export async function getAvailableCourse(req, res) {
 }
 
 // student register course 
-// transaction modify tb student_register, modify tb course_detail
+// transaction modify tb student_register insert new row, modify tb course_detail increase count, tb edu_term increase credit
 export async function registerCourse(req, res) {
     try {
+        let totalCredit = 0;
         const token = req.headers.authorization.split(" ")[1];
         const { regis } = req.body;
         const result = await sequelize.transaction(async t => {
@@ -237,6 +240,22 @@ export async function registerCourse(req, res) {
                 }, { transaction : t });
 
                 await course.increment('count', { transaction : t });
+                totalCredit = totalCredit + regis[i].credit;  
+            }
+
+            const gradeTerm = await Eduterm.findOne({
+                where: { student_id: token, year: regis[0].year, term : regis[0].term }
+            }, { transaction : t });
+
+            if (gradeTerm) {
+                await gradeTerm.increment('creditTerm', { by: totalCredit }, { transaction : t });
+            } else {
+                await Eduterm.create({
+                    student_id: token,
+                    year: regis[0].year,
+                    term: regis[0].term,
+                    creditTerm: totalCredit,
+                }, { transaction : t });
             }
         });
         return res.status(200).send({ msg : 'Register course successfully'});

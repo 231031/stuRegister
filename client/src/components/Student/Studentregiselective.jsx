@@ -62,7 +62,7 @@ export default function Studentregiselective() {
     navigate('/student/courses')
   }
 
-  function selCourseGroup(id, group, index, ind) {
+  function selCourseGroup(id, credit, group, index, ind) {
     // Update the list state
     setList((prevList) => {
       const updatedList = [...prevList];
@@ -76,11 +76,13 @@ export default function Studentregiselective() {
       if (updatedSel[ind] === undefined) {
         updatedSel.push({
           course_id: id,
+          credit: credit,
           group: group,
         });
       } else {
         updatedSel[ind] = {
           course_id: id,
+          credit: credit,
           group: group,
         };
       }
@@ -156,7 +158,7 @@ export default function Studentregiselective() {
                           <Row>{aList.courseName}</Row>
                           <Row>
                             <select className='border-2 border-sky rounded-md my-3 w-1/3' 
-                            type='text'  id='group' onChange={(e)=>selCourseGroup(aList.course_id, e.target.value, e.target.selectedIndex, ind)}>
+                            type='text'  id='group' onChange={(e)=>selCourseGroup(aList.course_id, aList.credit, e.target.value, e.target.selectedIndex, ind)}>
                                 <option value=''></option>
                                 { 
                                   aList.Coursedetails.map((gList, index) => (

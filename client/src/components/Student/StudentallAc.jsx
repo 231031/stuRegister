@@ -13,7 +13,7 @@ import Accimg from '../../assets/Acti.jpg';
 import AC1 from '../../assets/AC1.jpeg';
 import AC2 from '../../assets/AC2.jpg';
 import AC3 from '../../assets/Art.jpeg';
-import AC4 from '../../assets/importance-of-community-service-1200-1200x794.jpg';
+import AC4 from '../../assets/AC4.jpg';
 import AC5 from '../../assets/LASU.jpg';
 import AC6 from '../../assets/AI.jpeg';
 

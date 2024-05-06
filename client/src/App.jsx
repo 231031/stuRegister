@@ -184,6 +184,23 @@ const router = createBrowserRouter(
       element : <ACT2/>
     },
 
+    {
+      path: '/Student/StudentAC3',
+      element : <ACT3/>
+    },
+    {
+      path: '/Student/StudentAC4',
+      element : <ACT4/>
+    },
+    {
+      path: '/Student/StudentAC5',
+      element : <ACT5/>
+    },
+    {
+      path: '/Student/StudentAC6',
+      element : <ACT6/>
+    },
+
 
 
     {

@@ -37,9 +37,7 @@ const text_AC = {
   ACC5:'Cultural Clubs',
   ACC5_1: 'Celebrate diversity and learn about different cultures through our cultural clubs. Explore traditions, languages, and cuisines from around the world.',
   ACC6:'Technology and Innovation Clubs',
-  ACC6_1: 'Are you fascinated by the world of technology and innovation? Join our tech clubs where you can explore coding, robotics, and digital design. Be part of groundbreaking projects and turn your ideas into reality.'
-  
-
+  ACC6_1: 'Are you fascinated by the world of technology and innovation? Join our tech clubs where you can explore coding, robotics, and digital design. Be part of groundbreaking projects.'
 }
 
 export default function AllActivity() {
@@ -243,7 +241,7 @@ export default function AllActivity() {
         <div class="rounded-lg h-64 overflow-hidden">
           <img alt="content" class="object-cover object-center h-full w-full" src={AC6}/>
         </div>
-        <h2 class="text-xl font-medium title-font text-black mt-5">{text_AC.AC6}</h2>
+        <h2 class="text-xl font-medium title-font text-black mt-5">{text_AC.ACC6}</h2>
         <p class="text-base leading-relaxed mt-2">{text_AC.ACC6_1}</p>
 
         <div className='mt-3 flex flex-row-reverse'>

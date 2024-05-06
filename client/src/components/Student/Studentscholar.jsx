@@ -61,7 +61,7 @@ export default function Studentscholar() {
     <header>
     {/* <!-- Section 1 --> */}
     <div class="flex flex-row">
-    <div class="container mx-auto px-5 mt-5 h-96 rounded-md flex items-center" style={{ backgroundImage: `url(${imagee})` }}>
+    <div class="container mx-auto px-5 mt-9 h-96 rounded-md flex items-center" style={{ backgroundImage: `url(${imagee})` }}>
       <div class="sm:ml-20 text-gray-40 text-center sm:text-left">
         <h1 class="text-5xl font-bol mb-4">
         Free Scholarships For Every Bright <br />
@@ -76,7 +76,7 @@ export default function Studentscholar() {
     {/* <!-- Section 2 --> */}
   </header>
   <section class="text-gray-400 bg-white-900 body-font">
-  <div class="container px-5 py-24 mx-auto">
+  <div class="container px-2 py-24 mx-auto">
     <div class="flex flex-col">
       {/* <div class="h-1 bg-gray-800 rounded overflow-hidden">
         <div class="w-24 h-full bg-indigo-500"></div>
@@ -93,12 +93,28 @@ export default function Studentscholar() {
         </div>
         <h2 class="text-xl font-medium title-font text-black mt-5">{text_UNV.UNV1}</h2>
         <p class="text-base leading-relaxed mt-2">{text_UNV.UNV1_de}</p>
-
-        <button className="bg-sky hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 border border-sky hover:border-transparent rounded flex flex-reverse">
-        <Link to="/student/StudentScholarform" className="block w-full h-full">
-          Get Start
-        </Link>
+        
+        <div className='mt-3 flex flex-row-reverse'>
+        <div className="mb-4">
+        <button className="bg-sky hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 border border-sky hover:border-transparent rounded mr-1">
+          <Link to="/student/StudentScholarform" className="block w-full h-full">
+            Get Start
+          </Link>
         </button>
+
+        <button className="bg-Slate-100 hover:bg-[#6b7280] text-black font-semibold hover:text-white py-2 px-4 border border-sky hover:border-transparent rounded ml-auto">
+          <Link to="/student/StudentscholarLM1" className="block w-full h-full">
+            Learn More
+          </Link>
+        </button>
+
+      </div>
+        
+</div>
+
+
+
+
       </div>
       <div class="p-4 md:w-1/3 sm:mb-0 mb-6">
         <div class="rounded-lg h-64 overflow-hidden">
@@ -106,11 +122,28 @@ export default function Studentscholar() {
         </div>
         <h2 class="text-xl font-medium title-font text-black mt-5">{text_UNV.UNV2}</h2>
         <p class="text-base leading-relaxed mt-2">{text_UNV.UNV2_de}</p>
-        <button className="bg-sky hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 border border-sky hover:border-transparent rounded">
-        <Link to="/student/StudentScholarform" className="block w-full h-full">
-          Get Start
-        </Link>
+
+        <div className='mt-3 flex flex-row-reverse'>
+          <div className="mb-4">
+          <button className="bg-sky hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 border border-sky hover:border-transparent rounded mr-1">
+          <Link to="/student/StudentScholarform" className="block w-full h-full">
+            Get Start
+          </Link>
+          </button>
+
+          <button className="bg-Slate-100 hover:bg-[#6b7280] text-black font-semibold hover:text-white py-2 px-4 border border-sky hover:border-transparent rounded ml-auto">
+          <Link to="/student/StudentscholarLM2" className="block w-full h-full">
+            Learn More
+          </Link>
         </button>
+          </div>
+
+
+        </div>
+
+        
+        
+        
       </div>
       <div class="p-4 md:w-1/3 sm:mb-0 mb-6">
         <div class="rounded-lg h-64 overflow-hidden">
@@ -118,11 +151,25 @@ export default function Studentscholar() {
         </div>
         <h2 class="text-xl font-medium title-font text-black mt-5">{text_UNV.UNV3}</h2>
         <p class="text-base leading-relaxed mt-2">{text_UNV.UNV3_de}</p>
-        <button className="bg-sky hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 border border-sky hover:border-transparent rounded">
-        <Link to="/student/StudentScholarform" className="block w-full h-full">
-          Get Start
-        </Link>
+
+        <div className='mt-3 flex flex-row-reverse'>
+          <div className="mb-4">
+          <button className="bg-sky hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 border border-sky hover:border-transparent rounded mr-1">
+          <Link to="/student/StudentScholarform" className="block w-full h-full">
+            Get Start
+          </Link>
+          </button>
+
+          <button className="bg-Slate-100 hover:bg-[#6b7280] text-black font-semibold hover:text-white py-2 px-4 border border-sky hover:border-transparent rounded ml-auto">
+          <Link to="/student/StudentscholarLM3" className="block w-full h-full">
+            Learn More
+          </Link>
         </button>
+          </div>
+
+
+        </div>
+        
       </div>
     </div>
   </div>

@@ -114,7 +114,7 @@ export default function Studentscholar() {
 
 
 
-
+      {/* <---section3---> */}
       </div>
       <div class="p-4 md:w-1/3 sm:mb-0 mb-6">
         <div class="rounded-lg h-64 overflow-hidden">
@@ -166,11 +166,10 @@ export default function Studentscholar() {
           </Link>
         </button>
           </div>
-
-
-        </div>
-        
+        </div>  
       </div>
+
+      
     </div>
   </div>
 </section>

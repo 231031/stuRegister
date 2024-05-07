@@ -57,9 +57,42 @@ export async function updateStudent(info) {
 
 export async function getScholar() {
   try {
-    const response = await fetch('http://localhost:6001/student/scholarship');
+    const token = localStorage.getItem('token');
+    const [department_id, year, student_id] = token.split('-');
+    const response = await fetch('http://localhost:6001/student/getscholarship', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${student_id}`,
+      },
+      body: JSON.stringify(),
+    });
     const data = await response.json();
     if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
+export async function getActivity() {
+  try {
+    const token = localStorage.getItem('token');
+    const [department_id, year, student_id] = token.split('-');
+    const response = await fetch('http://localhost:6001/student/getactivity', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${student_id}`,
+      },
+      body: JSON.stringify(),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
       return Promise.reject(data);
     }
     return Promise.resolve(data);
@@ -166,8 +199,6 @@ export async function registerCourse(info, year, id) {
   }
 }
 
-
-// not test
 export async function registerScholar(data, info) {
   const application = {
     student_id: data.student_id,
@@ -185,6 +216,34 @@ export async function registerScholar(data, info) {
         "Authorization": `Bearer ${student_id}`,
       },
       body: JSON.stringify({ apply : application, info : info }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
+export async function registerActivity(activity_id, student_id) {
+  const arr = {
+    student_id: student_id,
+    activity_id: activity_id,
+  }
+
+  try {
+    const token = localStorage.getItem('token');
+    const [department_id, year, student_id] = token.split('-');
+    const response = await fetch('http://localhost:6001/student/register/activity', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${student_id}`,
+      },
+      body: JSON.stringify({ arr_activity : arr }),
     });
     const data = await response.json();
     if (response.status === 404) {

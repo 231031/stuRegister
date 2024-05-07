@@ -15,6 +15,7 @@ const Arractivity = sequelize.define('Arractivity',{
     status :{
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
     },
 },{
     tableName: 'arr_activity',

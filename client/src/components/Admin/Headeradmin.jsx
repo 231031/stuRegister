@@ -74,7 +74,7 @@ export default function Headeradmin() {
           </Dropdown>
 
           <Btn>
-            <NavLink to='/admin/teachers'>Teacher</NavLink>
+            <NavLink to='/admin/selteacher'>Teacher</NavLink>
           </Btn>
 
           <Dropdown>

@@ -5,12 +5,13 @@ import * as Yup from 'yup';
 
 // T years-- department_id--- number---
 const teacher_id_pattern = /^([T])([3-6][0-9])([A-Z]{3}|[A-Z]{2})([0-9]{3})$/;
+const activity_id_pattern = /^([A][C][C])([0-9]|[0-9]{2}|[0-9]|3)$/;
 
 // department_id--- number---
 const course_id_pattern = /^([A-Z]{3}|[A-Z]{2})([0-9]{3})$/;
 const time_pattern = /^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/;
 const scholar_id_pattern = /^([S])([0-9]{3})$/;
-
+const isNumber = (value) => !isNaN(value);
 
 const NameSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -43,14 +44,12 @@ const FacSchema = Yup.object().shape({
 
 const PersonalSchema = Yup.object().shape({
     ...NameSchema.fields,
-    salary: Yup.number()
-        .required('Required'),
+    salary: Yup.number().required('Required').typeError('Must be a number'),
     parentFirstName: Yup.string()
         .required('required'),
     parentLastName: Yup.string()
         .required('required'),
-    parentSalary: Yup.number()
-        .required('required'),
+    parentSalary: Yup.number().required('Required').typeError('Must be a number'),
 });
 
 const PasswordSchema = Yup.object().shape({
@@ -80,10 +79,8 @@ const ScholarshipSchema = Yup.object().shape({
                 .matches(scholar_id_pattern, 'ID pattern ex. S001'),
             scholarshipName: Yup.string()
                 .required('Required'),
-            limit: Yup.number()
-                .required('Required'),
-            lowGrade: Yup.number()
-                .required('Required'),
+            limit: Yup.number().required('Required').typeError('Must be a number'),
+            lowGrade: Yup.number().required('Required').typeError('Must be a number'),
             start: Yup.date()
                 .required('Required'),
             end: Yup.date()
@@ -129,8 +126,25 @@ const CourseSchema = Yup.object().shape({
                 .matches(course_id_pattern, 'Course ID pattern XXX000')
                 .required('Required'),
             courseName: Yup.string().required('Required'),
-            credit: Yup.number().required('Required'),   
+            credit: Yup.number().required('Required').typeError('Must be a number'),   
             type: Yup.string().required('Required'),
+        })
+    )
+    
+});
+
+
+const ActivitySchema = Yup.object().shape({
+    activity: Yup.array().of(
+        Yup.object().shape({
+            activity_id: Yup.string()
+                .matches(activity_id_pattern, 'Activity ID pattern AC000')
+                .required('Required'),
+            activityName: Yup.string().required('Required'),
+            dateAc: Yup.date().required('Required'),
+            acDay: Yup.number().required('Required').typeError('Must be a number'),
+            limit: Yup.number().required('Required').typeError('Must be a number'),
+            limit: Yup.number().required('Required').typeError('Must be a number'),
         })
     )
     
@@ -141,8 +155,8 @@ const AvailableSchema = Yup.object().shape({
         Yup.object().shape({
             course_id: Yup.string()
                 .required('Required'),
-            year: Yup.number().required('Required'),
-            term: Yup.number().required('Required'),
+            year: Yup.number().required('Required').typeError('Must be a number'),
+            term: Yup.number().required('Required').typeError('Must be a number'),
         })
     )
     
@@ -166,10 +180,10 @@ const DetailSchema = Yup.object().shape({
             teacher_id: Yup.string().required('Required'),
             class_id: Yup.string()
                 .required('Required'),
-            group: Yup.number()
+            group: Yup.number('Required Number')
                 .required('Required')
                 .min(1, 'group number > 0').max(5, 'too many!'), 
-            limit: Yup.number()
+            limit: Yup.number('Required Number')
                 .required('Required'),
             day: Yup.string().required('Required'),
             startTime: Yup.string()
@@ -188,5 +202,5 @@ const DetailSchema = Yup.object().shape({
 
 
 export { PersonalSchema, LoginSchema, UpdateSchema, CourseSchema, DetailSchema, FacSchema, DepartmentSchema, TeacherSchema,
-        AddStuSchema, AvailableSchema, NameSchema, PasswordSchema, ScholarshipSchema  };
+        AddStuSchema, AvailableSchema, NameSchema, PasswordSchema, ScholarshipSchema, ActivitySchema  };
 

@@ -116,7 +116,7 @@ export async function getScholar(req, res) {
     }
 }
 
-// not test
+
 // update student, register scholarship
 export async function registerScholar(req, res) {
     try {

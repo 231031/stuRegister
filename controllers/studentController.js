@@ -197,7 +197,7 @@ export async function getAvailableCourse(req, res) {
                     model: Coursedetail,
                     right: true, // inner join  
                     where: {
-                        count: { [Op.lt]: sequelize.col('limit') } // filter group count < limit
+                        count: { [Op.lt]: sequelize.col('finite') } // filter group count < limit
                     }
                 }
             });

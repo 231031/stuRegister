@@ -104,7 +104,7 @@ export async function getScholar(req, res) {
                 start : { [Op.lte]: date }, // start date less than present date
                 end : { [Op.gte]: date }, // end date more than or equal present date - end date until 23:59
                 count : {
-                    [Op.lt]: sequelize.col('limit') // count < limit
+                    [Op.lt]: sequelize.col('finite') // count < limit
                 }
                 // lowGrade
             },
@@ -116,7 +116,7 @@ export async function getScholar(req, res) {
     }
 }
 
-// not test
+
 // update student, register scholarship
 export async function registerScholar(req, res) {
     try {
@@ -197,7 +197,7 @@ export async function getAvailableCourse(req, res) {
                     model: Coursedetail,
                     right: true, // inner join  
                     where: {
-                        count: { [Op.lt]: sequelize.col('limit') } // filter group count < limit
+                        count: { [Op.lt]: sequelize.col('finite') } // filter group count < limit
                     }
                 }
             });
@@ -256,7 +256,7 @@ export async function registerCourse(req, res) {
                 const course = await Coursedetail.findOne({ 
                     where: { 
                         course_id: regis[i].course_id,
-                        group: regis[i].group 
+                        gr: regis[i].gr 
                     } 
                 }, { transaction : t });
 
@@ -299,7 +299,7 @@ export async function getActivity(req, res) {
                 activity_id: {
                     [Op.notIn]: activity,
                 },
-                count: { [Op.lt] : sequelize.col('limit') },
+                count: { [Op.lt] : sequelize.col('finite') },
                 dateAc : { [Op.gt] : date }
             },
         });

@@ -26,11 +26,11 @@ export default function Adminaddactivity() {
                         activity : [
                             {
                                 activity_id: '',
-                                activityName: '',
+                                activity_name: '',
                                 hours: '',
-                                dateAc: '',
-                                acDay: '',
-                                limit: '',
+                                date_ac: '',
+                                ac_day: '',
+                                finite: '',
                             }
                         ]    
                     }}
@@ -52,25 +52,25 @@ export default function Adminaddactivity() {
                             {({ push, remove }) => (
                             <div>
                                 {values.activity.map((p, index) => {
-                                const activityName = `activity[${index}].activityName`;
-                                const touchedName = getIn(touched, activityName);
-                                const errorName = getIn(errors, activityName);
+                                const activity_name = `activity[${index}].activity_name`;
+                                const touchedName = getIn(touched, activity_name);
+                                const errorName = getIn(errors, activity_name);
 
                                 const activity_id = `activity[${index}].activity_id`;
                                 const touchedId = getIn(touched, activity_id);
                                 const errorId = getIn(errors, activity_id);
 
-                                const limit = `activity[${index}].limit`;
-                                const touchedLimit = getIn(touched, limit);
-                                const errorLimit = getIn(errors, limit);
+                                const finite = `activity[${index}].finite`;
+                                const touchedfinite = getIn(touched, finite);
+                                const errorfinite = getIn(errors, finite);
 
-                                const dateAc = `activity[${index}].dateAc`;
-                                const touchedDate = getIn(touched, dateAc);
-                                const errorDate = getIn(errors, dateAc);
+                                const date_ac = `activity[${index}].date_ac`;
+                                const touchedDate = getIn(touched, date_ac);
+                                const errorDate = getIn(errors, date_ac);
 
-                                const acDay = `activity[${index}].acDay`;
-                                const touchedDay = getIn(touched, acDay);
-                                const errorDay = getIn(errors, acDay);
+                                const ac_day = `activity[${index}].ac_day`;
+                                const touchedDay = getIn(touched, ac_day);
+                                const errorDay = getIn(errors, ac_day);
 
                                 const hours = `activity[${index}].hours`;
                                 const touchedHours = getIn(touched, hours);
@@ -90,25 +90,25 @@ export default function Adminaddactivity() {
                                         <div className='flex flex-col my-2 mx-1'>
                                             <label htmlFor='name'>Activity Name</label>
                                             <Field className='rounded-md  border-2 border-sky' id='name'
-                                                    type='text' name={activityName} value={p.activityName} placeholder='Activity Name'></Field>
+                                                    type='text' name={activity_name} value={p.activity_name} placeholder='Activity Name'></Field>
                                             {errorName && touchedName && (
                                                 <Alert>{errorName}</Alert>
                                                 )}
                                         </div>
 
                                         <div className='flex flex-col my-2 mx-1 '>
-                                            <label htmlFor='limit'>Limit Particular</label>
-                                            <Field className='rounded-md border-2 border-sky' id='limit'
-                                                    type='number' name={limit} value={p.limit} placeholder='limit'></Field>
-                                            {errorLimit && touchedLimit && (
-                                                <Alert>{errorLimit}</Alert>
+                                            <label htmlFor='finite'>finite Particular</label>
+                                            <Field className='rounded-md border-2 border-sky' id='finite'
+                                                    type='number' name={finite} value={p.finite} placeholder='finite'></Field>
+                                            {errorfinite && touchedfinite && (
+                                                <Alert>{errorfinite}</Alert>
                                             )}
                                         </div>
 
                                         <div className='flex flex-col  my-2 mx-1'>
-                                            <label htmlFor='dateAc'>Activity Date</label>
-                                            <Field className='rounded-md border-2 border-sky' id='dateAc'
-                                                    type='date' name={dateAc} value={p.dateAc} placeholder='Activity Date'></Field>
+                                            <label htmlFor='date_ac'>Activity Date</label>
+                                            <Field className='rounded-md border-2 border-sky' id='date_ac'
+                                                    type='date' name={date_ac} value={p.date_ac} placeholder='Activity Date'></Field>
                                             {errorDate && touchedDate && (
                                                 <Alert>{errorDate}</Alert>
                                             )}
@@ -117,7 +117,7 @@ export default function Adminaddactivity() {
                                         <div className='flex flex-col my-2 mx-1'>
                                             <label htmlFor='day'>Day in Activity</label>
                                             <Field className='rounded-md border-2 border-sky' id='day'
-                                              type='number' name={acDay} value={p.acDay} placeholder='Day in Activity'></Field>
+                                              type='number' name={ac_day} value={p.ac_day} placeholder='Day in Activity'></Field>
                                             {errorDay && touchedDay && (
                                                 <Alert>{errorDay}</Alert>
                                             )}
@@ -140,8 +140,8 @@ export default function Adminaddactivity() {
                                 })}
                                 
                                 <button className='border-2 bg-blue-500 px-4 rounded-md' type='button' 
-                                onClick={() => push({ activityName: '', activity_id: '', limit: '', dateAc: '',
-                                acDay: '', hours: '' })}>Add</button>
+                                onClick={() => push({ activity_name: '', activity_id: '', finite: '', date_ac: '',
+                                ac_day: '', hours: '' })}>Add</button>
                             </div>
                             )}
                         </FieldArray>

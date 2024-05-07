@@ -97,7 +97,7 @@ export default function Admintableteach() {
                               <tr key={index}>
                                 <Row>{index+1}</Row>
                                 <Row>{teaList.teacher_id}</Row>
-                                <Row>{teaList.firstName} {teaList.lastName}</Row>
+                                <Row>{teaList.first_name} {teaList.last_name}</Row>
                                 <Row>{teaList.position}</Row>
                                 <Row className='cursor-pointer hover:bg-blue-300'>
                                     <button className='text-green-600 ' onClick={(e) => handleUpdate(teaList.teacher_id)}>Update</button>

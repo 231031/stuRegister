@@ -5,13 +5,16 @@ import { Course } from "../models/Course.model.js";
 import { Faculty } from "../models/Faculty.model.js";
 import { Department } from "../models/Department.model.js";
 import { Teacher } from "../models/Teacher.model.js";
+import pool from '../dbcon.js';
 
 export async function getAllStudents(req, res) {
     try {
-        const students = await Student.findAll({
-            attributes: ['student_id', 'firstName', 'lastName', 'year']
-        });
-        res.json(students)
+        const connection = await pool.getConnection();
+        const [students, fields] = await connection.execute(
+            'SELECT student_id, first_name, last_name, year FROM Student'
+        );
+        connection.release();
+        res.json(students);
         
     } catch (error) {
         return res.status(404).send({ error: error.message });

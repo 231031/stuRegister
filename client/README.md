@@ -22,3 +22,11 @@ Currently, two official plugins are available:
 -student register elective courses
 -admin add scholarship page 
 -edit model - Scholarship->not have teacher, Teacher->remove relation with scholarship, Coursedetail->edit data type 
+
+-adminController insert (update to SQL)
+-edit name of some columns in tb course_detail, Scholarship, stu_register, Activity (due to reserved words)
+group -> gr, 
+limit -> finite 
+-edit name in formik form, name in validation schema
+
+-add new column in tb Course 'description'

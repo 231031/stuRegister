@@ -54,7 +54,7 @@ export default function Courseregister() {
                         course : [
                             {
                                 course_id: '',
-                                courseName: '',
+                                course_name: '',
                                 department_id: '',
                                 credit: '',
                                 type: '',
@@ -80,9 +80,9 @@ export default function Courseregister() {
                             {({ push, remove }) => (
                                 <div>
                                 {values.course.map((p, index) => {
-                                    const courseName = `course[${index}].courseName`;
-                                    const touchedName = getIn(touched, courseName);
-                                    const errorName = getIn(errors, courseName);
+                                    const course_name = `course[${index}].course_name`;
+                                    const touchedName = getIn(touched, course_name);
+                                    const errorName = getIn(errors, course_name);
 
                                     const course_id = `course[${index}].course_id`;
                                     const touchedId = getIn(touched, course_id);
@@ -107,7 +107,7 @@ export default function Courseregister() {
                                         </Fill>
                                         <Fill>
                                             <Field className='rounded-md mx-1 border-2 border-sky ' 
-                                            name={courseName} value={p.courseName} placeholder='Course Name'></Field>
+                                            name={course_name} value={p.course_name} placeholder='Course Name'></Field>
                                             {errorName && touchedName && (
                                                 <Alert>{errorName}</Alert>
                                             )}
@@ -136,7 +136,7 @@ export default function Courseregister() {
                                     );
                                 })}
                                 <button className='border-2 bg-yellow-500 px-4 rounded-md' type='button' 
-                                onClick={() => push({ course_id: '', courseName: '', department_id: de, credit: '', type: '' })}>Add</button>
+                                onClick={() => push({ course_id: '', course_name: '', department_id: de, credit: '', type: '' })}>Add</button>
                                 </div>
                             )}
                             </FieldArray>

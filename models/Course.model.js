@@ -24,6 +24,10 @@ const Course = sequelize.define('Course',{
     type : {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
     }
 },{
     tableName: 'Course',

@@ -39,8 +39,8 @@ export default function Adminaddteacher() {
                         teacher : [
                             {
                                 department_id: '',
-                                firstName: '',
-                                lastName: '',
+                                first_name: '',
+                                last_name: '',
                                 teacher_id: '',
                                 position: '',
                             }
@@ -66,13 +66,13 @@ export default function Adminaddteacher() {
                             {({ push, remove }) => (
                             <div>
                                 {values.teacher.map((p, index) => {
-                                const firstName = `teacher[${index}].firstName`;
-                                const touchedFirst = getIn(touched, firstName);
-                                const errorFirst = getIn(errors, firstName);
+                                const first_name = `teacher[${index}].first_name`;
+                                const touchedFirst = getIn(touched, first_name);
+                                const errorFirst = getIn(errors, first_name);
 
-                                const lastName = `teacher[${index}].lastName`;
-                                const touchedLast = getIn(touched, lastName);
-                                const errorLast = getIn(errors, lastName);
+                                const last_name = `teacher[${index}].last_name`;
+                                const touchedLast = getIn(touched, last_name);
+                                const errorLast = getIn(errors, last_name);
 
                                 const teacher_id = `teacher[${index}].teacher_id`;
                                 const touchedId = getIn(touched, teacher_id);
@@ -86,14 +86,14 @@ export default function Adminaddteacher() {
                                     <div key={index} className='flex flex-wrap flex-row my-4'>
                                         <div className='flex flex-col'>
                                             <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
-                                                    type='text' name={firstName} value={p.firstName} placeholder='First Name'></Field>
+                                                    type='text' name={first_name} value={p.first_name} placeholder='First Name'></Field>
                                             {errorFirst && touchedFirst && (
                                                 <Alert>{errorFirst}</Alert>
                                                 )}
                                         </div>
                                         <div className='flex flex-col'>
                                             <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
-                                                    type='text' name={lastName} value={p.lastName} placeholder='Last Name'></Field>
+                                                    type='text' name={last_name} value={p.last_name} placeholder='Last Name'></Field>
                                             {errorLast && touchedLast && (
                                                 <Alert>{errorLast}</Alert>
                                                 )}
@@ -123,7 +123,7 @@ export default function Adminaddteacher() {
                                 })}
                                 
                                 <button className='border-2 bg-blue-500 px-4 rounded-md' type='button' 
-                                onClick={() => push({ firstName: '', lastName: '', department_id: de, teacher_id: '', position: '' })}>Add</button>
+                                onClick={() => push({ first_name: '', last_name: '', department_id: de, teacher_id: '', position: '' })}>Add</button>
                             </div>
                             )}
                         </FieldArray>

@@ -25,7 +25,7 @@ const Sturegister = sequelize.define('Sturegister',{
         type: DataTypes.DECIMAL,
         allowNull: false,
     },
-    group : {
+    gr : {
         type: DataTypes.INTEGER,
         allowNull: false,
     },

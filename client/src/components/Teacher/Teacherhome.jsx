@@ -8,6 +8,7 @@ import Headerteacher from './Headerteacher';
 import { getInfoTeacher } from '../../helpers/teacherHelper';
 
 const Box = tw.div`w-9/12 bg-slate-200 rounded-md mx-10 text-center`;
+
 export default function Teacherhome() {
 
   const [data, setData] = useState('');
@@ -34,7 +35,7 @@ export default function Teacherhome() {
 
   return (
     <HelmetProvider>
-        <div className='container h-screen'>
+        <div className=' h-screen'>
           <Toaster position='top-center' reverseOrder={false}></Toaster>
           <Helmet>
               <title>T | Home</title>

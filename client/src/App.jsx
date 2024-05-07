@@ -13,6 +13,9 @@ import Teachernewpass from './components/Teacher/Teachernewpass';
 import Teacherpersonal from './components/Teacher/Teacherpersonal';
 import Teacherhome from './components/Teacher/Teacherhome';
 import Teachertablecourse from './components/Teacher/Teachertablecourse';
+import Teacherscore from './components/Teacher/Teachersubmitscore';
+import Teachercourse from './components/Teacher/Teachercourse_info';
+import TeacherEditcourse from './components/Teacher/TeacherEditcourse';
 
 // stu components
 import Landing from'./components/Landing'; 
@@ -94,6 +97,19 @@ const router = createBrowserRouter(
       path: '/teacher/selcourse',
       element : <Teachertablecourse/>
     },
+    {
+      path: '/teacher/teacherscore',
+      element : <Teacherscore/>
+    },
+    {
+      path: '/teacher/teachercourse_info',
+      element : <Teachercourse/>
+    },
+    {
+      path: '/teacher/teacherEditcourse',
+      element : <TeacherEditcourse/>
+    },
+
 
 
     {

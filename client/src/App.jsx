@@ -64,7 +64,6 @@ import Adminadddepart from'./components/Admin/Adminadddepart';
 import Adminaddscholar from './components/Admin/Adminaddscholar';
 import Adminaddactivity from './components/Admin/Adminaddactivity';
 import Adminaddavailable from './components/Admin/Adminaddavailable';
-import Studentinfo from'./components/Admin/Studentinfo';
 import Admintableteach from './components/Admin/Admintableteach';
 import Admintablestu from './components/Admin/Admintablestu';
 

@@ -62,8 +62,11 @@ import Adminaddfac from'./components/Admin/Adminaddfac';
 import Adminaddteacher from'./components/Admin/Adminaddteacher'; 
 import Adminadddepart from'./components/Admin/Adminadddepart'; 
 import Adminaddscholar from './components/Admin/Adminaddscholar';
+import Adminaddactivity from './components/Admin/Adminaddactivity';
 import Adminaddavailable from './components/Admin/Adminaddavailable';
 import Studentinfo from'./components/Admin/Studentinfo';
+import Admintableteach from './components/Admin/Admintableteach';
+import Admintablestu from './components/Admin/Admintablestu';
 
 
 const router = createBrowserRouter(
@@ -244,16 +247,18 @@ const router = createBrowserRouter(
     },
 
     {
+      path: '/admin/addactivity',
+      element : <Adminaddactivity/>
+    },
+
+
+    {
       path: '/admin/addstu',
       element : <Adminaddstu/>
     },
     {
-      path: '/admin/students',
-      element : <Studentinfo/>
-    },
-    {
       path: '/admin/selstudent',
-      element : <Studentinfo/>
+      element : <Admintablestu/>
     },
     
     {
@@ -280,6 +285,10 @@ const router = createBrowserRouter(
     {
       path: '/admin/addteacher',
       element : <Adminaddteacher/>
+    },
+    {
+      path: '/admin/selteacher',
+      element : <Admintableteach/>
     },
 
   ]

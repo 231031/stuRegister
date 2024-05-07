@@ -16,14 +16,23 @@ const Activity = sequelize.define('Activity',{
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    date :{
+    dateAc :{
         type: DataTypes.DATEONLY,
         allowNull: false,
     },
-    status :{
-        type: DataTypes.BOOLEAN,
+    acDay :{ // number of days in the activity
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
+    limit : {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    count : {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+    }
 },{
     tableName: 'Activity',
     timestamps: false, 

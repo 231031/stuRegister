@@ -9,6 +9,8 @@ import { Availablecourse } from "../models/Avilablecourse.model.js";
 import { Scholarhistory } from "../models/Scholarhistory.model.js";
 import { Scholarship } from "../models/Scholarship.model.js";
 import { Eduterm } from "../models/Eduterm.model.js";
+import { Arractivity } from "../models/Arractivity.model.js";
+import { Activity } from "../models/Activity.model.js";
 
 export async function loginStudent(req, res) {
     try {
@@ -85,12 +87,26 @@ export async function getInfo(req, res) {
 
 export async function getScholar(req, res) {
     const date = new Date();
+    const token = req.headers.authorization.split(" ")[1];
     try {
+        const registered = await Scholarhistory.findAll({
+            where: {
+                student_id: token,
+            },
+            attributes: ['scholarship_id'],
+        })
+        const id = registered.map(scholar => scholar.scholarship_id);
+
+        // filter just not registered
         const scholar = await Scholarship.findAll({
             where: { 
+                scholarship_id : { [Op.notIn]: id },
                 start : { [Op.lte]: date }, // start date less than present date
                 end : { [Op.gte]: date }, // end date more than or equal present date - end date until 23:59
-                // filter low grade (from GPAX) ???
+                count : {
+                    [Op.lt]: sequelize.col('limit') // count < limit
+                }
+                // lowGrade
             },
             attributes: ['scholarship_id', 'scholarshipName']
         });
@@ -157,60 +173,65 @@ export async function getAvailableCourse(req, res) {
                 where: {student_id: token, year: year, term: term }
             });
             const register = resRegister.map(course => course.course_id);
-            if (register) {
-                const resCourse = await Availablecourse.findAll({
-                    where: {
-                      course_id: {
-                        [Op.notIn]: register,
-                      },
-                      department_id : department_id,
-                      year : year,
-                      term : term,
-                    },
-                });
-                const course = resCourse.map(course => course.course_id);
 
-                if (course) {
-                    const resDetail = await Course.findAll({
-                        where: {
-                          course_id: {
-                            [Op.in]: course,
-                          },
-                          type: type,
-                        },
-                        include: { 
-                            model: Coursedetail,
-                            right: true, // inner join
-                        }
-                    });
-                    res.json(resDetail);
-                }
-            } 
-            else { // not have any registered courses yet
-                const resCourse = await Availablecourse.findAll({
-                    where: {
-                      department_id : department_id,
-                      year : year,
-                      term : term,
+            const resCourse = await Availablecourse.findAll({
+                where: {
+                    course_id: {
+                    [Op.notIn]: register,
                     },
-                });
-                const course = resCourse.map(course => course.course_id);
-                if (course) {
-                    const resDetail = await Course.findAll({
-                        where: {
-                          course_id: {
-                            [Op.in]: course,
-                          },
-                          type: type,
-                        },
-                        include: {
-                            model: Coursedetail,
-                        }
-                    });
-                    res.json(resDetail);
-                }
+                    department_id : department_id,
+                    year : year,
+                    term : term,
+                },
+            });
+            const course = resCourse.map(course => course.course_id);
 
-            }
+            const resDetail = await Course.findAll({
+                where: {
+                    course_id: {
+                    [Op.in]: course,
+                    },
+                    type: type,
+                },
+                include: { 
+                    model: Coursedetail,
+                    right: true, // inner join  
+                    where: {
+                        count: { [Op.lt]: sequelize.col('limit') } // filter group count < limit
+                    }
+                }
+            });
+            res.json(resDetail);
+
+            // else { // not have any registered courses yet
+            //     const resCourse = await Availablecourse.findAll({
+            //         where: {
+            //           department_id : department_id,
+            //           year : year,
+            //           term : term,
+            //         },
+            //     });
+            //     const course = resCourse.map(course => course.course_id);
+            //     if (course) {
+            //         const resDetail = await Course.findAll({
+            //             where: {
+            //               course_id: {
+            //                 [Op.in]: course,
+            //               },
+            //               type: type,
+            //             },
+            //             include: {
+            //                 model: Coursedetail,
+            //                 right: true, // inner join
+            //                 where: {
+            //                     count: { [Op.lt]: Coursedetail.col('limit') } // filter group count < limit
+            //                 }
+            //             }
+            //         });
+            //         res.json(resDetail);
+            //     }
+
+            // }
             
         }
     } catch (error) {
@@ -258,11 +279,63 @@ export async function registerCourse(req, res) {
                 }, { transaction : t });
             }
         });
-        return res.status(200).send({ msg : 'Register course successfully'});
+        return res.status(200).send({ msg : 'Register Course successfully'});
     } catch (error) {
         return res.status(404).send({ error: error.message });
     }
 }
+
+export async function getActivity(req, res) {
+    const date = new Date();
+    const token = req.headers.authorization.split(" ")[1];
+    try {
+        const arr = await Arractivity.findAll({
+            where: { student_id : token },
+            attributes: ['activity_id']
+        });
+        const activity = arr.map(ac => ac.activity_id);
+        const available = await Activity.findAll({
+            where: {
+                activity_id: {
+                    [Op.notIn]: activity,
+                },
+                count: { [Op.lt] : sequelize.col('limit') },
+                dateAc : { [Op.gt] : date }
+            },
+        });
+        res.json(available);
+    } catch (error) {
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+// modify tb arr_activity insert new row, tb Activity increase count
+export async function registerActivity(req, res) {
+    try {
+        const token = req.headers.authorization.split(" ")[1];
+        const { arr_activity } = req.body;
+        await sequelize.transaction(async t => {
+            await Arractivity.create(
+                arr_activity,
+                { transaction: t },
+            );
+
+            const activity = await Activity.findByPk(
+                arr_activity.activity_id,
+                { transaction : t }
+            );
+
+            await activity.increment('count', { transaction : t });
+        });
+        return res.status(200).send({ msg : 'Register Activity successfully'});
+    } catch (error) {
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+
+
+
 
 
 

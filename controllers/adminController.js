@@ -7,7 +7,7 @@ import { Department } from "../models/Department.model.js";
 import { Student } from "../models/Student.model.js";
 import { Teacher } from "../models/Teacher.model.js";
 import { Availablecourse } from "../models/Avilablecourse.model.js";
-import bcrypt from 'bcrypt';
+import { Activity } from "../models/Activity.model.js";
 import { Scholarship } from "../models/Scholarship.model.js";
 
 export async function login(req, res) {
@@ -73,6 +73,15 @@ export async function addScholarship(req, res) {
     }
 }
 
+export async function addActivity(req, res) {
+    try {
+        await Activity.bulkCreate(req.body.activity);
+        return res.status(200).send({ msg : 'Add Activity successfully'});
+    } catch (error) {
+        return res.status(404).send({ error: error.message });
+    }
+}
+
 export async function addStudent(req, res) {
     try {
         await Student.bulkCreate(req.body);
@@ -99,6 +108,19 @@ export async function getDeTeacher(req, res) {
             },
         });
         return res.status(200).send(teachers);
+    } catch (error) {
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function getDeStudent(req, res) {
+    try {
+        const students = await Student.findAll({
+            where: {
+              department_id: req.body.department_id
+            },
+        });
+        return res.status(200).send(students);
     } catch (error) {
         return res.status(404).send({ error: error.message });
     }

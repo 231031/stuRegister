@@ -11,6 +11,7 @@ const router = Router();
 // post
 // query
 router.route("/getdeteacher").post(controller.getDeTeacher);
+router.route("/getdestudent").post(controller.getDeStudent);
 router.route("/getdeinfac").post(controller.getDeInFac);
 router.route('/login').post(controller.login);
 // insert
@@ -21,6 +22,7 @@ router.route("/addteacher").post(controller.addTeacher);
 router.route("/addfaculty").post(controller.addFaculty);
 router.route("/adddepartment").post(controller.addDepartment);
 router.route("/addscholarship").post(controller.addScholarship);
+router.route("/addactivity").post(controller.addActivity);
 router.route("/addavailable").post(controller.addAvailableCourse);
 
 // update

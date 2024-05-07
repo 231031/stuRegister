@@ -256,9 +256,48 @@ export async function getDeTeacher(info) {
     }
 }
 
+export async function getDeStudent(info) {
+  try {
+      const response = await fetch('http://localhost:6001/admin/getdestudent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ department_id: info }),
+      });
+      const data = await response.json();
+      if (response.status === 404) {
+        return Promise.reject(data);
+    }
+      return Promise.resolve(data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+}
+
 export async function addScholarship(info) {  
   try {
       const response = await fetch('http://localhost:6001/admin/addscholarship', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(info),
+      });
+      const data = await response.json();
+      if (response.status === 404) {
+        return Promise.reject(data);
+    }
+      console.log(data);
+      return Promise.resolve(data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+}
+
+export async function addActivity(info) {  
+  try {
+      const response = await fetch('http://localhost:6001/admin/addactivity', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

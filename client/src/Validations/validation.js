@@ -14,12 +14,12 @@ const scholar_id_pattern = /^([S])([0-9]{3})$/;
 const isNumber = (value) => !isNaN(value);
 
 const NameSchema = Yup.object().shape({
-    firstName: Yup.string()
+    first_name: Yup.string()
         .matches(/^[A-Za-z]+$/, 'All must be letters')
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
         .required('First Name Required'),
-    lastName: Yup.string()
+    last_name: Yup.string()
         .matches(/^[A-Za-z]+$/, 'All must be letters')
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
@@ -33,7 +33,7 @@ const FacSchema = Yup.object().shape({
                 .matches(/^[A-Z]+$/, 'All must be Capitalize letters')
                 .min(1, 'Too Short!')
                 .required('ID Required'),
-            facultyName: Yup.string()
+            faculty_name: Yup.string()
                 .matches(/^[A-Za-z ]+$/, 'All must be letters')
                 .min(2, 'Too Short!')
                 .max(30, 'Too Long!')
@@ -77,10 +77,10 @@ const ScholarshipSchema = Yup.object().shape({
             scholarship_id: Yup.string()
                 .required('Required')
                 .matches(scholar_id_pattern, 'ID pattern ex. S001'),
-            scholarshipName: Yup.string()
+            scholarship_name: Yup.string()
                 .required('Required'),
-            limit: Yup.number().required('Required').typeError('Must be a number'),
-            lowGrade: Yup.number().required('Required').typeError('Must be a number'),
+            finite: Yup.number().required('Required').typeError('Must be a number'),
+            low_grade: Yup.number().required('Required').typeError('Must be a number'),
             start: Yup.date()
                 .required('Required'),
             end: Yup.date()
@@ -125,7 +125,7 @@ const CourseSchema = Yup.object().shape({
             course_id: Yup.string()
                 .matches(course_id_pattern, 'Course ID pattern XXX000')
                 .required('Required'),
-            courseName: Yup.string().required('Required'),
+            course_name: Yup.string().required('Required'),
             credit: Yup.number().required('Required').typeError('Must be a number'),   
             type: Yup.string().required('Required'),
         })
@@ -140,11 +140,10 @@ const ActivitySchema = Yup.object().shape({
             activity_id: Yup.string()
                 .matches(activity_id_pattern, 'Activity ID pattern AC000')
                 .required('Required'),
-            activityName: Yup.string().required('Required'),
-            dateAc: Yup.date().required('Required'),
-            acDay: Yup.number().required('Required').typeError('Must be a number'),
-            limit: Yup.number().required('Required').typeError('Must be a number'),
-            limit: Yup.number().required('Required').typeError('Must be a number'),
+            activity_name: Yup.string().required('Required'),
+            date_ac: Yup.date().required('Required'),
+            ac_day: Yup.number().required('Required').typeError('Must be a number'),
+            finite: Yup.number().required('Required').typeError('Must be a number'),
         })
     )
     
@@ -167,7 +166,7 @@ const DepartmentSchema = Yup.object().shape({
         Yup.object().shape({
             department_id: Yup.string().required('Required')
                 .matches(/^[A-Z]+$/, 'All must be Capitalize letters'),
-            departmentName: Yup.string().required('Required').min(3, 'Too Short!')
+            department_name: Yup.string().required('Required').min(3, 'Too Short!')
                 .matches(/^[A-Za-z ]+$/, 'All must be letters'),
         })
     )
@@ -180,16 +179,16 @@ const DetailSchema = Yup.object().shape({
             teacher_id: Yup.string().required('Required'),
             class_id: Yup.string()
                 .required('Required'),
-            group: Yup.number('Required Number')
+            gr: Yup.number('Required Number')
                 .required('Required')
                 .min(1, 'group number > 0').max(5, 'too many!'), 
-            limit: Yup.number('Required Number')
+            finite: Yup.number('Required Number')
                 .required('Required'),
             day: Yup.string().required('Required'),
-            startTime: Yup.string()
+            start_time: Yup.string()
                 .matches(time_pattern, 'pattern 00:00 - 23:59')
                 .required('Required'), 
-            finishTime: Yup.string()
+            finish_time: Yup.string()
                 .matches(time_pattern, 'pattern 00:00 - 23:59')
                 .required('Required'),
         })

@@ -59,10 +59,10 @@ export default function Coursedetail() {
                             {
                                 course_id: '',
                                 teacher_id: '',
-                                group : '',
-                                limit: '',
-                                startTime: '',
-                                finishTime: '',
+                                gr: '',
+                                finite: '',
+                                start_time: '',
+                                finish_time: '',
                                 day: '',
                                 class_id: '',
                             }
@@ -92,21 +92,21 @@ export default function Coursedetail() {
                                     const touchedTeacher = getIn(touched, teacher_id);
                                     const errorTeacher = getIn(errors, teacher_id);
 
-                                    const group = `course_de[${index}].group`;
-                                    const touchedGroup = getIn(touched, group);
-                                    const errorGroup = getIn(errors, group);
+                                    const gr = `course_de[${index}].gr`;
+                                    const touchedgr = getIn(touched, gr);
+                                    const errorgr = getIn(errors, gr);
 
-                                    const limit = `course_de[${index}].limit`;
-                                    const touchedLimit = getIn(touched, limit);
-                                    const errorLimit = getIn(errors, limit);
+                                    const finite = `course_de[${index}].finite`;
+                                    const touchedfinite = getIn(touched, finite);
+                                    const errorfinite = getIn(errors, finite);
 
-                                    const startTime = `course_de[${index}].startTime`;
-                                    const touchedStart = getIn(touched, startTime);
-                                    const errorStart = getIn(errors, startTime);
+                                    const start_time = `course_de[${index}].start_time`;
+                                    const touchedStart = getIn(touched, start_time);
+                                    const errorStart = getIn(errors, start_time);
 
-                                    const finishTime = `course_de[${index}].finishTime`;
-                                    const touchedFinish = getIn(touched, finishTime);
-                                    const errorFinish = getIn(errors, finishTime);
+                                    const finish_time = `course_de[${index}].finish_time`;
+                                    const touchedFinish = getIn(touched, finish_time);
+                                    const errorFinish = getIn(errors, finish_time);
 
                                     const class_id = `course_de[${index}].class_id`;
                                     const touchedClass = getIn(touched, class_id);
@@ -120,16 +120,16 @@ export default function Coursedetail() {
                                     <div key={index} className='flex flex-wrap my-2'>
                                         <Fill>
                                             <Field className='rounded-md mx-1 border-2' type='number' 
-                                            name={group} value={p.group} placeholder='Group Number'></Field>
-                                            {errorGroup && touchedGroup && (
-                                                <Alert>{errorGroup}</Alert>
+                                            name={gr} value={p.gr} placeholder='gr Number'></Field>
+                                            {errorgr && touchedgr && (
+                                                <Alert>{errorgr}</Alert>
                                             )}
                                         </Fill>
                                         <Fill>
                                             <Field className='rounded-md mx-1 border-2' type='number' 
-                                            name={limit} value={p.limit} placeholder='Limit Student'></Field>
-                                            {errorLimit && touchedLimit && (
-                                                <Alert>{errorLimit}</Alert>
+                                            name={finite} value={p.finite} placeholder='finite Student'></Field>
+                                            {errorfinite && touchedfinite && (
+                                                <Alert>{errorfinite}</Alert>
                                             )}
                                         </Fill>
                                         <Fill>
@@ -177,14 +177,14 @@ export default function Coursedetail() {
                                         </Fill>
                                         <Fill>
                                             <Field className='rounded-md mx-1 border-2' type='text' 
-                                            name={startTime} value={p.startTime} placeholder='Start Time (00:00 - 23:59)'></Field>
+                                            name={start_time} value={p.start_time} placeholder='Start Time (00:00 - 23:59)'></Field>
                                             {errorStart && touchedStart && (
                                                 <Alert>{errorStart}</Alert>
                                             )}
                                         </Fill>
                                         <Fill>
                                             <Field className='rounded-md mx-1 border-2' type='text' 
-                                            name={finishTime} value={p.finishTime} placeholder='Finish Time'></Field>
+                                            name={finish_time} value={p.finish_time} placeholder='Finish Time'></Field>
                                             {errorFinish && touchedFinish && (
                                                 <Alert>{errorFinish}</Alert>
                                             )}
@@ -197,7 +197,7 @@ export default function Coursedetail() {
                                     );
                                 })}
                                 <button className='border-2 bg-yellow-500 px-4 rounded-md' type='button' 
-                                onClick={() => push({ course_id: course_id, group: '', limit: '', startTime: '', finishTime: '', 
+                                onClick={() => push({ course_id: course_id, gr: '', finite: '', start_time: '', finish_time: '', 
                                     teacher_id: '', class_id: '', day: '' })}>Add</button>
                                 </div>
                             )}
@@ -220,10 +220,10 @@ export default function Coursedetail() {
                 initialValues={{
                     course_id: '',
                     teacher_id: '',
-                    group : '',
-                    limit: '',
-                    startTime: '',
-                    finishTime: '',
+                    gr : '',
+                    finite: '',
+                    start_time: '',
+                    finish_time: '',
                     day: '',
                     class_id: '',
                 }}
@@ -258,13 +258,13 @@ export default function Coursedetail() {
                         {errors.major && touched.major ? (
                             <Alert>{errors.major}</Alert>
                         ) : null}
-                        <Field className='border-2 border-blue-500 rounded-md my-2 w-2/4' type='number' name='group' placeholder='Group Number'></Field>
-                        {errors.group && touched.group ? (
-                            <Alert>{errors.group}</Alert>
+                        <Field className='border-2 border-blue-500 rounded-md my-2 w-2/4' type='number' name='gr' placeholder='gr Number'></Field>
+                        {errors.gr && touched.gr ? (
+                            <Alert>{errors.gr}</Alert>
                         ) : null}
-                        <Field className='border-2 border-blue-500 rounded-md my-2 w-2/4' type='number' name='limit' placeholder='Limit Student'></Field>
-                        {errors.limit && touched.limit ? (
-                            <Alert>{errors.limit}</Alert>
+                        <Field className='border-2 border-blue-500 rounded-md my-2 w-2/4' type='number' name='finite' placeholder='finite Student'></Field>
+                        {errors.finite && touched.finite ? (
+                            <Alert>{errors.finite}</Alert>
                         ) : null}
                         <Field className='border-2 border-blue-500 rounded-md my-2 w-2/4' as="select" name="day">
                             <option></option>
@@ -279,11 +279,11 @@ export default function Coursedetail() {
                         {errors.password && touched.password ? (
                             <Alert>{errors.password}</Alert>
                         ) : null}
-                        <Field className='border-2 border-blue-500 rounded-md my-2 w-2/4' type='text' name='startTime' placeholder='Start Time (00:00 - 23:59)'></Field>
+                        <Field className='border-2 border-blue-500 rounded-md my-2 w-2/4' type='text' name='start_time' placeholder='Start Time (00:00 - 23:59)'></Field>
                         {errors.password && touched.password ? (
                             <Alert>{errors.password}</Alert>
                         ) : null}
-                        <Field className='border-2 border-blue-500 rounded-md my-2 w-2/4' type='text' name='finishTime' placeholder='Finish Time'></Field>
+                        <Field className='border-2 border-blue-500 rounded-md my-2 w-2/4' type='text' name='finish_time' placeholder='Finish Time'></Field>
                         {errors.password && touched.password ? (
                             <Alert>{errors.password}</Alert>
                         ) : null}

@@ -37,7 +37,6 @@ export default function Adminaddstu() {
             try {
               const tech = await getDeTeacher(de);
               setTeacher(tech);
-              console.log(teacher);
 
             } catch (error) {
                 toast.error('Cannot Get Information');
@@ -90,8 +89,8 @@ export default function Adminaddstu() {
             initialValues={{
                 student: [
                     {
-                        firstName: '',
-                        lastName: '',
+                        first_name: '',
+                        last_name: '',
                         department_id: '',
                         teacher_id: '',
                         year: '',
@@ -119,13 +118,13 @@ export default function Adminaddstu() {
                     {({ push, remove }) => (
                     <div>
                         {values.student.map((p, index) => {
-                        const firstName = `student[${index}].firstName`;
-                        const touchedFirst = getIn(touched, firstName);
-                        const errorFirst = getIn(errors, firstName);
+                        const first_name = `student[${index}].first_name`;
+                        const touchedFirst = getIn(touched, first_name);
+                        const errorFirst = getIn(errors, first_name);
 
-                        const lastName = `student[${index}].lastName`;
-                        const touchedLast = getIn(touched, lastName);
-                        const errorLast = getIn(errors, lastName);
+                        const last_name = `student[${index}].last_name`;
+                        const touchedLast = getIn(touched, last_name);
+                        const errorLast = getIn(errors, last_name);
 
                         {/* const teacher_id = `student[${index}].teacher_id`; */}
 
@@ -133,14 +132,14 @@ export default function Adminaddstu() {
                             <div key={index} className='flex flex-row my-4'>
                                 <div className='flex flex-col'>
                                     <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
-                                            type='text' name={firstName} value={p.firstName} placeholder='First Name'></Field>
+                                            type='text' name={first_name} value={p.first_name} placeholder='First Name'></Field>
                                     {errorFirst && touchedFirst && (
                                         <Alert>{errorFirst}</Alert>
                                         )}
                                 </div>
                                 <div className='flex flex-col'>
                                     <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
-                                            type='text' name={lastName} value={p.lastName} placeholder='Last Name'></Field>
+                                            type='text' name={last_name} value={p.last_name} placeholder='Last Name'></Field>
                                     {errorLast && touchedLast && (
                                         <Alert>{errorLast}</Alert>
                                         )}
@@ -154,7 +153,7 @@ export default function Adminaddstu() {
                         })}
                         
                         <button className='border-2 bg-blue-500 px-4 rounded-md' type='button' 
-                        onClick={() => push({ firstName: '', lastName: '', department_id: de, teacher_id: selTeacher, year: year })}>Add</button>
+                        onClick={() => push({ first_name: '', last_name: '', department_id: de, teacher_id: selTeacher, year: year })}>Add</button>
                     </div>
                     )}
                 </FieldArray>

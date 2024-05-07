@@ -26,9 +26,9 @@ export default function Adminaddscholar() {
                         scholarship : [
                             {
                                 scholarship_id: '',
-                                scholarshipName: '',
-                                limit: '',
-                                lowGrade: '',
+                                scholarship_name: '',
+                                finite: '',
+                                low_grade: '',
                                 start: '',
                                 end: '',
                             }
@@ -54,21 +54,21 @@ export default function Adminaddscholar() {
                             {({ push, remove }) => (
                             <div>
                                 {values.scholarship.map((p, index) => {
-                                const scholarshipName = `scholarship[${index}].scholarshipName`;
-                                const touchedName = getIn(touched, scholarshipName);
-                                const errorName = getIn(errors, scholarshipName);
+                                const scholarship_name = `scholarship[${index}].scholarship_name`;
+                                const touchedName = getIn(touched, scholarship_name);
+                                const errorName = getIn(errors, scholarship_name);
 
                                 const scholarship_id = `scholarship[${index}].scholarship_id`;
                                 const touchedId = getIn(touched, scholarship_id);
                                 const errorId = getIn(errors, scholarship_id);
 
-                                const limit = `scholarship[${index}].limit`;
-                                const touchedLimit = getIn(touched, limit);
-                                const errorLimit = getIn(errors, limit);
+                                const finite = `scholarship[${index}].finite`;
+                                const touchedfinite = getIn(touched, finite);
+                                const errorfinite = getIn(errors, finite);
 
-                                const lowGrade = `scholarship[${index}].lowGrade`;
-                                const touchedLow = getIn(touched, lowGrade);
-                                const errorLow = getIn(errors, lowGrade);
+                                const low_grade = `scholarship[${index}].low_grade`;
+                                const touchedLow = getIn(touched, low_grade);
+                                const errorLow = getIn(errors, low_grade);
 
                                 const start = `scholarship[${index}].start`;
                                 const touchedStart = getIn(touched, start);
@@ -90,7 +90,7 @@ export default function Adminaddscholar() {
 
                                         <div className='flex flex-col'>
                                             <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
-                                                    type='text' name={scholarshipName} value={p.scholarshipName} placeholder='Scholarship Name'></Field>
+                                                    type='text' name={scholarship_name} value={p.scholarship_name} placeholder='Scholarship Name'></Field>
                                             {errorName && touchedName && (
                                                 <Alert>{errorName}</Alert>
                                                 )}
@@ -98,15 +98,15 @@ export default function Adminaddscholar() {
 
                                         <div className='flex flex-col'>
                                             <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
-                                                    type='text' name={limit} value={p.limit} placeholder='limit'></Field>
-                                            {errorLimit && touchedLimit && (
-                                                <Alert>{errorLimit}</Alert>
+                                                    type='text' name={finite} value={p.finite} placeholder='finite'></Field>
+                                            {errorfinite && touchedfinite && (
+                                                <Alert>{errorfinite}</Alert>
                                             )}
                                         </div>
 
                                         <div className='flex flex-col'>
                                             <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
-                                                    type='text' name={lowGrade} value={p.lowGrade} placeholder='Low Grade'></Field>
+                                                    type='text' name={low_grade} value={p.low_grade} placeholder='Low Grade'></Field>
                                             {errorLow && touchedLow && (
                                                 <Alert>{errorLow}</Alert>
                                             )}
@@ -136,7 +136,7 @@ export default function Adminaddscholar() {
                                 })}
                                 
                                 <button className='border-2 bg-blue-500 px-4 rounded-md' type='button' 
-                                onClick={() => push({ scholarshipName: '', scholarship_id: '', limit: '', lowGrade: '',
+                                onClick={() => push({ scholarship_name: '', scholarship_id: '', finite: '', low_grade: '',
                                                       start: '', end: '' })}>Add</button>
                             </div>
                             )}

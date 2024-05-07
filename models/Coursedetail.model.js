@@ -8,7 +8,7 @@ const Coursedetail = sequelize.define('Coursedetail',{
         allowNull: false,
         primaryKey: true,
     },
-    group : {
+    gr : {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
@@ -33,7 +33,7 @@ const Coursedetail = sequelize.define('Coursedetail',{
         type: DataTypes.STRING,
         allowNull: false,
     },
-    limit : {
+    finite : {
         type: DataTypes.INTEGER,
         allowNull: false,
     },

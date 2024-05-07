@@ -83,7 +83,7 @@ export default function Admintabledepart() {
                           de.map((deList, index) => (
                               <tr key={index}>
                                 <Row>{index+1}</Row>
-                                <Row onClick={(e) => departTable()}>{deList.department_id}</Row>
+                                <Row>{deList.department_id}</Row>
                                 <Row className='cursor-pointer hover:bg-cyan-400 text-center' onClick={(e) => addTeacher(deList.department_id)}>
                                   <FontAwesomeIcon icon="fa-solid fa-chalkboard-user fa-2x" />
                               </Row>

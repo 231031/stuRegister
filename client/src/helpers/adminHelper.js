@@ -179,7 +179,7 @@ export async function addStudent(info) {
         const pass = generatePassword(7);
         const studentId = generateStudentId(info.student[i].year, info.student[i].department_id, i+1);
         students.push({ student_id: studentId, password: pass, year: currentYear - info.student[i].year, 
-                        firstName: info.student[i].firstName, lastName: info.student[i].lastName,
+                        first_name: info.student[i].first_name, last_name: info.student[i].last_name,
                         department_id: info.student[i].department_id, teacher_id: info.student[i].teacher_id });
     }
 
@@ -214,7 +214,7 @@ export async function addTeacher(info) {
     for (let i = 0; i < info.teacher.length; i++) {
         const pass = generatePassword(7);
         teachers.push({ teacher_id: info.teacher[i].teacher_id, password: pass,
-                        firstName: info.teacher[i].firstName, lastName: info.teacher[i].lastName,
+                        first_name: info.teacher[i].first_name, last_name: info.teacher[i].last_name,
                         department_id: info.teacher[i].department_id, position: info.teacher[i].position });
     }
 

@@ -42,7 +42,7 @@ export default function Adminadddepart() {
                             {
                                 faculty_id: '',
                                 department_id: '',
-                                departmentName: '',
+                                department_name: '',
                             }
                         ]    
                     }}
@@ -65,9 +65,9 @@ export default function Adminadddepart() {
                             {({ push, remove }) => (
                                 <div>
                                 {values.department.map((p, index) => {
-                                    const departmentName = `department[${index}].departmentName`;
-                                    const touchedName = getIn(touched, departmentName);
-                                    const errorName = getIn(errors, departmentName);
+                                    const department_name = `department[${index}].department_name`;
+                                    const touchedName = getIn(touched, department_name);
+                                    const errorName = getIn(errors, department_name);
 
                                     const department_id = `department[${index}].department_id`;
                                     const touchedId = getIn(touched, department_id);
@@ -84,7 +84,7 @@ export default function Adminadddepart() {
                                         </div>
                                         <div className='flex flex-col'>
                                             <Field className='rounded-md mx-1 border-2 border-sky' 
-                                            name={departmentName} value={p.departmentName} placeholder='Department Name'></Field>
+                                            name={department_name} value={p.department_name} placeholder='Department Name'></Field>
                                             {errorName && touchedName && (
                                                 <Alert>{errorName}</Alert>
                                             )}
@@ -96,7 +96,7 @@ export default function Adminadddepart() {
                                     );
                                 })}
                                 <button className='border-2 border-sky px-4 rounded-md' type='button' 
-                                onClick={() => push({ department_id: '', departmentName: '', faculty_id: faculty_id })}>Add</button>
+                                onClick={() => push({ department_id: '', department_name: '', faculty_id: faculty_id })}>Add</button>
                                 </div>
                             )}
                             </FieldArray>

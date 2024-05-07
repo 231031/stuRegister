@@ -12,7 +12,7 @@ const Scholarship = sequelize.define('Scholarship',{
         type: DataTypes.STRING,
         allowNull: false,
     },
-    limit : {
+    finite : {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 15,

@@ -24,7 +24,7 @@ export default function Adminaddfac() {
             faculty: [
               {
                 faculty_id: '',
-                facultyName: '',
+                faculty_name: '',
               }
             ]
           }}
@@ -45,9 +45,9 @@ export default function Adminaddfac() {
                 {({ push, remove }) => (
                   <div>
                     {values.faculty.map((p, index) => {
-                      const facultyName = `faculty[${index}].facultyName`;
-                      const touchedName = getIn(touched, facultyName);
-                      const errorName = getIn(errors, facultyName);
+                      const faculty_name = `faculty[${index}].faculty_name`;
+                      const touchedName = getIn(touched, faculty_name);
+                      const errorName = getIn(errors, faculty_name);
 
                       const faculty_id = `faculty[${index}].faculty_id`;
                       const touchedId = getIn(touched, faculty_id);
@@ -64,7 +64,7 @@ export default function Adminaddfac() {
                           </div>
                           <div className='flex flex-col'>
                               <Field className='rounded-md my-2 mx-1 border-2 border-sky' 
-                                      type='text' name={facultyName} value={p.facultyName} placeholder='Faculty Name'></Field>
+                                      type='text' name={faculty_name} value={p.faculty_name} placeholder='Faculty Name'></Field>
                               {errorName && touchedName && (
                                   <Alert>{errorName}</Alert>
                                   )}
@@ -75,7 +75,7 @@ export default function Adminaddfac() {
                         </div>
                       );
                     })}
-                    <button className='border-2 bg-blue-500 px-4 rounded-md' type='button' onClick={() => push({ faculty_id: '', facultyName: '' })}>Add</button>
+                    <button className='border-2 bg-blue-500 px-4 rounded-md' type='button' onClick={() => push({ faculty_id: '', faculty_name: '' })}>Add</button>
                   </div>
                 )}
               </FieldArray>

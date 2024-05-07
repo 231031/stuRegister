@@ -24,7 +24,7 @@ const Activity = sequelize.define('Activity',{
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    limit : {
+    finite : {
         type: DataTypes.INTEGER,
         allowNull: false,
     },

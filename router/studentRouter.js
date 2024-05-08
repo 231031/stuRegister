@@ -18,7 +18,7 @@ router.route('/getactivity').post(controller.getActivity);
 
 
 // put
-router.route("/update").put(controller.updateStudent);
+router.route("/update/password").put(controller.updatePassword);
 
 // get
 

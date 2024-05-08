@@ -55,6 +55,31 @@ export async function updateStudent(info) {
       }
 }
 
+export async function updatePassword(info) {
+
+    try {
+        const token = localStorage.getItem('token');
+        const [department_id, year, student_id] = token.split('-');
+        const response = await fetch('http://localhost:6001/student/update/password', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${student_id}`,
+          },
+          body: JSON.stringify(info),
+        });
+        const data = await response.json();
+        if (response.status === 404) {
+          console.log(data);
+          return Promise.reject(data);
+        }
+        return Promise.resolve(data);
+        
+      } catch (error) {
+        return Promise.reject(error);
+      }
+}
+
 export async function getScholar() {
   try {
     const token = localStorage.getItem('token');

@@ -12,11 +12,16 @@ import { Eduterm } from "../models/Eduterm.model.js";
 import { Arractivity } from "../models/Arractivity.model.js";
 import { Activity } from "../models/Activity.model.js";
 
+import pool from '../dbcon.js';
+const connection = await pool.getConnection();
+
 export async function loginStudent(req, res) {
     try {
         let change = true;
         const { username, password } = req.body;
-        const user = await Student.findByPk(username);
+        const [stu, fields] = await connection.execute('SELECT * FROM Student WHERE student_id = ?', [username]);
+        connection.release();
+        const user = stu[0];
         if (user !== null) {
             if (password === user.password && 7 === user.password.length) {
                 change = false;
@@ -43,31 +48,27 @@ export async function loginStudent(req, res) {
         else res.json(user);
         
     } catch (error) {
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
 }
 
-export async function updateStudent(req, res) {
+// not tested yet
+export async function updatePassword(req, res) {
     try {
+        const query = `
+            UPDATE Student SET password = ? WHERE student_id = ?
+        `
         const token = req.headers.authorization.split(" ")[1];
         if (token) {
-            await Student.findByPk(token);
-            if (req.body.password) {
-                const hashPass = await bcrypt.hash(req.body.password, 10); // Hash the password
-                req.body.password = hashPass;
-            }
-            await Student.update(
-                req.body,
-                {
-                  where: {
-                    student_id: token,
-                  },
-                },
-              );
+            const hashPass = await bcrypt.hash(req.body.password, 10); // Hash the password
+            await connection.execute(query, [hashPass, token]);
+            connection.release();
             return res.status(200).send({ msg : 'Student updated successfully'});
         }
         
     } catch (error) {
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
 }
@@ -112,6 +113,7 @@ export async function getScholar(req, res) {
         });
         res.json(scholar);
     } catch (error) {
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
 }
@@ -138,6 +140,7 @@ export async function registerScholar(req, res) {
         });
         return res.status(200).send({ msg : 'Register scholarship and Update successfully'});
     } catch (error) {
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
     
@@ -156,6 +159,7 @@ export async function getStuRegister(req, res) {
         });
         res.json(user);
     } catch (error) {
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
 }
@@ -235,6 +239,7 @@ export async function getAvailableCourse(req, res) {
             
         }
     } catch (error) {
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
 }
@@ -281,6 +286,7 @@ export async function registerCourse(req, res) {
         });
         return res.status(200).send({ msg : 'Register Course successfully'});
     } catch (error) {
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
 }
@@ -305,6 +311,7 @@ export async function getActivity(req, res) {
         });
         res.json(available);
     } catch (error) {
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
 }
@@ -329,6 +336,7 @@ export async function registerActivity(req, res) {
         });
         return res.status(200).send({ msg : 'Register Activity successfully'});
     } catch (error) {
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
 }

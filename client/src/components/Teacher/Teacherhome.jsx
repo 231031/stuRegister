@@ -43,7 +43,7 @@ export default function Teacherhome() {
           <Headerteacher data={data}/>
           <div className='flex flex-col items-center bg-slate-200 py-4'>
             <p className='my-2'>Teacher ID : {data?.teacher_id}</p>
-            <p className='my-2'>Name :  {data?.firstName} {data?.lastName}</p>
+            <p className='my-2'>Name :  {data?.first_name} {data?.last_name}</p>
             <p className='my-2'>Position : {data?.position}</p>
           </div>
           <div className='flex flex-row justify-center items-center h-96'>

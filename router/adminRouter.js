@@ -26,6 +26,6 @@ router.route("/addactivity").post(controller.addActivity);
 router.route("/addavailable").post(controller.addAvailableCourse);
 
 // update
-router.route("/editcourse").put(controller.editCourse);
+// router.route("/editcourse").put(controller.editCourse);
 
 export default router;

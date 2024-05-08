@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
-import { updateTeacher } from '../../helpers/teacherHelper';
+import { updatePassword } from '../../helpers/teacherHelper';
 import { PasswordSchema } from '../../Validations/validation';
 
 const Alert = tw.div`text-red-700 text-sm`;
@@ -32,8 +32,8 @@ export default function Teachernewpass() {
                     onSubmit={async (values) => {
                         try {
                             values.teacher_id = localStorage.getItem('token');
-                            const res = await updateTeacher(values);
-                            navigate('/teacher/home');
+                            const res = await updatePassword(values);
+                            navigate('/teacher/personal');
                             toast.success(res.msg);
                         } catch (error) {
                             toast.error('Teacher registration was failed');

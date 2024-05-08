@@ -19,6 +19,30 @@ export async function loginTeacher(user) {
       }
 }
 
+export async function updatePassword(info) {
+
+    try {
+        const token = localStorage.getItem('token');
+        const response = await fetch('http://localhost:6001/teacher/updatepass', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${token}`,
+          },
+          body: JSON.stringify(info),
+        });
+        const data = await response.json();
+        if (response.status === 404) {
+          console.log(data);
+          return Promise.reject(data);
+        }
+        return Promise.resolve(data);
+        
+      } catch (error) {
+        return Promise.reject(error);
+      }
+}
+
 export async function updateTeacher(info) {
 
     try {

@@ -17,6 +17,7 @@ export default {
       'Slate' : '#cbd5e1'
     },
     flex:{
+      
 
     }},
   },

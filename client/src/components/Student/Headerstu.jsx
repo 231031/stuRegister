@@ -43,7 +43,9 @@ export default function Headerstu({ data }) {
             <div className={isInfoOpen ? 'block' : 'hidden'}>
               <List>
                 <li><NavLink to='/student/update'>Personal</NavLink></li>
+                <li><NavLink to='/student/register'>register</NavLink></li>
                 <li><NavLink to='/student/eduhis'>Education</NavLink></li>
+                
               </List>
             </div>
           </Dropdown>

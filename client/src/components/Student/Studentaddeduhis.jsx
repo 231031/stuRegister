@@ -67,8 +67,8 @@ export default function Studentaddeduhis() {
                           <ul
                               class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                               <li class="flex items-center py-3">
-                                  <span>EMAIL : {text.Email}</span>
-                                  
+                                <span>Email : </span>
+                                  <span class="ml-auto">{text.Email}</span>
                               </li>
                               <li class="flex items-center py-3">
                                   <span>ID : </span>
@@ -97,7 +97,7 @@ export default function Studentaddeduhis() {
             {/* <-- Right Side --> */}
             <div class="w-full md:w-9/12 mx-2 h-64">
                 {/* <!-- Profile tab -->*/}
-                <div class="ml-10 mt-10 bg-white p-3 shadow-sm rounded-sm">
+                <div class="ml-10 mt-10 bg-[#f1f5f9] p-3 shadow-sm rounded-sm">
                     <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                         <span class="tracking-wide ml-2">1st Term</span>
                     </div>

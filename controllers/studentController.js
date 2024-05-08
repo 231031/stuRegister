@@ -1,10 +1,7 @@
 import { Sturegister } from "../models/Sturegister.model.js";
 import { Coursedetail } from "../models/Coursedetail.model.js";
 import { sequelize } from "../dbcon.js";
-import { Op } from 'sequelize';
 import bcrypt from 'bcrypt';
-import { Arractivity } from "../models/Arractivity.model.js";
-import { Activity } from "../models/Activity.model.js";
 
 import pool from '../dbcon.js';
 const connection = await pool.getConnection();
@@ -83,9 +80,9 @@ export async function getInfo(req, res) {
 
 export async function getScholar(req, res) {
     const date = new Date();
-    const token = req.headers.authorization.split(" ")[1];
 
     try { // low_grade
+        const token = req.headers.authorization.split(" ")[1];
         const query = `
             SELECT scholarship_id, scholarship_name FROM Scholarship WHERE start <= ? AND end >= ? AND count < finite
             AND scholarship_id NOT IN (SELECT scholarship_id FROM scholar_history WHERE student_id = ?)   
@@ -130,25 +127,6 @@ export async function registerScholar(req, res) {
     
 }
 
-// not fixed yet
-export async function getStuRegister(req, res) {
-    try {
-        const token = req.headers.authorization.split(" ")[1];
-        const { department_id, year } = req.body;
-        const user = await Sturegister.findAll({
-            where: { student_id: token, year: year, department_id: department_id },
-            attributes: ['student_id', 'firstName', 'lastName', 'year', 'department_id'],
-            include: {
-                model: Sturegister,
-            }
-        });
-        res.json(user);
-    } catch (error) {
-        connection.release();
-        return res.status(404).send({ error: error.message });
-    }
-}
-
 export async function getAvailableCourse(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
@@ -169,7 +147,6 @@ export async function getAvailableCourse(req, res) {
                     'day', course_detail.day,
                     'class_id', course_detail.class_id,
                     'finite', course_detail.finite,
-                    'count', course_detail.count
                 )
             ) AS Coursedetails
             FROM Course C INNER JOIN course_detail ON course_detail.course_id = C.course_id
@@ -252,27 +229,18 @@ export async function registerCourse(req, res) {
     }
 }
 
-
-// continue
 export async function getActivity(req, res) {
     const date = new Date();
-    const token = req.headers.authorization.split(" ")[1];
     try {
-        const arr = await Arractivity.findAll({
-            where: { student_id : token },
-            attributes: ['activity_id']
-        });
-        const activity = arr.map(ac => ac.activity_id);
-        const available = await Activity.findAll({
-            where: {
-                activity_id: {
-                    [Op.notIn]: activity,
-                },
-                count: { [Op.lt] : sequelize.col('finite') },
-                dateAc : { [Op.gt] : date }
-            },
-        });
+        const query = `
+            SELECT activity_id FROM Activity WHERE date_ac > ? AND count < finite
+            AND activity_id NOT IN (SELECT activity_id FROM arr_activity WHERE student_id = ?)   
+        `;
+        const token = req.headers.authorization.split(" ")[1];
+        const [available] = await pool.execute(query, [date, token]);
+        connection.release();
         res.json(available);
+
     } catch (error) {
         connection.release();
         return res.status(404).send({ error: error.message });
@@ -284,94 +252,159 @@ export async function registerActivity(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
         const { arr_activity } = req.body;
-        await sequelize.transaction(async t => {
-            await Arractivity.create(
-                arr_activity,
-                { transaction: t },
-            );
 
-            const activity = await Activity.findByPk(
-                arr_activity.activity_id,
-                { transaction : t }
-            );
+        await connection.beginTransaction();
+        await connection.execute('INSERT INTO arr_activity (student_id, activity_id) VALUES (?, ?)', 
+            [token, arr_activity.activity_id]
+        );
 
-            await activity.increment('count', { transaction : t });
-        });
+        const query = `
+            UPDATE Activity SET count = count + 1 WHERE activity_id = ?
+        `
+        await connection.execute(query, [arr_activity.activity_id]);
+
+        await connection.commit();
+        connection.release();
         return res.status(200).send({ msg : 'Register Activity successfully'});
+
+    } catch (error) {
+        await connection.rollback();
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+// send token year from request
+// fetch and is used in student change group component
+export async function getStuRegister(req, res) {
+    try {
+        const token = req.headers.authorization.split(" ")[1];
+        const { year } = req.body;
+        const month = new Date().getMonth();
+        let term = 2;
+        if (month >= 7) term = 1; // after august term 1
+        const query = `
+            SELECT C.*, 
+            JSON_ARRAYAGG(
+                JSON_OBJECT(
+                    'gr', D.gr,
+                    'teacher_id', D.teacher_id,
+                    'start_time', D.start_time,
+                    'finish_time', D.finish_time,
+                    'day', D.day,
+                    'class_id', D.class_id,
+                    'finite', D.finite
+                )
+            ) AS Coursedetails
+            FROM Course C 
+            JOIN stu_register S ON S.course_id = C.course_id
+            JOIN course_detail D ON D.course_id = S.course_id
+            WHERE S.year = ? AND S.term = ? AND S.student_id = ? 
+            GROUP BY C.course_id, C.department_id, C.credit, C.type, C.description, C.course_name      
+        `;
+
+        const [register] = await connection.execute(query, [year, term, token]);
+        connection.release();
+        res.json(register);
+
     } catch (error) {
         connection.release();
         return res.status(404).send({ error: error.message });
     }
 }
 
+// fetch and is used in student delete group compoent
+export async function getStuRegisterDelete(req, res) {
+    try {
+        const token = req.headers.authorization.split(" ")[1];
+        const { year } = req.body;
+        const month = new Date().getMonth();
+        let term = 2;
+        if (month >= 7) term = 1; // after august term 1
+        const query = `
+            SELECT C.*, D.gr, D.teacher_id, D.class_id 
+            FROM Course C 
+            JOIN stu_register S ON S.course_id = C.course_id
+            JOIN course_detail D ON D.course_id = S.course_id
+            WHERE S.year = ? AND S.term = ? AND S.student_id = ?     
+        `;
 
+        const [register] = await connection.execute(query, [year, term, token]);
+        connection.release();
+        res.json(register);
 
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
 
-
-
-
+// not tested yet
+// can update group more than one course
 // transaction
 // modify Studentregister (group), Coursedetail (count)
 export async function changeGroup(req, res) {
     try {
-       
-        
+        const token = req.headers.authorization.split(" ")[1];
+
+        await connection.beginTransaction();
+        await connection.execute( // old group before change
+            'UPDATE course_detail SET count = count - 1 WHERE course_id = ? AND gr = ? ',
+            []
+        );
+        await connection.execute( // new group after change
+            'UPDATE stu_register SET gr = ? WHERE student_id = ? AND year = ? AND term = ? AND course_id = ?', 
+            []
+        );
+        await connection.execute( // new group after change
+            'UPDATE course_detail SET count = count + 1 WHERE course_id = ? AND gr = ?', 
+            []
+        );
+
+
+        await connection.commit();
+        connection.release();
+        return res.status(200).send({ msg : 'Change Group Successfully'});
     } catch (error) {
+        await connection.rollback();
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
 }
 
-// insert Studentregister, modify Coursedetail (count)
-export async function addCourse(req, res) {
-    try {
-        const result = await sequelize.transaction(async tran => {
-
-            await Sturegister.create(req.body, { transaction : tran });
-            const course = await Coursedetail.findOne({ 
-                where: { course_id: req.body.course_id } 
-            }, { transaction : tran });
-            await course.increment('count', { transaction : tran });
-
-        });
-
-
-        
-        return res.status(200).send({ msg : 'Add course successfully'});
-    } catch (error) {
-        return res.status(404).send({ error: error.message });
-    }
-}
-
-// delete Studentregister, modify Coursedetail (count)
+// not tested yet
+// delete course just once per times
+// delete Studentregister, modify Coursedetail (count), modify edu_term (credit)
 export async function delCourse(req, res) {
     try {
-       
+        const token = req.headers.authorization.split(" ")[1];
+        await connection.beginTransaction();
+
+        // decrese count of group in this course
+        await connection.execute(
+            'UPDATE course_detail SET count = count - 1 WHERE course_id = ? AND gr = ? ',
+            []
+        );
+
+        // send credit of course with request, decrease credit of this student in this term
+        await connection.execute(
+            'UPDATE edu_term SET credit = credit - 1 WHERE student_id = ? AND year = ? AND term = ?', 
+            []
+        );
+
+        // delete row in tb stu_register of this course
+        await connection.execute(
+            'DELETE FROM stu_register WHERE student_id = ? AND course_id = ? AND year = ? AND term = ?', 
+            []
+        );
+
+        await connection.commit();
+        connection.release();
+        return res.status(200).send({ msg : 'Delete Course Successfully'});
         
     } catch (error) {
+        await connection.rollback();
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
 }
-
-// example
-
-// export async function transaction(req, res) {
-//     const queryRunner = myDataSource.createQueryRunner();
-//     try {
-//         const course1 = req.body;
-//         console.log(course1);
-//         await queryRunner.connect();
-//         await queryRunner.startTransaction()
-//         await queryRunner.manager.save(Course, { 
-//             course_id: 'CPE223',
-//             courseName: 'comarch',
-//          });
-//         await queryRunner.manager.save(Coursedetail, course1);
-//         await queryRunner.commitTransaction();
-//         res.status(200).send({ msg: "Transaction completed" });
-//     } catch (error) {
-//         await queryRunner.rollbackTransaction()
-//         return res.status(404).send({ error: error.message });
-//     } finally {
-//         await queryRunner.release()
-//     }
-// }

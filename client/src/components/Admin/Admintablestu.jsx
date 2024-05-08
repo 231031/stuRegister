@@ -97,7 +97,7 @@ export default function Admintablestu() {
                               <tr key={index}>
                                 <Row>{index+1}</Row>
                                 <Row>{stuList.student_id}</Row>
-                                <Row>{stuList.firstName} {stuList.lastName}</Row>
+                                <Row>{stuList.first_name} {stuList.last_name}</Row>
                                 <Row>{stuList.year}</Row>
                                 <Row className='cursor-pointer hover:bg-blue-300'>
                                     <button className='text-green-600 ' onClick={(e) => handleUpdate(stuList.student_id)}>Update</button>

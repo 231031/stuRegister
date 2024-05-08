@@ -1,8 +1,3 @@
-import { Course } from "../models/Course.model.js";
-import { Department } from "../models/Department.model.js";
-import { Student } from "../models/Student.model.js";
-
-
 import pool from '../dbcon.js';
 const connection = await pool.getConnection();
 
@@ -23,7 +18,6 @@ export async function login(req, res) {
     }
 }
 
-// fix
 export async function addCourse(req, res) {
     try {
         const courseValues = await req.body.course.map(course => {
@@ -47,7 +41,6 @@ export async function addCourse(req, res) {
     }
 }
 
-// fix
 export async function addAvailableCourse(req, res) {
     try {
         const availableValues = await req.body.available.map(available => {
@@ -70,7 +63,6 @@ export async function addAvailableCourse(req, res) {
     }
 }
 
-// fix
 export async function addFaculty(req, res) {
     try {
         const facultyValues = await req.body.faculty.map(faculty => {
@@ -93,7 +85,6 @@ export async function addFaculty(req, res) {
     }
 }
 
-// fix
 export async function addDepartment(req, res) {
     try {
         const departmentValues = await req.body.department.map(department => {
@@ -117,7 +108,6 @@ export async function addDepartment(req, res) {
     }
 }
 
-// fix
 export async function addScholarship(req, res) {
     try {
         const scholarshipValues = await req.body.scholarship.map(scholarship => {
@@ -143,7 +133,6 @@ export async function addScholarship(req, res) {
     }
 }
 
-// fix
 export async function addActivity(req, res) {
     try {
         const activityValues = await req.body.activity.map(activity => {
@@ -169,7 +158,6 @@ export async function addActivity(req, res) {
     }
 }
 
-// fix
 export async function addStudent(req, res) {
     try {
         const studentValues = await req.body.map(student => {
@@ -194,7 +182,6 @@ export async function addStudent(req, res) {
     }
 }
 
-// fix
 export async function addTeacher(req, res) {
     try {
         const teacherValues = await req.body.map(teacher => {
@@ -219,7 +206,6 @@ export async function addTeacher(req, res) {
     }
 }
 
-// fix
 export async function getDeTeacher(req, res) {
     try {
         const query = `
@@ -236,48 +222,34 @@ export async function getDeTeacher(req, res) {
 
 export async function getDeStudent(req, res) {
     try {
-        const students = await Student.findAll({
-            where: {
-              department_id: req.body.department_id
-            },
-        });
+        const [students] = await connection.execute(
+            'SELECT student_id, first_name, last_name, department_id, year FROM Student WHERE department_id = ?', 
+            [req.body.department_id]
+        );
+        connection.release();
         return res.status(200).send(students);
     } catch (error) {
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
 }
 
 export async function getDeInFac(req, res) {
     try {
-        const departments = await Department.findAll({
-            where: {
-              faculty_id: req.body.faculty_id,
-            },
-        });
+        const [departments] = await connection.execute(
+            'SELECT department_id, department_name FROM Department WHERE faculty_id = ?', 
+            [req.body.faculty_id]
+        );
+        connection.release();
         return res.status(200).send(departments);
     } catch (error) {
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
 }
 
-export async function editCourse(req, res) {
-    try {
-        await Course.update(
-            { course_id: req.body.course_id },
-            {
-              where: {
-                course_id: 'CPE232',
-              },
-            },
-          );
-        return res.status(200).send({ msg : 'Course updated successfully'});
-    } catch (error) {
-        console.log(error);
-        return res.status(404).send({ error: error.message });
-    }
-}
 
-// fix
+
 export async function addDetail(req, res) {
     try {
         const deValues = await req.body.course_de.map(detail => {

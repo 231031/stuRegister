@@ -60,29 +60,29 @@ export default function EvaluateActivity() {
     {/* <---section2----> */}
 
     <div class="grid-cols-2">
-  <div class=" pt-10 overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-      <div class="overflow-hidden">
-        <table class="min-w-full">
-          <thead class="bg-gray-200 border-b">
-            <tr>
-              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                #
-              </th>
-              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                Activity
-              </th>
-              
-              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+    <div class=" pt-10 overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+      <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+        <div class="overflow-hidden">
+          <table class="min-w-full">
+            <thead class="bg-gray-200 border-b">
+              <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                  #
+                </th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                  Activity
+                </th>
                 
-              </th>
-            </tr>
-          </thead>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                  
+                </th>
+              </tr>
+            </thead>
           <tbody>
             <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Mark
+              Academic Clubs
               </td>
 
               <div class ='flex flex-row-reverse mr-10 pt-1'>
@@ -98,7 +98,7 @@ export default function EvaluateActivity() {
             <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Jacob
+              Sports Teams
               </td>
               
               
@@ -115,7 +115,7 @@ export default function EvaluateActivity() {
             <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">4</td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Whitney
+              Creative Arts
               </td>
               <div class ='flex flex-row-reverse mr-10 pt-1'>
               <button className="bg-[#0d9488] hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border border-[#0d9488] hover:border-transparent rounded mr-1">
@@ -129,7 +129,7 @@ export default function EvaluateActivity() {
             <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">5</td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Ted
+              Community Service
               </td>
 
               <div class ='flex flex-row-reverse mr-10 pt-1'>

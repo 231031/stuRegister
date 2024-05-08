@@ -199,7 +199,7 @@ export async function registerCourse(info, year, id) {
   let term = 2;
   if (month >= 7) term = 1;
   for (let i = 0; i < info.length; i++) {
-      courses.push({ student_id: id, year: year, gr: info[i].group, 
+      courses.push({ student_id: id, year: year, gr: info[i].gr, 
                       term: term, course_id: info[i].course_id, credit: info[i].credit });
   }
   try {
@@ -227,7 +227,7 @@ export async function registerCourse(info, year, id) {
 export async function registerScholar(data, info) {
   const application = {
     student_id: data.student_id,
-    getYear: data.year,
+    get_year: data.year,
     scholarship_id: info.scholarship_id,
   }
 

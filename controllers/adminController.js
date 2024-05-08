@@ -23,6 +23,7 @@ export async function login(req, res) {
     }
 }
 
+// fix
 export async function addCourse(req, res) {
     try {
         const courseValues = await req.body.course.map(course => {
@@ -46,6 +47,7 @@ export async function addCourse(req, res) {
     }
 }
 
+// fix
 export async function addAvailableCourse(req, res) {
     try {
         const availableValues = await req.body.available.map(available => {
@@ -68,7 +70,7 @@ export async function addAvailableCourse(req, res) {
     }
 }
 
-// add in form of array
+// fix
 export async function addFaculty(req, res) {
     try {
         const facultyValues = await req.body.faculty.map(faculty => {
@@ -91,6 +93,7 @@ export async function addFaculty(req, res) {
     }
 }
 
+// fix
 export async function addDepartment(req, res) {
     try {
         const departmentValues = await req.body.department.map(department => {
@@ -104,6 +107,7 @@ export async function addDepartment(req, res) {
         await connection.beginTransaction();
         await connection.execute(query, departmentValues.flat());
         await connection.commit();
+        connection.release();
         return res.status(200).send({ msg : 'Add Department successfully'});
 
     } catch (error) {
@@ -113,6 +117,7 @@ export async function addDepartment(req, res) {
     }
 }
 
+// fix
 export async function addScholarship(req, res) {
     try {
         const scholarshipValues = await req.body.scholarship.map(scholarship => {
@@ -128,6 +133,7 @@ export async function addScholarship(req, res) {
         await connection.beginTransaction();
         await connection.execute(query, scholarshipValues.flat());
         await connection.commit();
+        connection.release();
         return res.status(200).send({ msg : 'Add Scholarships successfully'});
 
     } catch (error) {
@@ -137,6 +143,7 @@ export async function addScholarship(req, res) {
     }
 }
 
+// fix
 export async function addActivity(req, res) {
     try {
         const activityValues = await req.body.activity.map(activity => {
@@ -152,6 +159,7 @@ export async function addActivity(req, res) {
         await connection.beginTransaction();
         await connection.execute(query, activityValues.flat());
         await connection.commit();
+        connection.release();
         return res.status(200).send({ msg : 'Add Activity successfully'});
 
     } catch (error) {
@@ -161,6 +169,7 @@ export async function addActivity(req, res) {
     }
 }
 
+// fix
 export async function addStudent(req, res) {
     try {
         const studentValues = await req.body.map(student => {
@@ -176,6 +185,7 @@ export async function addStudent(req, res) {
         await connection.beginTransaction();
         await connection.execute(query, studentValues.flat());
         await connection.commit();
+        connection.release();
         return res.status(200).send({ msg : 'Add Student successfully'});
     } catch (error) {
         await connection.rollback();
@@ -184,6 +194,7 @@ export async function addStudent(req, res) {
     }
 }
 
+// fix
 export async function addTeacher(req, res) {
     try {
         const teacherValues = await req.body.map(teacher => {
@@ -199,6 +210,7 @@ export async function addTeacher(req, res) {
         await connection.beginTransaction();
         await connection.execute(query, teacherValues.flat());
         await connection.commit();
+        connection.release();
         return res.status(200).send({ msg : 'Add Teacher successfully'});
     } catch (error) {
         await connection.rollback();
@@ -207,6 +219,7 @@ export async function addTeacher(req, res) {
     }
 }
 
+// fix
 export async function getDeTeacher(req, res) {
     try {
         const query = `
@@ -264,6 +277,7 @@ export async function editCourse(req, res) {
     }
 }
 
+// fix
 export async function addDetail(req, res) {
     try {
         const deValues = await req.body.course_de.map(detail => {
@@ -280,6 +294,7 @@ export async function addDetail(req, res) {
         await connection.beginTransaction();
         await connection.execute(query, deValues.flat());
         await connection.commit();
+        connection.release();
         return res.status(200).send({ msg : 'Add Detail successfully'});
 
     } catch (error) {

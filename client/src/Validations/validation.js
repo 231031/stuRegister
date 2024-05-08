@@ -115,7 +115,7 @@ const UpdateSchema = Yup.object().shape({
     email: Yup.string().required('Required').email('xxx@gmail.com'),
     phone: Yup.string().required('Required').min(10, 'xxxxxxxxxx'),
     city: Yup.string().required('Required').min(3, 'too short!'),
-    zipCode: Yup.string().required('Required').min(4, 'wrong zip code'),
+    zip_code: Yup.string().required('Required').min(4, 'wrong zip code'),
     address: Yup.string().required('Required').min(5, 'too short!'),
 });
 

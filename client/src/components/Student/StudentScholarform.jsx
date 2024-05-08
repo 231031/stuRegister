@@ -50,7 +50,7 @@ export default function Scholarform() {
           salary: data?.salary || '',
           city: data?.city || '',
           state: data?.state || '',
-          zipCode: data?.zipCode || '',
+          zip_code: data?.zip_code || '',
           address: data?.address || '',
           scholarship_id: '',
       },
@@ -94,14 +94,14 @@ export default function Scholarform() {
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
                 First Name
               </label>
-              <p className="appearance-none block w-200 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-9 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name">{data?.firstName}</p>
+              <p className="appearance-none block w-200 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-9 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name">{data?.first_name}</p>
             </div>
             
             <div className="w-300px  px-3 mb-6 md:mb-0">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
                 last Name
               </label>
-              <p className="appearance-none block w-200 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-9 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-last-name">{data?.lastName}</p>
+              <p className="appearance-none block w-200 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-9 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-last-name">{data?.last_name}</p>
             </div>
 
             <div className="w-200px px-3 mb-6 md:mb-0">
@@ -279,13 +279,13 @@ export default function Scholarform() {
                 Zip
               </label>
               <input 
-              name="zipCode"
+              name="zip_code"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.zipCode}
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder={data?.zipCode}/>
-              {formik.touched.zipCode && formik.errors.zipCode ? (
-                            <p className="text-red-500 text-xs italic">{formik.errors.zipCode}</p>
+              value={formik.values.zip_code}
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder={data?.zip_code}/>
+              {formik.touched.zip_code && formik.errors.zip_code ? (
+                            <p className="text-red-500 text-xs italic">{formik.errors.zip_code}</p>
                         ) : null}
             </div>
 
@@ -327,7 +327,7 @@ export default function Scholarform() {
                 <option value=''></option>
               {
                 scholar.map((scholarList, index) => (
-                    <option key={index} value={scholarList.scholarship_id}>{scholarList.scholarshipName}</option>
+                    <option key={index} value={scholarList.scholarship_id}>{scholarList.scholarship_name}</option>
                 ))
               }
               </select>

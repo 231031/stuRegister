@@ -76,13 +76,13 @@ export default function Studentregiscourse() {
         updatedSel.push({
           course_id: id,
           credit: credit,
-          group: group,
+          gr: group,
         });
       } else {
         updatedSel[ind] = {
           course_id: id,
           credit: credit,
-          group: group,
+          gr: group,
         };
       }
       return updatedSel;
@@ -155,15 +155,15 @@ export default function Studentregiscourse() {
                       available.map((aList, ind) => (
                         <tr key={ind}>
                           <Row>{aList.course_id}</Row>
-                          <Row>{aList.courseName}</Row>
+                          <Row>{aList.course_name}</Row>
                           <Row>
                             <select className='border-2 border-sky rounded-md my-3 w-1/3' 
                             type='text'  id='group' onChange={(e)=>selCourseGroup(aList.course_id, aList.credit, e.target.value, e.target.selectedIndex, ind)}>
                                 <option value=''></option>
                                 { 
                                   aList.Coursedetails.map((gList, index) => (
-                                    <option key={index} value={gList.group} >
-                                      {gList.group}
+                                    <option key={index} value={gList.gr} >
+                                      {gList.gr}
                                     </option>
                                   ))
                                 }

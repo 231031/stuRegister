@@ -40,6 +40,12 @@ const Student = sequelize.define('Student',{
         type: DataTypes.STRING,
         allowNull: false,
     },
+    hours : {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+    },
+
     gender: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -81,18 +87,64 @@ const Student = sequelize.define('Student',{
         type: DataTypes.STRING,
         allowNull: false,
     },
-    parentFirstName: {
+
+    f_first_name: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    parentLastName: {
+    f_last_name: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    parentSalary: {
+    f_id: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    f_email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    f_salary: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    f_age: {
         type: DataTypes.INTEGER,
         allowNull: false,
-    }
+    },
+    f_phone: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+
+    m_first_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    m_last_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    m_id: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    m_email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    m_salary: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    m_age: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    m_phone: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
 },{
     tableName: 'Student',
     timestamps: false,

@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import tw from 'twin.macro';
 
 import profile from '../../assets/profile.png';
-import sry from '../../assets/sry.png';
 import Headerstu from './Headerstu';
-import { getInfo, getStuRegisterDel } from '../../helpers/stuhelper';
+import { getInfo, getStuRegisterDel, delStuCourse } from '../../helpers/stuhelper';
 
 const Row = tw.td`border-2 border-greendark py-1 text-sm`;
 
 export default function Studentdelcourse() {
 
+    const location = useLocation();
     const navigate = useNavigate();
     const [data, setData] = useState('');
     const [term, setTerm] = useState(); // current term
@@ -39,26 +39,47 @@ export default function Studentdelcourse() {
             console.log(error);
           }
         }
-        if (student_id) apiInfo(); 
 
-        const apiRegis = async () => {
-            try {
-                const res = await getStuRegisterDel(term);
-                setRegis(res);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        if (term) apiRegis();
+        if (student_id) apiInfo();
 
     }, []);
+
+    useEffect(() => {
+        const apiRegis = async () => {
+          try {
+              const res = await getStuRegisterDel(term);
+              setRegis(res);
+          } catch (error) {
+              console.log(error);
+          }
+        };
+        if (term) apiRegis();
+    }, [term]);
 
     function clickDetail(e) {
         navigate('/student/courses', { state : { course_id : e }});
     }
 
-    function handleChange() {
-        // get detail of course_id, group 
+    async function delCourse(id, group, credit) {
+        try {
+          const confirmed = window.confirm("Are you sure you want to delete this course?");
+          const detail = {
+            'course_id': id,
+            'gr': group,
+            'credit': credit,
+            'year': data?.year,
+            'term': term
+          }
+
+          if (confirmed) {
+            const res = await delStuCourse(detail);
+            toast.success(res.msg);  
+            // window.location.reload();
+          }
+          
+        } catch (error) {
+          console.log(error);
+        }
     }
 
 
@@ -94,7 +115,7 @@ export default function Studentdelcourse() {
               {
                 (regis.length > 0)? (
                   <div className='w-full flex flex-col justify-center items-center'>
-                    <p className='text-lg'>Compulsory Courses</p>
+                    <p className='text-lg'>Delete Courses</p>
                     <table className='text-center w-11/12 border-2 border-sky mt-10'>
                     <thead>
                       <tr>
@@ -119,8 +140,9 @@ export default function Studentdelcourse() {
                           <Row className='hover:bg-orange-300 cursor-pointer '>
                             <button className='italic' type='button' onClick={(e)=>clickDetail(rList.course_id)}>More Detail</button>
                           </Row>
-                          <Row className='hover:bg-orange-300 cursor-pointer '>
-                            {/* maybe checkbox for choosing which course will be deleted */}
+                          <Row>
+                            <button type='button' className='my-1 px-5 py-1 bg-red-700 text-white rounded-md hover:bg-sky'
+                            onClick={(e)=>delCourse(rList.course_id, rList.gr, rList.credit)}>DELETE</button>
                           </Row>
                         </tr>
                         
@@ -138,8 +160,7 @@ export default function Studentdelcourse() {
                 )
               } 
               </div>
-              <button type='submit' className='mx-10 px-5 py-1 bg-greendark text-white rounded-md hover:bg-sky'
-              onClick={(e)=>delCourse()}>SUBMIT</button>
+              
 
 
           </div>

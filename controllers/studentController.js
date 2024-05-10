@@ -63,6 +63,38 @@ export async function updatePassword(req, res) {
     }
 }
 
+export async function updateInfo(req, res) {
+    try {
+
+        const token = req.headers.authorization.split(" ")[1];
+        const { gender, id_card, address, age, city, dob, email, f_age, f_email, f_first_name, f_id, f_last_name, 
+            f_phone, f_salary, m_age, m_email, m_first_name, m_id, m_last_name, m_phone, m_salary, phone, state, zip_code } = req.body;
+
+        const fieldsToUpdate = {
+            gender, id_card, address, age, city, dob, email, f_age, f_email, f_first_name, f_id, f_last_name, 
+            f_phone, f_salary, m_age, m_email, m_first_name, m_id, m_last_name, m_phone, m_salary, phone, state, zip_code
+        };
+
+        const definedFields = Object.fromEntries(Object.entries(fieldsToUpdate).filter(([key, value]) => value !== undefined));
+        const setClause = Object.keys(definedFields)
+            .map(key => `${key} = ?`) 
+            .join(', ');
+
+        const query = `
+            UPDATE Student
+            SET ${setClause}
+            WHERE student_id = ?;
+        `;
+        await connection.execute(query, [...Object.values(definedFields), token]);
+        connection.release();
+        return res.status(200).send({ msg : 'Student updated successfully'});   
+         
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
 export async function getInfo(req, res) {
     try {
         const query = `
@@ -146,7 +178,7 @@ export async function getAvailableCourse(req, res) {
                     'finish_time', course_detail.finish_time,
                     'day', course_detail.day,
                     'class_id', course_detail.class_id,
-                    'finite', course_detail.finite,
+                    'finite', course_detail.finite
                 )
             ) AS Coursedetails
             FROM Course C INNER JOIN course_detail ON course_detail.course_id = C.course_id
@@ -274,6 +306,65 @@ export async function registerActivity(req, res) {
     }
 }
 
+
+export async function getArrActivity(req, res) {
+    try {
+        const token = req.headers.authorization.split(" ")[1];
+        const { evaluate } = req.body; // boolean
+        if (evaluate) { // both evaluate and not evaluate -> page StudentAtten
+            const query = `
+                SELECT * FROM arr_activity AR INNER JOIN Activity A ON A.activity_id = AR.activity_id
+                WHERE student_id = ?
+            `
+            const [arr] = await connection.execute(query, [token]);
+            connection.release();
+            res.json(arr);
+
+        } else { // not evaluate -> page StudentEvaActivity
+
+            const query = `
+                SELECT * FROM arr_activity AR INNER JOIN Activity A ON A.activity_id = AR.activity_id 
+                WHERE student_id = ? AND status = ?
+            `
+            const [arr] = await connection.execute(query, [token, evaluate]);
+            connection.release();
+            res.json(arr);
+
+        }
+        connection.release();
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+// transaction modify Student (increase hours), modify arr_activity (change status)
+export async function evaActivity(req, res) {
+    try {
+        const token = req.headers.authorization.split(" ")[1];
+        const { evaluate } = req.body; // activity_id, hours
+
+        const query = `
+            UPDATE arr_activity SET status = ? WHERE student_id = ? AND activity_id = ?
+        `
+        const queryHr = `
+            UPDATE Student SET hours = hours + ? WHERE student_id = ?
+        `
+        await connection.beginTransaction();
+        await connection.execute(query, [true, token, evaluate.activity_id]);
+        await connection.execute(queryHr, [evaluate.hours, token]);
+
+        await connection.commit();
+        connection.release();
+        return res.status(200).send({ msg : 'Register Activity successfully'});
+
+    } catch (error) {
+        await connection.rollback();
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
 export async function getStuRegister(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
@@ -307,7 +398,7 @@ export async function getStuRegisterChange(req, res) {
         let term = 2;
         if (month >= 7) term = 1; // after august term 1
         const query = `
-            SELECT C.*, 
+            SELECT C.*, S.gr,
             JSON_ARRAYAGG(
                 JSON_OBJECT(
                     'gr', D.gr,
@@ -348,7 +439,7 @@ export async function getStuRegisterDelete(req, res) {
             SELECT C.*, D.gr, D.teacher_id, D.class_id 
             FROM Course C 
             JOIN stu_register S ON S.course_id = C.course_id
-            JOIN course_detail D ON D.course_id = S.course_id
+            JOIN course_detail D ON D.course_id = S.course_id AND D.gr = S.gr
             WHERE S.year = ? AND S.term = ? AND S.student_id = ?     
         `;
 
@@ -395,30 +486,32 @@ export async function changeGroup(req, res) {
     }
 }
 
-// not tested yet
+
 // delete course just once per times
 // delete Studentregister, modify Coursedetail (count), modify edu_term (credit)
 export async function delCourse(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
+        const { course_id, gr, year, term, credit } = await req.body;
+
         await connection.beginTransaction();
 
         // decrese count of group in this course
         await connection.execute(
             'UPDATE course_detail SET count = count - 1 WHERE course_id = ? AND gr = ? ',
-            []
+            [course_id, gr]
         );
 
         // send credit of course with request, decrease credit of this student in this term
         await connection.execute(
-            'UPDATE edu_term SET credit = credit - 1 WHERE student_id = ? AND year = ? AND term = ?', 
-            []
+            'UPDATE edu_term SET credit_term = credit_term - ? WHERE student_id = ? AND year = ? AND term = ?', 
+            [credit, token, year, term]
         );
 
         // delete row in tb stu_register of this course
         await connection.execute(
             'DELETE FROM stu_register WHERE student_id = ? AND course_id = ? AND year = ? AND term = ?', 
-            []
+            [token, course_id, year, term]
         );
 
         await connection.commit();

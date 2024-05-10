@@ -274,9 +274,32 @@ export async function registerActivity(req, res) {
     }
 }
 
+export async function getStuRegister(req, res) {
+    try {
+        const token = req.headers.authorization.split(" ")[1];
+        const { year, term } = req.body;
+        const query = `
+                SELECT C.*, CD.*
+                FROM Course C 
+                INNER JOIN stu_register S ON S.course_id = C.course_id
+                INNER JOIN course_detail CD ON CD.course_id = S.course_id AND CD.gr = S.gr
+                WHERE S.year = ? AND S.term = ? AND S.student_id = ?    
+            `;
+    
+        const [register] = await connection.execute(query, [year, term, token]);
+        connection.release();
+        res.json(register);
+
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+    
+}
+
 // send token year from request
 // fetch and is used in student change group component
-export async function getStuRegister(req, res) {
+export async function getStuRegisterChange(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
         const { year } = req.body;

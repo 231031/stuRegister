@@ -507,8 +507,8 @@ export default function Studentregister() {
                 
 
                 <div className='grid-container grid-gap-10'>
-                    <div className='flex ' >
-                        <div className='grid-item ' style={{ position : right }}></div>
+                    <div className='flex 'style={{ padding : 30 }} >
+                        <div className='grid-item ' ></div>
                         <button className="bg-sky hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 border border-sky hover:border-transparent rounded mr-1">
                             <Link to="" className="block w-full h-full">
                                 Submit

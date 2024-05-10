@@ -504,10 +504,18 @@ export default function Studentregister() {
                 </div>
                 {/* <!-- End of profile tab --> */}
 
-                <div className="mt-5 w-200 px-3 mb-6 md:mb-0 " >
-                                    <label className="block uppercase tracking-wide text-gray-50 text-xs font-bold mb-2" htmlFor="grid-city">
-                                    Phone :
-                                    </label>
+                
+
+                <div className='grid-container grid-gap-10'>
+                    <div className='flex ' >
+                        <div className='grid-item ' style={{ position : right }}></div>
+                        <button className="bg-sky hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 border border-sky hover:border-transparent rounded mr-1">
+                            <Link to="" className="block w-full h-full">
+                                Submit
+                            </Link>
+                        </button>
+                    </div>
+                
                 </div>
 
 

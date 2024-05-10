@@ -180,7 +180,7 @@ export default function Studentregister() {
                                     </label>
                                     <div className="">
                                         <select 
-                                        className="appearance-none h-13 w-500 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" style={{height:50 }} >
+                                        className="appearance-none h-13 w-500 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" style={{height:50,width : 200 }} >
                                         <option value='D1'>  1  </option>
                                         <option value='D2'>   2 </option>
                                         <option value='D3'>   3 </option>
@@ -224,7 +224,7 @@ export default function Studentregister() {
                                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
                                     Y :
                                     </label>
-                                <input className="appearance-none h-13  w-500 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" style={{width:100 , height:50}}/>
+                                <input className="appearance-none h-13  w-500 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" style={{width:100 , width : 200}}/>
                                 </div>
 
                                 <div className="mt-5 w-100  px-3 mb-6 md:mb-0">
@@ -237,42 +237,69 @@ export default function Studentregister() {
                         </div>
                         </div>
                         {/* <---ENDline2----> */}
+                        {/* <---line3---> */}
                         <div class="grid md:grid-2 text-sm">
                             <div class ="flex">
                                 <div className="mt-5 w-100  px-3 mb-6 md:mb-0">
                                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
                                     Address :
                                     </label>
-                                <input className="appearance-none h-13  w-500 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" style={{width:300 , height:50}}/>
+                                <input className="appearance-none h-13  w-500 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" style={{width:225 , height:50}}/>
                                 </div>
 
                                 <div className="mt-5 w-100  px-3 mb-6 md:mb-0">
                                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
                                     City :
                                     </label>
-                                <input className="appearance-none h-13  w-500 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" style={{width:300 , height:50}}/>
+                                <input className="appearance-none h-13  w-500 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" style={{width:225 , height:50}}/>
+                                </div>
+
+                                <div className="mt-5 w-100  px-3 mb-6 md:mb-0">
+                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
+                                    State :
+                                    </label>
+                                <input className="appearance-none h-13  w-500 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" style={{width:225 , height:50}}/>
+                                </div>
+
+                                <div className="mt-5 w-100  px-3 mb-6 md:mb-0">
+                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
+                                    Zip code :
+                                    </label>
+                                <input className="appearance-none h-13  w-500 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" style={{width:150 , height:50}}/>
+                                </div>
+                            </div>
+    
+                        </div>
+                        {/* <---ENDline3---> */}
+                        {/* <---line4---> */}
+                        <div className='grid md:grid-2 text-sm'>
+                            <div  class ="flex">
+                                <div className="mt-5 w-100  px-3 mb-6 md:mb-0">
+                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
+                                        Email :
+                                        </label>
+                                    <input className="appearance-none h-13  w-500 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" style={{width:400 , height:50}}/>
+                                </div>
+                                <div className="mt-5 w-100  px-3 mb-6 md:mb-0">
+                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
+                                        Phone :
+                                        </label>
+                                    <input className="appearance-none h-13  w-500 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" style={{width:400 , height:50}}/>
                                 </div>
 
 
 
-
                             </div>
-                            
-
-                            
                         </div>
 
-                   
 
 
-                        {/* <---line3---> */}
 
-                        
-                        {/* <---line3---> */}
+                        {/* <----ENDline4---> */}
 
-                    <button
-                        class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">Show
-                        Full Information</button>
+
+
+                    
                 </div>
                 {/* <!-- End of about section --> */}
 

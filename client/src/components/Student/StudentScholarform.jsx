@@ -85,27 +85,28 @@ export default function Scholarform() {
       <form onSubmit={formik.handleSubmit}>
         {/* <-----section1-----> */}
         <div className="mt-10 md:container md:mx-auto">
-        <label className="block uppercase tracking-wide text-gray-700 text-xl font-bold mb-2" htmlFor="Agent Register">
+        <label className="block uppercase tracking-wide text-gray-700 text-xl font-bold " htmlFor="Agent Register">
         Agent Register
         </label>
         {/* <div lassName="w-full max-w-lg"> */}
           <div className="flex flex-wrap mt-10 -mx-3 mb-6">
-            <div className="w-300px  px-3 mb-6 md:mb-0">
-              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
+            
+            <div className="w-200px  px-3 mb-6 md:mb-0">
+              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold " htmlFor="grid-first-name" style={{height:50 ,width : 300}}>
                 First Name
               </label>
               <p className="appearance-none block w-200 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-9 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name">{data?.first_name}</p>
             </div>
             
             <div className="w-300px  px-3 mb-6 md:mb-0">
-              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
+              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold" htmlFor="grid-last-name" style={{height:50 ,width : 300}}>
                 last Name
               </label>
               <p className="appearance-none block w-200 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-9 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-last-name">{data?.last_name}</p>
             </div>
 
             <div className="w-200px px-3 mb-6 md:mb-0">
-              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-gender">
+              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold " htmlFor="grid-gender" style={{height:50 ,width : 200}}>
                 Gender
               </label>
               <p className="appearance-none block w-200px bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-gender">{data?.gender}</p>
@@ -121,8 +122,9 @@ export default function Scholarform() {
             </div>
 
             {/* salary */}
-            <div className="w-300px px-3 ">
-              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-salary">
+
+            <div className="w-400px px-3">
+              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold " htmlFor="grid-salary" style={{height:50 ,width : 300}}>
                 Salary
               </label>
               <div className="relative">
@@ -131,17 +133,17 @@ export default function Scholarform() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.salary}
-                className="block appearance-none w-600px bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                className="block appearance-none w-600px bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state" >
                   <option value={data?.salary}>{data?.salary}</option>
                   <option value='10,000 - 25,000'>   10,000 - 25,000        Bath   </option>
                   <option value='25,000 - 30,000'>   25,000 - 30,000        Bath   </option>
                   <option value='30,000 - 50,000'>   30,000 - 50,000        Bath   </option>
                   <option value='50,000 - 100,000'>   50,000 - 100,000        Bath   </option>
                 </select>
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                {/* <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center px-2 text-gray-700">
                   <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                     <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                </div>
+                </div> */}
               </div>
             </div>
 
@@ -183,7 +185,7 @@ export default function Scholarform() {
             
 
             <div className=" w-300px px-3 ">
-              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-dayofbirth">
+              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-dayofbirth" >
                 Day of birth
               </label>
               <p className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"   id="grid-dayofbirth">{data?.dob}</p>

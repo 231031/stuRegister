@@ -27,6 +27,8 @@ import Studentnewpass from'./components/Student/Studentnewpass';
 import Studentregiscourse from'./components/Student/Studentregiscourse'; 
 import Studentregiselective from'./components/Student/Studentregiselective'; 
 import Studentmycourse from'./components/Student/Studentmycourse'; 
+import Studentdelcourse from './components/Student/Studentdelcourse';
+import Studentchangegroup from './components/Student/Studentchangegroup';
 import Studentscholar from './components/Student/Studentscholar';
 import Studenteditpersonal from './components/Student/Studenteditpersonal';
 import Studentaddeduhis from './components/Student/Studentaddeduhis';
@@ -112,7 +114,7 @@ const router = createBrowserRouter(
     },
 
 
-
+    
     {
       path: '/student/login',
       element : <Studentlogin/>
@@ -137,6 +139,8 @@ const router = createBrowserRouter(
       path: '/student/update',
       element : <Studentupdate/>
     },
+
+    // course
     {
       path: '/student/regiscourse',
       element : <Studentregiscourse/>
@@ -150,9 +154,18 @@ const router = createBrowserRouter(
       element : <Studentmycourse/>
     }, 
     {
-      path: '/student/scholarship',
-      element : <Studentscholar/>
+      path: '/student/delcourse',
+      element : <Studentdelcourse/>
+    }, 
+    {
+      path: '/student/changegroup',
+      element : <Studentchangegroup/>
+    }, 
+    {
+      path: '/student/courses',
+      element : <Detailcourse/>
     },
+    
     {
       path: '/student/register',
       element : <Studentregister/>
@@ -161,27 +174,12 @@ const router = createBrowserRouter(
       path: '/student/eduhis',
       element : <Studentaddeduhis/>
     },
+    
+    // scholarship
     {
-      path: '/student/courses',
-      element : <Detailcourse/>
+      path: '/student/scholarship',
+      element : <Studentscholar/>
     },
-    {
-      path: '/student/activity',
-      element : <AllActivity/>
-    },
-    {
-      path: '/student/myactivity',
-      element : <AttendedActivity/>
-    },
-    {
-      path: '/student/evaluate',
-      element : <EvaluateActivity/>
-    },
-    {
-      path: '/student/evaluateform',
-      element : <EvaForm/>
-    },
-
     {
       path: '/student/StudentScholarform',
       element : <Scholarform/>
@@ -199,6 +197,24 @@ const router = createBrowserRouter(
     {
       path: '/student/StudentScholarLM3',
       element : <SCLM3/>
+    },
+
+    // activity
+    {
+      path: '/student/activity',
+      element : <AllActivity/>
+    },
+    {
+      path: '/student/myactivity',
+      element : <AttendedActivity/>
+    },
+    {
+      path: '/student/evaluate',
+      element : <EvaluateActivity/>
+    },
+    {
+      path: '/student/evaluateform',
+      element : <EvaForm/>
     },
 
     // <---activity page--->

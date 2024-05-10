@@ -146,7 +146,7 @@ export async function getInfo(info) {
   }
 }
 
-export async function getStuRegister(de, year) {
+export async function getStuRegister(selT, selY) {
   try {
     const token = localStorage.getItem('token');
     const [department_id, year, student_id] = token.split('-');
@@ -156,7 +156,7 @@ export async function getStuRegister(de, year) {
         'Content-Type': 'application/json',
         "Authorization": `Bearer ${student_id}`,
       },
-      body: JSON.stringify({ department_id: de, year: year }),
+      body: JSON.stringify({ term : selT, year: selY }),
     });
     const data = await response.json();
     if (response.status === 404) {
@@ -166,6 +166,70 @@ export async function getStuRegister(de, year) {
     return Promise.resolve(data);
   } catch (error) {
     return Promise.reject(error);
+  }
+}
+
+export async function getStuRegisterDel(term) {
+  try {
+    const token = localStorage.getItem('token');
+    const [department_id, year, student_id] = token.split('-');
+    const response = await fetch('http://localhost:6001/student/getsturegister/delete', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${student_id}`,
+      },
+      body: JSON.stringify({ term : term, year : year }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
+export async function getStuRegisterChange(term) {
+  try {
+    const token = localStorage.getItem('token');
+    const [department_id, year, student_id] = token.split('-');
+    const response = await fetch('http://localhost:6001/student/getsturegister/update', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${student_id}`,
+      },
+      body: JSON.stringify({ term : term, year : year }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
+// sent term year course_id, group
+export async function stuDelCourse() {
+  try {
+
+  } catch (error) {
+    
+  }
+}
+
+// sent term year course_id, old group, new group
+export async function stuChangeGroup() {
+  try {
+
+  } catch (error) {
+
   }
 }
 

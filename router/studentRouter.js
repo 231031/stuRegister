@@ -11,9 +11,10 @@ router.route("/register/scholarship").post(controller.registerScholar);
 router.route("/register/activity").post(controller.registerActivity);
 // post query
 router.route('/info').post(controller.getInfo);
-router.route('/getsturegister').post(controller.getStuRegister);
-router.route('/getstudentregister/delete').post(controller.getStuRegisterDelete);
-router.route('/getavailable').post(controller.getAvailableCourse);
+router.route('/getsturegister').post(controller.getStuRegister); // my course
+router.route('/getsturegister/delete').post(controller.getStuRegisterDelete); // delete course
+router.route('/getsturegister/update').post(controller.getStuRegisterDelete); // change group
+router.route('/getavailable').post(controller.getAvailableCourse); // add course
 router.route('/getscholarship').post(controller.getScholar);
 router.route('/getactivity').post(controller.getActivity);
 

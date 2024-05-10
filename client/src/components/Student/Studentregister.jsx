@@ -93,33 +93,32 @@ export default function Studentregister() {
                         <span class="tracking-wide">Student Register</span>
                     </div>
                     <div class="text-gray-700">
-                        <div class="grid md:grid-cols-2 text-sm">
-                            <div className="mt-2 w-200  px-3 mb-6 md:mb-0">
-                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
-                                First Name :
-                                </label>
-                            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text"/>
-                            </div>
+                        {/* <--line1---> */}
+                        <div class="grid md:grid-2 text-sm">
+                            <div class="flex ">
+                                <div className="mt-2 w-200  px-3 mb-6 md:mb-0">
+                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
+                                    First Name :
+                                    </label>
+                                <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text"/>
+                                </div>
 
-                            <div className="mt-2 w-200  px-3 mb-6 md:mb-0">
-                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
-                                Last Name :
-                                </label>
-                            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text"/>
-                            </div>
-                        </div>
+                                <div className="mt-2 w-200  px-3 mb-6 md:mb-0">
+                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
+                                    Last Name :
+                                    </label>
+                                <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text"/>
+                                </div>
 
-                        <div class="grid md:grid-cols-5 gap-4 text-sm">
-                            <div className="px-3 mt-2" style={{width : 200}}>
-                                <div className='md:grid-cols-2 hover:col-span-1'>
+                                <div className='mt-2 w-200  px-3 mb-6 md:mb-0' >
                                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-salary">
                                         Gender :
                                     </label>
                                     <div className="">
                                         <select 
-                                        className="block appearance-none w-500 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" >
-                                        <option value='10,000 - 25,000'>  Male   </option>
-                                        <option value='10,000 - 25,000'>  Female </option>
+                                        className="block appearance-none h-13 w-500 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" >
+                                        <option value='Male'>  Male   </option>
+                                        <option value='Female'>  Female </option>
                                         
                                         </select>
                                         {/* <div className="pointer-events-none absolute inset-y-0 ml-4 flex items-center  text-gray-700">
@@ -129,22 +128,147 @@ export default function Studentregister() {
                                     </div>
 
                                 </div>
-                                    
-                            </div>
 
-                                <div className="mt-2 w-200  px-3 mb-6 md:mb-0">
+                                <div className="mt-2 w-200 px-3 mb-6 md:mb-0 ">
                                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
                                     ID card :
                                     </label>
-                                <input className="appearance-none block w-1000 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text"/>
+                                <input className="block appearance-none block w-700 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3  px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text"/>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                        {/* <---ENDline1----> */}
+
+                        {/* <---line2----> */}
+                        <div class="grid md:grid-2 text-sm">
+                            <div class="flex ">
+                                <div className='mt-5 w-300  px-3 mb-6 md:mb-0' >
+                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-salary">
+                                        Day of Birth :
+                                    </label>
+                                    <div className="">
+                                        <select 
+                                        className="block appearance-none h-13 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"style={{height:50 ,width : 200}} >
+                                        <option value='M1'>  January  </option>
+                                        <option value='M2'>  February </option>
+                                        <option value='M3'>  March </option>
+                                        <option value='M4'>  April  </option>
+                                        <option value='M5'>  May </option>
+                                        <option value='M6'>  June </option>
+                                        <option value='M7'>  July  </option>
+                                        <option value='M8'>  August </option>
+                                        <option value='M9'>  September </option>
+                                        <option value='M10'>  October </option>
+                                        <option value='M11'>  November </option>
+                                        <option value='M12'>  December </option>
+
+                                        
+                                        </select>
+                                        {/* <div className="pointer-events-none absolute inset-y-0 ml-4 flex items-center  text-gray-700">
+                                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                        </div> */}
+                                    </div>
+                                </div>
+
+                                <div className='mt-5 w-200  px-3 mb-6 md:mb-0' >
+                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-salary">
+                                        D
+                                    </label>
+                                    <div className="">
+                                        <select 
+                                        className="appearance-none h-13 w-500 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" style={{height:50 }} >
+                                        <option value='D1'>  1  </option>
+                                        <option value='D2'>   2 </option>
+                                        <option value='D3'>   3 </option>
+                                        <option value='D4'>   4 </option>
+                                        <option value='D5'>   5 </option>
+                                        <option value='D6'>   6 </option>
+                                        <option value='D7'>   7 </option>
+                                        <option value='D8'>   8 </option>
+                                        <option value='D9'>   9 </option>
+                                        <option value='D10'>   10 </option>
+                                        <option value='D11'>   11 </option>
+                                        <option value='D12'>  12  </option>
+                                        <option value='D13'>   13 </option>
+                                        <option value='D14'>   14 </option>
+                                        <option value='D15'>   15 </option>
+                                        <option value='D16'>   16 </option>
+                                        <option value='D17'>   17 </option>
+                                        <option value='D18'>   18 </option>
+                                        <option value='D19'>   19 </option>
+                                        <option value='D20'>   20 </option>
+                                        <option value='D21'>   21 </option>
+                                        <option value='D22'>   22 </option>
+                                        <option value='D23'>  23  </option>
+                                        <option value='D24'>   24 </option>
+                                        <option value='D25'>   25 </option>
+                                        <option value='D26'>   26</option>
+                                        <option value='D27'>   27 </option>
+                                        <option value='D28'>   28 </option>
+                                        <option value='D29'>   29 </option>
+                                        <option value='D30'>   30 </option>
+                                        <option value='D31'>   31 </option>
+                                        </select>
+                                        {/* <div className="pointer-events-none absolute inset-y-0 ml-4 flex items-center  text-gray-700">
+                                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                        </div> */}
+                                    </div>
+                                </div>
+
+                                <div className="mt-5 w-100  px-3 mb-6 md:mb-0">
+                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
+                                    Y :
+                                    </label>
+                                <input className="appearance-none h-13  w-500 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" style={{width:100 , height:50}}/>
+                                </div>
+
+                                <div className="mt-5 w-100  px-3 mb-6 md:mb-0">
+                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
+                                    Age :
+                                    </label>
+                                <input className="appearance-none h-13  w-500 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" style={{width:100 , height:50}}/>
                                 </div>
                             </div>
-
-
-
-
-
                         </div>
+                        </div>
+                        {/* <---ENDline2----> */}
+                        <div class="grid md:grid-2 text-sm">
+                            <div class ="flex">
+                                <div className="mt-5 w-100  px-3 mb-6 md:mb-0">
+                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
+                                    Address :
+                                    </label>
+                                <input className="appearance-none h-13  w-500 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" style={{width:300 , height:50}}/>
+                                </div>
+
+                                <div className="mt-5 w-100  px-3 mb-6 md:mb-0">
+                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
+                                    City :
+                                    </label>
+                                <input className="appearance-none h-13  w-500 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" style={{width:300 , height:50}}/>
+                                </div>
+
+
+
+
+                            </div>
+                            
+
+                            
+                        </div>
+
+                   
+
+
+                        {/* <---line3---> */}
+
+                        
+                        {/* <---line3---> */}
 
                     <button
                         class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">Show

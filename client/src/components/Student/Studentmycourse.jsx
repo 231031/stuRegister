@@ -14,6 +14,7 @@ export default function Studentmycourse() {
     const navigate = useNavigate();
     const [data, setData] = useState('');
     const [term, setTerm] = useState(2); // current term
+    const [month, setMonth] = useState(0); // current month
 
     // selected
     const [selY, setSelY] = useState('');
@@ -27,8 +28,9 @@ export default function Studentmycourse() {
       }
       const [department_id, year, student_id] = token.split('-');
 
-      const month = new Date().getMonth();
-      if (month >= 7) setTerm(1);
+      const month = new Date().getMonth()
+      setMonth(month);
+      if (month >= 7) setTerm(1); // month 7 is August 1
 
       const apiInfo = async () => {
         try {
@@ -167,10 +169,10 @@ export default function Studentmycourse() {
               } 
               </div>
 
-
+              {/* term 1 -> change group and delete course in month 8 | term 2 -> change group and delete in month 1 */}
               {/* data.year = selected year and term = selected term then button change group and delete course will display */}
               {
-                (data?.year == selY && term == selT) ? (
+                (data?.year == selY && term == selT && (term == 1 && month + 1 == 8) || (term == 2 && month + 1 == 1)) ? (
                   <div className='flex flex-row mt-14'>
                     <button className='mx-10 px-5 py-1 bg-greendark text-white rounded-md hover:bg-sky'
                     onClick={(e)=>clickChange()}>Change Group</button>

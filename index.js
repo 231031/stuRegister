@@ -94,7 +94,7 @@ app.use(express.json());
 app.use('/admin', routerAdmin);
 app.use('/teacher', routerTeacher);
 app.use('/student', router);
-app.use('/oa', routerOA);
+app.use('/committee', routerOA);
 app.use('/', routerAll);
 
 app.post('/test', async (req, res) => {

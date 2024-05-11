@@ -107,11 +107,27 @@ export async function getCourseTeacher(req, res) {
     }
 }
 
+export async function getCourse(req, res) {
+    try {
+        const [course] = await connection.execute(
+            'SELECT * FROM Course WHERE course_id = ?', 
+            [req.body.course_id]
+        );
+        connection.release();
+        res.json(course[0]);
+        
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
 export async function editCourse(req, res) {
     try {
+        const { course_name, description } = await req.body.info;
         await connection.execute(
             'UPDATE Course SET course_name = ?, description = ? WHERE course_id = ?', 
-            [req.body.course_id, req.body.description]
+            [course_name, description, req.body.course_id]
         );
         connection.release();
         return res.status(200).send({ msg : 'Course updated successfully'});

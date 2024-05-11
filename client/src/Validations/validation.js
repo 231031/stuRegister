@@ -167,6 +167,12 @@ const CourseSchema = Yup.object().shape({
     
 });
 
+const CourseUpdateSchema = Yup.object().shape({
+    course_name: Yup.string()
+        .required('required').min(3, 'too short!'),
+    description: Yup.string()
+        .required('required').min(10, 'too short!'),
+});
 
 const ActivitySchema = Yup.object().shape({
     activity: Yup.array().of(
@@ -235,5 +241,5 @@ const DetailSchema = Yup.object().shape({
 
 
 export { PersonalSchema, LoginSchema, UpdateSchema, CourseSchema, DetailSchema, FacSchema, DepartmentSchema, TeacherSchema,
-        AddStuSchema, AvailableSchema, NameSchema, PasswordSchema, ScholarshipSchema, ActivitySchema  };
+        AddStuSchema, AvailableSchema, NameSchema, PasswordSchema, ScholarshipSchema, ActivitySchema, CourseUpdateSchema };
 

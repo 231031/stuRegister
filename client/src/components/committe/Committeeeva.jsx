@@ -2,18 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import tw from "twin.macro";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-
+import toast, { Toaster } from "react-hot-toast";
 
 import Headercom from "./Headercom";
 import { getAllScholarships } from "../../helpers/helper";
-import { getApplicant } from "../../helpers/comHelper";
+import { getScholarHis, updateCheck } from "../../helpers/comHelper";
 
 const Row = tw.td`border border-slate-600 py-1 px-2 text-sm`;
-export default function Committeetable() {
+export default function Committeeeva() {
 
   const [data, setData] = useState("");
   const [stu, setStu] = useState("");
   const [sel, setSel] = useState("");
+  const [eva, setEva] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export default function Committeetable() {
   useEffect(() => {
     const apiStu = async () => {
       try {
-        const res = await getApplicant(sel);
+        const res = await getScholarHis(sel);
         setStu(res);
       } catch (error) {
         console.error(error);
@@ -40,14 +41,47 @@ export default function Committeetable() {
     if (sel) apiStu();
   }, [sel]);
 
-  function handleClick(id) {
-    navigate('/committee/info', { state: { student_id: id } });
+  function handleChange(index, id, approve, year) {
+    if (approve != '') {
+      setEva((prevSel) => {
+        const updatedSel = [...prevSel];
+        if (updatedSel[index] === undefined) {
+          updatedSel.push({
+            student_id: id,
+            approve: approve,
+            get_year: year,
+          });
+        } else {
+          updatedSel[index] = {
+            student_id: id,
+            approve: approve,
+            get_year: year,
+          };
+        }
+        return updatedSel;
+      });
+    }
+  }
+
+  async function handleUpdate() {
+    try {
+      if (stu.length === eva.length) {
+        const res = await updateCheck(eva, stu[0].scholarship_id);
+        toast.success(res.msg);
+      } else {
+        toast.error('Please select All Approved');
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
 
   return (
     <HelmetProvider>
       <div>
+        <Toaster position="top-center" reverseOrder={false}></Toaster>
+
         <Helmet>
           <title>C | Application</title>
         </Helmet>
@@ -74,15 +108,16 @@ export default function Committeetable() {
               <p className='my-5'>No Scholarship for Choose Right Now</p>
             )
           }
-          <div className='mt-10'>
-            {
-              (stu.length) > 0 ? (
+          <div className='mt-10'></div>
+          {
+            (stu.length) > 0 ? (
+              <div className='flex flex-col items-center'>
                 <table className='my-2 table-fixed border-collapse border border-slate-500 text-center'>
                   <thead>
                     <tr>
                       <Row>Num</Row>
                       <Row>Student Name</Row>
-                      <Row>Information</Row>
+                      <Row>Status</Row>
                     </tr>
                   </thead>
                   <tbody>
@@ -91,25 +126,33 @@ export default function Committeetable() {
                         <tr key={index}>
                           <Row>{index + 1}</Row>
                           <Row>{stuList.first_name} {stuList.last_name}</Row>
-                          <Row className='cursor-pointer hover:bg-blue-300'>
-                            <button className='text-green-600 ' onClick={(e) => handleClick(stuList.student_id)}>Click</button>
+                          <Row>
+                            <select onChange={(e) => handleChange(index, stuList.student_id, e.target.value, stuList.get_year)}>
+                              <option value=''></option>
+                              <option value={true} className="text-greendark">pass</option>
+                              <option value={false} className="text-red-500">reject</option>
+                            </select>
                           </Row>
                         </tr>
                       ))
                     }
                   </tbody>
                 </table>
-              ) : (
-                <div className='my-5 h-72'>
-                  <h3 className='ml-7 text-xl text-blue-900'>Applicant</h3>
-                  <h2 className='my-4 ml-7 text-md text-blue-600 flex justify-center'>Choose Scholarship</h2>
-                </div>
-              )
-            }
-          </div>
+                <button onClick={(e) => handleUpdate()} type="button"
+                  className="px-3 py-1 bg-greendark rounded-md my-10">SUBMIT</button>
+              </div>
+            ) : (
+              <div className='my-5 h-72'>
+                <h3 className='ml-7 text-xl text-blue-900'>Evaluation</h3>
+                <h2 className='my-4 ml-7 text-md text-blue-600 flex justify-center'>Choose Scholarship</h2>
+              </div>
+            )
+          }
+
         </div>
 
       </div>
     </HelmetProvider>
   );
 }
+

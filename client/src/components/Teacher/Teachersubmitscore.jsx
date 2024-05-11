@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
-import toast from "react-hot-toast";
+import { useNavigate, useLocation } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 import Headerteacher from "./Headerteacher";
 

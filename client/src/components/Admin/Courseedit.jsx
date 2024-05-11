@@ -5,7 +5,7 @@ import tw from 'twin.macro';
 import { Toaster } from 'react-hot-toast';
 import toast from "react-hot-toast";
 
-import { editCourse } from '../helpers/adminHelper';
+import { editCourse } from '../../helpers/adminHelper';
 
 const Alert = tw.div`text-red-700 text-sm`;
 export default function Courseedit() {

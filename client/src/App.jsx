@@ -58,7 +58,7 @@ import AdminLogin from './components/Admin/Adminlogin';
 import Adminhome from './components/Admin/Adminhome';
 import Courseregister from'./components/Admin/Courseregister'; 
 import Coursedetail from'./components/Admin/Coursedetail'; 
-import Courseedit from'./components/Courseedit'; 
+import Courseedit from'./components/Admin/Courseedit'; 
 import Coursetable from'./components/Admin/Coursetable'; 
 import Admintablefac from'./components/Admin/Admintablefac'; 
 import Admintabledepart from'./components/Admin/Admintabledepart'; 
@@ -73,6 +73,10 @@ import Adminaddavailable from './components/Admin/Adminaddavailable';
 import Admintableteach from './components/Admin/Admintableteach';
 import Admintablestu from './components/Admin/Admintablestu';
 
+// committee component
+import Committeetable from './components/committe/Committeetable';
+import Committeestu from './components/committe/Committeestu';
+import Committeeeva from './components/committe/Committeeeva';
 
 const router = createBrowserRouter(
   [
@@ -80,6 +84,24 @@ const router = createBrowserRouter(
       path: '/',
       element : <Landing></Landing>
     },
+
+
+
+    {
+      path: '/committee/info',
+      element : <Committeestu></Committeestu>
+    },
+    {
+      path: '/committee/tablestu',
+      element : <Committeetable></Committeetable>
+    },
+    {
+      path: '/committee/evastu',
+      element : <Committeeeva></Committeeeva>
+    },
+
+    
+
     {
       path: '/teacher/login',
       element : <Teacherlogin/>

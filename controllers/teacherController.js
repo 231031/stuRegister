@@ -5,15 +5,6 @@ import { Teacher } from "../models/Teacher.model.js";
 import pool from '../dbcon.js';
 const connection = await pool.getConnection();
 
-export async function updateGrade() {
-    try {
-
-    } catch (error) {
-        connection.release();
-        return res.status(404).send({ error: error.message });
-    }
-}
-
 export async function loginTeacher(req, res) {
     try {
         let change = true;
@@ -82,7 +73,6 @@ export async function updatePassword(req, res) {
     }
 }
 
-// continue
 export async function updateTeacher(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
@@ -101,6 +91,22 @@ export async function updateTeacher(req, res) {
     }
 }
 
+export async function getCourseTeacher(req, res) {
+    try {
+        const query = `
+            SELECT C.* FROM course_detail CD INNER JOIN Course C ON CD.course_id = C.course_id 
+            WHERE teacher_id = ? GROUP BY C.course_id
+        `;
+        const [courses] = await pool.execute(query, [req.body.teacher_id]);
+        connection.release();
+        res.json(courses);
+        
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
 export async function editCourse(req, res) {
     try {
         await connection.execute(
@@ -111,6 +117,67 @@ export async function editCourse(req, res) {
         return res.status(200).send({ msg : 'Course updated successfully'});
         
     } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function getStuTeacher(req, res) {
+    try {
+        const query = `
+            SELECT S.student_id, S.first_name, S.last_name, S.year, C.course_id, C.course_name, C.credit 
+            FROM stu_register SR INNER JOIN Student S ON SR.student_id = S.student_id 
+            INNER JOIN course_detail CD ON CD.course_id = SR.course_id AND CD.gr = SR.gr
+            INNER JOIN Course C ON C.course_id = SR.course_id
+            WHERE CD.teacher_id = ? AND SR.course_id = ? AND SR.status_grade = ?
+        `;
+        const [courses] = await pool.execute(query, [req.body.teacher_id, req.body.course_id, false]);
+        connection.release();
+        res.json(courses);
+        
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+// transaction modify stu_register (update grade), modify edu_term (update grade_term)
+export async function updateGrade(req, res) {
+    try {
+        const { term } = req.body;
+        const queryRegis = `
+            UPDATE stu_register SET grade = ?, status_grade = ? WHERE student_id = ? AND course_id = ? AND year = ?
+        `
+        const query = `
+            SELECT * FROM edu_term WHERE student_id = ? AND year = ? AND term = ?
+        `
+        const queryEdu = `
+            UPDATE edu_term SET grade_term = ? WHERE student_id = ? AND year = ? AND term = ?
+        `
+        await connection.beginTransaction();
+        for (const student of req.body.list) {
+            const { student_id, grade, course_id, year, credit } = await student;
+            let sum = grade*credit;
+
+            // update grade in tb stu_register
+            await connection.execute(queryRegis, [grade, true, student_id, course_id, year]);
+
+            // query grade_term before update with new grade
+            const [detail] = await connection.execute(query, [student_id, year, term]);
+            const result = await detail[0];
+
+            // calculate new gpa and update grade_term with gpa
+            const oldSum = (result.credit_term)*(result.grade_term); // sum of each grade*credit
+            sum = sum + oldSum;
+            let gpa = sum/result.credit_term;
+            await connection.execute(queryEdu, [gpa, student_id, year, term]);
+
+        }
+        await connection.commit();
+        connection.release();
+        return res.status(200).send({ msg : 'Update Grade Successfully'});
+    } catch (error) {
+        await connection.rollback();
         connection.release();
         return res.status(404).send({ error: error.message });
     }

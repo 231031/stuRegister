@@ -20,7 +20,6 @@ export async function loginTeacher(user) {
 }
 
 export async function updatePassword(info) {
-
     try {
         const token = localStorage.getItem('token');
         const response = await fetch('http://localhost:6001/teacher/updatepass', {
@@ -85,4 +84,69 @@ export async function getInfoTeacher(info) {
   } catch (error) {
     return Promise.reject(error);
   }
+}
+
+export async function getCourseTeacher(info) {
+  try {
+    const response = await fetch('http://localhost:6001/teacher/course/getcourse', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ teacher_id: info }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
+export async function getStuTeacher(info, id) {
+  try {
+    const response = await fetch('http://localhost:6001/teacher/course/getstudent', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ teacher_id: info, course_id: id }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
+export async function updateGrade(info, term) {
+  console.log(info);
+  console.log(term);
+  try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:6001/teacher/updategrade', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({ list : info, term : term }),
+      });
+      const data = await response.json();
+      if (response.status === 404) {
+        console.log(data);
+        return Promise.reject(data);
+      }
+      return Promise.resolve(data);
+      
+    } catch (error) {
+      return Promise.reject(error);
+    }
 }

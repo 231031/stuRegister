@@ -25,6 +25,11 @@ const Sturegister = sequelize.define('Sturegister',{
         type: DataTypes.DECIMAL,
         allowNull: false,
     },
+    status_grade : {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+    },
     gr : {
         type: DataTypes.INTEGER,
         allowNull: false,

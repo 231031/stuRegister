@@ -9,7 +9,8 @@ const router = Router();
 router.route('/login').post(controller.loginTeacher);
 router.route('/info').post(controller.getInfo);
 // query
-router.route('/course/getstudent').post();
+router.route('/course/getstudent').post(controller.getStuTeacher);
+router.route('/course/getcourse').post(controller.getCourseTeacher);
 
 
 // get

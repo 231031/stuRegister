@@ -346,7 +346,6 @@ export async function getAvailableCourse(de, year, type) {
 }
 
 export async function registerCourse(info, year, id) {
-  console.log(info);
   const courses = [];
   const month = new Date().getMonth();
   let term = 2;
@@ -368,7 +367,6 @@ export async function registerCourse(info, year, id) {
     });
     const data = await response.json();
     if (response.status === 404) {
-      console.log(data);
       return Promise.reject(data);
     }
     return Promise.resolve(data);

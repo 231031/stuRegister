@@ -245,7 +245,7 @@ export async function registerCourse(req, res) {
             );
         } else {
             await connection.execute(
-                'INSERT INTO stu_register (student_id, year, term, credit_term) VALUES (?, ?, ?, ?)',  
+                'INSERT INTO edu_term (student_id, year, term, credit_term) VALUES (?, ?, ?, ?)',  
                 [token, regis[0].year, regis[0].term, totalCredit]
             );
         }

@@ -10,11 +10,14 @@ export async function getStudent() {
 
 export async function registerInfomation(info) {
   const { date, month, year } = info;
-  const dob = `${year}-${month}-${date}`;
-  info = {
-    ...info,
-    'dob': dob,
+  if (date) {
+    const dob = `${year}-${month}-${date}`;
+    info = {
+      ...info,
+      'dob': dob,
+    }
   }
+  
   try {
     const token = localStorage.getItem('token');
     const [department_id, year, student_id] = token.split('-');

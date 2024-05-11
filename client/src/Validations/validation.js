@@ -108,11 +108,26 @@ const UpdateSchema = Yup.object().shape({
     city: Yup.string().required('Required').min(3, 'too short!'),
     zip_code: Yup.string().required('Required').min(4, 'wrong zip code'),
     address: Yup.string().required('Required').min(5, 'too short!'),
+
+    f_email: Yup.string()
+        .required('required').email('xxx@gmail.com'),
+    f_salary: Yup.string()
+        .required('required'),
+    f_phone: Yup.string()
+        .required('required').max(10, 'xxxxxxxxxx'),
+
+    m_email: Yup.string()
+        .required('required').email('xxx@gmail.com'),
+    m_salary: Yup.string()
+        .required('required'),
+    m_phone: Yup.string()
+        .required('required').max(10, 'xxxxxxxxxx'),
+
 });
 
 const PersonalSchema = Yup.object().shape({
-    // self
     ...UpdateSchema.fields,
+    // self
     id_card: Yup.string().required('Required'),
     gender: Yup.string().required('Required'),
     date: Yup.string().required('Required'),
@@ -126,12 +141,6 @@ const PersonalSchema = Yup.object().shape({
         .required('required'),
     f_id: Yup.string()
         .required('required'),
-    f_email: Yup.string()
-        .required('required').email('xxx@gmail.com'),
-    f_salary: Yup.string()
-        .required('required'),
-    f_phone: Yup.string()
-        .required('required').max(10, 'xxxxxxxxxx'),
     f_age: Yup.number().required('Required').typeError('Must be a number'),
     // monther
     m_first_name: Yup.string()
@@ -140,12 +149,6 @@ const PersonalSchema = Yup.object().shape({
         .required('required'),
     m_id: Yup.string()
         .required('required'),
-    m_email: Yup.string()
-        .required('required').email('xxx@gmail.com'),
-    m_salary: Yup.string()
-        .required('required'),
-    m_phone: Yup.string()
-        .required('required').max(10, 'xxxxxxxxxx'),
     m_age: Yup.number().required('Required').typeError('Must be a number'),
     
 });

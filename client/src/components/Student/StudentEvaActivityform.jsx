@@ -2,21 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
+import { evaActivity } from '../../helpers/stuhelper';
 import Headerstu from './Headerstu';
 
-const FeedbackForm = () => {
-    // State for free text inputs
-    const [freeText1, setFreeText1] = useState('');
-  
-}
 
-// ป้องกัน การโหลดหน้าใหม่ --> หลังส่ง form
-const handleSubmit = (e) => {
-    e.preventDefault();
-};
+
+
 
 // Questions and message
 const text = {
@@ -35,26 +29,51 @@ const text = {
 
 
 
-
+// ป้องกัน การโหลดหน้าใหม่ --> หลังส่ง form
+const handleSubmit = (e) => {
+    e.preventDefault();
+};
 
 export default function EvaForm() {
 
+    const location = useLocation();
     const navigate = useNavigate();
     const [data, setData] = useState('');
+    const [eva, setEva] = useState('');
+    const [freeText1, setFreeText1] = useState('');
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (!token) {
           navigate('/student/login');
         }
+
+        if (location.state) {
+            setEva({
+                'activity_id' : location.state.activity_id,
+                'hours' : location.state.hours
+            })
+        }
+        else navigate('/student/evaluate');
+
         const [department_id, year, student_id] = token.split('-');
         setData({
           department_id: department_id,
           year: year,
           student_id: student_id,
         });
+        
       }, []);
 
-
+    async function evaluateAc(e) {
+        try {
+            e.preventDefault();
+            const res = await evaActivity(eva, data.student_id);
+            toast.success(res.msg);
+        } catch (error) {
+            console.log(error);
+        }
+    }
     
 
   return (
@@ -69,15 +88,15 @@ export default function EvaForm() {
         <div className='container px-2 py-24 mx-auto'>
             <div id="feedbackModal" className="feedbackModal">
             <div className="modalContent">
-                <h1 class="text-center text-3xl font-semibold capitalize text-sky dark:text-sky lg:text-4xl">Feedback Activity</h1>
+                <h1 className="text-center text-3xl font-semibold capitalize text-sky dark:text-sky lg:text-4xl">Feedback Activity</h1>
                 <h2 style={{ textAlign: 'center', marginTop: '0px' }}>{text.intro}</h2>
 
 
                 <div className = 'container mt-3'>
-                    <h1  class='text-center  text-gray-600  '>This is a test message to appear on the feedback form at the top.</h1><br />
+                    <h1  className='text-center  text-gray-600  '>This is a test message to appear on the feedback form at the top.</h1><br />
                 </div>
                 
-            <form id="feedback" className="formFeedback" method="POST" onSubmit={handleSubmit}>
+            <form id="feedback" className="formFeedback" method="POST" onSubmit={(e)=>evaluateAc(e)}>
 
                 {/* <----Render radio button questions----> */}
 
@@ -112,23 +131,21 @@ export default function EvaForm() {
                     {/* <---feedback box ----> */}
 
                     <div id="ftQ1Container">
-                        <span id="ftQ1" class="text-sky dark:text-sky lg:text-xl">{text.ftQ1}<br /></span><br />
+                        <span id="ftQ1" className="text-sky dark:text-sky lg:text-xl">{text.ftQ1}<br /></span><br />
                             <textarea
                                 id="freeText1"
-                                className="freeText"
+                                className="freeText border-2"
                                 name="freeText1"
                                 rows="5"
                                 cols="45"
-                                value={FeedbackForm.freeText1}
                                 onChange={(e) => setFreeText1(e.target.value)}
                                 >
                             </textarea>
                         <div className="clearfix"></div><br />
                     </div>      
-                    <button className="bg-sky hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 border border-sky hover:border-transparent rounded mr-1 " style={{ position: 'relative', left: '50%', transform: 'translate(-50%, 0%)' }}>
-                        <Link to="" className="block w-full h-full">
-                            Submit
-                        </Link>
+                    <button 
+                    className="bg-sky hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 border border-sky hover:border-transparent rounded mr-1 " style={{ position: 'relative', left: '50%', transform: 'translate(-50%, 0%)' }}>
+                        Submit
                     </button>            
                 </div>
 

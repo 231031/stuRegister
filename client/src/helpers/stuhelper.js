@@ -1,5 +1,4 @@
 export async function getStudent() {
-
     try {
         const response = await fetch('http://localhost:6001/oa/students');
         const data = await response.json();
@@ -9,8 +8,40 @@ export async function getStudent() {
       }
 }
 
-export async function loginStudent(user) {
+export async function registerInfomation(info) {
+  const { date, month, year } = info;
+  if (date) {
+    const dob = `${year}-${month}-${date}`;
+    info = {
+      ...info,
+      'dob': dob,
+    }
+  }
+  
+  try {
+    const token = localStorage.getItem('token');
+    const [department_id, year, student_id] = token.split('-');
 
+    const response = await fetch('http://localhost:6001/student/registerinfo', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${student_id}`,
+      },
+      body: JSON.stringify(info),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
+export async function loginStudent(user) {
     try {
         const response = await fetch('http://localhost:6001/student/login', {
           method: 'POST',
@@ -126,6 +157,48 @@ export async function getActivity() {
   }
 }
 
+export async function getArrActivity(info, id) {
+  try {
+    const response = await fetch('http://localhost:6001/student/getarractivity', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${id}`,
+      },
+      body: JSON.stringify({ evaluate : info }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
+export async function evaActivity(info, id) {
+  try {
+    const response = await fetch('http://localhost:6001/student/evaluate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${id}`,
+      },
+      body: JSON.stringify({ evaluate : info }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
 export async function getInfo(info) {
   try {
     const response = await fetch('http://localhost:6001/student/info', {
@@ -216,16 +289,32 @@ export async function getStuRegisterChange(term) {
 }
 
 // sent term year course_id, group
-export async function stuDelCourse() {
+export async function delStuCourse(info) {
   try {
-
+    const token = localStorage.getItem('token');
+    const [department_id, year, student_id] = token.split('-');
+    const response = await fetch('http://localhost:6001/student/delete/course', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${student_id}`,
+      },
+      body: JSON.stringify(info),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
   } catch (error) {
-    
+    return Promise.reject(error);
   }
 }
 
+// not tested yet
 // sent term year course_id, old group, new group
-export async function stuChangeGroup() {
+export async function changeGroup() {
   try {
 
   } catch (error) {
@@ -257,7 +346,6 @@ export async function getAvailableCourse(de, year, type) {
 }
 
 export async function registerCourse(info, year, id) {
-  console.log(info);
   const courses = [];
   const month = new Date().getMonth();
   let term = 2;
@@ -279,7 +367,6 @@ export async function registerCourse(info, year, id) {
     });
     const data = await response.json();
     if (response.status === 404) {
-      console.log(data);
       return Promise.reject(data);
     }
     return Promise.resolve(data);

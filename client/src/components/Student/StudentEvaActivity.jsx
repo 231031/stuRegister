@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import Headerstu from './Headerstu';
+import { getArrActivity } from '../../helpers/stuhelper';
 
 
 
@@ -16,6 +17,9 @@ export default function EvaluateActivity() {
 
     const navigate = useNavigate();
     const [data, setData] = useState('');
+    const [eva, setEva] = useState(false);
+    const [arr, setArr] = useState(false);
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (!token) {
@@ -28,6 +32,22 @@ export default function EvaluateActivity() {
           student_id: student_id,
         });
       }, []);
+
+    useEffect(() => {
+      const apiArr = async() => {
+        try {
+          const res = await getArrActivity(eva, data.student_id);
+          setArr(res);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      if (data) apiArr();
+    }, [data]);
+
+    function handleClick(id, hours) {
+      navigate('/student/evaluateform', { state : { activity_id : id, hours : hours }});
+    }
 
   return (
     <HelmetProvider>
@@ -43,106 +63,71 @@ export default function EvaluateActivity() {
         {/* <---section1----> */}
 
 
-        <div class="h-[16rem] bg-gray-100 dark:bg-gray-800">
-        <div class="container mx-auto px-6 py-10">
-        <h1 class="text-center text-3xl font-semibold capitalize text-gray-800 dark:text-white lg:text-4xl">Evaluate Activity</h1>
+        <div className="h-[16rem] bg-gray-100 dark:bg-gray-800">
+        <div className="container mx-auto px-6 py-10">
+        <h1 className="text-center text-3xl font-semibold capitalize text-gray-800 dark:text-white lg:text-4xl">Evaluate Activity</h1>
 
-        <div class="mx-auto mt-6 flex justify-center">
-            <span class="inline-block h-1 w-40 rounded-full bg-blue-500"></span>
-            <span class="mx-1 inline-block h-1 w-3 rounded-full bg-blue-500"></span>
-            <span class="inline-block h-1 w-1 rounded-full bg-blue-500"></span>
+        <div className="mx-auto mt-6 flex justify-center">
+            <span className="inline-block h-1 w-40 rounded-full bg-blue-500"></span>
+            <span className="mx-1 inline-block h-1 w-3 rounded-full bg-blue-500"></span>
+            <span className="inline-block h-1 w-1 rounded-full bg-blue-500"></span>
         </div>
 
-        <p class="mx-auto mt-6 max-w-2xl text-center text-gray-500 dark:text-gray-300">{text.intro}</p>
+        <p className="mx-auto mt-6 max-w-2xl text-center text-gray-500 dark:text-gray-300">{text.intro}</p>
         </div>
     </div>
 
     {/* <---section2----> */}
 
-    <div class="grid-cols-2">
-    <div class=" pt-10 overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-      <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-        <div class="overflow-hidden">
-          <table class="min-w-full">
-            <thead class="bg-gray-200 border-b">
-              <tr>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  #
-                </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  Activity
-                </th>
-                
-                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  
-                </th>
-              </tr>
-            </thead>
-          <tbody>
-            <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-              Academic Clubs
-              </td>
+    <div className="grid-cols-2">
+    <div className=" pt-10 overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+      <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+        <div className="overflow-hidden">
+          {
+            (arr.length > 0) ? (
+              <table className="min-w-full">
+                  <thead className="bg-gray-200 border-b">
+                    <tr>
+                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        #
+                      </th>
+                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        Activity
+                      </th>
+                      
+                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {
+                      arr.map((arrList, index) => (
+                        
+                          <tr key={index} className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{index+1}</td>
+                            <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                              {arrList.activity_name}
+                            </td>
 
-              <div class ='flex flex-row-reverse mr-10 pt-1'>
-              <button className="bg-[#0d9488] hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border border-[#0d9488] hover:border-transparent rounded mr-1">
-                <Link to="/student/evaluateform" className="block w-full h-full">
-                Evaluate
-                </Link>
-              </button>
-              </div>
-              
-            
-            </tr>
-            <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-              Sports Teams
-              </td>
-              
-              
-              <div class ='flex flex-row-reverse mr-10 pt-1'>
-              <button className="bg-[#0d9488] hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border border-[#0d9488] hover:border-transparent rounded mr-1">
-                <Link to="/student/evaluateform" className="block w-full h-full">
-                Evaluate
-                </Link>
-              </button>
-              </div>
-              
-            </tr>
-      
-            <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">4</td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-              Creative Arts
-              </td>
-              <div class ='flex flex-row-reverse mr-10 pt-1'>
-              <button className="bg-[#0d9488] hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border border-[#0d9488] hover:border-transparent rounded mr-1">
-                <Link to="/student/evaluateform" className="block w-full h-full">
-                Evaluate
-                </Link>
-              </button>
-              </div>
-              
-            </tr>
-            <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">5</td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-              Community Service
-              </td>
+                            <div className='flex flex-row-reverse mr-10 pt-1'>
+                            <button onClick={(e)=>handleClick(arrList.activity_id, arrList.hours)}
+                              className="bg-[#0d9488] hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border border-[#0d9488] hover:border-transparent rounded mr-1">
+                                Evaluate
+                            </button>
 
-              <div class ='flex flex-row-reverse mr-10 pt-1'>
-              <button className="bg-[#0d9488] hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border border-[#0d9488] hover:border-transparent rounded mr-1">
-                <Link to="/student/evaluateform" className="block w-full h-full">
-                Evaluate
-                </Link>
-              </button>
-              </div>
+                            </div>
+                          </tr>                     
+                      ))
 
-            </tr>
-          </tbody>
-        </table>
+                  }
+                  </tbody>
+              </table>
+            ) : (
+              <p className=''></p>
+            )
+          }
+          
       </div>
     </div>
   </div>
@@ -154,3 +139,53 @@ export default function EvaluateActivity() {
     </HelmetProvider>
   )
 }
+
+
+
+                          {/* <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            Sports Teams
+                            </td>
+                            
+                            
+                            <div class ='flex flex-row-reverse mr-10 pt-1'>
+                            <button className="bg-[#0d9488] hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border border-[#0d9488] hover:border-transparent rounded mr-1">
+                              <Link to="/student/evaluateform" className="block w-full h-full">
+                              Evaluate
+                              </Link>
+                            </button>
+                            </div>
+                            
+                          </tr> */}
+                    
+                          {/* <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">4</td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            Creative Arts
+                            </td>
+                            <div class ='flex flex-row-reverse mr-10 pt-1'>
+                            <button className="bg-[#0d9488] hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border border-[#0d9488] hover:border-transparent rounded mr-1">
+                              <Link to="/student/evaluateform" className="block w-full h-full">
+                              Evaluate
+                              </Link>
+                            </button>
+                            </div>
+                            
+                          </tr> */}
+
+                          {/* <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">5</td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            Community Service
+                            </td>
+
+                            <div class ='flex flex-row-reverse mr-10 pt-1'>
+                            <button className="bg-[#0d9488] hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border border-[#0d9488] hover:border-transparent rounded mr-1">
+                              <Link to="/student/evaluateform" className="block w-full h-full">
+                              Evaluate
+                              </Link>
+                            </button>
+                            </div>
+
+                          </tr> */}

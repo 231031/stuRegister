@@ -7,16 +7,17 @@ import { Department } from "../models/Department.model.js";
 import { Teacher } from "../models/Teacher.model.js";
 import pool from '../dbcon.js';
 
+const connection = await pool.getConnection();
 export async function getAllStudents(req, res) {
     try {
-        const connection = await pool.getConnection();
-        const [students, fields] = await connection.execute(
+        const [students] = await connection.execute(
             'SELECT student_id, first_name, last_name, year FROM Student'
         );
         connection.release();
         res.json(students);
         
     } catch (error) {
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
 }
@@ -27,6 +28,20 @@ export async function getAllCourses(req, res) {
         res.json(courses)
         
     } catch (error) {
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function getAllScholarships(req, res) {
+    try {
+        const [scholars] = await connection.execute(
+            'SELECT scholarship_id, scholarship_name FROM Scholarship'
+        );
+        connection.release();
+        res.json(scholars);
+        
+    } catch (error) {
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
 }

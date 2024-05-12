@@ -1,113 +1,178 @@
-import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom'
-import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { HelmetProvider } from "react-helmet-async";
+import { Link, useNavigate } from "react-router-dom";
 
+import Headerteacher from "./Headerteacher";
 
-import Headerteacher from './Headerteacher';
-
+import { getCourseTeacher, getInfoTeacher } from "../../helpers/teacherHelper";
 
 export default function Teachertablecourse() {
+  const navigate = useNavigate();
+  const [data, setData] = useState("");
+  const [course, setCourse] = useState("");
 
-  const [data, setData] = useState('');
-  const [course, setCourse] = useState('');
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
-        return <Navigate to={'/teacher/login'} replace={true}></Navigate>
+      navigate("/teacher/login");
     }
-    // fetch teacher and include course details of this teacher
-    const apiInfo = async () => {
-        try {
-          const res = await getInfoTeacher(localStorage.getItem('token'));
-          setData(res);
 
-        } catch (error) {
-            toast.error('Cannot Get Information');
-            console.error(error);
-        } 
+    const apiInfo = async () => {
+      try {
+        const res = await getInfoTeacher(localStorage.getItem("token"));
+        setData(res);
+      } catch (error) {
+        console.error(error);
+      }
     };
     apiInfo();
   }, []);
 
+  useEffect(() => {
+    const apiCourse = async () => {
+      try {
+        const res = await getCourseTeacher(data?.teacher_id);
+        setCourse(res);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    if (data) apiCourse();
+  }, [data]);
+
+  function handleClick(path, id) {
+    navigate(path, { state: { course_id: id } });
+  }
 
   return (
     <div>
       <HelmetProvider>
-        <Headerteacher data={data}/>
+        <Headerteacher data={data} />
       </HelmetProvider>
 
-
       {/* <----textheader----> */}
-      <div className='container px-2 py-24 mx-auto'>
+      <div className="container px-2 py-24 mx-auto">
         <div id="feedbackModal" className="feedbackModal">
-                <div className="modalContent">
-                  <h1 class="text-center text-3xl font-semibold capitalize text-sky dark:text-sky lg:text-4xl">My Course</h1>
-                  <h2 style={{ textAlign: 'center', marginTop: '0px' }}>KMUTT UNIVERSITY</h2>
+          <div className="modalContent">
+            <h1 className="text-center text-3xl font-semibold capitalize text-sky dark:text-sky lg:text-4xl">
+              My Course
+            </h1>
+            <h2 style={{ textAlign: "center", marginTop: "0px" }}>
+              KMUTT UNIVERSITY
+            </h2>
 
-
-                  <div className = 'container mt-3'>
-                      <h1  class='text-center  text-gray-600  '>Enhancing Your Learning Journey: Manage My Course</h1><br />
-                  </div>
-                </div>
+            <div className="container mt-3">
+              <h1 className="text-center  text-gray-600  ">
+                Enhancing Your Learning Journey: Manage My Course
+              </h1>
+              <br />
+            </div>
           </div>
-
+        </div>
 
         {/* <----table------> */}
 
-        <div class="grid-cols-2">
-    <div class=" pt-10 overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-      <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-        <div class="overflow-hidden">
-          <table class="min-w-full">
-            <thead class="bg-gray-200 border-b">
-              <tr>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  #
-                </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  My courxe
-                </th>
-                
-                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  
-                </th>
-              </tr>
-            </thead>
-          <tbody>
-            <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-              CPE232 : Data Model 
-              </td>
+        <div className="grid-cols-2">
+          <div className=" pt-10 overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+            <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+              <div className="overflow-hidden">
+                {course.length > 0 ? (
+                  <table className="min-w-full">
+                    <thead className="bg-gray-200 border-b">
+                      <tr>
+                        <th
+                          scope="col"
+                          className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                        >
+                          #
+                        </th>
+                        <th
+                          scope="col"
+                          className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                        >
+                          My course
+                        </th>
 
-              <div class ='flex flex-row-reverse mr-10 pt-1'>
+                        <th
+                          scope="col"
+                          className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                        ></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {course.map((cList, index) => (
+                        <tr
+                          key={index}
+                          className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"
+                        >
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            1
+                          </td>
+                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            {cList.course_id} : {cList.course_name}
+                          </td>
 
-              <button className="bg-[#9ca3af] hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border border-[#94a3b8] hover:border-transparent rounded mr-1">
-                <Link to="/teacher/teacherEditcourse" className="block w-full h-full">
-                Edit
-                </Link>
-              </button>
+                          <div class="flex flex-row-reverse mr-10 pt-1">
+                            <button
+                              onClick={(e) =>
+                                handleClick(
+                                  "/teacher/teacherEditcourse",
+                                  cList.course_id
+                                )
+                              }
+                              className="bg-[#9ca3af] hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border border-[#94a3b8] hover:border-transparent rounded mr-1"
+                            >
+                              Edit
+                            </button>
 
-              <button className="bg-[#9ca3af] hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border border-[#94a3b8] hover:border-transparent rounded mr-1">
-                <Link to="/teacher/teacherscore" className="block w-full h-full">
-                Submit Score
-                </Link>
-              </button>
+                            <button
+                              onClick={(e) =>
+                                handleClick(
+                                  "/teacher/teacherscore",
+                                  cList.course_id
+                                )
+                              }
+                              className="bg-[#9ca3af] hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border border-[#94a3b8] hover:border-transparent rounded mr-1"
+                            >
+                              Submit Score
+                            </button>
 
-              <button className="bg-[#9ca3af] hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border border-[#94a3b8] hover:border-transparent rounded mr-1">
-                <Link to="/teacher/teachercourse_info" className="block w-full h-full">
-                Infomation
-                </Link>
-              </button>
-
+                            <button
+                              onClick={(e) =>
+                                handleClick(
+                                  "/teacher/teachercourse_info",
+                                  cList.course_id
+                                )
+                              }
+                              className="bg-[#9ca3af] hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border border-[#94a3b8] hover:border-transparent rounded mr-1"
+                            >
+                              Infomation
+                            </button>
+                          </div>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                ) : (
+                  <div className="flex flex-col items-center">
+                    <p className="text-red-500">
+                      Not Have Course in Your Response
+                    </p>
+                  </div>
+                )}
               </div>
-              
-            
-            </tr>
-            <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+{
+  /* <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
+              <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
               GEN111 : Man and Ethic of living
               </td>
               
@@ -136,9 +201,9 @@ export default function Teachertablecourse() {
               
             </tr>
       
-            <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">4</td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+            <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">4</td>
+              <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
               CPE 223: COMPUTER ARCHITECTURES
               </td>
 
@@ -166,9 +231,10 @@ export default function Teachertablecourse() {
               </div>
               
             </tr>
-            <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">5</td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+
+            <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">5</td>
+              <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
               STA 302 : STATISTICS FOR ENGINEERS
               </td>
 
@@ -194,30 +260,5 @@ export default function Teachertablecourse() {
 
               </div>
               
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-      
-      
-      
-      </div>
-      
-      
-    </div>
-
-  )
+            </tr> */
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Formik, Field, Form } from "formik";
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast';
 import tw from 'twin.macro';
@@ -31,7 +31,6 @@ export default function Studentlogin() {
                     onSubmit={async (values) => {
                         try {
                             const res = await loginStudent(values);
-                            console.log(res);
                             if (res === null) toast.error("Username doesn't exist.");
                             else if (res.error) toast.error(res.error);
                             else {

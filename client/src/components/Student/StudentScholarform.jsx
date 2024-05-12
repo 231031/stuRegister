@@ -110,6 +110,7 @@ export default function Scholarform() {
                 Gender
               </label>
               <p className="appearance-none block w-200px bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-gender">{data?.gender}</p>
+              
               {/* <div className="relative"> */}
                 {/* <select className="block appearance-none w-400px bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state" value={data?.gender}>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -119,6 +120,7 @@ export default function Scholarform() {
                   <option value={data?.gender}>{data?.gender}</option>
                 </select> */}
               {/* </div> */}
+
             </div>
 
             {/* salary */}

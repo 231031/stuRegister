@@ -44,7 +44,7 @@ export default function Studentnewpass() {
 
                             values.student_id = id;
                             const res = await updatePassword(values);
-                            navigate('/student/personal');
+                            navigate('/student/register');
                             toast.success(res.msg);
                         } catch (error) {
                             toast.error('Student registration was failed');

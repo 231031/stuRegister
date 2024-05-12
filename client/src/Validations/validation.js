@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 // T years-- department_id--- number---
 const teacher_id_pattern = /^([T])([3-6][0-9])([A-Z]{3}|[A-Z]{2})([0-9]{3})$/;
 const activity_id_pattern = /^([A][C][C])([0-9]|[0-9]{2}|[0-9]|3)$/;
+const year_pattern = /^([19|20][0-9][0-9]{2})$/;
 
 // department_id--- number---
 const course_id_pattern = /^([A-Z]{3}|[A-Z]{2})([0-9]{3})$/;
@@ -40,16 +41,6 @@ const FacSchema = Yup.object().shape({
                 .required('Name Required'),
         })
       )
-});
-
-const PersonalSchema = Yup.object().shape({
-    ...NameSchema.fields,
-    salary: Yup.number().required('Required').typeError('Must be a number'),
-    parentFirstName: Yup.string()
-        .required('required'),
-    parentLastName: Yup.string()
-        .required('required'),
-    parentSalary: Yup.number().required('Required').typeError('Must be a number'),
 });
 
 const PasswordSchema = Yup.object().shape({
@@ -117,6 +108,49 @@ const UpdateSchema = Yup.object().shape({
     city: Yup.string().required('Required').min(3, 'too short!'),
     zip_code: Yup.string().required('Required').min(4, 'wrong zip code'),
     address: Yup.string().required('Required').min(5, 'too short!'),
+
+    f_email: Yup.string()
+        .required('required').email('xxx@gmail.com'),
+    f_salary: Yup.string()
+        .required('required'),
+    f_phone: Yup.string()
+        .required('required').max(10, 'xxxxxxxxxx'),
+
+    m_email: Yup.string()
+        .required('required').email('xxx@gmail.com'),
+    m_salary: Yup.string()
+        .required('required'),
+    m_phone: Yup.string()
+        .required('required').max(10, 'xxxxxxxxxx'),
+
+});
+
+const PersonalSchema = Yup.object().shape({
+    ...UpdateSchema.fields,
+    // self
+    id_card: Yup.string().required('Required'),
+    gender: Yup.string().required('Required'),
+    date: Yup.string().required('Required'),
+    month: Yup.string().required('Required'),
+    year: Yup.string().required('Required').matches(year_pattern, '19XX - 20XX'),
+    age: Yup.number().required('Required').typeError('Must be a number'),   
+    // father
+    f_first_name: Yup.string()
+        .required('required'),
+    f_last_name: Yup.string()
+        .required('required'),
+    f_id: Yup.string()
+        .required('required'),
+    f_age: Yup.number().required('Required').typeError('Must be a number'),
+    // monther
+    m_first_name: Yup.string()
+        .required('required'),
+    m_last_name: Yup.string()
+        .required('required'),
+    m_id: Yup.string()
+        .required('required'),
+    m_age: Yup.number().required('Required').typeError('Must be a number'),
+    
 });
 
 const CourseSchema = Yup.object().shape({
@@ -133,6 +167,12 @@ const CourseSchema = Yup.object().shape({
     
 });
 
+const CourseUpdateSchema = Yup.object().shape({
+    course_name: Yup.string()
+        .required('required').min(3, 'too short!'),
+    description: Yup.string()
+        .required('required').min(10, 'too short!'),
+});
 
 const ActivitySchema = Yup.object().shape({
     activity: Yup.array().of(
@@ -201,5 +241,5 @@ const DetailSchema = Yup.object().shape({
 
 
 export { PersonalSchema, LoginSchema, UpdateSchema, CourseSchema, DetailSchema, FacSchema, DepartmentSchema, TeacherSchema,
-        AddStuSchema, AvailableSchema, NameSchema, PasswordSchema, ScholarshipSchema, ActivitySchema  };
+        AddStuSchema, AvailableSchema, NameSchema, PasswordSchema, ScholarshipSchema, ActivitySchema, CourseUpdateSchema };
 

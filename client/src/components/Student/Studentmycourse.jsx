@@ -11,6 +11,7 @@ import { getInfo, getStuRegister } from '../../helpers/stuhelper';
 const Row = tw.td`border-2 border-greendark py-1 text-sm`;
 export default function Studentmycourse() {
 
+    
     const navigate = useNavigate();
     const [data, setData] = useState('');
     const [term, setTerm] = useState(2); // current term
@@ -29,7 +30,7 @@ export default function Studentmycourse() {
       const [department_id, year, student_id] = token.split('-');
 
       const month = new Date().getMonth()
-      setMonth(month);
+      setMonth(0); // test
       if (month >= 7) setTerm(1); // month 7 is August 1
 
       const apiInfo = async () => {

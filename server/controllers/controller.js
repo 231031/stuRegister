@@ -1,13 +1,7 @@
-import { Student } from "../models/Student.model.js";
-import { Sturegister } from "../models/Sturegister.model.js";
-import { Coursedetail } from "../models/Coursedetail.model.js";
-import { Course } from "../models/Course.model.js";
-import { Faculty } from "../models/Faculty.model.js";
-import { Department } from "../models/Department.model.js";
-import { Teacher } from "../models/Teacher.model.js";
 import pool from '../dbcon.js';
 
 const connection = await pool.getConnection();
+
 export async function getAllStudents(req, res) {
     try {
         const [students] = await connection.execute(
@@ -24,10 +18,14 @@ export async function getAllStudents(req, res) {
 
 export async function getAllCourses(req, res) {
     try {
-        const courses = await Course.findAll();
-        res.json(courses)
+        const [courses] = await connection.execute(
+            'SELECT * FROM Course'
+        );
+        connection.release();
+        res.json(courses);
         
     } catch (error) {
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
 }
@@ -48,42 +46,56 @@ export async function getAllScholarships(req, res) {
 
 export async function getAllCoursesDe(req, res) {
     try {
-        const courses_de = await Coursedetail.findAll();
-        res.json(courses_de)
+        const [course_de] = await connection.execute(
+            'SELECT * FROM course_detail'
+        );
+        connection.release();
+        res.json(course_de);
         
     } catch (error) {
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
 }
 
 export async function getAllFaculty(req, res) {
     try {
-        const faculty = await Faculty.findAll();
-        res.json(faculty)
+        const [faculty] = await connection.execute(
+            'SELECT * FROM Faculty'
+        );
+        connection.release();
+        res.json(faculty);
         
     } catch (error) {
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
 }
 
 export async function getAllDepartments(req, res) {
     try {
-        const department = await Department.findAll();
-        res.json(department)
+        const [departments] = await connection.execute(
+            'SELECT * FROM Department'
+        );
+        connection.release();
+        res.json(departments);
         
     } catch (error) {
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
 }
 
 export async function getAllTeachers(req, res) {
     try {
-        const teachers = await Teacher.findAll({
-            attributes: ['teacher_id', 'firstName', 'lastName', 'year']
-        });
-        res.json(teachers)
+        const [teachers] = await connection.execute(
+            'SELECT * FROM Teacher'
+        );
+        connection.release();
+        res.json(teachers);
         
     } catch (error) {
+        connection.release();
         return res.status(404).send({ error: error.message });
     }
 }

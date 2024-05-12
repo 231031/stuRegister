@@ -59,7 +59,7 @@ export default function Coursetable() {
                               <tr key={index}>
                                 <Row>{index+1}</Row>
                                 <Row>{courseList.course_id}</Row>
-                                <Row>{courseList.courseName}</Row>
+                                <Row>{courseList.course_name}</Row>
                                 <Row><button className='text-green-600' 
                                   onClick={(e) => handleAdd(courseList.course_id, courseList.department_id)}>
                                   Add</button>

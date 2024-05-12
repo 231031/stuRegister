@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
-
-import { getStuRegister } from '../../../../controllers/studentController';
+import { getInfoStudent } from "../../helpers/comHelper";
 
 export default function Committeestu() {
   
@@ -19,7 +18,7 @@ export default function Committeestu() {
 
     const apiStu = async () => {
       try {
-        const res = await getStuRegister(id);
+        const res = await getInfoStudent(id);
         setStu(res);
       } catch (error) {
         console.error(error);

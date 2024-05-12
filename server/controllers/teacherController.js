@@ -1,7 +1,4 @@
 import bcrypt from 'bcrypt';
-import { Coursedetail } from "../models/Coursedetail.model.js";
-import { Teacher } from "../models/Teacher.model.js";
-
 import pool from '../dbcon.js';
 const connection = await pool.getConnection();
 

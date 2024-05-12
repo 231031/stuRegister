@@ -104,11 +104,14 @@ export default function Teacherscore() {
                 <div className="w-100px px-3 ">
                     <div className="relative">
                         <select className="block appearance-none w-100px bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-200" id="grid-state">
-                        <option > A </option>
-                        <option > B </option>
-                        <option > C </option>
-                        <option > D </option>
-                        <option > F </option>
+                        <option > 4 </option>
+                        <option > 3.5 </option>
+                        <option > 3 </option>
+                        <option > 2.5 </option>
+                        <option > 2 </option>
+                        <option > 1.5 </option>
+                        <option > 1 </option>
+                        <option > 0 </option>
                         </select>
                         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                         <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -133,10 +136,14 @@ export default function Teacherscore() {
                 <div className="w-100px px-3 ">
                     <div className="relative">
                         <select className="block appearance-none w-100px bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-200" id="grid-state">
-                        <option > A </option>
-                        <option > B </option>
-                        <option > C </option>
-                        <option > D </option>
+                        <option > 4 </option>
+                        <option > 3.5 </option>
+                        <option > 3 </option>
+                        <option > 2.5 </option>
+                        <option > 2 </option>
+                        <option > 1.5 </option>
+                        <option > 1 </option>
+                        <option > 0 </option>
                         </select>
                         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                         <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

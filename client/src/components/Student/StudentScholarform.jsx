@@ -167,7 +167,7 @@ export default function Scholarform() {
                         ) : null}
             </div>
 
-            <div className="w-300px  px-3">
+            <div className="w-300px  px-3 mb-3">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
                 Mobile No:
               </label>

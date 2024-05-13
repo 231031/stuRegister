@@ -11,6 +11,7 @@ export default function Headerstu({ data }) {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isCourseOpen, setIsCourseOpen] = useState(false);
   const [isActivityOpen, setIsActivityOpen] = useState(false);
+  const [isUserOpen, setIsUserOpen] = useState(false);
 
   const toggleInfo = () => {
     setIsInfoOpen(!isInfoOpen);
@@ -32,7 +33,8 @@ export default function Headerstu({ data }) {
   const toggleUser = () => {
     setIsCourseOpen(false);
     setIsInfoOpen(false);
-    setIsActivityOpen(!isActivityOpen);
+    setIsActivityOpen(false);
+    setIsUserOpen(!isUserOpen);
   };
 
   return (
@@ -85,13 +87,13 @@ export default function Headerstu({ data }) {
             <p>Year : {data?.year}</p>  
           </div> */}
           <Dropdown>
-            <Btn onClick={toggleUser}><FontAwesomeIcon className='ml-1 flex justify-end items-center 
-          absolute right-6' icon="fa-solid fa-circle-user" /></Btn>
-            <div className={isActivityOpen ? 'block' : 'hidden'}>
+            <Btn onClick={toggleUser}><FontAwesomeIcon className='ml-2 ' icon="fa-solid fa-circle-user" /></Btn>
+            <div className={isUserOpen ? 'block' : 'hidden'}>
               <List className='w-46'>
                 <li><p>ID : {data?.student_id}</p></li>
                 <li><p>Year : {data?.year}</p></li>
-                <li><NavLink to='/components/landing'>Change user views</NavLink></li>
+                <li><NavLink to='/components/Landing'>Change user view</NavLink></li>
+                <li><NavLink to='/student/login'>Log Out</NavLink></li>
               </List>
             </div>
           </Dropdown>

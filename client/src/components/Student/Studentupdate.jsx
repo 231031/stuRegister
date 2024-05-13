@@ -134,7 +134,7 @@ export default function Studentregister() {
                                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
                                         First Name :
                                         </label>
-                                        <p className="appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" style={{height:45, width:100}}>
+                                        <p className="appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" style={{height:45, width:120}}>
                                             {data?.first_name}
                                         </p>
                                     </div>
@@ -143,7 +143,7 @@ export default function Studentregister() {
                                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
                                         Last Name :
                                         </label>
-                                        <p className="appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" style={{height:45, width:100}}>
+                                        <p className="appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" style={{height:45, width:120}}>
                                             {data?.last_name}
                                         </p>
                                     </div>
@@ -152,7 +152,7 @@ export default function Studentregister() {
                                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-salary">
                                             Gender :
                                         </label>
-                                        <p className="block appearance-none w-700 bg-white text-gray-700 border border-gray-200 rounded py-3  px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" style={{height:45, width:100}}>
+                                        <p className="block appearance-none w-700 bg-white text-gray-700 border border-gray-200 rounded py-3  px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" style={{height:45, width:120}}>
                                             {data?.gender}
                                         </p>  
 
@@ -162,7 +162,7 @@ export default function Studentregister() {
                                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
                                         ID card :
                                         </label>
-                                        <p className="block appearance-none w-700 bg-white text-gray-700 border border-gray-200 rounded py-3  px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" style={{height:45, width:100}}>
+                                        <p className="block appearance-none w-700 bg-white text-gray-700 border border-gray-200 rounded py-3  px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" style={{height:45, width:120}}>
                                             {data?.id_card}
                                         </p>                 
                                     </div>
@@ -181,8 +181,8 @@ export default function Studentregister() {
                                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
                                         DOB :
                                         </label>
-                                        <p className="block appearance-none w-700 bg-white text-gray-700 border border-gray-200 rounded py-3  px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" style={{height:45, width:100}}>
-                                            {data?.dob}
+                                        <p className="block appearance-none w-700 bg-white text-gray-700 border border-gray-200 rounded py-3  px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" style={{height:45, width:120}}>
+                                            {data?.dob ? new Date(data.dob).toISOString().split('T')[0] : ""}
                                         </p>                 
                                     </div>
 
@@ -190,7 +190,7 @@ export default function Studentregister() {
                                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
                                         Age :
                                         </label>
-                                        <p className="appearance-none h-13  w-500 bg-white text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" style={{height:45, width:100}}>
+                                        <p className="appearance-none h-13  w-500 bg-white text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" style={{height:45, width:120}}>
                                             {data?.age}
                                         </p>
                                    

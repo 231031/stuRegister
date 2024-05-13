@@ -33,10 +33,24 @@ export async function getAllCourses(req, res) {
 export async function getAllScholarships(req, res) {
     try {
         const [scholars] = await connection.execute(
-            'SELECT scholarship_id, scholarship_name FROM Scholarship'
+            'SELECT * FROM Scholarship'
         );
         connection.release();
         res.json(scholars);
+        
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function getAllActivitys(req, res) {
+    try {
+        const [activitys] = await connection.execute(
+            'SELECT * FROM Activity'
+        );
+        connection.release();
+        res.json(activitys);
         
     } catch (error) {
         connection.release();

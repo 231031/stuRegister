@@ -33,6 +33,7 @@ export default function Studentregiscourse() {
       try {
         const res = await getInfo(student_id);
         setData(res);
+
       } catch (error) {
         console.log(error);
       }

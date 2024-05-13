@@ -12,29 +12,50 @@ export default function Headerstu({ data }) {
   const [isCourseOpen, setIsCourseOpen] = useState(false);
   const [isActivityOpen, setIsActivityOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
+  const [isScholarOpen, setIsScholarOpen] = useState(false);
+
+  const logout = () => {
+    localStorage.removeItem('token');
+  };
 
   const toggleInfo = () => {
     setIsInfoOpen(!isInfoOpen);
     setIsCourseOpen(false);
     setIsActivityOpen(false);
+    setIsScholarOpen(false);
+    setIsUserOpen(false);
   };
 
   const toggleCourse = () => {
     setIsCourseOpen(!isCourseOpen);
     setIsInfoOpen(false);
     setIsActivityOpen(false);
+    setIsScholarOpen(false);
+    setIsUserOpen(false);
   };
 
   const toggleActivity = () => {
     setIsCourseOpen(false);
     setIsInfoOpen(false);
     setIsActivityOpen(!isActivityOpen);
-  };  
+    setIsScholarOpen(false);
+    setIsUserOpen(false);
+  }; 
+
   const toggleUser = () => {
     setIsCourseOpen(false);
     setIsInfoOpen(false);
     setIsActivityOpen(false);
+    setIsScholarOpen(false);
     setIsUserOpen(!isUserOpen);
+  };
+
+  const toggleScholar = () => {
+    setIsCourseOpen(false);
+    setIsInfoOpen(false);
+    setIsActivityOpen(false);
+    setIsUserOpen(false);
+    setIsScholarOpen(!isScholarOpen);
   };
 
   return (
@@ -56,9 +77,15 @@ export default function Headerstu({ data }) {
             </div>
           </Dropdown>
 
-          <Btn>
-            <NavLink to='/student/scholarship'>Scholarship</NavLink>
-          </Btn>
+          <Dropdown>
+            <Btn onClick={toggleScholar}>Scholarship<FontAwesomeIcon className='ml-2' icon="fa-solid fa-caret-down" /></Btn>
+            <div className={isScholarOpen ? 'block' : 'hidden'}>
+              <List>
+                <li><NavLink to='/student/scholarship'>Scholarship</NavLink></li>
+                <li><NavLink to='/student/statusscholar'>Status</NavLink></li>
+              </List>
+            </div>
+          </Dropdown>
 
           <Dropdown>
             <Btn onClick={toggleCourse}>Course<FontAwesomeIcon className='ml-2' icon="fa-solid fa-caret-down" /></Btn>
@@ -93,7 +120,7 @@ export default function Headerstu({ data }) {
                 <li><p>ID : {data?.student_id}</p></li>
                 <li><p>Year : {data?.year}</p></li>
                 <li><NavLink to='/components/Landing'>Change user view</NavLink></li>
-                <li><NavLink to='/student/login'>Log Out</NavLink></li>
+                <li onClick={logout}><NavLink to='/student/login'>Log Out</NavLink></li>
               </List>
             </div>
           </Dropdown>

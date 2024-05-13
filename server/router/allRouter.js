@@ -9,5 +9,6 @@ router.route("/coursesde").get(controller.getAllCoursesDe);
 router.route("/faculty").get(controller.getAllFaculty);
 router.route("/departments").get(controller.getAllDepartments);
 router.route("/scholarships").get(controller.getAllScholarships);
+router.route("/activitys").get(controller.getAllActivitys);
 
 export default router;

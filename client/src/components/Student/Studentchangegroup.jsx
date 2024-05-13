@@ -58,12 +58,12 @@ export default function Studentchangegroup() {
             const updatedUp = [...prevUp];
             updatedUp[i] = ({
               course_id: res[i].course_id,
+              old_gr: res[i].gr,
               gr: res[i].gr,
             });
             return updatedUp;
           });
         }
-
       } catch (error) {
         console.log(error);
       }
@@ -77,23 +77,17 @@ export default function Studentchangegroup() {
   }
 
   function handleUpdate(id, group, group_in, index) {
-    console.log(group_in, group);
     setDe((prevDe) => {
-      if (group_in === 0) {
-        const updatedDe = [...prevDe];
-        updatedDe[index] = group;
-        return updatedDe;
-      } else {
         const updatedDe = [...prevDe];
         updatedDe[index] = group_in;
         return updatedDe;
-      }
     });
 
     setUp((prevUp) => {
       const updatedUp = [...prevUp];
       updatedUp[index] = {
         course_id: id,
+        old_gr: regis[index].gr,
         gr : group,
       };
       return updatedUp;
@@ -101,14 +95,12 @@ export default function Studentchangegroup() {
   }
 
   async function handleClick() {
-    console.log(de);
-    console.log(up);
-    // try {
-    //   const res = await changeGroup();
-    //   toast.success(res.msg);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      const res = await changeGroup(up, data.year, term);
+      toast.success(res.msg);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -119,7 +111,7 @@ export default function Studentchangegroup() {
           <title>Stu | ChangeGroup</title>
         </Helmet>
         <Headerstu data={data} />
-        <div className='flex bg-lowyellow'>
+        <div className='h-screen flex bg-lowyellow'>
           <div className='w-1/4 bg-slate-300 h-[calc(100vh-40px)] p-10'>
             <div className='flex flex-col items-center my-10'>
               <img className='rounded-full w-1/2 h-1/2 border-2 border-sky' src={profile} />

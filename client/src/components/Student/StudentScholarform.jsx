@@ -190,7 +190,7 @@ export default function Scholarform() {
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-dayofbirth" >
                 Day of birth
               </label>
-              <p className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"   id="grid-dayofbirth">{data?.dob}</p>
+              <p className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"   id="grid-dayofbirth">{data?.dob ? new Date(data.dob).toISOString().split('T')[0] : ""}</p>
                 {/* <div className="relative">
                   <select className="block appearance-none w-600px bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
                     <option>{data?.dob}</option>

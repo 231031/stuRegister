@@ -37,6 +37,7 @@ import AllActivity from './components/Student/StudentallAc';
 import AttendedActivity from './components/Student/StudentAtten';
 import EvaluateActivity from './components/Student/StudentEvaActivity';
 import Scholarform from './components/Student/StudentScholarform'; 
+import Studentstatusscholar from './components/Student/Studentstatusscholar';
 import EvaForm from './components/Student/StudentEvaActivityform';
 import Studentregister from './components/Student/Studentregister';
 
@@ -203,6 +204,10 @@ const router = createBrowserRouter(
     {
       path: '/student/scholarship',
       element : <Studentscholar/>
+    },
+    {
+      path: '/student/statusscholar',
+      element : <Studentstatusscholar/>
     },
     {
       path: '/student/StudentScholarform',

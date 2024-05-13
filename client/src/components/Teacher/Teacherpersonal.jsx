@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import { Formik, Field, Form } from "formik";
 import tw from 'twin.macro';
 import { Toaster } from 'react-hot-toast';
@@ -10,12 +10,31 @@ import { updateTeacher } from '../../helpers/teacherHelper';
 import { PersonalSchema } from '../../Validations/validation';
 
 import Headerteacher from "./Headerteacher";
-import { data } from 'autoprefixer';
+import { getInfoTeacher } from '../../helpers/teacherHelper';
 
 const Alert = tw.div`text-red-700 text-sm`;
 export default function Teacherpersonal() {
 
   const navigate = useNavigate();
+  const [data, setData] = useState('');
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/teacher/login");
+    }
+
+    const apiInfo = async () => {
+      try {
+        const res = await getInfoTeacher(localStorage.getItem("token"));
+        setData(res);
+      } catch (error) {
+        toast.error("Cannot Get Information");
+        console.error(error);
+      }
+    };
+    apiInfo();
+  }, []);
 
   return (
     <HelmetProvider>

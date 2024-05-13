@@ -509,25 +509,31 @@ export async function getStuRegisterDelete(req, res) {
 export async function changeGroup(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
+        const { update, year, term }  = await req.body;
 
         await connection.beginTransaction();
-        await connection.execute( // old group before change
-            'UPDATE course_detail SET count = count - 1 WHERE course_id = ? AND gr = ? ',
-            []
-        );
-        await connection.execute( // new group after change
-            'UPDATE stu_register SET gr = ? WHERE student_id = ? AND year = ? AND term = ? AND course_id = ?', 
-            []
-        );
-        await connection.execute( // new group after change
-            'UPDATE course_detail SET count = count + 1 WHERE course_id = ? AND gr = ?', 
-            []
-        );
 
-
+        for (let i = 0; i < update.length; i++) {
+            if (update[i].old_gr != update[i].gr) {
+                await connection.execute( // old group before change
+                    'UPDATE course_detail SET count = count - 1 WHERE course_id = ? AND gr = ? ',
+                    [update[i].course_id, update[i].old_gr]
+                );
+                await connection.execute( // new group after change
+                    'UPDATE stu_register SET gr = ? WHERE student_id = ? AND year = ? AND term = ? AND course_id = ?', 
+                    [update[i].gr, token, year, term, update[i].course_id]
+                );
+                await connection.execute( // new group after change
+                    'UPDATE course_detail SET count = count + 1 WHERE course_id = ? AND gr = ?', 
+                    [update[i].course_id, update[i].gr]
+                );
+            }
+            
+        }
         await connection.commit();
         connection.release();
         return res.status(200).send({ msg : 'Change Group Successfully'});
+
     } catch (error) {
         await connection.rollback();
         connection.release();

@@ -334,11 +334,26 @@ export async function delStuCourse(info) {
 
 // not tested yet
 // sent term year course_id, old group, new group
-export async function changeGroup() {
+export async function changeGroup(info, year, term) {
   try {
-
+    const token = localStorage.getItem('token');
+    const [department_id, year, student_id] = token.split('-');
+    const response = await fetch('http://localhost:6001/student/update/group', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${student_id}`,
+      },
+      body: JSON.stringify({ update : info, year : year, term : term }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
   } catch (error) {
-
+    return Promise.reject(error);
   }
 }
 

@@ -12,6 +12,7 @@ export default function Headeradmin() {
   const [isSOpen, setIsSOpen] = useState(false);
   const [isActivityOpen, setIsActivityOpen] = useState(false);
   const [isCourseOpen, setIsCourseOpen] = useState(false);
+  const [isUserOpen, setIsUserOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -39,6 +40,14 @@ export default function Headeradmin() {
     setIsSOpen(false);
     setIsCourseOpen(false);
     setIsActivityOpen(!isActivityOpen);
+  };
+
+  const toggleUser = () => {
+    setIsDropdownOpen(false);
+    setIsSOpen(false);
+    setIsCourseOpen(false);
+    setIsActivityOpen(false);
+    setIsUserOpen(!isUserOpen);
   };
 
   return (
@@ -93,6 +102,15 @@ export default function Headeradmin() {
               <List>
                 <li><NavLink to='/admin/addactivity'>Add Activity</NavLink></li>
                 <li><NavLink to='/admin/activitys'>All Activity</NavLink></li>
+              </List>
+            </div>
+          </Dropdown>
+          <Dropdown>
+            <Btn onClick={toggleUser}><FontAwesomeIcon className='ml-2' icon="fa-solid fa-circle-user" /></Btn>
+            <div className={isUserOpen ? 'block' : 'hidden'}>
+              <List className='w-46'>
+                <li><NavLink to='/components/Landing'>Change user view</NavLink></li>
+                <li><NavLink to='/admin/login'>Log Out</NavLink></li>
               </List>
             </div>
           </Dropdown>

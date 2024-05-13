@@ -11,6 +11,7 @@ export default function Headerstu({ data }) {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isCourseOpen, setIsCourseOpen] = useState(false);
   const [isActivityOpen, setIsActivityOpen] = useState(false);
+  const [isUserOpen, setIsUserOpen] = useState(false);
 
   const toggleInfo = () => {
     setIsInfoOpen(!isInfoOpen);
@@ -28,6 +29,12 @@ export default function Headerstu({ data }) {
     setIsCourseOpen(false);
     setIsInfoOpen(false);
     setIsActivityOpen(!isActivityOpen);
+  };  
+  const toggleUser = () => {
+    setIsCourseOpen(false);
+    setIsInfoOpen(false);
+    setIsActivityOpen(false);
+    setIsUserOpen(!isUserOpen);
   };
 
   return (
@@ -74,11 +81,22 @@ export default function Headerstu({ data }) {
               </List>
             </div>
           </Dropdown> 
-          <div className='text-white text-xs flex flex-col justify-center items-center 
-          absolute right-5 border-opacity-50 border-gray-400 pl-6'>
+          {/* <div  className='text-white text-xs flex flex-col justify-center items-center 
+          absolute right-5 border-opacity-50 border-gray-400 pl-6' icon="fa-solid fa-circle-user">
             <p>ID : {data?.student_id}</p>
-            <p>Year : {data?.year}</p>
-        </div>
+            <p>Year : {data?.year}</p>  
+          </div> */}
+          <Dropdown>
+            <Btn onClick={toggleUser}><FontAwesomeIcon className='ml-2 ' icon="fa-solid fa-circle-user" /></Btn>
+            <div className={isUserOpen ? 'block' : 'hidden'}>
+              <List className='w-46'>
+                <li><p>ID : {data?.student_id}</p></li>
+                <li><p>Year : {data?.year}</p></li>
+                <li><NavLink to='/components/Landing'>Change user view</NavLink></li>
+                <li><NavLink to='/student/login'>Log Out</NavLink></li>
+              </List>
+            </div>
+          </Dropdown>
         </ul>
         
         
@@ -86,5 +104,3 @@ export default function Headerstu({ data }) {
     </div>
   )
 }
-
-

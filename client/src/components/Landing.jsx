@@ -14,6 +14,10 @@ export default function Landing() {
   function teacher() {
     navigate('/teacher/login');
   }
+  
+  function committee() {
+    navigate('/committee/login');
+  }
 
   function student() {
     navigate('/student/login');
@@ -28,13 +32,18 @@ export default function Landing() {
         <div className='flex flex-row justify-center mt-14'>
           <Btn>
             <FontAwesomeIcon onClick={(e)=>admin()}
-            className='size-20 mx-8 p-10 rounded-full bg-orange-300 cursor-pointer hover:bg-orange-500' icon="fa-solid fa-user-tie " />
+            className='size-20 mx-8 p-10 rounded-full bg-orange-300 cursor-pointer hover:bg-orange-500' icon="fa-solid fa-user-gear " />
             <p className='mt-4 text-orange-800 text-2xl '>Admin</p>
           </Btn>
           <Btn>
             <FontAwesomeIcon onClick={(e)=>teacher()}
-            className='size-20 mx-8 p-10 rounded-full bg-blue-300 cursor-pointer hover:bg-blue-500' icon="fa-solid fa-person-chalkboard" />
+            className='size-20 mx-8 p-10 rounded-full bg-blue-300 cursor-pointer hover:bg-blue-500' icon="fa-solid fa-chalkboard-user" />
             <p className='mt-4 text-blue-800 text-2xl'>Teacher</p>
+          </Btn>
+          <Btn>
+            <FontAwesomeIcon onClick={(e)=>committee()}
+            className='size-20 mx-8 p-10 rounded-full bg-red-300 cursor-pointer hover:bg-red-500' icon="fa-solid fa-user-check" />
+            <p className='mt-4 text-blue-800 text-2xl'>Committee</p>
           </Btn>
           <Btn>
             <FontAwesomeIcon onClick={(e)=>student()}

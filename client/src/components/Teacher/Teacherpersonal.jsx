@@ -9,6 +9,9 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { updateTeacher } from '../../helpers/teacherHelper';
 import { PersonalSchema } from '../../Validations/validation';
 
+import Headerteacher from "./Headerteacher";
+import { data } from 'autoprefixer';
+
 const Alert = tw.div`text-red-700 text-sm`;
 export default function Teacherpersonal() {
 
@@ -16,11 +19,12 @@ export default function Teacherpersonal() {
 
   return (
     <HelmetProvider>
-      <div className='container text-lg'>
+      <div>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <Helmet>
             <title>T | FillPersonal</title>
         </Helmet>
+        <Headerteacher data={data}/>
         <h3 className='text-center py-4'>Teacher Personal Information</h3>
             <div className='register-form'>
                 <Formik 

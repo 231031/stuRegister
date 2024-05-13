@@ -33,9 +33,9 @@ export default function Committeelogin() {
       <div className='flex justify-center flex-col h-screen'>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <Helmet>
-            <title>A | Login</title>
+            <title>C | Login</title>
         </Helmet>
-        <h3 className='text-center py-5 text-4xl text-bold'>Admin Login</h3>
+        <h3 className='text-center py-5 text-4xl text-bold'>Committee Login</h3>
         <div className='flex justify-center'>
           <form onSubmit={(e)=>handleSubmit(e)}>
             <div className='flex flex-col w-96'>

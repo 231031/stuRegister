@@ -112,7 +112,7 @@ export default function Studentregiscourse() {
             <title>Stu | RegisterCourse</title>
         </Helmet>
         <Headerstu data={data}/>
-        <div className='container flex flex-row'>
+        <div className='h-screen flex flex-row '>
           <div className='w-1/4 bg-slate-300 h-[calc(100vh-40px)] p-10'>
             <div className='flex flex-col items-center my-10'>
               <img className='rounded-full w-1/2 h-1/2 border-2 border-sky' src={profile}/>
@@ -134,10 +134,10 @@ export default function Studentregiscourse() {
           </div>
           {
             (month == 4 && date < 15) ? (
-              <div className='w-3/4 flex'>
+              <div className='w-3/4 flex justify-center '>
               {
                 (available.length > 0)? (
-                  <div className='w-full flex flex-col justify-center items-center'>
+                  <div className='w-3/4 flex flex-col justify-center items-center'>
                     <p className='text-lg'>Compulsory Courses</p>
                     <table className='text-center w-11/12 border-2 border-sky mt-10'>
                     <thead>
@@ -191,7 +191,7 @@ export default function Studentregiscourse() {
                   </div>
                   
                 ) : (
-                  <div className='w-3/4 flex justify-end items-center'>
+                  <div className='w-3/4 flex justify-center items-center'>
                     <p>Not Have Available Course Now</p>
                   </div>
                 )

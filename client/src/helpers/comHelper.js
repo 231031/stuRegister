@@ -1,3 +1,23 @@
+export async function login(info) {
+  try {
+      const response = await fetch('http://localhost:6001/committee/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ key : info }),
+      });
+      const data = await response.json();
+      if (response.status === 404) {
+        return Promise.reject(data);
+      }
+      console.log(data);
+      return Promise.resolve(data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+}
+
 export async function getApplicant(info) {
   try {
     const response = await fetch('http://localhost:6001/committee/getapplicant', {

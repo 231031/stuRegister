@@ -97,7 +97,7 @@ export default function Adminaddavailable() {
                                             <label for='course'>Course</label>
                                             {
                                                 (course.length > 0)  ? (
-                                                    <Field id='course' className='rounded-md mx-1 border-2 border-sky-700 w-20' type='text' name={course_id} value={p.course_id} as='select'>
+                                                    <Field id='course' className='rounded-md mx-1 border-2 border-sky w-20' type='text' name={course_id} value={p.course_id} as='select'>
                                                         <option value=''></option>
                                                         {
                                                             course.map((courseList, index) => (
@@ -144,7 +144,7 @@ export default function Adminaddavailable() {
                                     );
                                 })}
                                 <button className='border-2 bg-yellow-500 px-4 rounded-md' type='button' 
-                                onClick={() => push({ course_id: '', department_id: de, year: '', term: '' })}>Add</button>
+                                onClick={() => push({ course_id: '', year: '', department_id: de, term: '' })}>Add</button>
                                 </div>
                             )}
                             </FieldArray>

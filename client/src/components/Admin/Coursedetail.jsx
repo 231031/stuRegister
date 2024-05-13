@@ -119,21 +119,21 @@ export default function Coursedetail() {
                                     return (
                                     <div key={index} className='flex flex-wrap my-2'>
                                         <Fill>
-                                            <Field className='rounded-md mx-1 border-2' type='number' 
+                                            <Field className='rounded-md mx-1 border-2 border-sky' type='number' 
                                             name={gr} value={p.gr} placeholder='gr Number'></Field>
                                             {errorgr && touchedgr && (
                                                 <Alert>{errorgr}</Alert>
                                             )}
                                         </Fill>
                                         <Fill>
-                                            <Field className='rounded-md mx-1 border-2' type='number' 
+                                            <Field className='rounded-md mx-1 border-2 border-sky' type='number' 
                                             name={finite} value={p.finite} placeholder='finite Student'></Field>
                                             {errorfinite && touchedfinite && (
                                                 <Alert>{errorfinite}</Alert>
                                             )}
                                         </Fill>
                                         <Fill>
-                                            <Field className='rounded-md mx-1 border-2' as="select" name={day} value={p.day}>
+                                            <Field className='rounded-md mx-1 border-2 border-sky' as="select" name={day} value={p.day}>
                                                 <option></option>
                                                 <option value="monday">monday</option>
                                                 <option value="tuesday">tuesday</option>
@@ -149,7 +149,7 @@ export default function Coursedetail() {
                                         </Fill>
                                         
                                         <Fill>
-                                            <Field className='rounded-md mx-1 border-2' 
+                                            <Field className='rounded-md mx-1 border-2 border-sky' 
                                             name={class_id} value={p.class_id} placeholder='Class ID'></Field>
                                             {errorClass && touchedClass && (
                                                 <Alert>{errorClass}</Alert>
@@ -158,7 +158,7 @@ export default function Coursedetail() {
                                         <Fill>
                                             {
                                                 (teacher.length > 0)  ? (
-                                                    <Field className='rounded-md mx-1 border-2' type='text' 
+                                                    <Field className='rounded-md mx-1 border-2 border-sky' type='text' 
                                                     name={teacher_id} value={p.teacher_id} as='select'>
                                                         <option value=''></option>
                                                         {
@@ -176,21 +176,21 @@ export default function Coursedetail() {
                                             )}
                                         </Fill>
                                         <Fill>
-                                            <Field className='rounded-md mx-1 border-2' type='text' 
+                                            <Field className='rounded-md mx-1 border-2 border-sky' type='text' 
                                             name={start_time} value={p.start_time} placeholder='Start Time (00:00 - 23:59)'></Field>
                                             {errorStart && touchedStart && (
                                                 <Alert>{errorStart}</Alert>
                                             )}
                                         </Fill>
                                         <Fill>
-                                            <Field className='rounded-md mx-1 border-2' type='text' 
+                                            <Field className='rounded-md mx-1 border-2 border-sky' type='text' 
                                             name={finish_time} value={p.finish_time} placeholder='Finish Time'></Field>
                                             {errorFinish && touchedFinish && (
                                                 <Alert>{errorFinish}</Alert>
                                             )}
                                         </Fill>
 
-                                        <button type='button' className='px-1 rounded-md border-2 bg-red-500' onClick={() => remove(index)} 
+                                        <button type='button' className='px-1 rounded-md border-2 border-sky bg-red-500' onClick={() => remove(index)} 
                                             disabled={values.course_de.length === 1}> X </button>
                                         
                                     </div>
@@ -202,7 +202,7 @@ export default function Coursedetail() {
                                 </div>
                             )}
                             </FieldArray>
-                            <button type="submit" className="btn border-2 bg-sky-500 rounded-md my-2 px-4">SUBMIT</button>
+                            <button type="submit" className="btn border-2 bg-sky text-white rounded-md my-2 px-4">SUBMIT</button>
                         </Form>
                     )}
                 </Formik>

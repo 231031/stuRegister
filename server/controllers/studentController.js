@@ -110,6 +110,55 @@ export async function getInfo(req, res) {
     }
 }
 
+export async function getStuTerm(req, res) {
+    try {
+        const query = `
+            SELECT 
+                ET.student_id,
+                ET.year,
+                JSON_ARRAYAGG(
+                    JSON_OBJECT(
+                        'term', ET.term,
+                        'grade_term', ET.grade_term,
+                        'course_term', courses.course_term
+                    )
+                ) AS register_term
+            FROM 
+                edu_term ET
+            INNER JOIN (
+                SELECT 
+                    student_id,
+                    year,
+                    term,
+                    JSON_ARRAYAGG(
+                        JSON_OBJECT(
+                            'course_id', course_id,
+                            'grade', grade
+                        )
+                    ) AS course_term
+                FROM 
+                    stu_register
+                GROUP BY 
+                    student_id, year, term
+            ) AS courses ON ET.student_id = courses.student_id 
+                AND ET.year = courses.year 
+                AND ET.term = courses.term
+            WHERE 
+                ET.student_id = ? 
+                AND ET.year = ?
+            GROUP BY 
+                ET.student_id, ET.year;
+
+        `
+        const [regis] = await connection.execute(query, [req.body.student_id, req.body.year]);
+        connection.release();
+        res.json(regis[0]);
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
 export async function getScholar(req, res) {
     const date = new Date();
 

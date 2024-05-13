@@ -11,7 +11,6 @@ export async function login(info) {
         if (response.status === 404) {
           return Promise.reject(data);
         }
-        console.log(data);
         return Promise.resolve(data);
       } catch (error) {
         return Promise.reject(error);
@@ -32,7 +31,6 @@ export async function addCourse(info) {
         if (response.status === 404) {
           return Promise.reject(data);
         }
-        console.log(data);
         return Promise.resolve(data);
       } catch (error) {
         return Promise.reject(error);
@@ -52,7 +50,6 @@ export async function addAvailableCourse(info) {
         if (response.status === 404) {
           return Promise.reject(data);
         }
-        console.log(data);
         return Promise.resolve(data);
       } catch (error) {
         return Promise.reject(error);
@@ -72,7 +69,6 @@ export async function editCourse(info) {
         if (response.status === 404) {
           return Promise.reject(data);
         }
-        console.log(data);
         return Promise.resolve(data);
       } catch (error) {
         return Promise.reject(error);
@@ -92,7 +88,6 @@ export async function addDetail(info) {
         if (response.status === 404) {
           return Promise.reject(data);
       }
-        console.log(data);
         return Promise.resolve(data);
       } catch (error) {
         return Promise.reject(error);
@@ -112,7 +107,6 @@ export async function addFaculty(info) {
         if (response.status === 404) {
           return Promise.reject(data);
       }
-        console.log(data);
         return Promise.resolve(data);
       } catch (error) {
         return Promise.reject(error);
@@ -133,7 +127,6 @@ export async function addDepartment(info) {
         if (response.status === 404) {
           return Promise.reject(data);
       }
-        console.log(data);
         return Promise.resolve(data);
       } catch (error) {
         return Promise.reject(error);
@@ -196,7 +189,6 @@ export async function addStudent(info) {
         if (response.status === 404) {
           return Promise.reject(data);
       }
-        console.log(data);
         return Promise.resolve(data);
       } catch (error) {
         return Promise.reject(error);

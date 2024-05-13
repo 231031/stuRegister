@@ -17,6 +17,7 @@ router.route('/getsturegister').post(controller.getStuRegister); // my course
 router.route('/getsturegister/delete').post(controller.getStuRegisterDelete); // delete course
 router.route('/getsturegister/update').post(controller.getStuRegisterChange); // change group
 router.route('/getavailable').post(controller.getAvailableCourse); // add course
+router.route('/getstuterm').post(controller.getStuTerm); // education
 router.route('/getscholarship').post(controller.getScholar);
 router.route('/getactivity').post(controller.getActivity);
 router.route('/getarractivity').post(controller.getArrActivity);

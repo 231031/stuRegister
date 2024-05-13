@@ -31,8 +31,8 @@ export default function Detailcourse() {
             <title>Stu | CourseDetail</title>
         </Helmet> 
         <Headerstu data={data}/>
-        <div className='bg-lowyellow'> 
-            {/* display course detail of selected course ?? */}
+        <div>
+          <p>Course Detail</p>
         </div>
       </div>
     </HelmetProvider>

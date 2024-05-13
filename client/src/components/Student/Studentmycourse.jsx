@@ -136,7 +136,7 @@ export default function Studentmycourse() {
                         <Row>ID</Row>
                         <Row>Course Name</Row>
                         <Row>Group</Row>
-                        <Row>Processor</Row>
+                        <Row>Professor</Row>
                         <Row>Room</Row> 
                         <Row>More Detail</Row>
                       </tr>

@@ -447,7 +447,7 @@ export async function getStuRegisterChange(req, res) {
         let term = 2;
         if (month >= 7) term = 1; // after august term 1
         const query = `
-            SELECT C.*, S.gr,
+            SELECT C.*, S.gr, 
             JSON_ARRAYAGG(
                 JSON_OBJECT(
                     'gr', D.gr,

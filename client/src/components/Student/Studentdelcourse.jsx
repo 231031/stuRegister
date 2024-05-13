@@ -16,7 +16,7 @@ export default function Studentdelcourse() {
     const location = useLocation();
     const navigate = useNavigate();
     const [data, setData] = useState('');
-    const [term, setTerm] = useState(); // current term
+    const [term, setTerm] = useState(2); // current term
 
     // selected
     const [regis, setRegis] = useState('');
@@ -74,7 +74,7 @@ export default function Studentdelcourse() {
           if (confirmed) {
             const res = await delStuCourse(detail);
             toast.success(res.msg);  
-            // window.location.reload();
+            window.location.reload();
           }
           
         } catch (error) {

@@ -41,7 +41,7 @@ export default function Committeetable() {
   }, [sel]);
 
   function handleClick(id) {
-    navigate('/committee/info', { state: { student_id: id } });
+    navigate('/committee/info', { state: { student_id: id, scholarship_id : sel  }});
   }
 
 

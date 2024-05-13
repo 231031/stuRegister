@@ -1,6 +1,24 @@
 import pool from '../dbcon.js';
 const connection = await pool.getConnection();
 
+
+export async function login(req, res) {
+    try {
+        // committeekeykmutt3123
+        const key = 'committeekeykmutt3123';
+        if (req.body.key === key) {
+            return res.status(200).send({
+                msg : "Login successful",
+                role : 'committee',
+            }) 
+        }
+        else return res.status(401).send({ error : "invalid key!"});
+
+    } catch (error) {
+        return res.status(404).send({ error: error.message });
+    }
+}
+
 export async function getApplicant(req, res) {
     try {
         const query = `
@@ -76,30 +94,32 @@ export async function updateCheck(req, res) {
 export async function getStudent(req, res) {
     try {
         const query = `
-            SELECT S.student_id, S.first_name, S.last_name, 
+            SELECT S.student_id, S.first_name, S.last_name, S.salary, S.f_salary, 
+            S.m_salary, S.address, S.zip_code, S.city, S.state,
                 JSON_ARRAYAGG(
                     JSON_OBJECT(
                         'grade', SR.grade,
-                        'credit', C.credit,          
+                        'credit', C.credit        
                     )
-                ) AS Register
-                FROM Course C INNER JOIN stu_register ON C.course_id = SR.course_id 
+                ) AS register
+                FROM Course C INNER JOIN stu_register SR ON C.course_id = SR.course_id 
                 INNER JOIN Student S ON S.student_id = SR.student_id WHERE S.student_id = ?
-                GROUP BY S.student_id, S.first_name, S.last_name
+                GROUP BY S.student_id, S.first_name, S.last_name, S.salary, S.f_salary, 
+                S.m_salary, S.address, S.zip_code, S.city, S.state
         `;
         const [student] = await pool.execute(query, [req.body.id]);
         connection.release();
-        
+
         let total_credit = 0;
         let sum = 0;
-        const { register } = student;
-        for (const course of register) {
-            sum += (course.credit*course.grade);
-            total_credit += course.credit;
+        const { register } = student[0];
+        for (let i = 0; i < register.length; i++) {
+            sum += (register[i].credit*register[i].grade);
+            total_credit += register[i].credit;
         }
         let gpax = sum / total_credit;
 
-        return res.status(200).send({ gpax : gpax, info : student });
+        return res.status(200).send({ gpax : gpax, info : student[0] });
     } catch (error) {
         connection.release();
         return res.status(404).send({ error: error.message });

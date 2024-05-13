@@ -10,6 +10,7 @@ const router = Router();
 
 // post
 // query
+router.route('/login').post(controller.login);
 router.route('/getapplicant').post(controller.getApplicant);
 router.route('/getscholarhis').post(controller.getScholarHis);
 router.route('/getstudent').post(controller.getStudent);

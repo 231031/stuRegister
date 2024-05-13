@@ -191,7 +191,7 @@ export default function Studentregiscourse() {
                   </div>
                   
                 ) : (
-                  <div className='w-3/4 flex justify-center items-center'>
+                  <div className='w-3/4 flex justify-end items-center'>
                     <p>Not Have Available Course Now</p>
                   </div>
                 )

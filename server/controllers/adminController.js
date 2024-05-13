@@ -44,7 +44,7 @@ export async function addCourse(req, res) {
 export async function addAvailableCourse(req, res) {
     try {
         const availableValues = await req.body.available.map(available => {
-            return [available.course_id, available.department_id, available.year, available.term];
+            return [available.course_id,  available.year, available.department_id, available.term];
         });
         const query = `
             INSERT INTO available_course (course_id, year, department_id, term)

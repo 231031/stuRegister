@@ -1,6 +1,24 @@
 import pool from '../dbcon.js';
 const connection = await pool.getConnection();
 
+
+export async function login(req, res) {
+    try {
+        // committeekeykmutt3123
+        const key = 'committeekeykmutt3123';
+        if (req.body.key === key) {
+            return res.status(200).send({
+                msg : "Login successful",
+                role : 'committee',
+            }) 
+        }
+        else return res.status(401).send({ error : "invalid key!"});
+
+    } catch (error) {
+        return res.status(404).send({ error: error.message });
+    }
+}
+
 export async function getApplicant(req, res) {
     try {
         const query = `

@@ -65,7 +65,7 @@ export default function Admintablefac() {
                               <tr key={index}>
                                 <Row>{index+1}</Row>
                                 <Row onClick={(e) => departTable(facList.faculty_id)} className='cursor-pointer hover:bg-cyan-600'>{facList.faculty_id}</Row>
-                                <Row>{facList.facultyName}</Row>
+                                <Row>{facList.faculty_name}</Row>
                                 <Row className='cursor-pointer hover:bg-blue-300'><button className='text-green-600 ' onClick={(e) => handleAdd(facList.faculty_id)}>Add</button></Row>
                                 <Row className='cursor-pointer hover:bg-red-300'><button className='text-red-600 ' onClick={(e) => handleDel(facList.faculty_id)}>Del</button></Row>
                               </tr>

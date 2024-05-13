@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
-import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Headerstu from './Headerstu';
-import { useNavigate } from 'react-router-dom';
+import { getStuTerm, getInfo } from '../../helpers/stuhelper';
 
 
 // <----img---->
@@ -24,18 +23,42 @@ export default function Studentaddeduhis() {
 
   const navigate = useNavigate();
   const [data, setData] = useState('');
+  const [term, setTerm] = useState('');
+  const [date, setDate] = useState('');
+  const [month, setMonth] = useState('');
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
       navigate('/student/login');
-    }
+    } 
     const [department_id, year, student_id] = token.split('-');
-    setData({
-      department_id: department_id,
-      year: year,
-      student_id: student_id,
-    });
+
+    const apiInfo = async () => {
+      try {
+        const res = await getInfo(student_id);
+        setData(res);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    if (student_id) apiInfo();    
+
+    setDate(new Date().getDate());
+    setMonth(new Date().getMonth());
   }, []);
+
+  useEffect(() => {
+    const apiTerm = async () => {
+      try {
+        const res = await getStuTerm(data?.student_id, data?.year);
+        setTerm(res);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    if (data) apiTerm();
+  }, [data]);
 
   return (
     <HelmetProvider>
@@ -47,36 +70,36 @@ export default function Studentaddeduhis() {
         <Headerstu data={data}/>
 
         
-        <div class="md:flex no-wrap md:-mx-2 ">
+        <div className="md:flex no-wrap md:-mx-2 ">
           
 
         {/* <!-- Left Side --> */}
         
-          <div class="container flex flex-row">
+          <div className="container flex flex-row">
             <div className="w-1/4 bg-gray-800 p-10 " style={{ height: "1500px" }} >
 
-                    <div class="bg-gray-800 p-3 border-t-4 border-gray-800 h-full" >
-                          <div class="image overflow-hidden">
-                              <img class="h-30px w-30px mx-auto"
+                    <div className="bg-gray-800 p-3 border-t-4 border-gray-800 h-full" >
+                          <div className="image overflow-hidden">
+                              <img className="h-30px w-30px mx-auto"
                                   src={profile}
                                   alt=""/>
                           </div>
-                          <h1 class="text-white font-bold text-xl leading-8 my-1">{text.name}</h1>
-                          <h3 class="text-[#e2e8f0] font-lg text-semibold leading-6">{text.Faculty}</h3>
-                          <p class="text-sm text-[#e2e8f0] hover:text-gray-600 leading-6">Year : {text.year}</p>
+                          <h1 className="text-white font-bold text-xl leading-8 my-1">{text.name}</h1>
+                          <h3 className="text-[#e2e8f0] font-lg text-semibold leading-6">{text.Faculty}</h3>
+                          <p className="text-sm text-[#e2e8f0] hover:text-gray-600 leading-6">Year : {text.year}</p>
                           <ul
-                              class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
-                              <li class="flex items-center py-3">
+                              className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
+                              <li className="flex items-center py-3">
                                 <span>Email : </span>
-                                  <span class="ml-auto">{text.Email}</span>
+                                  <span className="ml-auto">{text.Email}</span>
                               </li>
-                              <li class="flex items-center py-3">
+                              <li className="flex items-center py-3">
                                   <span>ID : </span>
-                                  <span class="ml-auto">{text.student_id}</span>
+                                  <span className="ml-auto">{text.student_id}</span>
                               </li>
                           </ul>
                           <br />
-                          <div class="flex items-center space-x-3 font-semibold text-white text-xl leading-8">
+                          <div className="flex items-center space-x-3 font-semibold text-white text-xl leading-8">
                               
                               <span>GPAX: 4.00</span>
                             
@@ -95,11 +118,11 @@ export default function Studentaddeduhis() {
                 {/* <!-- End of profile card --> */}
         
             {/* <-- Right Side --> */}
-            <div class="w-full md:w-9/12 mx-2 h-64">
+            <div className="w-full md:w-9/12 mx-2 h-64">
                 {/* <!-- Profile tab -->*/}
-                <div class="ml-10 mt-10 bg-[#f1f5f9] p-3 shadow-sm rounded-sm">
-                    <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
-                        <span class="tracking-wide ml-2">1st Term</span>
+                <div className="ml-10 mt-10 bg-[#f1f5f9] p-3 shadow-sm rounded-sm">
+                    <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
+                        <span className="tracking-wide ml-2">1st Term</span>
                     </div>
                   
 
@@ -107,23 +130,23 @@ export default function Studentaddeduhis() {
 
 
 
-                    <div class="grid-cols-2">
-                      <div class=" pt-10 overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-                        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                          <div class="overflow-hidden">
-                            <table class="min-w-full">
-                              <thead class="bg-gray-200 border-b">
+                    <div className="grid-cols-2">
+                      <div className=" pt-10 overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+                        <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                          <div className="overflow-hidden">
+                            <table className="min-w-full">
+                              <thead className="bg-gray-200 border-b">
                               
                                 <tr>
-                                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                  <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                   ID
                                   </th>
-                                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                  <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                   Course Name
                                   </th>
 
                                   <div class ='flex flex-row-reverse mr-10 pt-1'>
-                                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                  <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                   Grade
                                   </th>
 
@@ -133,44 +156,44 @@ export default function Studentaddeduhis() {
                               </thead>
                             <tbody>
                             
-                              <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                              <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                   CPE232
                                   </td>
-                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                 Data Model
                                 </td>
                                 <div class ='flex flex-row-reverse mr-10 pt-1'>
-                                  <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
-                                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">A</td>
+                                  <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">A</td>
                                   </tr>
                                 </div>
                               </tr>
 
-                              <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                              <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                   GEN111
                                   </td>
-                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                 Man and Ethic of living
                                 </td>
                                 <div class ='flex flex-row-reverse mr-10 pt-1'>
-                                <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">A</td>
+                                <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">A</td>
                                 </tr>
                                 </div>
                               </tr>
 
-                              <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                              <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                   CPE223
                                   </td>
-                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                 Computer Architectures
                                 </td>
                                 <div class ='flex flex-row-reverse mr-10 pt-1'>
-                                <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">A</td>
+                                <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">A</td>
                                 </tr>
                                 </div>
                               </tr>
@@ -202,28 +225,28 @@ export default function Studentaddeduhis() {
 
     
                 {/* <!-- Profile tab -->*/}
-                <div class="">
-                    <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
-                        <span class="tracking-wide ml-2">2st Term</span>
+                <div className="">
+                    <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
+                        <span className="tracking-wide ml-2">2st Term</span>
                     </div>
 
-                    <div class="grid-cols-2 mt-10">
-                      <div class=" pt-10 overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-                        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                          <div class="overflow-hidden">
-                            <table class="min-w-full">
-                              <thead class="bg-gray-200 border-b">
+                    <div className="grid-cols-2 mt-10">
+                      <div className=" pt-10 overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+                        <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                          <div className="overflow-hidden">
+                            <table className="min-w-full">
+                              <thead className="bg-gray-200 border-b">
                               
                                 <tr>
-                                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                  <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                   ID
                                   </th>
-                                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                  <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                   Course Name
                                   </th>
 
                                   <div class ='flex flex-row-reverse mr-10 pt-1'>
-                                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                  <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                   Grade
                                   </th>
 
@@ -233,44 +256,44 @@ export default function Studentaddeduhis() {
                               </thead>
                             <tbody>
                             
-                              <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                              <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                   CPE232
                                   </td>
-                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                 Data Model
                                 </td>
                                 <div class ='flex flex-row-reverse mr-10 pt-1'>
-                                  <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
-                                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">A</td>
+                                  <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">A</td>
                                   </tr>
                                 </div>
                               </tr>
 
-                              <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                              <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                   GEN111
                                   </td>
-                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                 Man and Ethic of living
                                 </td>
                                 <div class ='flex flex-row-reverse mr-10 pt-1'>
-                                <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">A</td>
+                                <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">A</td>
                                 </tr>
                                 </div>
                               </tr>
 
-                              <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                              <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                   CPE223
                                   </td>
-                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                 Computer Architectures
                                 </td>
                                 <div class ='flex flex-row-reverse mr-10 pt-1'>
-                                <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">A</td>
+                                <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">A</td>
                                 </tr>
                                 </div>
                               </tr>
@@ -307,28 +330,28 @@ export default function Studentaddeduhis() {
 
     
                 {/* <!-- Profile tab -->*/}
-                <div class="">
-                    <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
-                        <span class="tracking-wide ml-2">Summer</span>
+                <div className="">
+                    <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
+                        <span className="tracking-wide ml-2">Summer</span>
                     </div>
 
-                    <div class="grid-cols-2 mt-10">
-                      <div class=" pt-10 overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-                        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                          <div class="overflow-hidden">
-                            <table class="min-w-full">
-                              <thead class="bg-gray-200 border-b">
+                    <div className="grid-cols-2 mt-10">
+                      <div className=" pt-10 overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+                        <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                          <div className="overflow-hidden">
+                            <table className="min-w-full">
+                              <thead className="bg-gray-200 border-b">
                               
                                 <tr>
-                                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                  <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                   ID
                                   </th>
-                                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                  <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                   Course Name
                                   </th>
 
                                   <div class ='flex flex-row-reverse mr-10 pt-1'>
-                                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                  <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                   Grade
                                   </th>
 
@@ -338,44 +361,44 @@ export default function Studentaddeduhis() {
                               </thead>
                             <tbody>
                             
-                              <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                              <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                   CPE232
                                   </td>
-                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                 Data Model
                                 </td>
                                 <div class ='flex flex-row-reverse mr-10 pt-1'>
-                                  <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
-                                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">A</td>
+                                  <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">A</td>
                                   </tr>
                                 </div>
                               </tr>
 
-                              <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                              <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                   GEN111
                                   </td>
-                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                 Man and Ethic of living
                                 </td>
                                 <div class ='flex flex-row-reverse mr-10 pt-1'>
-                                <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">A</td>
+                                <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">A</td>
                                 </tr>
                                 </div>
                               </tr>
 
-                              <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                              <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                   CPE223
                                   </td>
-                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                 Computer Architectures
                                 </td>
                                 <div class ='flex flex-row-reverse mr-10 pt-1'>
-                                <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">A</td>
+                                <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 ">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">A</td>
                                 </tr>
                                 </div>
                               </tr>

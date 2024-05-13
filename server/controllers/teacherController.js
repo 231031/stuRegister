@@ -142,7 +142,7 @@ export async function getStuTeacher(req, res) {
             FROM stu_register SR INNER JOIN Student S ON SR.student_id = S.student_id 
             INNER JOIN course_detail CD ON CD.course_id = SR.course_id AND CD.gr = SR.gr
             INNER JOIN Course C ON C.course_id = SR.course_id
-            WHERE CD.teacher_id = ? AND SR.course_id = ? AND SR.status_grade = ?
+            WHERE CD.teacher_id = ? AND CD.course_id = ? AND SR.status_grade = ?
         `;
         const [courses] = await pool.execute(query, [req.body.teacher_id, req.body.course_id, false]);
         connection.release();

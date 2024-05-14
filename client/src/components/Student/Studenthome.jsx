@@ -5,7 +5,7 @@ import tw from 'twin.macro';
 
 const Box = tw.div`w-1/2 h-3/4 bg-slate-300 rounded-md mx-10 text-center`;
 import Headerstu from './Headerstu';
-import { getInfo } from '../../helpers/stuhelper';
+import { getInfo, getGpax } from '../../helpers/stuhelper';
 import { getAllScholarships, getAllActivitys } from '../../helpers/helper';
 
 export default function Studenthome() {
@@ -14,45 +14,36 @@ export default function Studenthome() {
   const [data, setData] = useState('');
   const [scholar, setScholar] = useState('');
   const [activity, setActivity] = useState('');
+  const [gpax, setGpax] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
       navigate('/student/login');
     }
-    const [department_id, year, student_id] = token.split('-');
-
-    const apiInfo = async () => {
+    let isMounted = true;
+    const fetchData = async () => {
       try {
-        const res = await getInfo(student_id);
-        setData(res);
+        const [infoRes, gpaxRes, scholarRes, activityRes] = await Promise.all([
+          getInfo(),
+          getGpax(),
+          getAllScholarships(),
+          getAllActivitys(),
+        ]);
+
+        setData(infoRes);
+        setGpax(gpaxRes.gpax);
+        setScholar(scholarRes);
+        setActivity(activityRes);
       } catch (error) {
-        console.log(error);
+        console.error("Failed to fetch data:", error);
       }
-    }
+    };
 
-    const apiScholar = async () => {
-      try {
-        const res = await getAllScholarships();
-        setScholar(res);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    const apiActivity = async () => {
-      try {
-        const res = await getAllActivitys();
-        setActivity(res);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    if (student_id) apiInfo();
-    apiScholar();
-    apiActivity();
-
+    fetchData();
+    return () => {
+      isMounted = false;
+    };
 
   }, []);
 
@@ -70,7 +61,7 @@ export default function Studenthome() {
         <div className='flex flex-col items-center bg-slate-300 py-8'>
           <p className='my-2'>Student ID : {data?.student_id}</p>
           <p className='my-2'>Name : {data?.first_name} {data?.last_name}</p>
-          <p className='my-2'>GPA : </p>
+          <p className='my-2'>GPA : {gpax}</p>
           <p className='my-2'>Total Credit : </p>
         </div>
         <div className='flex flex-row justify-center items-center h-96'>

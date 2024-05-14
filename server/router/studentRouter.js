@@ -18,7 +18,9 @@ router.route('/getsturegister/delete').post(controller.getStuRegisterDelete); //
 router.route('/getsturegister/update').post(controller.getStuRegisterChange); // change group
 router.route('/getavailable').post(controller.getAvailableCourse); // add course
 router.route('/getstuterm').post(controller.getStuTerm); // education
-router.route('/getscholarship').post(controller.getScholar);
+router.route('/getgpax').post(controller.getGpax); // gpax
+router.route('/getscholarship').post(controller.getScholar); // sholarship
+router.route('/getstatusscholar').post(controller.getStatusScholar); // status scholar
 router.route('/getactivity').post(controller.getActivity);
 router.route('/getarractivity').post(controller.getArrActivity);
 

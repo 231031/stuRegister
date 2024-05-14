@@ -134,6 +134,29 @@ export async function getScholar() {
   }
 }
 
+export async function getStutusScholar(selY) {
+  try {
+    const token = localStorage.getItem('token');
+    const [department_id, year, student_id] = token.split('-');
+    const response = await fetch('http://localhost:6001/student/getstatusscholar', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${student_id}`,
+      },
+      body: JSON.stringify({ year : selY }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
 export async function getActivity() {
   try {
     const token = localStorage.getItem('token');
@@ -199,14 +222,16 @@ export async function evaActivity(info, id) {
   }
 }
 
-export async function getInfo(info) {
+export async function getInfo() {
   try {
+    const token = localStorage.getItem('token');
+    const [department_id, year, student_id] = token.split('-');
     const response = await fetch('http://localhost:6001/student/info', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ student_id: info }),
+      body: JSON.stringify({ student_id: student_id }),
     });
     const data = await response.json();
     if (response.status === 404) {
@@ -227,6 +252,28 @@ export async function getStuTerm(info, year) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ student_id: info, year : year  }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
+export async function getGpax() {
+  try {
+    const token = localStorage.getItem('token');
+    const [department_id, year, student_id] = token.split('-');
+    const response = await fetch('http://localhost:6001/student/getgpax', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ student_id: student_id }),
     });
     const data = await response.json();
     if (response.status === 404) {
@@ -332,7 +379,6 @@ export async function delStuCourse(info) {
   }
 }
 
-// not tested yet
 // sent term year course_id, old group, new group
 export async function changeGroup(info, year, term) {
   try {

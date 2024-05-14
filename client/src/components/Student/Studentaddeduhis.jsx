@@ -4,7 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 
 import Headerstu from './Headerstu';
-import { getStuTerm, getInfo } from '../../helpers/stuhelper';
+import { getStuTerm, getInfo, getGpax } from '../../helpers/stuhelper';
 
 
 // <----img---->
@@ -24,6 +24,7 @@ export default function Studentaddeduhis() {
   const navigate = useNavigate();
   const [data, setData] = useState('');
   const [regis, setRegis] = useState('');
+  const [gpax, setGpax] = useState('');
   const [date, setDate] = useState('');
   const [month, setMonth] = useState('');
 
@@ -33,15 +34,20 @@ export default function Studentaddeduhis() {
       navigate('/student/login');
     }
 
-    const apiInfo = async () => {
+    const fetchData = async () => {
       try {
-        const res = await getInfo();
-        setData(res);
+        const [infoRes, gpaxRes] = await Promise.all([
+          getInfo(),
+          getGpax(),
+        ]);
+        setData(infoRes);
+        setGpax(gpaxRes.gpax);
       } catch (error) {
         console.log(error);
       }
-    }
-    apiInfo();
+    };
+
+    fetchData();
 
     setDate(new Date().getDate());
     setMonth(new Date().getMonth());
@@ -100,7 +106,7 @@ export default function Studentaddeduhis() {
                 <br />
                 <div className="flex items-center space-x-3 font-semibold text-white text-xl leading-8">
 
-                  <span>GPAX: {}</span>
+                  <span>GPAX: {gpax}</span>
 
 
                 </div>

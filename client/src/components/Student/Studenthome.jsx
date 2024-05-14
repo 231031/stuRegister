@@ -21,7 +21,6 @@ export default function Studenthome() {
     if (!token) {
       navigate('/student/login');
     }
-    let isMounted = true;
     const fetchData = async () => {
       try {
         const [infoRes, gpaxRes, scholarRes, activityRes] = await Promise.all([
@@ -36,14 +35,11 @@ export default function Studenthome() {
         setScholar(scholarRes);
         setActivity(activityRes);
       } catch (error) {
-        console.error("Failed to fetch data:", error);
+        console.log(error);
       }
     };
 
     fetchData();
-    return () => {
-      isMounted = false;
-    };
 
   }, []);
 

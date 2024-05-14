@@ -10,14 +10,6 @@ import { getStuTerm, getInfo, getGpax } from '../../helpers/stuhelper';
 // <----img---->
 import profile from '../../assets/profile.png';
 
-const text = {
-  name: 'Praew EiEi',
-  student_id: '65070501063',
-  year: '2',
-  Faculty: 'Computer Engineering',
-  Email: 'i@kmutt.ac.th'
-}
-
 
 export default function Studentaddeduhis() {
 
@@ -25,8 +17,6 @@ export default function Studentaddeduhis() {
   const [data, setData] = useState('');
   const [regis, setRegis] = useState('');
   const [gpax, setGpax] = useState('');
-  const [date, setDate] = useState('');
-  const [month, setMonth] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -49,8 +39,6 @@ export default function Studentaddeduhis() {
 
     fetchData();
 
-    setDate(new Date().getDate());
-    setMonth(new Date().getMonth());
   }, []);
 
   useEffect(() => {
@@ -70,7 +58,7 @@ export default function Studentaddeduhis() {
       <div>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <Helmet>
-          <title>Stu | AddEduHis</title>
+          <title>Stu | EduHis</title>
         </Helmet>
         <Headerstu data={data} />
 

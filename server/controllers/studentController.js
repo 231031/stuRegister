@@ -196,13 +196,29 @@ export async function getGpax(req, res) {
 
 }
 
+export async function getTotalCredit(req, res) {
+    try { 
+        const query = `
+                SELECT SUM(ET.credit_term) AS total_credit
+                FROM Student S INNER JOIN edu_term ET ON S.student_id = ET.student_id
+                WHERE S.student_id = ? GROUP BY S.student_id
+            `;
+        const [credit] = await pool.execute(query, [req.body.student_id]);
+        connection.release();
+        res.json(credit[0]);
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
 export async function getScholar(req, res) {
     const date = new Date();
 
     try { // low_grade
         const token = req.headers.authorization.split(" ")[1];
         const query = `
-            SELECT scholarship_id, scholarship_name FROM Scholarship WHERE start <= ? AND end >= ? AND count < finite
+            SELECT scholarship_id, scholarship_name, finite FROM Scholarship WHERE start <= ? AND end >= ? AND count < finite
             AND scholarship_id NOT IN (SELECT scholarship_id FROM scholar_history WHERE student_id = ?)   
         `;
         const [scholarRows] = await pool.execute(query, [date, date, token]);
@@ -303,6 +319,32 @@ export async function getAvailableCourse(req, res) {
             res.json(resDetail);
         }
         connection.release();
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function getCourseDe(req, res) {
+    try {
+        const token = req.headers.authorization.split(" ")[1];
+        const { department_id, year, type } = req.body;
+        const month = new Date().getMonth();
+        let term = 2;
+        if (month >= 7) term = 1; // after august term 1
+
+        const query = `
+            SELECT C.*
+            FROM available_course AC INNER JOIN Course C ON C.course_id = AC.course_id
+            WHERE AC.department_id = ? AND AC.year = ? AND AC.term = ?
+              
+        `;
+        const [resDetail] = await pool.execute(query,
+            [department_id, year, term]
+        );
+        connection.release();
+        res.json(resDetail);
+
     } catch (error) {
         connection.release();
         return res.status(404).send({ error: error.message });

@@ -39,7 +39,7 @@ export default function Headerteacher({ data }) {
               <List className='w-46'>
                 <li><p>ID : {data?.teacher_id}</p></li>
                 <li><p>POS : {data?.position}</p></li>
-                <li><NavLink to='/components/Landing'>Change user view</NavLink></li>
+                <li><NavLink to='/'>Change user view</NavLink></li>
                 <li><NavLink to='/teacher/login'>Log Out</NavLink></li>
               </List>
             </div>

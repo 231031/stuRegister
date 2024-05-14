@@ -5,8 +5,8 @@ import tw from 'twin.macro';
 
 const Box = tw.div`w-1/2 h-3/4 bg-lowbrown rounded-md mx-10 text-center`;
 import Headerstu from './Headerstu';
-import { getInfo, getGpax } from '../../helpers/stuhelper';
-import { getAllScholarships, getAllActivitys } from '../../helpers/helper';
+import { getInfo, getGpax, getScholar } from '../../helpers/stuhelper';
+import { getAllActivitys } from '../../helpers/helper';
 
 export default function Studenthome() {
 
@@ -26,7 +26,7 @@ export default function Studenthome() {
         const [infoRes, gpaxRes, scholarRes, activityRes] = await Promise.all([
           getInfo(),
           getGpax(),
-          getAllScholarships(),
+          getScholar(),
           getAllActivitys(),
         ]);
 
@@ -70,16 +70,14 @@ export default function Studenthome() {
                       <tr className='font-bold'>
                         <td>Scholarship Name</td>
                         <td>Limit</td>
-                        <td>Open</td>
                       </tr>
                     </thead>
                     <tbody>
                       {
                         scholar.map((sList, index) => (
-                          <tr key={index} className='w-11/12 bg-sky text-darkgreen border-y-8 border-slate-300'>
+                          <tr key={index} className='w-11/12 bg-sky text-darkgreen border-y-8 border-lowbrown'>
                             <td className='py-1'>{sList.scholarship_name}</td>
                             <td className='py-1'>{sList.finite}</td>
-                            <td className='py-1'>{new Date(sList.start).toISOString().split('T')[0]}</td>
                           </tr>
 
                         ))
@@ -110,7 +108,7 @@ export default function Studenthome() {
                     <tbody>
                       {
                         activity.map((aList, index) => (
-                          <tr key={index} className='w-11/12 bg-sky text-darkgreen border-y-8 border-slate-300'>
+                          <tr key={index} className='w-11/12 bg-sky text-darkgreen border-y-8 border-lowbrown'>
                             <td className='py-1'>{aList.activity_name}</td>
                             <td className='py-1'>{aList.finite}</td>
                             <td className='py-1'>{aList.hours}</td>

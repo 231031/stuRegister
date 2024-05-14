@@ -202,7 +202,7 @@ export async function getScholar(req, res) {
     try { // low_grade
         const token = req.headers.authorization.split(" ")[1];
         const query = `
-            SELECT scholarship_id, scholarship_name FROM Scholarship WHERE start <= ? AND end >= ? AND count < finite
+            SELECT scholarship_id, scholarship_name, finite FROM Scholarship WHERE start <= ? AND end >= ? AND count < finite
             AND scholarship_id NOT IN (SELECT scholarship_id FROM scholar_history WHERE student_id = ?)   
         `;
         const [scholarRows] = await pool.execute(query, [date, date, token]);

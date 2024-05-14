@@ -37,6 +37,7 @@ export default function Studentregiscourse() {
         console.log(error);
       }
     }  
+    apiInfo();
 
     setDate(new Date().getDate());
     setMonth(new Date().getMonth());
@@ -111,8 +112,8 @@ export default function Studentregiscourse() {
             <title>Stu | RegisterCourse</title>
         </Helmet>
         <Headerstu data={data}/>
-        <div className='h-screen flex flex-row '>
-          <div className='w-1/4 bg-slate-300 h-[calc(100vh-40px)] p-10'>
+        <div className='h-[calc(100vh-40px)] flex flex-row '>
+          <div className='w-1/4 bg-slate-300 p-10'>
             <div className='flex flex-col items-center my-10'>
               <img className='rounded-full w-1/2 h-1/2 border-2 border-sky' src={profile}/>
             </div>
@@ -197,7 +198,7 @@ export default function Studentregiscourse() {
               } 
               </div>
             ) : (
-              <div className='h-screen flex flex-col items-center justify-center'>
+              <div className='flex flex-col items-center justify-center w-full'>
                 <img src={sry} className='w-1/6'/>
                 <p className='my-5'>Sorry, we're not in registration period</p>
                 <button className='p-3 bg-slate-400 text-white rounded-md' type='button' onClick={(e)=>handleClick()}>Preview Course Detail</button>

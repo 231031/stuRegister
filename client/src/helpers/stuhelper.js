@@ -286,6 +286,28 @@ export async function getGpax() {
   }
 }
 
+export async function getTotalCredit() {
+  try {
+    const token = localStorage.getItem('token');
+    const [department_id, year, student_id] = token.split('-');
+    const response = await fetch('http://localhost:6001/student/gettotalcredit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ student_id: student_id }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
 export async function getStuRegister(selT, selY) {
   try {
     const token = localStorage.getItem('token');
@@ -414,6 +436,29 @@ export async function getAvailableCourse(de, year, type) {
         "Authorization": `Bearer ${student_id}`,
       },
       body: JSON.stringify({ department_id: de, year: year, type: type }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
+export async function getCourseDe() {
+  try {
+    const token = localStorage.getItem('token');
+    const [department_id, year, student_id] = token.split('-');
+    const response = await fetch('http://localhost:6001/student/getcoursede', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${student_id}`,
+      },
+      body: JSON.stringify({ department_id: department_id, year: year }),
     });
     const data = await response.json();
     if (response.status === 404) {

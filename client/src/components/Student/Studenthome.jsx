@@ -5,7 +5,7 @@ import tw from 'twin.macro';
 
 const Box = tw.div`w-1/2 h-3/4 bg-lowbrown rounded-md mx-10 text-center`;
 import Headerstu from './Headerstu';
-import { getInfo, getGpax, getScholar } from '../../helpers/stuhelper';
+import { getInfo, getGpax, getScholar, getTotalCredit } from '../../helpers/stuhelper';
 import { getAllActivitys } from '../../helpers/helper';
 
 export default function Studenthome() {
@@ -15,25 +15,29 @@ export default function Studenthome() {
   const [scholar, setScholar] = useState('');
   const [activity, setActivity] = useState('');
   const [gpax, setGpax] = useState('');
+  const [credit, setCredit] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
       navigate('/student/login');
     }
+
     const fetchData = async () => {
       try {
-        const [infoRes, gpaxRes, scholarRes, activityRes] = await Promise.all([
+        const [infoRes, gpaxRes, scholarRes, activityRes, creditRes] = await Promise.all([
           getInfo(),
           getGpax(),
           getScholar(),
           getAllActivitys(),
+          getTotalCredit(),
         ]);
 
         setData(infoRes);
         setGpax(gpaxRes.gpax);
         setScholar(scholarRes);
         setActivity(activityRes);
+        setCredit(creditRes.total_credit);
       } catch (error) {
         console.log(error);
       }
@@ -59,7 +63,7 @@ export default function Studenthome() {
             <p className='my-2'>Student ID : {data?.student_id}</p>
             <p className='my-2'>Name : {data?.first_name} {data?.last_name}</p>
             <p className='my-2'>GPA : {gpax}</p>
-            <p className='my-2'>Total Credit : </p>
+            <p className='my-2'>Total Credit : {credit}</p>
           </div>
           <div className=' flex justify-center flex-row items-center h-96 '>
             {

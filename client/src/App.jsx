@@ -83,7 +83,7 @@ import Committeeeva from './components/committe/Committeeeva';
 const router = createBrowserRouter(
   [
     {
-      path: '/components/Landing',
+      path: '/',
       element : <Landing></Landing>
     },
     {

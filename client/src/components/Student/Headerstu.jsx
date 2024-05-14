@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom'
 import tw from 'twin.macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Btn = tw.p` px-8 py-2 text-lowyellow cursor-pointer text-base hover:text-greendark  border-opacity-50 border-lowyellow`;
-const List = tw.ul`bg-sky text-lowyellow rounded-md p-1 absolute w-40 flex flex-col items-center bg-opacity-90`;
+const Btn = tw.p` px-8 py-2 text-lowyellow cursor-pointer text-base hover:text-lowbrown  border-opacity-50 border-lowyellow`;
+const List = tw.ul`bg-lowgreen text-lowyellow rounded-md p-1 absolute w-40 flex flex-col items-center bg-opacity-90`;
 const Dropdown = tw.div`flex flex-col border-opacity-50 border-lowyellow`;
 export default function Headerstu({ data }) {
 
@@ -60,7 +60,7 @@ export default function Headerstu({ data }) {
 
   return (
     <div>
-       <nav className=' bg-sky'>
+       <nav className=' bg-darkgreen'>
         <ul className='flex flex-wrap justify-center items-center divide-x-2'>
           <Btn>
             <NavLink to='/student/home'>Home</NavLink>
@@ -119,7 +119,7 @@ export default function Headerstu({ data }) {
               <List className='w-46'>
                 <li><p>ID : {data?.student_id}</p></li>
                 <li><p>Year : {data?.year}</p></li>
-                <li><NavLink to='/components/Landing'>Change user view</NavLink></li>
+                <li><NavLink to='/'>Change user view</NavLink></li>
                 <li onClick={logout}><NavLink to='/student/login'>Log Out</NavLink></li>
               </List>
             </div>

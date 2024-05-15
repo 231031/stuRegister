@@ -181,14 +181,19 @@ export async function getGpax(req, res) {
 
         let total_credit = 0;
         let sum = 0;
-        const { register } = student[0];
-        for (let i = 0; i < register.length; i++) {
-            sum += (register[i].credit * register[i].grade);
-            total_credit += register[i].credit;
-        }
-        let gpax = sum / total_credit;
+        let gpax = 0;
+        if (student.length > 0) {
+            const { register } = student[0];
+            for (let i = 0; i < register.length; i++) {
+                sum += (register[i].credit * register[i].grade);
+                total_credit += register[i].credit;
+            }
+            gpax = sum / total_credit;
 
-        return res.status(200).send({ gpax: gpax });
+            return res.status(200).send({ gpax: gpax });
+        }
+        else return res.status(200).send({ gpax: gpax });
+        
     } catch (error) {
         connection.release();
         return res.status(404).send({ error: error.message });
@@ -205,7 +210,11 @@ export async function getTotalCredit(req, res) {
             `;
         const [credit] = await pool.execute(query, [req.body.student_id]);
         connection.release();
-        res.json(credit[0]);
+        if (credit.length > 0) {
+            res.json(credit[0]);
+        }
+        else res.json({ total_credit: 0 });
+        
     } catch (error) {
         connection.release();
         return res.status(404).send({ error: error.message });
@@ -247,8 +256,8 @@ export async function getStatusScholar(req, res) {
     }
 }
 
-
-// update student, register scholarship
+// transaction
+// update tb student, insert row scholar_history
 export async function registerScholar(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
@@ -278,6 +287,8 @@ export async function registerScholar(req, res) {
 
 }
 
+
+// edit year -> course_detail
 export async function getAvailableCourse(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
@@ -285,6 +296,7 @@ export async function getAvailableCourse(req, res) {
         const month = new Date().getMonth();
         let term = 2;
         if (month >= 7) term = 1; // after august term 1
+        let pre_year = (new Date().getFullYear() + 543);
 
         const query = `
             SELECT C.*, 
@@ -301,7 +313,7 @@ export async function getAvailableCourse(req, res) {
                 )
             ) AS Coursedetails
             FROM Course C INNER JOIN course_detail ON course_detail.course_id = C.course_id
-            WHERE C.type = ? AND course_detail.count < course_detail.finite 
+            WHERE C.type = ? AND course_detail.count < course_detail.finite AND course_detail.year = ?
             AND C.course_id IN (
                 SELECT course_id FROM available_course WHERE department_id = ? AND year = ? 
                 AND term = ? AND course_id NOT IN
@@ -313,7 +325,7 @@ export async function getAvailableCourse(req, res) {
 
         if (token) {
             const [resDetail] = await pool.execute(query,
-                [type, department_id, year, term, token, year, term]
+                [type, pre_year, department_id, year, term, token, year, term]
             );
             connection.release();
             res.json(resDetail);
@@ -373,10 +385,12 @@ export async function getSelCourse(req, res) {
 }
 
 
-// transaction insert tb stu_register, modify tb course_detail increase count, modify tb edu_term increse credit_term
+// transaction 
+// insert tb stu_register, modify tb course_detail increase count, modify tb edu_term increse credit_term
 export async function registerCourse(req, res) {
     try {
         let totalCredit = 0;
+        let pre_year = (new Date().getFullYear() + 543);
         const token = req.headers.authorization.split(" ")[1];
         const { regis } = req.body;
 
@@ -395,8 +409,8 @@ export async function registerCourse(req, res) {
 
         for (let i = 0; i < regis.length; i++) {
             await connection.execute(
-                'UPDATE course_detail SET count = count + 1 WHERE course_id = ? AND gr = ?',
-                [regis[i].course_id, regis[i].gr]
+                'UPDATE course_detail SET count = count + 1 WHERE course_id = ? AND gr = ? AND year = ?',
+                [regis[i].course_id, regis[i].gr, pre_year]
             );
             totalCredit = totalCredit + regis[i].credit;
         }
@@ -508,7 +522,8 @@ export async function getArrActivity(req, res) {
 }
 
 
-// transaction modify Student (increase hours), modify arr_activity (change status)
+// transaction 
+// modify Student (increase hours), modify arr_activity (change status)
 export async function evaActivity(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
@@ -535,19 +550,22 @@ export async function evaActivity(req, res) {
     }
 }
 
+// edit year -> course_detail
 export async function getStuRegister(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
+        let pre_year = (new Date().getFullYear() + 543);
+        
         const { year, term } = req.body;
         const query = `
                 SELECT C.*, CD.*
                 FROM Course C 
                 INNER JOIN stu_register S ON S.course_id = C.course_id
                 INNER JOIN course_detail CD ON CD.course_id = S.course_id AND CD.gr = S.gr
-                WHERE S.year = ? AND S.term = ? AND S.student_id = ?    
+                WHERE S.year = ? AND S.term = ? AND S.student_id = ? AND CD.year = ?
             `;
 
-        const [register] = await connection.execute(query, [year, term, token]);
+        const [register] = await connection.execute(query, [year, term, token, pre_year]);
         connection.release();
         res.json(register);
 
@@ -563,6 +581,8 @@ export async function getStuRegister(req, res) {
 export async function getStuRegisterChange(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
+        let pre_year = (new Date().getFullYear() + 543);
+
         const { year } = req.body;
         const month = new Date().getMonth();
         let term = 2;
@@ -583,11 +603,11 @@ export async function getStuRegisterChange(req, res) {
             FROM Course C 
             JOIN stu_register S ON S.course_id = C.course_id
             JOIN course_detail D ON D.course_id = S.course_id
-            WHERE S.year = ? AND S.term = ? AND S.student_id = ? AND D.count < D.finite
+            WHERE S.year = ? AND S.term = ? AND S.student_id = ? AND D.count < D.finite AND D.year = ?
             GROUP BY C.course_id, C.department_id, C.credit, C.type, C.description, C.course_name      
         `;
 
-        const [register] = await connection.execute(query, [year, term, token]);
+        const [register] = await connection.execute(query, [year, term, token, pre_year]);
         connection.release();
         res.json(register);
 
@@ -601,6 +621,8 @@ export async function getStuRegisterChange(req, res) {
 export async function getStuRegisterDelete(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
+        let pre_year = (new Date().getFullYear() + 543);
+
         const { year } = req.body;
         const month = new Date().getMonth();
         let term = 2;
@@ -610,10 +632,10 @@ export async function getStuRegisterDelete(req, res) {
             FROM Course C 
             JOIN stu_register S ON S.course_id = C.course_id
             JOIN course_detail D ON D.course_id = S.course_id AND D.gr = S.gr
-            WHERE S.year = ? AND S.term = ? AND S.student_id = ?     
+            WHERE S.year = ? AND S.term = ? AND S.student_id = ? AND D.year = ? 
         `;
 
-        const [register] = await connection.execute(query, [year, term, token]);
+        const [register] = await connection.execute(query, [year, term, token, pre_year]);
         connection.release();
         res.json(register);
 
@@ -630,6 +652,8 @@ export async function getStuRegisterDelete(req, res) {
 export async function changeGroup(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
+        let pre_year = (new Date().getFullYear() + 543);
+        
         const { update, year, term } = await req.body;
 
         await connection.beginTransaction();
@@ -637,16 +661,16 @@ export async function changeGroup(req, res) {
         for (let i = 0; i < update.length; i++) {
             if (update[i].old_gr != update[i].gr) {
                 await connection.execute( // old group before change
-                    'UPDATE course_detail SET count = count - 1 WHERE course_id = ? AND gr = ? ',
-                    [update[i].course_id, update[i].old_gr]
+                    'UPDATE course_detail SET count = count - 1 WHERE course_id = ? AND gr = ? AND course_detail.year = ?', // add filter present year of course_detail
+                    [update[i].course_id, update[i].old_gr, pre_year]
                 );
                 await connection.execute( // new group after change
                     'UPDATE stu_register SET gr = ? WHERE student_id = ? AND year = ? AND term = ? AND course_id = ?',
                     [update[i].gr, token, year, term, update[i].course_id]
                 );
                 await connection.execute( // new group after change
-                    'UPDATE course_detail SET count = count + 1 WHERE course_id = ? AND gr = ?',
-                    [update[i].course_id, update[i].gr]
+                    'UPDATE course_detail SET count = count + 1 WHERE course_id = ? AND gr = ? AND course_detail.year = ?',
+                    [update[i].course_id, update[i].gr, pre_year]
                 );
             }
 
@@ -669,14 +693,16 @@ export async function changeGroup(req, res) {
 export async function delCourse(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
+        let pre_year = (new Date().getFullYear() + 543);
+
         const { course_id, gr, year, term, credit } = await req.body;
 
         await connection.beginTransaction();
 
         // decrese count of group in this course
         await connection.execute(
-            'UPDATE course_detail SET count = count - 1 WHERE course_id = ? AND gr = ? ',
-            [course_id, gr]
+            'UPDATE course_detail SET count = count - 1 WHERE course_id = ? AND gr = ? AND course_detail.year = ?', // add filter present year of course_detail
+            [course_id, gr, pre_year]
         );
 
         // send credit of course with request, decrease credit of this student in this term
@@ -704,24 +730,26 @@ export async function delCourse(req, res) {
 
 
 // advanced analysis
+
+// (Student) -> each activity
+// 2. The number of people in each faculty apply in an activity (6 activity) 
 export async function getFacActivity(req, res) {
     try {
-        const token = req.headers.authorization.split(" ")[1];
-        const { year } = req.body;
-        const month = new Date().getMonth();
-        let term = 2;
-        if (month >= 7) term = 1; // after august term 1
+        const { activity_id } = await req.body;
+
         const query = `
-            SELECT C.*, D.gr, D.teacher_id, D.class_id 
-            FROM Course C 
-            JOIN stu_register S ON S.course_id = C.course_id
-            JOIN course_detail D ON D.course_id = S.course_id AND D.gr = S.gr
-            WHERE S.year = ? AND S.term = ? AND S.student_id = ?     
+            SELECT count(S.student_id) AS num_student
+            FROM Activity A INNER JOIN arr_activity AR ON A.activity_id = AR.activity_id
+            INNER JOIN Student S ON S.student_id = AR.student_id
+            INNER JOIN Department D ON S.department_id = D.department_id
+            INNER JOIN Faculty F ON F.faculty_id = D.faculty_id
+            WHERE A.activity_id = ?
+            GROUP BY F.faculty_id
         `;
 
-        const [register] = await connection.execute(query, [year, term, token]);
+        const [num_student] = await connection.execute(query, [activity_id]);
         connection.release();
-        res.json(register);
+        res.json(num_student);
 
     } catch (error) {
         connection.release();

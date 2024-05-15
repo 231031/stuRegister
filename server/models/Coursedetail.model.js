@@ -13,6 +13,11 @@
 //         allowNull: false,
 //         primaryKey: true,
 //     },
+//     year : {
+//         type: DataTypes.INTEGER,
+//         allowNull: false,
+//         primaryKey: true,
+//     },/     
 //     teacher_id : {
 //         type: DataTypes.STRING,
 //         allowNull: false,

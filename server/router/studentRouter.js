@@ -18,7 +18,7 @@ router.route('/getsturegister').post(controller.getStuRegister); // my course
 router.route('/getsturegister/delete').post(controller.getStuRegisterDelete); // delete course
 router.route('/getsturegister/update').post(controller.getStuRegisterChange); // change group
 router.route('/getavailable').post(controller.getAvailableCourse); // add course
-router.route('/getcoursede').post(controller.getCourseDe); // add course
+router.route('/getcoursede').post(controller.getCourseDe); // all course detail
 router.route('/getselcourse').post(controller.getSelCourse); // more detail course
 
 router.route('/getstuterm').post(controller.getStuTerm); // education
@@ -30,6 +30,7 @@ router.route('/getstatusscholar').post(controller.getStatusScholar); // status s
 
 router.route('/getactivity').post(controller.getActivity);
 router.route('/getarractivity').post(controller.getArrActivity);
+router.route('/getfacactivity').post(controller.getFacActivity); // num activity
 
 
 // delete

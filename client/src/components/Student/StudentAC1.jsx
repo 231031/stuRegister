@@ -63,6 +63,7 @@ export default function ACT1() {
     if (id) apiNum();
   }, [id]);
 
+  // advanced analysis
   async function handleClick() {
     try {
       const res = await registerActivity(id, data.student_id);

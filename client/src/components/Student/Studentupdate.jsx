@@ -378,30 +378,15 @@ export default function Studentregister() {
                                                 <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2" htmlFor="grid-salary">
                                                     Salary :
                                                 </label>
-                                                <div className="relative">
-                                                    <select
-                                                        name="f_salary"
-                                                        onChange={formik.handleChange}
-                                                        onBlur={formik.handleBlur}
-                                                        value={formik.values.f_salary}
-                                                        className="block appearance-none h-13 bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" style={{ height: 50, width: 300 }} >
-                                                        <option value=''></option>
-                                                        <option value='10,000 - 25,000'>   10,000 - 25,000        Bath   </option>
-                                                        <option value='25,000 - 30,000'>   25,000 - 30,000        Bath   </option>
-                                                        <option value='30,000 - 50,000'>   30,000 - 50,000        Bath   </option>
-                                                        <option value='50,000 - 100,000'>   50,000 - 100,000        Bath   </option>
-
-
-                                                    </select>
-                                                    <div className=" pointer-events-none absolute inset-y-0 right-4 flex items-center text-gray-700">
-                                                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                                        </svg>
-                                                    </div>
-                                                    {formik.touched.f_salary && formik.errors.f_salary ? (
+                                                <input
+                                                    name="f_salary"
+                                                    onChange={formik.handleChange}
+                                                    onBlur={formik.handleBlur}
+                                                    value={formik.values.f_salary}
+                                                    className="block appearance-none w-700 bg-white text-gray-700 border border-gray-200 rounded py-3  px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" style={{ height: 50, width: 300 }} />
+                                                {formik.touched.f_salary && formik.errors.f_salary ? (
                                                         <p className="text-red-500 text-xs italic">{formik.errors.f_salary}</p>
                                                     ) : null}
-                                                </div>
                                             </div>
 
                                             <div className="mt-5 w-200 px-3 mb-6 md:mb-0 ">
@@ -509,30 +494,15 @@ export default function Studentregister() {
                                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-salary" >
                                                     Salary :
                                                 </label>
-                                                <div className="relative">
-                                                    <select
-                                                        name="m_salary"
-                                                        onChange={formik.handleChange}
-                                                        onBlur={formik.handleBlur}
-                                                        value={formik.values.m_salary}
-                                                        className="block appearance-none h-13 bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" style={{ height: 50, width: 300 }} >
-                                                        <option value=''></option>
-                                                        <option value='10,000 - 25,000'>   10,000 - 25,000        Bath   </option>
-                                                        <option value='25,000 - 30,000'>   25,000 - 30,000        Bath   </option>
-                                                        <option value='30,000 - 50,000'>   30,000 - 50,000        Bath   </option>
-                                                        <option value='50,000 - 100,000'>   50,000 - 100,000        Bath   </option>
-
-
-                                                    </select>
-                                                    <div className=" pointer-events-none absolute inset-y-0 right-4 flex items-center text-gray-700">
-                                                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                                        </svg>
-                                                    </div>
+                                                <input
+                                                    name="m_salary"
+                                                    onChange={formik.handleChange}
+                                                    onBlur={formik.handleBlur}
+                                                    value={formik.values.m_salary}
+                                                    className="block appearance-none w-700 bg-white text-gray-700 border border-gray-200 rounded py-3  px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" style={{ height: 50, width: 300 }} />
                                                     {formik.touched.m_salary && formik.errors.m_salary ? (
-                                                        <p className="text-red-500 text-xs italic">{formik.errors.m_salary}</p>
-                                                    ) : null}
-                                                </div>
+                                                            <p className="text-red-500 text-xs italic">{formik.errors.m_salary}</p>
+                                                        ) : null}
                                             </div>
 
                                             <div className="mt-5 w-200 px-3 mb-6 md:mb-0 ">

@@ -30,7 +30,7 @@ router.route('/getstatusscholar').post(controller.getStatusScholar); // status s
 
 router.route('/getactivity').post(controller.getActivity);
 router.route('/getarractivity').post(controller.getArrActivity);
-router.route('/getfacactivity').post(controller.getFacActivity); // num activity
+router.route('/getfacactivity').post(controller.getFacActivity); // num activity (advanced analysis)
 
 
 // delete
@@ -43,6 +43,7 @@ router.route("/update/group").put(controller.changeGroup);
 router.route("/registerinfo").put(controller.updateInfo);
 
 // get
+router.route("/getavgscholar").get(controller.getAvgScholar); // avg gapx and avg hours (advanced analysis)
 
 
 export default router;

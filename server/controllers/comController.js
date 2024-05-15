@@ -19,12 +19,17 @@ export async function login(req, res) {
     }
 }
 
+// get just present year
 export async function getApplicant(req, res) {
     try {
+        const pre_year = new Date().getFullYear() + 543;
         const query = `
-            SELECT SH.*, SD.first_name, SD.last_name
+            SELECT SH.*, SD.first_name, SD.last_name, D.department_name, F.faculty_name
             FROM Scholarship S INNER JOIN scholar_history SH ON S.scholarship_id = SH.scholarship_id
-            INNER JOIN Student SD ON SD.student_id = SH.student_id WHERE SH.scholarship_id = ?
+            INNER JOIN Student SD ON SD.student_id = SH.student_id 
+            INNER JOIN Department D ON SD.department_id = D.department_id
+            INNER JOIN Faculty F ON F.faculty_id = D.faculty_id
+            WHERE SH.scholarship_id = ? ORDER BY SH.get_year AND SD.student_id DESC 
         `;
         const [student] = await pool.execute(query, [req.body.id]);
         connection.release();
@@ -39,9 +44,12 @@ export async function getApplicant(req, res) {
 export async function getScholarHis(req, res) {
     try {
         const query = `
-            SELECT SH.*, SD.first_name, SD.last_name
+            SELECT SH.*, SD.first_name, SD.last_name, D.department_name, F.faculty_name
             FROM Scholarship S INNER JOIN scholar_history SH ON S.scholarship_id = SH.scholarship_id
-            INNER JOIN Student SD ON SD.student_id = SH.student_id WHERE SH.status = ?
+            INNER JOIN Student SD ON SD.student_id = SH.student_id 
+            INNER JOIN Department D ON D.department_id = SD.department_id
+            INNER JOIN Faculty F ON F.faculty_id = D.faculty_id
+            WHERE S.scholarship_id = ? AND SH.status = ?
         `;
         const [student] = await pool.execute(query, [req.body.id, false]);
         connection.release();
@@ -94,7 +102,7 @@ export async function getStudent(req, res) {
     try {
         const query = `
             SELECT S.student_id, S.first_name, S.last_name, S.salary, S.f_salary, 
-            S.m_salary, S.address, S.zip_code, S.city, S.state,
+            S.m_salary, S.address, S.zip_code, S.city, S.state, D.department_name, F.faculty_name,
                 JSON_ARRAYAGG(
                     JSON_OBJECT(
                         'grade', SR.grade,
@@ -102,9 +110,12 @@ export async function getStudent(req, res) {
                     )
                 ) AS register
                 FROM Course C INNER JOIN stu_register SR ON C.course_id = SR.course_id 
-                INNER JOIN Student S ON S.student_id = SR.student_id WHERE S.student_id = ?
+                INNER JOIN Student S ON S.student_id = SR.student_id 
+                INNER JOIN Department D ON D.department_id = S.department_id
+                INNER JOIN Faculty F ON F.faculty_id = D.faculty_id
+                WHERE S.student_id = ?
                 GROUP BY S.student_id, S.first_name, S.last_name, S.salary, S.f_salary, 
-                S.m_salary, S.address, S.zip_code, S.city, S.state
+                S.m_salary, S.address, S.zip_code, S.city, S.state, D.department_name, F.faculty_name
         `;
         const [student] = await pool.execute(query, [req.body.id]);
         connection.release();
@@ -125,3 +136,71 @@ export async function getStudent(req, res) {
     }
 }
 
+
+// advanced analysis
+
+// 1
+// get the number of students in each faculty who get shcolarship
+// the scholarships can apply every year in range of time and reset count every year
+// get_year is year that the student gets shcolarship
+export async function getCountFaculty(req, res) {
+    try {
+        const pre_year = new Date().getFullYear() + 543;
+        const query = `
+            SELECT F.faculty_name, count(SD.student_id) AS count_student
+            FROM Scholarship S INNER JOIN scholar_history SH ON S.scholarship_id = SH.scholarship_id
+            INNER JOIN Student SD ON SD.student_id = SH.student_id 
+            INNER JOIN Department D ON D.department_id = SD.department_id
+            INNER JOIN Faculty F ON F.faculty_id = D.faculty_id
+            WHERE S.scholarship_id = ? AND SH.approve = ? AND SH.get_year = ?
+            GROUP BY F.faculty_name
+        `;
+        const [student] = await pool.execute(query, [req.body.id, true, pre_year]);
+        connection.release();
+        res.json(student);
+
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+// average salary of father's student in each faculty
+export async function getAvgF(req, res) {
+    try {
+        const query = `
+            SELECT F.faculty_name, avg(S.f_salary) AS avg_salary
+            From Student S
+            INNER JOIN Department D ON D.department_id = S.department_id
+            INNER JOIN Faculty F ON F.faculty_id = D.faculty_id
+            GROUP BY F.faculty_name
+        `;
+        const [avg_salary_f] = await pool.execute(query);
+        connection.release();
+        res.json(avg_salary_f);
+
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+// average salary of mother's student in each faculty
+export async function getAvgM(req, res) {
+    try {
+        const query = `
+            SELECT F.faculty_name, avg(S.m_salary) AS avg_salary
+            From Student S
+            INNER JOIN Department D ON D.department_id = S.department_id
+            INNER JOIN Faculty F ON F.faculty_id = D.faculty_id
+            GROUP BY F.faculty_name
+        `;
+        const [avg_salary_m] = await pool.execute(query);
+        connection.release();
+        res.json(avg_salary_m);
+
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}

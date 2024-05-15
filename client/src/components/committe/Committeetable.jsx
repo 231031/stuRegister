@@ -41,7 +41,7 @@ export default function Committeetable() {
   }, [sel]);
 
   function handleClick(id) {
-    navigate('/committee/info', { state: { student_id: id, scholarship_id : sel  }});
+    navigate('/committee/info', { state: { student_id: id, scholarship_id: sel } });
   }
 
 
@@ -82,6 +82,10 @@ export default function Committeetable() {
                     <tr>
                       <Row>Num</Row>
                       <Row>Student Name</Row>
+                      <Row>Department</Row>
+                      <Row>Faculty</Row>
+                      <Row>Year</Row>
+                      <Row>Status</Row>
                       <Row>Information</Row>
                     </tr>
                   </thead>
@@ -91,6 +95,18 @@ export default function Committeetable() {
                         <tr key={index}>
                           <Row>{index + 1}</Row>
                           <Row>{stuList.first_name} {stuList.last_name}</Row>
+                          <Row>{stuList.department_name}</Row>
+                          <Row>{stuList.faculty_name}</Row>
+                          <Row>{stuList.get_year}</Row>
+                          <Row>
+                            {
+                              (stuList.status == 1) ? (
+                                <p>Evaluated</p>
+                              ) : (
+                                <p>Not Evaluated</p>
+                              )
+                            }
+                          </Row>
                           <Row className='cursor-pointer hover:bg-blue-300'>
                             <button className='text-green-600 ' onClick={(e) => handleClick(stuList.student_id)}>Click</button>
                           </Row>

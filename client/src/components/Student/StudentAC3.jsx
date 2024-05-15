@@ -3,7 +3,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast';
 
-import { registerActivity } from '../../helpers/stuhelper';
+import { registerActivity, getFacActivity } from '../../helpers/stuhelper';
 import Headerstu from './Headerstu';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -27,6 +27,7 @@ export default function ACT3() {
 
   const navigate = useNavigate();
   const [data, setData] = useState('');
+  const [num, setNum] = useState('');
 
   const location = useLocation();
   const [id, setId] = useState('');
@@ -50,6 +51,19 @@ export default function ACT3() {
       navigate('/student/activity');
     }
   }, []);
+
+  useEffect(() => {
+    const apiNum = async () => {
+      try {
+        const res = getFacActivity(id);
+        setNum(res);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (id) apiNum();
+  }, [id]);
+  
 
   async function handleClick() {
     try {

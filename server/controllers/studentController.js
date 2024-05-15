@@ -372,6 +372,8 @@ export async function getSelCourse(req, res) {
     }
 }
 
+
+// transaction insert tb stu_register, modify tb course_detail increase count, modify tb edu_term increse credit_term
 export async function registerCourse(req, res) {
     try {
         let totalCredit = 0;
@@ -445,6 +447,7 @@ export async function getActivity(req, res) {
     }
 }
 
+// transaction
 // modify tb arr_activity insert new row, tb Activity increase count
 export async function registerActivity(req, res) {
     try {
@@ -620,7 +623,7 @@ export async function getStuRegisterDelete(req, res) {
     }
 }
 
-// not tested yet
+
 // can update group more than one course
 // transaction
 // modify Studentregister (group), Coursedetail (count)
@@ -660,6 +663,7 @@ export async function changeGroup(req, res) {
 }
 
 
+// transaction
 // delete course just once per times
 // delete Studentregister, modify Coursedetail (count), modify edu_term (credit)
 export async function delCourse(req, res) {
@@ -693,6 +697,33 @@ export async function delCourse(req, res) {
 
     } catch (error) {
         await connection.rollback();
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+
+// advanced analysis
+export async function getFacActivity(req, res) {
+    try {
+        const token = req.headers.authorization.split(" ")[1];
+        const { year } = req.body;
+        const month = new Date().getMonth();
+        let term = 2;
+        if (month >= 7) term = 1; // after august term 1
+        const query = `
+            SELECT C.*, D.gr, D.teacher_id, D.class_id 
+            FROM Course C 
+            JOIN stu_register S ON S.course_id = C.course_id
+            JOIN course_detail D ON D.course_id = S.course_id AND D.gr = S.gr
+            WHERE S.year = ? AND S.term = ? AND S.student_id = ?     
+        `;
+
+        const [register] = await connection.execute(query, [year, term, token]);
+        connection.release();
+        res.json(register);
+
+    } catch (error) {
         connection.release();
         return res.status(404).send({ error: error.message });
     }

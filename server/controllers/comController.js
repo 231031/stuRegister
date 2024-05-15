@@ -90,7 +90,6 @@ export async function updateCheck(req, res) {
 
 // continue calculate gpax (sum of (grade*credit)  / total credit)
 // tb stu_register, tb Student
-// not tested yet
 export async function getStudent(req, res) {
     try {
         const query = `

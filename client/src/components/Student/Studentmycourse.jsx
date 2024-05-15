@@ -57,7 +57,7 @@ export default function Studentmycourse() {
   }, [selT, selY]);
 
   function clickDetail(e) {
-    navigate('/student/courses', { state: { course_id: e } });
+    navigate('/student/moredetail', { state: { course_id: e } });
   }
 
   function clickChange(e) {

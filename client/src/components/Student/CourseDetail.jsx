@@ -65,9 +65,7 @@ export default function Detailcourse() {
           }
 
         </div>
-            <title>Stu | CourseDetail</title>
-        </Helmet> 
-        <Headerstu data={data}/>
+
         <div className='h-screen bg-lowyellow'>
         <div className='flex flex-row justify-start items-start space-x-10 px-20 font-semibold'>
           <div className='size-48 my-10 flex flex-col justify-end bg-black rounded-3xl '>

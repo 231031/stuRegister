@@ -78,7 +78,7 @@ export default function Teachertablecourse() {
               <div className="overflow-hidden">
                 {course.length > 0 ? (
                   <table className="min-w-full">
-                    <thead className="bg-gray-200 border-b">
+                    <thead className="bg-sky border-b">
                       <tr>
                         <th
                           scope="col"
@@ -103,7 +103,7 @@ export default function Teachertablecourse() {
                       {course.map((cList, index) => (
                         <tr
                           key={index}
-                          className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"
+                          className="bg-slate-100 border-b transition duration-300 ease-in-out hover:bg-gray-100"
                         >
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             1
@@ -120,7 +120,7 @@ export default function Teachertablecourse() {
                                   cList.course_id
                                 )
                               }
-                              className="bg-[#9ca3af] hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border border-[#94a3b8] hover:border-transparent rounded mr-1"
+                              className="bg-darkbrown hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border border-[#94a3b8] hover:border-transparent rounded mr-1"
                             >
                               Edit
                             </button>
@@ -132,7 +132,7 @@ export default function Teachertablecourse() {
                                   cList.course_id
                                 )
                               }
-                              className="bg-[#9ca3af] hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border border-[#94a3b8] hover:border-transparent rounded mr-1"
+                              className="bg-lowbrown hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border border-[#94a3b8] hover:border-transparent rounded mr-1"
                             >
                               Submit Score
                             </button>

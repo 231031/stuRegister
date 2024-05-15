@@ -23,19 +23,23 @@ import Studentpersonal from'./components/Student/Studentpersonal';
 import Studentlogin from'./components/Student/Studentlogin'; 
 import Studenthome from'./components/Student/Studenthome'; 
 import Studentupdate from'./components/Student/Studentupdate'; 
-import Studentnewpass from'./components/Student/Studentnewpass'; 
+import Studentnewpass from'./components/Student/Studentnewpass';
+
 import Studentregiscourse from'./components/Student/Studentregiscourse'; 
 import Studentregiselective from'./components/Student/Studentregiselective'; 
 import Studentmycourse from'./components/Student/Studentmycourse'; 
 import Studentdelcourse from './components/Student/Studentdelcourse';
 import Studentchangegroup from './components/Student/Studentchangegroup';
-import Studentscholar from './components/Student/Studentscholar';
+import Studentmoredetail from './components/Student/Studentmoredetail';
+import Detailcourse from './components/Student/CourseDetail';
+
 import Studenteditpersonal from './components/Student/Studenteditpersonal';
 import Studentaddeduhis from './components/Student/Studentaddeduhis';
-import Detailcourse from './components/Student/CourseDetail';
 import AllActivity from './components/Student/StudentallAc';
 import AttendedActivity from './components/Student/StudentAtten';
 import EvaluateActivity from './components/Student/StudentEvaActivity';
+
+import Studentscholar from './components/Student/Studentscholar';
 import Scholarform from './components/Student/StudentScholarform'; 
 import Studentstatusscholar from './components/Student/Studentstatusscholar';
 import EvaForm from './components/Student/StudentEvaActivityform';
@@ -189,6 +193,10 @@ const router = createBrowserRouter(
     {
       path: '/student/courses',
       element : <Detailcourse/>
+    },
+    {
+      path: '/student/moredetail',
+      element : <Studentmoredetail/>
     },
     
     {

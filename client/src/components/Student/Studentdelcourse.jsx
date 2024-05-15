@@ -56,7 +56,7 @@ export default function Studentdelcourse() {
     }, [term]);
 
     function clickDetail(e) {
-        navigate('/student/courses', { state : { course_id : e }});
+      navigate('/student/moredetail', { state: { course_id: e } });
     }
 
     async function delCourse(id, group, credit) {

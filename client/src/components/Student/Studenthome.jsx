@@ -107,6 +107,7 @@ export default function Studenthome() {
                         <td>Activity Name</td>
                         <td>Limit</td>
                         <td>Get Hours</td>
+                        <td>Activity Date</td>
                       </tr>
                     </thead>
                     <tbody>
@@ -116,6 +117,7 @@ export default function Studenthome() {
                             <td className='py-1'>{aList.activity_name}</td>
                             <td className='py-1'>{aList.finite}</td>
                             <td className='py-1'>{aList.hours}</td>
+                            <td className='py-1'>{aList?.date_ac ? new Date(aList.date_ac).toISOString().split('T')[0] : ""}</td>
                           </tr>
 
                         ))

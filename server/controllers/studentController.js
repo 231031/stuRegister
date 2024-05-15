@@ -351,6 +351,27 @@ export async function getCourseDe(req, res) {
     }
 }
 
+// more detail of course
+export async function getSelCourse(req, res) {
+    try {
+        const { id } = req.body;
+
+        const query = `
+            SELECT Course.*
+            FROM Course WHERE course_id = ?        
+        `;
+        const [resDetail] = await pool.execute(query,
+            [id]
+        );
+        connection.release();
+        res.json(resDetail[0]);
+
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
 export async function registerCourse(req, res) {
     try {
         let totalCredit = 0;
@@ -465,13 +486,13 @@ export async function getArrActivity(req, res) {
             connection.release();
             res.json(arr);
 
-        } else { // not evaluate -> page StudentEvaActivity
+        } else { // not evaluate -> page StudentEvaActivity (can evalate after finished activity and have time to evaluate 10 days)
 
             const query = `
                 SELECT * FROM arr_activity AR INNER JOIN Activity A ON A.activity_id = AR.activity_id 
-                WHERE student_id = ? AND status = ?
+                WHERE student_id = ? AND status = ? AND ? > date_ac + ac_day AND ? - date_ac + ac_day < 10
             `
-            const [arr] = await connection.execute(query, [token, evaluate]);
+            const [arr] = await connection.execute(query, [token, evaluate, new Date(), new Date()]);
             connection.release();
             res.json(arr);
 
@@ -559,7 +580,7 @@ export async function getStuRegisterChange(req, res) {
             FROM Course C 
             JOIN stu_register S ON S.course_id = C.course_id
             JOIN course_detail D ON D.course_id = S.course_id
-            WHERE S.year = ? AND S.term = ? AND S.student_id = ? 
+            WHERE S.year = ? AND S.term = ? AND S.student_id = ? AND D.count < D.finite
             GROUP BY C.course_id, C.department_id, C.credit, C.type, C.description, C.course_name      
         `;
 

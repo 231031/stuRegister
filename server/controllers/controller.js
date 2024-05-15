@@ -44,10 +44,11 @@ export async function getAllScholarships(req, res) {
     }
 }
 
-export async function getAllActivitys(req, res) {
+export async function getOpenActivitys(req, res) {
     try {
         const [activitys] = await connection.execute(
-            'SELECT * FROM Activity'
+            'SELECT * FROM Activity WHERE date_ac > ? ORDER BY date_ac',
+            [new Date()]
         );
         connection.release();
         res.json(activitys);

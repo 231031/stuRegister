@@ -19,6 +19,7 @@ router.route('/getsturegister/delete').post(controller.getStuRegisterDelete); //
 router.route('/getsturegister/update').post(controller.getStuRegisterChange); // change group
 router.route('/getavailable').post(controller.getAvailableCourse); // add course
 router.route('/getcoursede').post(controller.getCourseDe); // add course
+router.route('/getselcourse').post(controller.getSelCourse); // more detail course
 
 router.route('/getstuterm').post(controller.getStuTerm); // education
 router.route('/getgpax').post(controller.getGpax); // gpax

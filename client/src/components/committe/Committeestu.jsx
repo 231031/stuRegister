@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import tw from "twin.macro";
 
-import { getInfoStudent } from "../../helpers/comHelper"
+import { getInfoStudent, getStuScholar } from "../../helpers/comHelper"
 import Headercom from "./Headercom";
 
+const Row = tw.td`border border-slate-600 py-1 px-2 text-sm`;
 export default function Committeestu() {
 
   const navigate = useNavigate();
   const location = useLocation();
   const [info, setInfo] = useState("");
-  const [gpax, setGpax] = useState("");
+  const [got, setGot] = useState("");
   const [id, setId] = useState("");
   const [scholar, setScholar] = useState("");
 
@@ -26,13 +28,25 @@ export default function Committeestu() {
     const apiStu = async () => {
       try {
         const res = await getInfoStudent(id);
-        setInfo(res.info);
-        setGpax(res.gpax);
+        setInfo(res);
       } catch (error) {
         console.error(error);
       }
     };
-    if (id) apiStu();
+
+    const apiGot = async () => {
+      try {
+        const res = await getStuScholar(id);
+        setGot(res);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (id) {
+      apiStu();
+      apiGot();
+    }
   }, [id]);
 
 
@@ -44,7 +58,7 @@ export default function Committeestu() {
         </Helmet>
         <Headercom />
         <div className="flex flex-col items-center my-10">
-          <div className="flex flex-col flex-wrap w-2/3 h-2/3 bg-Slate rounded-md shadow-md p-5">
+          <div className="flex flex-col flex-wrap w-2/3 h-2/3 bg-Slate rounded-md shadow-md p-5 text-sm ">
 
             {/* header */}
             <div className="flex flex-row mt-5">
@@ -68,7 +82,7 @@ export default function Committeestu() {
                   </div>
                   <div className="flex flex-row">
                     <p className="font-bold mr-5">Gpax :</p>
-                    <p>{gpax}</p>
+                    <p>{info?.stu_gpax}</p>
                   </div>
 
 
@@ -143,6 +157,45 @@ export default function Committeestu() {
 
             </div>
           </div>
+
+          {
+            (got.length > 0) ? (
+              <div className="w-full flex flex-col items-center mt-20">
+                <h3 className="font-bold">Scholarship History</h3>
+                <table className="w-2/3 text-center mt-3">
+                  <thead>
+                    <tr className="font-bold">
+                      <Row>Num</Row>
+                      <Row>Scholarship Name</Row>
+                      <Row>Year</Row>
+                      <Row>Result</Row>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      got.map((gList, index) => (
+                        <tr key={index}>
+                          <Row>{index + 1}</Row>
+                          <Row>{gList.scholarship_name}</Row>
+                          <Row>{gList.get_year}</Row>
+                          {
+                            (gList.approve) ? (
+                              <Row className="text-greendark font-semibold">Approved</Row>
+                            ) : (
+                              <Row className="text-red-800 font-semibold">Rejected</Row>
+                            )
+                          }
+                        </tr>
+                      ))
+                    }
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <div></div>
+            )
+          }
+
         </div>
 
       </div>

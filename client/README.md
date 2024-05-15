@@ -41,8 +41,8 @@ limit -> finite
 -Committee
 -add home page of committee
 -edit fetch tablestu and infostu get department_name and faculty_name
+-add tb analysis in Committeetable, add scholar_history of each student in Committeestu (all rejected and approved)
 
-- have not added in comHelper yet
 -advanced analysis back -> the number of students in each faculty who get scholarship in present year (getCountFaculty)
 -advanced analysis back -> get average salary's father of students in each faculty (getAvgF)
 -advanced analysis back -> get average salary's mother of students in each faculty (getAvgM)

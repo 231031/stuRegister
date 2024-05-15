@@ -119,7 +119,7 @@ export default function Committeeeva() {
                       <Row>Student Name</Row>
                       <Row>Department</Row>
                       <Row>Faculty</Row>
-                      <Row>Status</Row>
+                      <Row>Evaluate</Row>
                     </tr>
                   </thead>
                   <tbody>

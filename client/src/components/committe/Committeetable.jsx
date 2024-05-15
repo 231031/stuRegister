@@ -6,7 +6,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 
 import Headercom from "./Headercom";
 import { getAllScholarships } from "../../helpers/helper";
-import { getApplicant } from "../../helpers/comHelper";
+import { getApplicant, getCountFaculty } from "../../helpers/comHelper";
 
 const Row = tw.td`border border-slate-600 py-1 px-2 text-sm`;
 export default function Committeetable() {
@@ -14,6 +14,7 @@ export default function Committeetable() {
   const [data, setData] = useState("");
   const [stu, setStu] = useState("");
   const [sel, setSel] = useState("");
+  const [count_fac, setCount] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,7 +38,21 @@ export default function Committeetable() {
         console.error(error);
       }
     };
-    if (sel) apiStu();
+
+    const apiCount = async () => {
+      try {
+        const res = await getCountFaculty(sel);
+        setCount(res);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (sel) {
+      apiCount();
+      apiStu();
+    }
+
   }, [sel]);
 
   function handleClick(id) {
@@ -74,17 +89,21 @@ export default function Committeetable() {
               <p className='my-5'>No Scholarship for Choose Right Now</p>
             )
           }
-          <div className='mt-10'>
-            {
-              (stu.length) > 0 ? (
-                <table className='my-2 table-fixed border-collapse border border-slate-500 text-center'>
+
+
+
+          {
+
+            (stu.length) > 0 ? (
+              <div className='mt-10 flex flex-col items-center'>
+                <h3 className="font-bold">Applicant</h3>
+                <table className='my-2 table-fixed border-collapse border border-slate-500 text-center w-3/4'>
                   <thead>
                     <tr>
                       <Row>Num</Row>
                       <Row>Student Name</Row>
                       <Row>Department</Row>
                       <Row>Faculty</Row>
-                      <Row>Year</Row>
                       <Row>Status</Row>
                       <Row>Information</Row>
                     </tr>
@@ -97,7 +116,6 @@ export default function Committeetable() {
                           <Row>{stuList.first_name} {stuList.last_name}</Row>
                           <Row>{stuList.department_name}</Row>
                           <Row>{stuList.faculty_name}</Row>
-                          <Row>{stuList.get_year}</Row>
                           <Row>
                             {
                               (stuList.status == 1) ? (
@@ -115,14 +133,50 @@ export default function Committeetable() {
                     }
                   </tbody>
                 </table>
-              ) : (
-                <div className='my-5 h-72'>
-                  <h3 className='ml-7 text-xl text-blue-900'>Applicant</h3>
-                  <h2 className='my-4 ml-7 text-md text-blue-600 flex justify-center'>Choose Scholarship</h2>
-                </div>
-              )
-            }
-          </div>
+              </div>
+            ) : (
+              <div className='mt-20 h-72 font-bold'>
+                <h3 className='ml-7 text-xl text-blue-900'>Applicant</h3>
+                <h2 className='my-4 ml-7 text-md text-blue-600 flex justify-center'>Choose Scholarship</h2>
+              </div>
+            )
+          }
+
+
+          {/* table from advanced analysis */}
+          {
+            (count_fac.length) > 0 ? (
+              <div className='mt-10 flex flex-col items-center'>
+                <h3 className="font-bold">The number of people who got scholarship in each faculty</h3>
+                <table className='my-2 table-fixed border-collapse border border-slate-500 text-center w-3/4'>
+                  <thead>
+                    <tr>
+                      <Row>Num</Row>
+                      <Row>Faculty Name</Row>
+                      <Row>Number Approved</Row>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      count_fac.map((cList, index) => (
+                        <tr key={index}>
+                          <Row>{index + 1}</Row>
+                          <Row>{cList.faculty_name}</Row>
+                          <Row>{cList.count_student}</Row>
+                        </tr>
+                      ))
+                    }
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <div className='mt-15 h-72 font-bold'>
+                <h3 className='ml-7 text-xl text-blue-900'>Scholarship in each faculty</h3>
+                <h2 className='my-4 ml-7 text-md text-blue-600 flex justify-center'>Choose Scholarship</h2>
+              </div>
+            )
+          }
+
         </div>
 
       </div>

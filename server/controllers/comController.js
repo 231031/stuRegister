@@ -29,9 +29,9 @@ export async function getApplicant(req, res) {
             INNER JOIN Student SD ON SD.student_id = SH.student_id 
             INNER JOIN Department D ON SD.department_id = D.department_id
             INNER JOIN Faculty F ON F.faculty_id = D.faculty_id
-            WHERE SH.scholarship_id = ? ORDER BY SH.get_year AND SD.student_id DESC 
+            WHERE SH.scholarship_id = ? AND SH.get_year = ? ORDER BY SH.status 
         `;
-        const [student] = await pool.execute(query, [req.body.id]);
+        const [student] = await pool.execute(query, [req.body.id, pre_year]);
         connection.release();
         res.json(student);
 
@@ -96,40 +96,43 @@ export async function updateCheck(req, res) {
     }
 }
 
-// continue calculate gpax (sum of (grade*credit)  / total credit)
+// continue calculate gpax grade_term / the number of terms
 // tb stu_register, tb Student
 export async function getStudent(req, res) {
     try {
         const query = `
-            SELECT S.student_id, S.first_name, S.last_name, S.salary, S.f_salary, 
-            S.m_salary, S.address, S.zip_code, S.city, S.state, D.department_name, F.faculty_name,
-                JSON_ARRAYAGG(
-                    JSON_OBJECT(
-                        'grade', SR.grade,
-                        'credit', C.credit        
-                    )
-                ) AS register
-                FROM Course C INNER JOIN stu_register SR ON C.course_id = SR.course_id 
-                INNER JOIN Student S ON S.student_id = SR.student_id 
-                INNER JOIN Department D ON D.department_id = S.department_id
-                INNER JOIN Faculty F ON F.faculty_id = D.faculty_id
-                WHERE S.student_id = ?
-                GROUP BY S.student_id, S.first_name, S.last_name, S.salary, S.f_salary, 
-                S.m_salary, S.address, S.zip_code, S.city, S.state, D.department_name, F.faculty_name
+            SELECT tb_gpax.stu_gpax, S.student_id, S.first_name, S.last_name, S.salary, S.f_salary, 
+            S.m_salary, S.address, S.zip_code, S.city, S.state, D.department_name, F.faculty_name
+            FROM 
+            (SELECT S.student_id, avg(ET.grade_term) AS stu_gpax FROM Student S 
+            INNER JOIN edu_term ET ON S.student_id = ET.student_id 
+            GROUP BY S.student_id) AS tb_gpax 
+            INNER JOIN Student S ON tb_gpax.student_id = S.student_id
+            INNER JOIN Department D ON D.department_id = S.department_id
+            INNER JOIN Faculty F ON D.faculty_id = F.faculty_id
+            WHERE S.student_id = ?
         `;
         const [student] = await pool.execute(query, [req.body.id]);
         connection.release();
+        res.json(student[0])
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
 
-        let total_credit = 0;
-        let sum = 0;
-        const { register } = student[0];
-        for (let i = 0; i < register.length; i++) {
-            sum += (register[i].credit*register[i].grade);
-            total_credit += register[i].credit;
-        }
-        let gpax = sum / total_credit;
 
-        return res.status(200).send({ gpax : gpax, info : student[0] });
+export async function getStuScholar(req, res) {
+    try {
+        const query = `
+            SELECT SH.*, S.scholarship_name
+            FROM scholar_history SH INNER JOIN Student SD ON SD.student_id = SH.student_id
+            INNER JOIN Scholarship S ON S.scholarship_id = SH.scholarship_id
+            WHERE SD.student_id = ? AND SH.status = ? ORDER BY SH.get_year DESC
+        `;
+        const [got_shcolar] = await pool.execute(query, [req.body.id, true]);
+        connection.release();
+        res.json(got_shcolar)
     } catch (error) {
         connection.release();
         return res.status(404).send({ error: error.message });

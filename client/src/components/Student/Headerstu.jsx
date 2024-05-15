@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom'
 import tw from 'twin.macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Btn = tw.p` px-8 py-2 text-lowyellow cursor-pointer text-base hover:text-lowbrown  border-opacity-50 border-lowyellow`;
-const List = tw.ul`bg-lowgreen text-lowyellow rounded-md p-1 absolute w-40 flex flex-col items-center bg-opacity-90`;
+const Btn = tw.p` px-8 py-3 flex text-lowyellow cursor-pointer text-base hover:text-lowbrown items-center justify-center w-48`;
+const List = tw.ul`bg-lowgreen text-lowyellow rounded-md w-48 mt-2 p-1 absolute flex flex-col items-center  bg-opacity-90 z-50`;
 const Dropdown = tw.div`flex flex-col border-opacity-50 border-lowyellow`;
 export default function Headerstu({ data }) {
 
@@ -61,7 +61,7 @@ export default function Headerstu({ data }) {
   return (
     <div>
        <nav className=' bg-darkgreen'>
-        <ul className='flex flex-wrap justify-center items-center divide-x-2'>
+        <ul className='flex flex-wrap justify-center items-center '>
           <Btn>
             <NavLink to='/student/home'>Home</NavLink>
           </Btn>
@@ -69,7 +69,7 @@ export default function Headerstu({ data }) {
           <Dropdown>
             <Btn onClick={toggleInfo}>Information<FontAwesomeIcon className='ml-2' icon="fa-solid fa-caret-down" /></Btn>
             <div className={isInfoOpen ? 'block' : 'hidden'}>
-              <List>
+              <List >
                 <li><NavLink to='/student/update'>Personal</NavLink></li>
                 <li><NavLink to='/student/eduhis'>Education</NavLink></li>
                 
@@ -80,7 +80,7 @@ export default function Headerstu({ data }) {
           <Dropdown>
             <Btn onClick={toggleScholar}>Scholarship<FontAwesomeIcon className='ml-2' icon="fa-solid fa-caret-down" /></Btn>
             <div className={isScholarOpen ? 'block' : 'hidden'}>
-              <List>
+              <List >
                 <li><NavLink to='/student/scholarship'>Scholarship</NavLink></li>
                 <li><NavLink to='/student/statusscholar'>Status</NavLink></li>
               </List>
@@ -101,7 +101,7 @@ export default function Headerstu({ data }) {
           <Dropdown>
             <Btn onClick={toggleActivity}>Activity<FontAwesomeIcon className='ml-2' icon="fa-solid fa-caret-down" /></Btn>
             <div className={isActivityOpen ? 'block' : 'hidden'}>
-              <List className='w-46'>
+              <List>
                 <li><NavLink to='/student/activity'>All Activity</NavLink></li>
                 <li><NavLink to='/student/myactivity'>Attended Activity</NavLink></li>
                 <li><NavLink to='/student/evaluate'>Evaluate Activity</NavLink></li>
@@ -114,13 +114,14 @@ export default function Headerstu({ data }) {
             <p>Year : {data?.year}</p>  
           </div> */}
           <Dropdown>
-            <Btn onClick={toggleUser}><FontAwesomeIcon className='ml-2 ' icon="fa-solid fa-circle-user" /></Btn>
+            <Btn onClick={toggleUser}><FontAwesomeIcon className='ml-2 size-9' icon="fa-solid fa-circle-user" /></Btn>
             <div className={isUserOpen ? 'block' : 'hidden'}>
               <List className='w-46'>
                 <li><p>ID : {data?.student_id}</p></li>
                 <li><p>Year : {data?.year}</p></li>
-                <li><NavLink to='/'>Change user view</NavLink></li>
-                <li onClick={logout}><NavLink to='/student/login'>Log Out</NavLink></li>
+                  <li><NavLink to='/' >Change user view</NavLink></li>
+                  <li onClick={logout}><NavLink to='/student/login'>Log Out</NavLink></li>
+                
               </List>
             </div>
           </Dropdown>

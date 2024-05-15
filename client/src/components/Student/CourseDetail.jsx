@@ -30,12 +30,12 @@ export default function Detailcourse() {
         </Helmet> 
         <Headerstu data={data}/>
         <div className='h-screen bg-white '>
-        <div className=''> 
+        <div> 
           <div className='px-20 pt-20 pb-3 font-bold text-4xl'>Published Classes</div>
           <div className='px-20 text-xl'>These classes are available to students.</div>
         </div>
         <div className='flex flex-row justify-start items-start space-x-10 px-20 font-semibold'>
-          <div className='size-48 my-10 flex flex-col justify-end  rounded-3xl bg-contain ' style={{backgroundImage: `url(${imageU1_2})`}}>
+          <div className='h-48 w-56 my-10 flex flex-col justify-end  rounded-3xl bg-contain ' style={{backgroundImage: `url(${imageU1_2})`}}>
               <button className='flex flex-col w-100% bg-lowbrown h-2/5 rounded-b-3xl '>
                 <div className='text-white ml-4 mt-2'>
                   CPE : 232
@@ -45,7 +45,7 @@ export default function Detailcourse() {
                 </div>
               </button>
           </div>
-          <div className='size-48 my-10 flex flex-col justify-end rounded-3xl bg-contain' style={{backgroundImage: `url(${imageU1_2})`}}>
+          <div className='h-48 w-56 my-10 flex flex-col justify-end rounded-3xl bg-contain' style={{backgroundImage: `url(${imageU1_2})`}}>
               <button className='flex flex-col w-100% bg-lowbrown h-2/5 rounded-b-3xl'>
                 <div className='text-white ml-4 mt-2'>
                   CPE : 232
@@ -55,7 +55,7 @@ export default function Detailcourse() {
                 </div>
               </button>
           </div>
-          <div className='size-48 my-10 flex flex-col justify-end  rounded-3xl bg-contain' style={{backgroundImage: `url(${imageU1_2})`}}>
+          <div className='h-48 w-56 my-10 flex flex-col justify-end  rounded-3xl bg-contain' style={{backgroundImage: `url(${imageU1_2})`}}>
               <button className='flex flex-col w-100% bg-lowbrown h-2/5 rounded-b-3xl'>
                 <div className='text-white ml-4 mt-2'>
                   CPE : 232

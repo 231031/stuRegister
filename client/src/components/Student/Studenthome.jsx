@@ -59,7 +59,7 @@ export default function Studenthome() {
         </Helmet>
         <Headerstu data={data} />
         {/* <div className='flex'> */}
-          <div className='flex flex-col justify-first items-center bg-sky py-8'>
+          <div className='flex flex-col justify-first items-center text-xl font-semibold bg-sky py-8'>
             <p className='my-2'>Student ID : {data?.student_id}</p>
             <p className='my-2'>Name : {data?.first_name} {data?.last_name}</p>
             <p className='my-2'>GPA : {gpax}</p>
@@ -89,7 +89,7 @@ export default function Studenthome() {
                     </tbody>
                   </table>
                   <button onClick={(e) => handleScholar()}
-                    type='button' className='px-4 py-2 bg-sky text-darkgreen rounded-lg'>Apply</button>
+                    type='button' className='px-4 py-2 bg-sky text-darkgreen rounded-lg hover:bg-lowgreen hover:text-white'>Apply</button>
 
                 </Box>
               ) : (

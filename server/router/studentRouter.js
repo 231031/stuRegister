@@ -13,12 +13,20 @@ router.route("/evaluate").post(controller.evaActivity);
 
 // post query
 router.route('/info').post(controller.getInfo);
+
 router.route('/getsturegister').post(controller.getStuRegister); // my course
 router.route('/getsturegister/delete').post(controller.getStuRegisterDelete); // delete course
 router.route('/getsturegister/update').post(controller.getStuRegisterChange); // change group
 router.route('/getavailable').post(controller.getAvailableCourse); // add course
+router.route('/getcoursede').post(controller.getCourseDe); // add course
+
 router.route('/getstuterm').post(controller.getStuTerm); // education
-router.route('/getscholarship').post(controller.getScholar);
+router.route('/getgpax').post(controller.getGpax); // gpax
+router.route('/gettotalcredit').post(controller.getTotalCredit); // total credit
+
+router.route('/getscholarship').post(controller.getScholar); // sholarship
+router.route('/getstatusscholar').post(controller.getStatusScholar); // status scholar
+
 router.route('/getactivity').post(controller.getActivity);
 router.route('/getarractivity').post(controller.getArrActivity);
 

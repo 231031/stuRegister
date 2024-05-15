@@ -26,21 +26,20 @@ export default function Studentdelcourse() {
         if (!token) {
           navigate('/student/login');
         }
-        const [department_id, year, student_id] = token.split('-');
   
         if (location.state) setTerm(location.state.term);
         else navigate('/student/mycourse');
 
         const apiInfo = async () => {
           try {
-            const res = await getInfo(student_id);
+            const res = await getInfo();
             setData(res);
           } catch (error) {
             console.log(error);
           }
         }
 
-        if (student_id) apiInfo();
+        apiInfo();
 
     }, []);
 

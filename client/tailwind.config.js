@@ -9,9 +9,12 @@ export default {
     extend: { 
       colors: {
       'greendark': '#41B06E',
-      'sky': '#141E46',
+      'sky': '#96C6C6',
       'lowyellow': '#FFF5E0',
-      'lowgreen': '8DECB4',
+      'lowgreen': '#264E58',
+      'darkgreen': '#112D31',
+      'lowbrown': '#6E6659',
+      'darkbrown': '#4E4A41',
       'black': '#000000',
       'white': '#FFF7FC',
       'Slate' : '#cbd5e1'

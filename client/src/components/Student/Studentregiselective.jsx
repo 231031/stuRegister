@@ -56,8 +56,8 @@ export default function Studentregiselective() {
       if (data) apiCourse();
   }, [data]);
 
-  function handleClick() {
-    navigate('/student/courses')
+  function clickDetail() {
+    navigate('/student/moredetail', { state: { course_id: e } });
   }
 
   function selCourseGroup(id, credit, group, index, ind) {
@@ -199,7 +199,7 @@ export default function Studentregiselective() {
               <div className='h-screen flex flex-col items-center justify-center'>
                 <img src={sry} className='w-1/6'/>
                 <p className='my-5'>Sorry, we're not in registration period</p>
-                <button className='p-3 bg-slate-400 text-white rounded-md' type='button' onClick={(e)=>handleClick()}>Preview Course Detail</button>
+                <button className='p-3 bg-slate-400 text-white rounded-md' type='button' onClick={(e)=>clickDetail()}>Preview Course Detail</button>
               </div>
             )
           }

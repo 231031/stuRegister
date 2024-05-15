@@ -102,12 +102,19 @@ const LoginSchema = Yup.object().shape({
         .required('Required'),
 });
 
-const UpdateSchema = Yup.object().shape({
+
+
+const ScholarStuSchema = Yup.object().shape({
     email: Yup.string().required('Required').email('xxx@gmail.com'),
     phone: Yup.string().required('Required').min(10, 'xxxxxxxxxx'),
     city: Yup.string().required('Required').min(3, 'too short!'),
     zip_code: Yup.string().required('Required').min(4, 'wrong zip code'),
     address: Yup.string().required('Required').min(5, 'too short!'),
+});
+
+
+const UpdateSchema = Yup.object().shape({
+    ...ScholarStuSchema.fields,
 
     f_email: Yup.string()
         .required('required').email('xxx@gmail.com'),
@@ -241,5 +248,5 @@ const DetailSchema = Yup.object().shape({
 
 
 export { PersonalSchema, LoginSchema, UpdateSchema, CourseSchema, DetailSchema, FacSchema, DepartmentSchema, TeacherSchema,
-        AddStuSchema, AvailableSchema, NameSchema, PasswordSchema, ScholarshipSchema, ActivitySchema, CourseUpdateSchema };
+        AddStuSchema, AvailableSchema, NameSchema, PasswordSchema, ScholarshipSchema, ActivitySchema, CourseUpdateSchema, ScholarStuSchema };
 

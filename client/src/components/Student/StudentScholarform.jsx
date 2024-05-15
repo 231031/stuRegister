@@ -7,7 +7,7 @@ import { useFormik } from 'formik';
 
 import Headerstu from './Headerstu';
 import { getScholar, getInfo, registerScholar } from '../../helpers/stuhelper';
-import { UpdateSchema } from '../../Validations/validation';
+import { ScholarStuSchema } from '../../Validations/validation';
 
 export default function Scholarform() {
 
@@ -54,7 +54,7 @@ export default function Scholarform() {
           address: data?.address || '',
           scholarship_id: '',
       },
-      validationSchema: UpdateSchema,
+      validationSchema: ScholarStuSchema,
       onSubmit: async (values) => {
           try {
             if (values.scholarship_id == '') {
@@ -110,16 +110,6 @@ export default function Scholarform() {
                 Gender
               </label>
               <p className="appearance-none block w-200px bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-gender">{data?.gender}</p>
-              
-              {/* <div className="relative"> */}
-                {/* <select className="block appearance-none w-400px bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state" value={data?.gender}>
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                  <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                </div>
-                  <option value={data?.gender}>{data?.gender}</option>
-                </select> */}
-              {/* </div> */}
 
             </div>
 
@@ -142,10 +132,6 @@ export default function Scholarform() {
                   <option value='30,000 - 50,000'>   30,000 - 50,000        Bath   </option>
                   <option value='50,000 - 100,000'>   50,000 - 100,000        Bath   </option>
                 </select>
-                {/* <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center px-2 text-gray-700">
-                  <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                </div> */}
               </div>
             </div>
 
@@ -191,15 +177,6 @@ export default function Scholarform() {
                 Day of birth
               </label>
               <p className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"   id="grid-dayofbirth">{data?.dob ? new Date(data.dob).toISOString().split('T')[0] : ""}</p>
-                {/* <div className="relative">
-                  <select className="block appearance-none w-600px bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-                    <option>{data?.dob}</option>
-                  </select>
-                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                    </div>
-                </div> */}
             </div>
 
             

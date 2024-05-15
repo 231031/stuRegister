@@ -471,6 +471,26 @@ export async function getCourseDe() {
   }
 }
 
+export async function getSelCourse(id) {
+  try {
+    const response = await fetch('http://localhost:6001/student/getselcourse', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id : id }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
 export async function registerCourse(info, year, id) {
   const courses = [];
   const month = new Date().getMonth();

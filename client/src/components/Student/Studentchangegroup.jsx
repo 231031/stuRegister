@@ -72,7 +72,7 @@ export default function Studentchangegroup() {
   }, [term]);
 
   function clickDetail(e) {
-    navigate('/student/courses', { state: { course_id: e } });
+    navigate('/student/moredetail', { state: { course_id: e } });
   }
 
   function handleUpdate(id, group, group_in, index) {

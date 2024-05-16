@@ -117,7 +117,9 @@ export default function Committeeeva() {
                     <tr>
                       <Row>Num</Row>
                       <Row>Student Name</Row>
-                      <Row>Status</Row>
+                      <Row>Department</Row>
+                      <Row>Faculty</Row>
+                      <Row>Evaluate</Row>
                     </tr>
                   </thead>
                   <tbody>
@@ -126,6 +128,8 @@ export default function Committeeeva() {
                         <tr key={index}>
                           <Row>{index + 1}</Row>
                           <Row>{stuList.first_name} {stuList.last_name}</Row>
+                          <Row>{stuList.department_name}</Row>
+                          <Row>{stuList.faculty_name}</Row>
                           <Row>
                             <select onChange={(e) => handleChange(index, stuList.student_id, e.target.value, stuList.get_year)}>
                               <option value=''></option>

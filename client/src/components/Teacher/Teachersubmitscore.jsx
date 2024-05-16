@@ -145,6 +145,18 @@ export default function Teacherscore() {
                         >
                           Student Name
                         </th>
+                        <th
+                          scope="col"
+                          className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                        >
+                          Department Name
+                        </th>
+                        <th
+                          scope="col"
+                          className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                        >
+                          Faculty Name
+                        </th>
 
                         <div className="flex flex-row-reverse mr-10 pt-1">
                           <th
@@ -164,6 +176,12 @@ export default function Teacherscore() {
                           </td>
                           <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                           {stuList.first_name} {stuList.last_name}
+                          </td>
+                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {stuList.department_name}
+                          </td>
+                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {stuList.faculty_name}
                           </td>
                           <div className="flex flex-row-reverse mr-10 pt-1">
                             <div className="w-100px px-3 ">

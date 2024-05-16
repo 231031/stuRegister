@@ -30,3 +30,22 @@ limit -> finite
 -edit name in formik form, name in validation schema
 
 -add new column in tb Course 'description'
+
+
+-16/5/67
+-Student
+-fetch advanced analysis -> The number of people in each faculty who apply in each activity (6 activity) (getFacActivity)
+-advanced analysis back -> get average hours and average gpax of students who get scholarship from last year (getAvgScholar)
+
+
+-Committee
+-add home page of committee
+-edit fetch tablestu and infostu get department_name and faculty_name
+-add tb analysis in Committeetable, add scholar_history of each student in Committeestu (all rejected and approved)
+
+-advanced analysis back -> the number of students in each faculty who get scholarship in present year (getCountFaculty)
+-advanced analysis back -> get average salary's father of students in each faculty (getAvgF)
+-advanced analysis back -> get average salary's mother of students in each faculty (getAvgM)
+
+-Teacher
+-edit submitscore page (add department_name, faculty_name)

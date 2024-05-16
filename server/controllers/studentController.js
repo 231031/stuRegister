@@ -260,6 +260,7 @@ export async function getStatusScholar(req, res) {
 // update tb student, insert row scholar_history
 export async function registerScholar(req, res) {
     try {
+        const pre_year = new Date().getFullYear() + 543;
         const token = req.headers.authorization.split(" ")[1];
         const query = `
             UPDATE Student SET email = ?, phone = ?, salary = ?, city = ?, state = ?, zip_code = ?, address = ?
@@ -272,7 +273,7 @@ export async function registerScholar(req, res) {
         );
         await connection.execute(
             'INSERT INTO scholar_history (student_id, scholarship_id, get_year) VALUES (?, ?, ?)',
-            [apply.student_id, apply.scholarship_id, apply.get_year]
+            [apply.student_id, apply.scholarship_id, pre_year]
         );
 
         await connection.commit();
@@ -420,7 +421,7 @@ export async function registerCourse(req, res) {
             [token, regis[0].year, regis[0].term]
         );
 
-        if (edu[0]) {
+        if (edu.length > 0) {
             await connection.execute(
                 'UPDATE edu_term SET credit_term = credit_term + ? WHERE student_id = ? AND year = ? AND term = ?',
                 [totalCredit, token, regis[0].year, regis[0].term]
@@ -733,6 +734,7 @@ export async function delCourse(req, res) {
 
 // (Student) -> each activity
 // 2. The number of people in each faculty apply in an activity (6 activity) 
+// real time present year
 export async function getFacActivity(req, res) {
     try {
         const { activity_id } = await req.body;
@@ -748,6 +750,32 @@ export async function getFacActivity(req, res) {
         `;
 
         const [num_student] = await connection.execute(query, [activity_id]);
+        connection.release();
+        res.json(num_student);
+
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+
+export async function getAvgScholar(req, res) {
+    try {
+            const pre_year = new Date().getFullYear() + 543;
+            const query = `
+                SELECT S.scholarship_name, avg(stu_gpax) AS avg_gpax, avg(SD.hours) AS avg_hours FROM
+                (SELECT S.student_id, avg(ET.grade_term) AS stu_gpax FROM Student S 
+                INNER JOIN edu_term ET ON S.student_id = ET.student_id 
+                GROUP BY S.student_id) AS tb_gpax
+                INNER JOIN Student SD ON SD.student_id = tb_gpax.student_id
+                INNER JOIN scholar_history SH ON SD.student_id = SH.student_id
+                INNER JOIN Scholarship S ON S.scholarship_id = SH.scholarship_id
+                WHERE SH.get_year = ? AND SH.approve = ?
+                GROUP BY S.scholarship_name
+            `;
+
+        const [num_student] = await connection.execute(query, [pre_year-1, true]);
         connection.release();
         res.json(num_student);
 

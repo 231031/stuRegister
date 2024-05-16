@@ -138,11 +138,15 @@ export async function editCourse(req, res) {
 export async function getStuTeacher(req, res) {
     try {
         const query = `
-            SELECT S.student_id, S.first_name, S.last_name, S.year, C.course_id, C.course_name, C.credit 
+            SELECT S.student_id, S.first_name, S.last_name, S.year, C.course_id, C.course_name, C.credit, 
+            D.department_name, F.faculty_name
             FROM stu_register SR INNER JOIN Student S ON SR.student_id = S.student_id 
             INNER JOIN course_detail CD ON CD.course_id = SR.course_id AND CD.gr = SR.gr
             INNER JOIN Course C ON C.course_id = SR.course_id
+            INNER JOIN Department D ON D.department_id = S.department_id
+            INNER JOIN Faculty F ON F.faculty_id = D.faculty_id
             WHERE CD.teacher_id = ? AND CD.course_id = ? AND SR.status_grade = ?
+            ORDER BY S.student_id
         `;
         const [courses] = await pool.execute(query, [req.body.teacher_id, req.body.course_id, false]);
         connection.release();

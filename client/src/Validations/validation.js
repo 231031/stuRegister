@@ -118,15 +118,15 @@ const UpdateSchema = Yup.object().shape({
 
     f_email: Yup.string()
         .required('required').email('xxx@gmail.com'),
-    f_salary: Yup.string()
-        .required('required'),
+    f_salary: Yup.number()
+        .required('Required').typeError('Must be a number'),
     f_phone: Yup.string()
         .required('required').max(10, 'xxxxxxxxxx'),
 
     m_email: Yup.string()
         .required('required').email('xxx@gmail.com'),
-    m_salary: Yup.string()
-        .required('required'),
+    m_salary: Yup.number()
+        .required('Required').typeError('Must be a number'),
     m_phone: Yup.string()
         .required('required').max(10, 'xxxxxxxxxx'),
 

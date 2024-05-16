@@ -19,7 +19,7 @@ export default function Committeelogin() {
       } 
       else {
         localStorage.setItem('role', res.role);
-        navigate('/committee/tablestu');  
+        navigate('/committee/home');  
         toast.success(res.msg);
       }
     } catch (error) {

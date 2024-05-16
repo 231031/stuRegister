@@ -80,6 +80,7 @@ import Admintablestu from './components/Admin/Admintablestu';
 
 // committee component
 import Committeelogin from './components/committe/Committeelogin';
+import Committeehome from './components/committe/Committeehome';
 import Committeetable from './components/committe/Committeetable';
 import Committeestu from './components/committe/Committeestu';
 import Committeeeva from './components/committe/Committeeeva';
@@ -89,6 +90,10 @@ const router = createBrowserRouter(
     {
       path: '/',
       element : <Landing></Landing>
+    },
+    {
+      path: '/committee/home',
+      element : <Committeehome></Committeehome>
     },
     {
       path: '/committee/login',

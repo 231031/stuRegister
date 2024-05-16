@@ -42,7 +42,7 @@ export default function Admintablestu() {
     }, [sel]);
 
     function handleUpdate(id) {
-        // link to update page of student update
+      navigate('/admin/updatestudent', { state : { student_id : id } });
     }
 
     function handleDel(id) {

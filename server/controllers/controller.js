@@ -16,6 +16,21 @@ export async function getAllStudents(req, res) {
     }
 }
 
+export async function getCourse(req, res) {
+    try {
+        const [course] = await connection.execute(
+            'SELECT * FROM Course WHERE course_id = ?', 
+            [req.body.course_id]
+        );
+        connection.release();
+        res.json(course[0]);
+        
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
 export async function getAllCourses(req, res) {
     try {
         const [courses] = await connection.execute(

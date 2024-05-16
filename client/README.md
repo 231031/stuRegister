@@ -49,3 +49,17 @@ limit -> finite
 
 -Teacher
 -edit submitscore page (add department_name, faculty_name)
+-add register information page after login first time connect to backend (not tested yet)
+-edit Teacherpersonal connect to backend (not tested yet)
+
+
+-Admin
+-link table to path for editing
+-edit Courseedit component
+-create component and path for update teacher select from tableteacher
+-create component and path for update student select from tablestudent and connect to backend
+-use for update (first_name, last_name, id_card, gender, age)
+
+-Validation
+-seperate schema self, admincourse,
+-change schema name

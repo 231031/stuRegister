@@ -33,7 +33,7 @@ export default function Teachernewpass() {
                         try {
                             values.teacher_id = localStorage.getItem('token');
                             const res = await updatePassword(values);
-                            navigate('/teacher/personal');
+                            navigate('/teacher/register');
                             toast.success(res.msg);
                         } catch (error) {
                             toast.error('Teacher registration was failed');

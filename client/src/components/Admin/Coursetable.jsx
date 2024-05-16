@@ -32,6 +32,10 @@ export default function Coursetable() {
     function handleDel(e) {
       navigate('/admin/adddetail', { state : { course_id : e }});
     }
+
+    function handleEdit(e) {
+      navigate('/admin/editcourse', { state : { course_id : e }});
+    }
   return (
     <HelmetProvider>
       <div className='bg-indigo-200 h-screen'>
@@ -50,6 +54,7 @@ export default function Coursetable() {
                           <Row>Course ID</Row>
                           <Row>Course Name</Row>
                           <Row>Add</Row>
+                          <Row>Edit</Row>
                           <Row>Del</Row>
                         </tr>
                       </thead>
@@ -63,6 +68,10 @@ export default function Coursetable() {
                                 <Row><button className='text-green-600' 
                                   onClick={(e) => handleAdd(courseList.course_id, courseList.department_id)}>
                                   Add</button>
+                                </Row>
+                                <Row><button className='text-green-600' 
+                                  onClick={(e) => handleEdit(courseList.course_id)}>
+                                  Edit</button>
                                 </Row>
                                 <Row><button className='text-red-600' onClick={(e) => handleDel(courseList.course_id)}>Del</button></Row>
                               </tr>

@@ -117,6 +117,7 @@ export async function getStudent(req, res) {
         res.json(student[0])
     } catch (error) {
         connection.release();
+        console.log(error);
         return res.status(404).send({ error: error.message });
     }
 }

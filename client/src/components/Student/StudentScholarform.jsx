@@ -7,7 +7,7 @@ import { useFormik } from 'formik';
 
 import Headerstu from './Headerstu';
 import { getScholar, getInfo, registerScholar } from '../../helpers/stuhelper';
-import { ScholarStuSchema } from '../../Validations/validation';
+import { InfoSchema } from '../../Validations/validation';
 
 export default function Scholarform() {
 
@@ -42,7 +42,6 @@ export default function Scholarform() {
         apiScholar();
     }, []);
 
-    // username 65CPE001 Password 123456789
     const formik = useFormik({
       initialValues: {
           email: data?.email || '',  
@@ -54,7 +53,7 @@ export default function Scholarform() {
           address: data?.address || '',
           scholarship_id: '',
       },
-      validationSchema: ScholarStuSchema,
+      validationSchema: InfoSchema,
       onSubmit: async (values) => {
           try {
             if (values.scholarship_id == '') {

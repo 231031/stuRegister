@@ -12,7 +12,6 @@ const year_pattern = /^([19|20][0-9][0-9]{2})$/;
 const course_id_pattern = /^([A-Z]{3}|[A-Z]{2})([0-9]{3})$/;
 const time_pattern = /^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/;
 const scholar_id_pattern = /^([S])([0-9]{3})$/;
-const isNumber = (value) => !isNaN(value);
 
 const NameSchema = Yup.object().shape({
     first_name: Yup.string()
@@ -104,7 +103,7 @@ const LoginSchema = Yup.object().shape({
 
 
 
-const ScholarStuSchema = Yup.object().shape({
+const InfoSchema = Yup.object().shape({
     email: Yup.string().required('Required').email('xxx@gmail.com'),
     phone: Yup.string().required('Required').min(10, 'xxxxxxxxxx'),
     city: Yup.string().required('Required').min(3, 'too short!'),
@@ -114,7 +113,7 @@ const ScholarStuSchema = Yup.object().shape({
 
 
 const UpdateSchema = Yup.object().shape({
-    ...ScholarStuSchema.fields,
+    ...InfoSchema.fields,
 
     f_email: Yup.string()
         .required('required').email('xxx@gmail.com'),
@@ -132,15 +131,27 @@ const UpdateSchema = Yup.object().shape({
 
 });
 
-const PersonalSchema = Yup.object().shape({
-    ...UpdateSchema.fields,
+
+const SelfSchema = Yup.object().shape({
     // self
     id_card: Yup.string().required('Required'),
     gender: Yup.string().required('Required'),
     date: Yup.string().required('Required'),
     month: Yup.string().required('Required'),
     year: Yup.string().required('Required').matches(year_pattern, '19XX - 20XX'),
-    age: Yup.number().required('Required').typeError('Must be a number'),   
+    age: Yup.number().required('Required').typeError('Must be a number'),       
+});
+
+const TeacherPerSchema = Yup.object().shape({
+    ...SelfSchema.fields,
+    ...InfoSchema.fields,
+});
+
+const PersonalSchema = Yup.object().shape({
+    ...UpdateSchema.fields,
+    // self
+    ...SelfSchema.fields,
+   
     // father
     f_first_name: Yup.string()
         .required('required'),
@@ -179,6 +190,12 @@ const CourseUpdateSchema = Yup.object().shape({
         .required('required').min(3, 'too short!'),
     description: Yup.string()
         .required('required').min(10, 'too short!'),
+});
+
+const AdminCourseSchema = Yup.object().shape({
+    course_name: Yup.string()
+        .required('required').min(3, 'too short!'),
+    credit: Yup.number().required('Required').typeError('Must be a number'),
 });
 
 const ActivitySchema = Yup.object().shape({
@@ -247,6 +264,6 @@ const DetailSchema = Yup.object().shape({
 
 
 
-export { PersonalSchema, LoginSchema, UpdateSchema, CourseSchema, DetailSchema, FacSchema, DepartmentSchema, TeacherSchema,
-        AddStuSchema, AvailableSchema, NameSchema, PasswordSchema, ScholarshipSchema, ActivitySchema, CourseUpdateSchema, ScholarStuSchema };
+export { PersonalSchema, LoginSchema, UpdateSchema, CourseSchema, DetailSchema, FacSchema, DepartmentSchema, TeacherSchema, SelfSchema, AdminCourseSchema,
+        AddStuSchema, AvailableSchema, NameSchema, PasswordSchema, ScholarshipSchema, ActivitySchema, CourseUpdateSchema, InfoSchema, TeacherPerSchema };
 

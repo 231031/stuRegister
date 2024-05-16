@@ -133,6 +133,44 @@ export async function addDepartment(info) {
       }
 }
 
+export async function getInfoStudent(info) {
+  try {
+    const response = await fetch('http://localhost:6001/admin/getstudent', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: info }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
+export async function updateInfoStu(info, id) {
+    try {
+        const response = await fetch('http://localhost:6001/admin/update/infostu', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ info : info, id : id }),
+        });
+        const data = await response.json();
+        if (response.status === 404) {
+          return Promise.reject(data);
+      }
+        return Promise.resolve(data);
+      } catch (error) {
+        return Promise.reject(error);
+      }
+}
+
 export async function getDeInFac(info) {
     try {
         const response = await fetch('http://localhost:6001/admin/getdeinfac', {

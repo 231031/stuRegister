@@ -10,6 +10,7 @@ library.add(fas, faTwitter, faFontAwesome );
 // teacher components
 import Teacherlogin from './components/Teacher/Teacherlogin';
 import Teachernewpass from './components/Teacher/Teachernewpass';
+import Teacherregister from './components/Teacher/Teacherregister';
 import Teacherpersonal from './components/Teacher/Teacherpersonal';
 import Teacherhome from './components/Teacher/Teacherhome';
 import Teachertablecourse from './components/Teacher/Teachertablecourse';
@@ -76,7 +77,10 @@ import Adminaddscholar from './components/Admin/Adminaddscholar';
 import Adminaddactivity from './components/Admin/Adminaddactivity';
 import Adminaddavailable from './components/Admin/Adminaddavailable';
 import Admintableteach from './components/Admin/Admintableteach';
+import Admindelteacher from './components/Admin/Admindelteacher';
+import Adminupdateteacher from './components/Admin/Adminupdateteacher';
 import Admintablestu from './components/Admin/Admintablestu';
+import Adminupdatestu from './components/Admin/Adminupdatestu';
 
 // committee component
 import Committeelogin from './components/committe/Committeelogin';
@@ -121,6 +125,10 @@ const router = createBrowserRouter(
     {
       path: '/teacher/newpassword',
       element : <Teachernewpass/>
+    },
+    {
+      path: '/teacher/register',
+      element : <Teacherregister/>
     },
     {
       path: '/teacher/personal',
@@ -338,6 +346,10 @@ const router = createBrowserRouter(
       path: '/admin/selstudent',
       element : <Admintablestu/>
     },
+    {
+      path: '/admin/updatestudent',
+      element : <Adminupdatestu/>
+    },
     
     {
       path: '/admin/addavailable',
@@ -367,6 +379,14 @@ const router = createBrowserRouter(
     {
       path: '/admin/selteacher',
       element : <Admintableteach/>
+    },
+    {
+      path: '/admin/delteacher',
+      element : <Admindelteacher/>
+    },
+    {
+      path: '/admin/updateteacher',
+      element : <Adminupdateteacher/>
     },
 
   ]

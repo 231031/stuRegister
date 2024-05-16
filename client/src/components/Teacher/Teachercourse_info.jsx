@@ -4,7 +4,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import Headerteacher from "./Headerteacher";
 
-import { getInfoTeacher, getCourse } from "../../helpers/teacherHelper";
+import { getInfoTeacher } from "../../helpers/teacherHelper";
+import { getCourse } from "../../helpers/helper";
 
 export default function Teachercourse() {
 

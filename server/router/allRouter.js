@@ -10,5 +10,6 @@ router.route("/faculty").get(controller.getAllFaculty);
 router.route("/departments").get(controller.getAllDepartments);
 router.route("/scholarships").get(controller.getAllScholarships);
 router.route("/activitys").get(controller.getOpenActivitys);
+router.route('/course/getdetail').post(controller.getCourse);
 
 export default router;

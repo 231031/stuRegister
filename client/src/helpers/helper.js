@@ -8,6 +8,26 @@ export async function getAllCourse() {
       }
 }
 
+export async function getCourse(info) {
+  try {
+    const response = await fetch('http://localhost:6001/course/getdetail', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ course_id: info }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
 export async function getAllScholarships() {
     try {
         const response = await fetch('http://localhost:6001/scholarships');

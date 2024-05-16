@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useFormik } from 'formik';
-import toast, { Toaster }  from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 import Headerteacher from "./Headerteacher";
 
-import { getInfoTeacher, getCourse, editCourse } from "../../helpers/teacherHelper";
+import { getInfoTeacher, editCourse } from "../../helpers/teacherHelper";
+import { getCourse } from "../../helpers/helper";
 import { CourseUpdateSchema } from '../../Validations/validation';
 
 export default function TeacherEditcourse() {
@@ -50,18 +51,18 @@ export default function TeacherEditcourse() {
 
   const formik = useFormik({
     initialValues: {
-        course_name: course?.course_name || '',  
-        description: course?.description || '',
+      course_name: course?.course_name || '',
+      description: course?.description || '',
     },
     validationSchema: CourseUpdateSchema,
     onSubmit: async (values) => {
-        try {
-            const res = await editCourse(values, id);
-            toast.success(res.msg);
-        } catch (error) {
-            console.log(error);
-            toast.error('You registered this scholarship');
-        }
+      try {
+        const res = await editCourse(values, id);
+        toast.success(res.msg);
+      } catch (error) {
+        console.log(error);
+        toast.error('You registered this scholarship');
+      }
     },
     enableReinitialize: true,
   });
@@ -72,8 +73,8 @@ export default function TeacherEditcourse() {
       <Toaster position='top-center' reverseOrder={false}></Toaster>
       <HelmetProvider>
         <Helmet>
-            <title>T | EditCourse</title>
-        </Helmet> 
+          <title>T | EditCourse</title>
+        </Helmet>
       </HelmetProvider>
       <Headerteacher data={data} />
 
@@ -121,8 +122,8 @@ export default function TeacherEditcourse() {
                     required
                   />
                   {formik.touched.course_name && formik.errors.course_name ? (
-                            <p className="text-red-500 text-xs italic">{formik.errors.course_name}</p>
-                        ) : null}
+                    <p className="text-red-500 text-xs italic">{formik.errors.course_name}</p>
+                  ) : null}
                 </div>
 
                 <div className="relative w-full mb-3">
@@ -142,9 +143,9 @@ export default function TeacherEditcourse() {
                     placeholder=""
                     required
                   ></textarea>
-                    {formik.touched.description && formik.errors.description ? (
-                              <p className="text-red-500 text-xs italic">{formik.errors.description}</p>
-                          ) : null}
+                  {formik.touched.description && formik.errors.description ? (
+                    <p className="text-red-500 text-xs italic">{formik.errors.description}</p>
+                  ) : null}
                 </div>
                 <div className="text-center mt-6">
                   <button

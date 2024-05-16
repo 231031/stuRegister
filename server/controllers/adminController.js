@@ -182,6 +182,53 @@ export async function addStudent(req, res) {
     }
 }
 
+export async function updateInfoStu(req, res) {
+    try {
+        const { first_name, last_name, age, dob, id_card } = req.body.info;
+        const { id } = req.body;
+
+        const fieldsToUpdate = {
+            id_card, age, first_name, last_name, dob, id_card
+        };
+
+        const definedFields = Object.fromEntries(Object.entries(fieldsToUpdate).filter(([key, value]) => value !== undefined));
+        const setClause = Object.keys(definedFields)
+            .map(key => `${key} = ?`)
+            .join(', ');
+
+        const query = `
+            UPDATE Student
+            SET ${setClause}
+            WHERE student_id = ?;
+        `;
+        await connection.execute(query, [...Object.values(definedFields), id]);
+        connection.release();
+        return res.status(200).send({ msg: 'Student updated successfully' });
+
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function getInfoStudent(req, res) {
+    try {
+        const { id } = req.body;
+
+        const query = `
+            SELECT student_id, first_name, last_name, id_card, dob, age
+            FROM Student WHERE student_id = ?
+        `;
+        const [stu] = await connection.execute(query, [id]);
+        connection.release();
+        res.json(stu[0]);
+
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
 export async function addTeacher(req, res) {
     try {
         const teacherValues = await req.body.map(teacher => {
@@ -271,6 +318,22 @@ export async function addDetail(req, res) {
 
     } catch (error) {
         await connection.rollback();
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function editCourse(req, res) {
+    try {
+        const { course_name, description, credit, course_id } = await req.body;
+        await connection.execute(
+            'UPDATE Course SET course_name = ?, description = ?, credit = ? WHERE course_id = ?', 
+            [course_name, description, credit, course_id]
+        );
+        connection.release();
+        return res.status(200).send({ msg : 'Course updated successfully'});
+        
+    } catch (error) {
         connection.release();
         return res.status(404).send({ error: error.message });
     }

@@ -73,15 +73,25 @@ export async function updatePassword(req, res) {
 export async function updateTeacher(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
+        const { gender, id_card, address, age, city, dob, email, phone, state, zip_code } = req.body;
+
+        const fieldsToUpdate = {
+            gender, id_card, address, age, city, dob, email, phone, state, zip_code
+        };
+
+        const definedFields = Object.fromEntries(Object.entries(fieldsToUpdate).filter(([key, value]) => value !== undefined));
+        const setClause = Object.keys(definedFields)
+            .map(key => `${key} = ?`)
+            .join(', ');
+
         const query = `
-            UPDATE Teacher SET password = ? WHERE teacher_id = ?
-        `
-        if (token) {
-            await connection.execute(query, []);
-            connection.release();
-            return res.status(200).send({ msg : 'teacher updated successfully'});
-        }
+            UPDATE Teacher
+            SET ${setClause}
+            WHERE teacher_id = ?;
+        `;
+        await connection.execute(query, [...Object.values(definedFields), token]);
         connection.release();
+        return res.status(200).send({ msg: 'Teacher updated successfully' });
     } catch (error) {
         connection.release();
         return res.status(404).send({ error: error.message });
@@ -104,20 +114,7 @@ export async function getCourseTeacher(req, res) {
     }
 }
 
-export async function getCourse(req, res) {
-    try {
-        const [course] = await connection.execute(
-            'SELECT * FROM Course WHERE course_id = ?', 
-            [req.body.course_id]
-        );
-        connection.release();
-        res.json(course[0]);
-        
-    } catch (error) {
-        connection.release();
-        return res.status(404).send({ error: error.message });
-    }
-}
+
 
 export async function editCourse(req, res) {
     try {

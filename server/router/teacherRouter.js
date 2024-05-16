@@ -11,7 +11,6 @@ router.route('/info').post(controller.getInfo);
 // query
 router.route('/course/getstudent').post(controller.getStuTeacher);
 router.route('/course/getcourse').post(controller.getCourseTeacher);
-router.route('/course/getdetail').post(controller.getCourse);
 
 
 // get
@@ -20,6 +19,7 @@ router.route('/course/getdetail').post(controller.getCourse);
 router.route("/updatepass").put(controller.updatePassword);
 router.route("/updategrade").put(controller.updateGrade);
 router.route("/editcourse").put(controller.editCourse);
-router.route("/update").put(controller.updateTeacher);
+router.route("/registerinfo").put(controller.updateTeacher);
+
 
 export default router;

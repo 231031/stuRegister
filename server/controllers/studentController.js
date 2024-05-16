@@ -662,7 +662,7 @@ export async function changeGroup(req, res) {
         for (let i = 0; i < update.length; i++) {
             if (update[i].old_gr != update[i].gr) {
                 await connection.execute( // old group before change
-                    'UPDATE course_detail SET count = count - 1 WHERE course_id = ? AND gr = ? AND course_detail.year = ?', // add filter present year of course_detail
+                    'UPDATE course_detail SET count = count - 1 WHERE course_id = ? AND gr = ? AND year = ?', // add filter present year of course_detail
                     [update[i].course_id, update[i].old_gr, pre_year]
                 );
                 await connection.execute( // new group after change
@@ -670,7 +670,7 @@ export async function changeGroup(req, res) {
                     [update[i].gr, token, year, term, update[i].course_id]
                 );
                 await connection.execute( // new group after change
-                    'UPDATE course_detail SET count = count + 1 WHERE course_id = ? AND gr = ? AND course_detail.year = ?',
+                    'UPDATE course_detail SET count = count + 1 WHERE course_id = ? AND gr = ? AND year = ?',
                     [update[i].course_id, update[i].gr, pre_year]
                 );
             }
@@ -702,7 +702,7 @@ export async function delCourse(req, res) {
 
         // decrese count of group in this course
         await connection.execute(
-            'UPDATE course_detail SET count = count - 1 WHERE course_id = ? AND gr = ? AND course_detail.year = ?', // add filter present year of course_detail
+            'UPDATE course_detail SET count = count - 1 WHERE course_id = ? AND gr = ? AND year = ?', // add filter present year of course_detail
             [course_id, gr, pre_year]
         );
 

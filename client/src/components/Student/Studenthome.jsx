@@ -3,10 +3,12 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import tw from 'twin.macro';
 
-const Box = tw.div`w-1/2 h-3/4 bg-lowbrown rounded-md mx-10 text-center`;
+const Box = tw.div`w-1/2 h-3/4 bg-lowbrown rounded-2xl mx-10 pt-3 text-center`;
 import Headerstu from './Headerstu';
 import { getInfo, getGpax, getScholar, getTotalCredit } from '../../helpers/stuhelper';
 import { getAllActivitys } from '../../helpers/helper';
+
+import bg_stu from '../../assets/bg_stu.png';
 
 export default function Studenthome() {
 
@@ -59,17 +61,32 @@ export default function Studenthome() {
         </Helmet>
         <Headerstu data={data} />
         {/* <div className='flex'> */}
-          <div className='flex flex-col justify-first items-center text-xl font-semibold bg-sky py-8'>
-            <p className='my-2'>Student ID : {data?.student_id}</p>
-            <p className='my-2'>Name : {data?.first_name} {data?.last_name}</p>
-            <p className='my-2'>GPA : {gpax}</p>
-            <p className='my-2'>Total Credit : {credit}</p>
+          <div className='flex flex-col justify-first items-center text-xl py-8' style={{backgroundImage: `url(${bg_stu})`}}>
+            <div className='bg-white p-5 rounded-2xl w-1/3 '>
+              <div className=' flex  p-2 justify-between my-2'>
+                <p className='font-semibold '>Student ID </p>
+                <p>{data?.student_id}</p>
+              </div>
+              <div className=' flex  p-2 justify-between my-2'>
+                <p className='font-semibold'>Name</p>
+                <p >{data?.first_name} {data?.last_name}</p>
+              </div>
+              <div className='flex p-2 justify-between my-2'>
+                <p className='font-semibold'>GPA </p>
+                <p >{gpax}</p>
+              </div>
+              <div className='flex justify-between p-2 my-2'>
+                <p className='font-semibold'>Total Credit</p>
+                <p>{credit}</p>
+              </div>
+            </div>
+            
           </div>
           <div className=' flex justify-center flex-row items-center h-96 '>
             {
               (scholar.length > 0) ? (
                 <Box className='flex flex-col items-center'>
-                  <table className='my-2 table-fixed  w-11/12 text-sm text-white'>
+                  <table className='my-2 table-fixed  w-11/12 text-lg text-white'>
                     <thead>
                       <tr className='font-bold'>
                         <td>Scholarship Name</td>
@@ -79,7 +96,7 @@ export default function Studenthome() {
                     <tbody>
                       {
                         scholar.map((sList, index) => (
-                          <tr key={index} className='w-11/12 bg-sky text-darkgreen border-y-8 border-lowbrown'>
+                          <tr key={index} className='w-11/12 bg-sky text-darkgreen text-sm border-y-8 border-lowbrown'>
                             <td className='py-1'>{sList.scholarship_name}</td>
                             <td className='py-1'>{sList.finite}</td>
                           </tr>
@@ -101,7 +118,7 @@ export default function Studenthome() {
             {
               (activity.length > 0) ? (
                 <Box className='flex flex-col items-center '>
-                  <table className='my-2 table-fixed  w-11/12 text-sm text-white'>
+                  <table className='my-2 table-fixed  w-11/12 text-lg text-white'>
                     <thead>
                       <tr className='font-bold'>
                         <td>Activity Name</td>
@@ -113,7 +130,7 @@ export default function Studenthome() {
                     <tbody>
                       {
                         activity.map((aList, index) => (
-                          <tr key={index} className='w-11/12 bg-sky text-darkgreen border-y-8 border-lowbrown'>
+                          <tr key={index} className='w-11/12 bg-sky text-darkgreen text-sm border-y-8 border-lowbrown'>
                             <td className='py-1'>{aList.activity_name}</td>
                             <td className='py-1'>{aList.finite}</td>
                             <td className='py-1'>{aList.hours}</td>

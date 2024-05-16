@@ -36,7 +36,7 @@ export default function Detailcourse() {
         </div>
         <div className='flex flex-row justify-start items-start space-x-10 px-20 font-semibold'>
           <div className='h-48 w-56 my-10 flex flex-col justify-end  rounded-3xl bg-contain ' style={{backgroundImage: `url(${imageU1_2})`}}>
-              <button className='flex flex-col w-100% bg-lowbrown h-2/5 rounded-b-3xl '>
+              <button className='flex flex-col w-100% bg-lowbrown h-2/5 rounded-b-3xl text-lg '>
                 <div className='text-white ml-4 mt-2'>
                   CPE : 232
                 </div>
@@ -45,8 +45,8 @@ export default function Detailcourse() {
                 </div>
               </button>
           </div>
-          <div className='h-48 w-56 my-10 flex flex-col justify-end rounded-3xl bg-contain' style={{backgroundImage: `url(${imageU1_2})`}}>
-              <button className='flex flex-col w-100% bg-lowbrown h-2/5 rounded-b-3xl'>
+          <div className='h-48 w-56 my-10 flex flex-col justify-end rounded-3xl bg-contain ' style={{backgroundImage: `url(${imageU1_2})`}}>
+              <button className='flex flex-col w-100% bg-lowbrown h-2/5 rounded-b-3xl text-lg'>
                 <div className='text-white ml-4 mt-2'>
                   CPE : 232
                 </div>
@@ -55,8 +55,8 @@ export default function Detailcourse() {
                 </div>
               </button>
           </div>
-          <div className='h-48 w-56 my-10 flex flex-col justify-end  rounded-3xl bg-contain' style={{backgroundImage: `url(${imageU1_2})`}}>
-              <button className='flex flex-col w-100% bg-lowbrown h-2/5 rounded-b-3xl'>
+          <div className='h-48 w-56 my-10 flex flex-col justify-end  rounded-3xl bg-contain ' style={{backgroundImage: `url(${imageU1_2})`}}>
+              <button className='flex flex-col w-100% bg-lowbrown h-2/5 rounded-b-3xl text-lg'>
                 <div className='text-white ml-4 mt-2'>
                   CPE : 232
                 </div>

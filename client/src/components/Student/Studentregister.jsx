@@ -3,7 +3,6 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 import Headerstu from './Headerstu';
@@ -11,15 +10,6 @@ import profile from '../../assets/profile.png';
 import { PersonalSchema } from '../../Validations/validation';
 
 import { getInfo, registerInfomation } from '../../helpers/stuhelper';
-
-// <--text--->
-const text = {
-    name: 'Praew EiEi',
-    student_id: '65070501063',
-    year: '2',
-    Faculty: 'Computer Engineering',
-    Email: 'i@kmutt.ac.th'
-}
 
 
 export default function Studentregister() {
@@ -114,7 +104,7 @@ export default function Studentregister() {
                                 <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{data?.first_name} {data?.last_name}</h1>
                                 <h3 class="text-gray-600 font-lg text-semibold leading-6">ID {data?.student_id}</h3>
                                 <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">{data?.department_id}</p>
-                                <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">Year {data?.year}</p>
+                                <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">Year {new Date().getFullYear() + 543 - data?.year}</p>
                                 <ul
                                     class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                                     <li class="flex items-center py-3">

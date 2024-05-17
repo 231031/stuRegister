@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import tw from 'twin.macro';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
-import { getDeTeacher } from '../../helpers/adminHelper';
+import { delTeacher, getDeTeacher } from '../../helpers/adminHelper';
 import Headeradmin from './Headeradmin';
 
 export default function Admindelteacher() {
@@ -16,26 +16,32 @@ export default function Admindelteacher() {
     const [sel, setSel] = useState("");
 
     useEffect(() => {
-        if (location.state) setDel(location.state.del_teacher);
+        if (location.state) {
+            const { teacher_id, first_name, last_name, department_id } = location.state;
+            setDel({
+                teacher_id: teacher_id,
+                first_name: first_name,
+                last_name: last_name,
+                department_id : department_id,
+            });
+            const apiTeacher = async () => {
+                try {
+                    const res = await getDeTeacher(location.state.department_id);
+                    setTeacher(res);
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+            apiTeacher();
+        }
         else navigate('/admin/selteacher');
     }, []);
 
-    useEffect(() => {
-        const apiTeacher = async () => {
-            try {
-                const res = await getDeTeacher(del_teacher.department_id);
-                setTeacher(res);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        if (del_teacher) apiTeacher();
-    }, [del_teacher]);
 
     async function handleClick() {
         try {
-
+            const res = await delTeacher();
+            toast
         } catch (error) {
             console.log(error);
         }

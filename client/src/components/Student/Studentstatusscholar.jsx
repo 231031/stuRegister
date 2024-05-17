@@ -64,7 +64,7 @@ export default function Studentstatusscholar() {
                   <select className='text-white w-1/2 bg-greendark border-0 rounded-md' onChange={(e) => setSelY(e.target.value)}>
                     <option value=''></option>
                     {
-                      Array.from({ length: data.year }, (_, index) => index + 1).map((year) => (
+                      Array.from({ length: new Date().getFullYear() + 543 - data?.year }, (_, index) => index + 1).map((year) => (
                         <option key={year} value={year}>{year}</option>
                       ))
                     }

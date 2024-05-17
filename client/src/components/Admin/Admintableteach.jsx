@@ -42,25 +42,25 @@ export default function Admintableteach() {
   }, [sel]);
 
   function handleUpdate(id) {
-    navigate('/admin/updateteacher', { state : { teacher_id: id}});
+    navigate('/admin/updateteacher', { state: { teacher_id: id } });
   }
 
   function handleDel(id, first_name, last_name) {
-
+    navigate('/admin/delteacher', { state: { teacher_id: id, first_name: first_name, last_name: last_name, department_id: sel } });
   }
 
   return (
     <HelmetProvider>
       <div>
-        <Helmet>
+       <Helmet>
           <title>A | TableTeacher</title>
         </Helmet>
         <Headeradmin />
         <div className='flex flex-col items-center'>
           {
             (data.length > 0) ? (
-              <div className='flex flex-col w-1/6 mt-5'>
-                <label htmlFor='sel'>Select Department of Teacher</label>
+              <div className='flex flex-col w-1/4 mt-5'>
+                <label htmlFor='sel' className='font-bold'>Select Department of Teacher</label>
                 <select
                   className='border-2 border-sky   rounded-md' id='sel'
                   onChange={(e) => setSel(e.target.value)}>
@@ -74,7 +74,7 @@ export default function Admintableteach() {
               </div>
 
             ) : (
-              <p>No Department for Choose Right Now</p>
+              <p className='font-bold my-10 text-red-800 italic'>No Department for Choose Right Now</p>
             )
           }
           <div className='mt-10'>
@@ -87,8 +87,7 @@ export default function Admintableteach() {
                       <Row>Teacher ID</Row>
                       <Row>Teacher Name</Row>
                       <Row>Position</Row>
-                      <Row>Update</Row>
-                      <Row>Delete</Row>
+                      <Row>Status</Row>
                     </tr>
                   </thead>
                   <tbody>
@@ -99,14 +98,20 @@ export default function Admintableteach() {
                           <Row>{teaList.teacher_id}</Row>
                           <Row>{teaList.first_name} {teaList.last_name}</Row>
                           <Row>{teaList.position}</Row>
-                          <Row className='cursor-pointer hover:bg-blue-300'>
-                            <button className='text-green-600 '
-                              onClick={(e) => handleUpdate(teaList.teacher_id)}>Update</button>
-                          </Row>
-                          <Row className='cursor-pointer hover:bg-red-300'>
-                            <button className='text-red-600 '
-                              onClick={(e) => handleDel(teaList.teacher_id, teaList.first_name, teaList.last_name)}>Del</button>
-                          </Row>
+                          {
+                            (teaList.status) ? (
+                              <Row className='text-greendark font-bold'>
+                                Active
+                                <button className='text-orange-600 hover:text-blue-800 ml-10'
+                                  onClick={(e) => handleUpdate(teaList.teacher_id)}>Update</button>
+                                <button className='text-red-600 hover:text-blue-800 ml-10'
+                                  onClick={(e) => handleDel(teaList.teacher_id, teaList.first_name, teaList.last_name)}>Del</button>
+                              </Row>
+
+                            ) : (
+                              <Row className='bg-red-800'></Row>
+                            )
+                          }
                         </tr>
                       ))
                     }
@@ -114,8 +119,8 @@ export default function Admintableteach() {
                 </table>
               ) : (
                 <div className='my-5 h-72'>
-                  <h3 className='ml-7 text-xl text-blue-900'>Teacher Lists</h3>
-                  <h2 className='my-4 ml-7 text-md text-blue-600 flex justify-center'>Choose Department</h2>
+                  <h3 className='ml-7 text-xl text-blue-900 font-bold'>Teacher Lists</h3>
+                  <h2 className='my-4 ml-7 text-md text-blue-600 flex justify-center font-bold'>Choose Department</h2>
                 </div>
               )
             }

@@ -95,7 +95,9 @@ export default function Studentchangegroup() {
 
   async function handleClick() {
     try {
-      const res = await changeGroup(up, data.year, term);
+      const token = localStorage.getItem('token');
+      const [department_id, year, student_id] = token.split('-');
+      const res = await changeGroup(up, year, term);
       toast.success(res.msg);
     } catch (error) {
       console.log(error);
@@ -121,7 +123,7 @@ export default function Studentchangegroup() {
             </div>
             <div className='flex flex-row flex-wrap justify-between'>
               <p>Year</p>
-              <p>{data?.year}</p>
+              <p>{new Date().getFullYear() + 543 - data?.year}</p>
             </div>
             <div className='flex flex-row flex-wrap justify-between'>
               <p>Department</p>

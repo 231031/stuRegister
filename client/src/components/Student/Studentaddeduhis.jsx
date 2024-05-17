@@ -44,7 +44,10 @@ export default function Studentaddeduhis() {
   useEffect(() => {
     const apiTerm = async () => {
       try {
-        const res = await getStuTerm(data?.student_id, data?.year);
+        const token = localStorage.getItem('token');
+        const [department_id, year, student_id] = token.split('-');
+
+        const res = await getStuTerm(data?.student_id, year);
         setRegis(res.register_term);
       } catch (error) {
         console.log(error);

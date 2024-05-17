@@ -54,6 +54,11 @@ export default function Teacherscore() {
   }, [data, id]);
 
   function handleChange(grade, id, index, course_id, credit, year) {
+    const month = new Date().getMonth()
+    const pre_year = new Date().getFullYear() + 543;
+    let stu_year = pre_year - year;
+    if (month >= 7) stu_year = stu_year + 1;
+
     if (grade != '') {
       setSel((prevSel) => {
         const updatedSel = [...prevSel];
@@ -63,7 +68,7 @@ export default function Teacherscore() {
             grade: grade,
             course_id: course_id,
             credit: credit,
-            year: year,
+            year: stu_year,
           });
         } else {
           updatedSel[index] = {
@@ -71,7 +76,7 @@ export default function Teacherscore() {
             grade: grade,
             course_id: course_id,
             credit: credit,
-            year: year,
+            year: stu_year,
           };
         }
         return updatedSel;

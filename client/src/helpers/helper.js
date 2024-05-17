@@ -8,6 +8,16 @@ export async function getAllCourse() {
       }
 }
 
+export async function getAllCourseAc() {
+    try {
+        const response = await fetch('http://localhost:6001/allcourseac');
+        const data = await response.json();
+        return Promise.resolve(data);
+      } catch (error) {
+        return Promise.reject(error);
+      }
+}
+
 export async function getCourse(info) {
   try {
     const response = await fetch('http://localhost:6001/course/getdetail', {

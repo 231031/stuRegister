@@ -92,7 +92,10 @@ export default function Studentregiscourse() {
   async function handleSubmit() {
     try {
       if (sel.length === available.length) {
-        const res = await registerCourse(sel, data.year, data.student_id);
+        const token = localStorage.getItem('token');
+        const [department_id, year, student_id] = token.split('-');
+        
+        const res = await registerCourse(sel, year, data.student_id);
         navigate('/student/regiselective')
         toast.success(res.msg);
       } else {
@@ -123,7 +126,7 @@ export default function Studentregiscourse() {
               </div>
               <div className='flex flex-row justify-between'>
                 <p>Year</p>
-                <p>{data?.year}</p>
+                <p>{new Date().getFullYear() + 543 - data?.year}</p>
               </div>
               <div className='flex flex-row justify-between'>
                 <p>Department</p>

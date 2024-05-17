@@ -21,7 +21,16 @@ export default function Committeehome() {
                 console.error(error);
             }
         };
+        const apiSalaryM = async () => {
+            try {
+                const res = await getAvgM();
+                setF(res);
+            } catch (error) {
+                console.error(error);
+            }
+        };
         apiSalaryF();
+        apiSalaryM();
     }, []);
 
     return (

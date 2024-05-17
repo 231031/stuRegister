@@ -63,6 +63,24 @@ export async function addAvailableCourse(req, res) {
     }
 }
 
+export async function delCourse(req, res) {
+    try {
+        const query = `
+            DELETE FROM available_course WHERE course_id = ?
+        `
+        await connection.beginTransaction();
+        await connection.execute(query, [req.body.course_id]);
+        await connection.execute('UPDATE Course SET status = ? WHERE course_id = ?', [false, req.body.course_id]);
+        await connection.commit();
+        connection.release();
+        return res.status(200).send({ msg : 'Not Active Teacher successfully'});
+    } catch (error) {
+        await connection.rollback();
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
 export async function addFaculty(req, res) {
     try {
         const facultyValues = await req.body.faculty.map(faculty => {
@@ -253,14 +271,90 @@ export async function addTeacher(req, res) {
     }
 }
 
+export async function getInfoTeacher(req, res) {
+    try {
+        const { id } = req.body;
+
+        const query = `
+            SELECT teacher_id, first_name, last_name, id_card, dob, age
+            FROM Teacher WHERE teacher_id = ?
+        `;
+        const [teach] = await connection.execute(query, [id]);
+        connection.release();
+        res.json(teach[0]);
+
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+
+export async function updateInfoTeacher(req, res) {
+    try {
+        const { first_name, last_name, age, dob, id_card } = req.body.info;
+        const { id } = req.body;
+
+        const fieldsToUpdate = {
+            id_card, age, first_name, last_name, dob, id_card
+        };
+
+        const definedFields = Object.fromEntries(Object.entries(fieldsToUpdate).filter(([key, value]) => value !== undefined));
+        const setClause = Object.keys(definedFields)
+            .map(key => `${key} = ?`)
+            .join(', ');
+
+        const query = `
+            UPDATE Teacher
+            SET ${setClause}
+            WHERE teacher_id = ?;
+        `;
+        await connection.execute(query, [...Object.values(definedFields), id]);
+        connection.release();
+        return res.status(200).send({ msg: 'Teacher updated successfully' });
+
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
 export async function getDeTeacher(req, res) {
     try {
         const query = `
-            SELECT teacher_id, first_name, last_name, position, department_id FROM Teacher WHERE department_id = ?
+            SELECT teacher_id, first_name, last_name, position, department_id, status FROM Teacher WHERE department_id = ?
         `
-        const [teachers, fields] = await connection.execute(query, [req.body.department_id]);
+        const [teachers] = await connection.execute(query, [req.body.department_id]);
         connection.release();
         return res.status(200).send(teachers);
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function getDeTeacherAc(req, res) {
+    try {
+        const query = `
+            SELECT teacher_id, first_name, last_name, position, department_id FROM Teacher WHERE department_id = ? AND status = ?
+        `
+        const [teachers] = await connection.execute(query, [req.body.department_id, true]);
+        connection.release();
+        return res.status(200).send(teachers);
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function delTeacher(req, res) {
+    try {
+        const query = `
+            UPDATE Teacher SET status = ? WHERE teacher_id = ?
+        `
+        await connection.execute(query, [false, req.body.teacher_id]);
+        connection.release();
+        return res.status(200).send({ msg : 'Not Active Teacher successfully'});
     } catch (error) {
         connection.release();
         return res.status(404).send({ error: error.message });
@@ -270,11 +364,25 @@ export async function getDeTeacher(req, res) {
 export async function getDeStudent(req, res) {
     try {
         const [students] = await connection.execute(
-            'SELECT student_id, first_name, last_name, department_id, year FROM Student WHERE department_id = ?', 
+            'SELECT student_id, first_name, last_name, department_id, year, status FROM Student WHERE department_id = ? ORDER BY year DESC', 
             [req.body.department_id]
         );
         connection.release();
         return res.status(200).send(students);
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function delStudent(req, res) {
+    try {
+        const query = `
+            UPDATE Student SET status = ? WHERE student_id = ?
+        `
+        await connection.execute(query, [false, req.body.student_id]);
+        connection.release();
+        return res.status(200).send({ msg : 'Not Active Student successfully'});
     } catch (error) {
         connection.release();
         return res.status(404).send({ error: error.message });

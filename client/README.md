@@ -63,3 +63,16 @@ limit -> finite
 -Validation
 -seperate schema self, admincourse,
 -change schema name
+
+-18/05/67
+
+table
+-update tb Student, Teacher, Course (add column status) for tell who are available (not have deleted), chnage year to first year of studying
+-update tb Teacher (add column about information)
+
+
+-Admin
+-update component in tb show all students, teachers, courses
+-update component for adding data fetch just status=1
+-Course change status delete available_course of this course_id
+-Teacher change status -> update course_detail and Student of this teacher to another

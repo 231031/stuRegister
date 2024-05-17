@@ -6,7 +6,7 @@ import tw from 'twin.macro';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import { addAvailableCourse } from '../../helpers/adminHelper';
-import { getAllCourse } from '../../helpers/helper';
+import { getAllCourseAc } from '../../helpers/helper';
 import { AvailableSchema } from '../../Validations/validation';
 import Headeradmin from './Headeradmin';
 
@@ -28,7 +28,7 @@ export default function Adminaddavailable() {
 
         const apiCourse = async () => {
             try {
-              const courses = await getAllCourse();
+              const courses = await getAllCourseAc();
               setCourse(courses);
 
             } catch (error) {

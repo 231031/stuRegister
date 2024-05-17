@@ -26,7 +26,7 @@ export default function Studentregiselective() {
     const token = localStorage.getItem('token');
     if (!token) {
       navigate('/student/login');
-    } 
+    }
 
     const apiInfo = async () => {
       try {
@@ -35,25 +35,25 @@ export default function Studentregiselective() {
       } catch (error) {
         console.log(error);
       }
-    }  
+    }
 
     setDate(new Date().getDate());
     setMonth(new Date().getMonth());
   }, []);
 
   useEffect(() => {
-      const apiCourse = async () => {
-        try {
-          if (month == 4 && date < 15) {
-            const detail = await getAvailableCourse(data.department_id, data.year, 'elective');
-            setAvailable(detail); 
-          } 
-        } catch (error) {
-            toast.error('Cannot Get Information');
-            console.error(error);
-        } 
+    const apiCourse = async () => {
+      try {
+        if (month == 4 && date < 15) {
+          const detail = await getAvailableCourse(data.department_id, data.year, 'elective');
+          setAvailable(detail);
+        }
+      } catch (error) {
+        toast.error('Cannot Get Information');
+        console.error(error);
       }
-      if (data) apiCourse();
+    }
+    if (data) apiCourse();
   }, [data]);
 
   function clickDetail() {
@@ -67,7 +67,7 @@ export default function Studentregiselective() {
       updatedList[ind] = index - 1;
       return updatedList;
     });
-  
+
     // Update the sel state
     setSel((prevSel) => {
       const updatedSel = [...prevSel];
@@ -90,122 +90,125 @@ export default function Studentregiselective() {
 
   async function handleSubmit() {
     try {
-        if (sel.length > 0) {
-            const res = await registerCourse(sel, data.year, data.student_id);
-            toast.success(res.msg);
-        } else {
-            toast.error('Select Group of Some Courses Before Submit');   
-        }
+      if (sel.length > 0) {
+        const token = localStorage.getItem('token');
+        const [department_id, year, student_id] = token.split('-');
+
+        const res = await registerCourse(sel, year, data.student_id);
+        toast.success(res.msg);
+      } else {
+        toast.error('Select Group of Some Courses Before Submit');
+      }
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   }
-  
+
 
   return (
     <HelmetProvider>
       <div>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <Helmet>
-            <title>Stu | RegisterCourse</title>
+          <title>Stu | RegisterCourse</title>
         </Helmet>
-        <Headerstu data={data}/>
+        <Headerstu data={data} />
         <div className='container flex flex-row'>
           <div className='w-1/4 bg-slate-300 h-[calc(100vh-40px)] p-10'>
             <div className='flex flex-col items-center my-10'>
-              <img className='rounded-full w-1/2 h-1/2 border-2 border-sky' src={profile}/>
+              <img className='rounded-full w-1/2 h-1/2 border-2 border-sky' src={profile} />
             </div>
             <div className='flex flex-row justify-between'>
-                <p>Student ID</p>
-                <p>{data?.student_id}</p>
-              </div>
-              <div className='flex flex-row justify-between'>
-                <p>Year</p>
-                <p>{data?.year}</p>
-              </div>
-              <div className='flex flex-row justify-between'>
-                <p>Department</p>
-                <p>{data?.department_id}</p>
-              </div>
-            
-            
+              <p>Student ID</p>
+              <p>{data?.student_id}</p>
+            </div>
+            <div className='flex flex-row justify-between'>
+              <p>Year</p>
+              <p>{new Date().getFullYear() + 543 - data?.year}</p>
+            </div>
+            <div className='flex flex-row justify-between'>
+              <p>Department</p>
+              <p>{data?.department_id}</p>
+            </div>
+
+
           </div>
           {
             (month == 4 && date < 15) ? (
               <div className='w-3/4 flex'>
-              {
-                (available.length > 0)? (
-                  <div className='w-full flex flex-col justify-center items-center'>
-                    <p className='text-lg'>Elective Courses</p>
-                    <table className='text-center w-11/12 border-2 border-sky mt-10'>
-                    <thead>
-                      <tr>
-                        <Row>ID</Row>
-                        <Row>Course Name</Row>
-                        <Row>Select Group</Row>
-                        <Row>Processor</Row>
-                        <Row>Room</Row> 
-                        <Row>More Detail</Row>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    {
-                      available.map((aList, ind) => (
-                        <tr key={ind}>
-                          <Row>{aList.course_id}</Row>
-                          <Row>{aList.course_name}</Row>
-                          <Row>
-                            <select className='border-2 border-sky rounded-md my-3 w-1/3' 
-                            type='text'  id='group' onChange={(e)=>selCourseGroup(aList.course_id, aList.credit, e.target.value, e.target.selectedIndex, ind)}>
-                                <option value=''></option>
-                                { 
-                                  aList.Coursedetails.map((gList, index) => (
-                                    <option key={index} value={gList.gr} >
-                                      {gList.gr}
-                                    </option>
-                                  ))
-                                }
-                            </select> 
-                          </Row>
-                          <Row>
-                              {aList.Coursedetails[list[ind]]?.teacher_id}
-                          </Row>
-                          <Row>
-                              {aList.Coursedetails[list[ind]]?.class_id}
-                          </Row>
-                          <Row>
-                            <Link>More Detail</Link>
-                            {/* Link to page detail of this course fetch detail of this course */}
-                          </Row>
-                        </tr>
-                        
-                          
-                      ))
-                    }
-                    </tbody>
-                    </table>
-                    <button className='mt-10 py-1 px-2 bg-teal-500 rounded-md border-2 border-slate-500' 
-                    type='button' onClick={(e)=>handleSubmit()}>SUBMIT</button>
-                  </div>
-                  
-                ) : (
-                  <div className='w-3/4 flex justify-center items-center'>
-                    <p>Not Have Available Course Now</p>
-                  </div>
-                )
-              } 
+                {
+                  (available.length > 0) ? (
+                    <div className='w-full flex flex-col justify-center items-center'>
+                      <p className='text-lg'>Elective Courses</p>
+                      <table className='text-center w-11/12 border-2 border-sky mt-10'>
+                        <thead>
+                          <tr>
+                            <Row>ID</Row>
+                            <Row>Course Name</Row>
+                            <Row>Select Group</Row>
+                            <Row>Processor</Row>
+                            <Row>Room</Row>
+                            <Row>More Detail</Row>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {
+                            available.map((aList, ind) => (
+                              <tr key={ind}>
+                                <Row>{aList.course_id}</Row>
+                                <Row>{aList.course_name}</Row>
+                                <Row>
+                                  <select className='border-2 border-sky rounded-md my-3 w-1/3'
+                                    type='text' id='group' onChange={(e) => selCourseGroup(aList.course_id, aList.credit, e.target.value, e.target.selectedIndex, ind)}>
+                                    <option value=''></option>
+                                    {
+                                      aList.Coursedetails.map((gList, index) => (
+                                        <option key={index} value={gList.gr} >
+                                          {gList.gr}
+                                        </option>
+                                      ))
+                                    }
+                                  </select>
+                                </Row>
+                                <Row>
+                                  {aList.Coursedetails[list[ind]]?.teacher_id}
+                                </Row>
+                                <Row>
+                                  {aList.Coursedetails[list[ind]]?.class_id}
+                                </Row>
+                                <Row>
+                                  <Link>More Detail</Link>
+                                  {/* Link to page detail of this course fetch detail of this course */}
+                                </Row>
+                              </tr>
+
+
+                            ))
+                          }
+                        </tbody>
+                      </table>
+                      <button className='mt-10 py-1 px-2 bg-teal-500 rounded-md border-2 border-slate-500'
+                        type='button' onClick={(e) => handleSubmit()}>SUBMIT</button>
+                    </div>
+
+                  ) : (
+                    <div className='w-3/4 flex justify-center items-center'>
+                      <p>Not Have Available Course Now</p>
+                    </div>
+                  )
+                }
               </div>
             ) : (
               <div className='h-screen flex flex-col items-center justify-center'>
-                <img src={sry} className='w-1/6'/>
+                <img src={sry} className='w-1/6' />
                 <p className='my-5'>Sorry, we're not in registration period</p>
-                <button className='p-3 bg-slate-400 text-white rounded-md' type='button' onClick={(e)=>clickDetail()}>Preview Course Detail</button>
+                <button className='p-3 bg-slate-400 text-white rounded-md' type='button' onClick={(e) => clickDetail()}>Preview Course Detail</button>
               </div>
             )
           }
         </div>
-        
-        
+
+
       </div>
     </HelmetProvider>
   )

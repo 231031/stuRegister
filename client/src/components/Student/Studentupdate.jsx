@@ -92,7 +92,7 @@ export default function Studentregister() {
                                 <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">{data?.first_name} {data?.last_name}</h1>
                                 <h3 className="text-gray-600 font-lg text-semibold leading-6">ID {data?.student_id}</h3>
                                 <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">{data?.department_id}</p>
-                                <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">Year {data?.year}</p>
+                                <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">Year {new Date().getFullYear() + 543 - data?.year}</p>
                                 <ul
                                     className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                                     <li className="flex items-center py-3">

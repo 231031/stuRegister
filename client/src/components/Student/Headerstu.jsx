@@ -118,7 +118,15 @@ export default function Headerstu({ data }) {
             <div className={isUserOpen ? 'block' : 'hidden'}>
               <List className='w-46'>
                 <li><p>ID : {data?.student_id}</p></li>
-                <li><p>Year : {data?.year}</p></li>
+                <li>
+                  {
+                    (data?.year > 10) ? (
+                      <p>Year : {new Date().getFullYear() + 543 - data?.year}</p>
+                    ) : (
+                      <p>Year : {data?.year}</p>
+                    )
+                  }
+                </li>
                   <li><NavLink to='/' >Change user view</NavLink></li>
                   <li onClick={logout}><NavLink to='/student/login'>Log Out</NavLink></li>
                 

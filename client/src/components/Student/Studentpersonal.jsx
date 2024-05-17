@@ -60,7 +60,7 @@ export default function Studentpersonal() {
               </div>
               <div className='flex flex-row justify-between'>
                 <p>Year</p>
-                <p>{data?.year}</p>
+                <p>{new Date().getFullYear() + 543 - data?.year}</p>
               </div>
               <div className='flex flex-row justify-between'>
                 <p>Department</p>

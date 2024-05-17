@@ -4,7 +4,7 @@ import tw from 'twin.macro';
 import toast, { Toaster } from 'react-hot-toast';
 import { useLocation } from 'react-router-dom';
 import { DetailSchema } from '../../Validations/validation';
-import { addDetail, getDeTeacher } from '../../helpers/adminHelper';
+import { addDetail, getDeTeacherAc } from '../../helpers/adminHelper';
 import { useNavigate } from 'react-router-dom'
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
@@ -32,7 +32,7 @@ export default function Coursedetail() {
     useEffect(() => {
         const apiTeacher = async () => {
             try {
-              const res = await getDeTeacher(de);
+              const res = await getDeTeacherAc(de);
               setTeacher(res);
             } catch (error) {
                 toast.error('Cannot Get Information');

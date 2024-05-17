@@ -8,7 +8,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import { AddStuSchema } from '../../Validations/validation';
 import { addStudent } from '../../helpers/adminHelper';
-import { getDeTeacher } from '../../helpers/adminHelper';
+import { getDeTeacherAc } from '../../helpers/adminHelper';
 import Headeradmin from './Headeradmin';
 
 const Alert = tw.div`text-red-700 text-sm`;
@@ -19,7 +19,6 @@ export default function Adminaddstu() {
     const [de, setDe] = useState("");
     const [teacher, setTeacher] = useState("");
     const [selTeacher, setSelTeacher] = useState("");
-    const [year, setYear] = useState("");
 
     useEffect(() => {
         if (location.state) {
@@ -35,7 +34,7 @@ export default function Adminaddstu() {
     useEffect(() => {
         const apiTeacher = async () => {
             try {
-              const tech = await getDeTeacher(de);
+              const tech = await getDeTeacherAc(de);
               setTeacher(tech);
 
             } catch (error) {
@@ -82,7 +81,6 @@ export default function Adminaddstu() {
                             )
                         
                 }
-                <input className='w-1/4 rounded-md my-2 mx-1 border-2 border-sky' id='year' placeholder='Year' onChange={(e)=>{setYear(e.target.value)}}/>
             </div>
             
             <Formik
@@ -93,7 +91,6 @@ export default function Adminaddstu() {
                         last_name: '',
                         department_id: '',
                         teacher_id: '',
-                        year: '',
                     }
                 ]
             }}
@@ -102,7 +99,6 @@ export default function Adminaddstu() {
                 try {
                     values.student[0].department_id = de;
                     values.student[0].teacher_id = selTeacher;
-                    values.student[0].year = year;
                     const res = await addStudent(values);
                     toast.success(res.msg);
                 } catch (error) {
@@ -153,7 +149,7 @@ export default function Adminaddstu() {
                         })}
                         
                         <button className='border-2 bg-blue-500 px-4 rounded-md' type='button' 
-                        onClick={() => push({ first_name: '', last_name: '', department_id: de, teacher_id: selTeacher, year: year })}>Add</button>
+                        onClick={() => push({ first_name: '', last_name: '', department_id: de, teacher_id: selTeacher })}>Add</button>
                     </div>
                     )}
                 </FieldArray>

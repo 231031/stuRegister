@@ -5,7 +5,7 @@ const connection = await pool.getConnection();
 export async function getAllStudents(req, res) {
     try {
         const [students] = await connection.execute(
-            'SELECT student_id, first_name, last_name, year FROM Student'
+            'SELECT student_id, first_name, last_name, year FROM Student WHERE status = ?', [true]
         );
         connection.release();
         res.json(students);
@@ -35,6 +35,20 @@ export async function getAllCourses(req, res) {
     try {
         const [courses] = await connection.execute(
             'SELECT * FROM Course'
+        );
+        connection.release();
+        res.json(courses);
+        
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function getAllCourseAc(req, res) {
+    try {
+        const [courses] = await connection.execute(
+            'SELECT * FROM Course WHERE status = ?', [true]
         );
         connection.release();
         res.json(courses);
@@ -76,8 +90,9 @@ export async function getOpenActivitys(req, res) {
 
 export async function getAllCoursesDe(req, res) {
     try {
+        const pre_year = new Date().getFullYear();
         const [course_de] = await connection.execute(
-            'SELECT * FROM course_detail'
+            'SELECT * FROM course_detail WHERE year = ?', [pre_year]
         );
         connection.release();
         res.json(course_de);
@@ -120,6 +135,20 @@ export async function getAllTeachers(req, res) {
     try {
         const [teachers] = await connection.execute(
             'SELECT * FROM Teacher'
+        );
+        connection.release();
+        res.json(teachers);
+        
+    } catch (error) {
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+export async function getAllTeacherTb(req, res) {
+    try {
+        const [teachers] = await connection.execute(
+            'SELECT * FROM Teacher WHERE status = ?' [true]
         );
         connection.release();
         res.json(teachers);

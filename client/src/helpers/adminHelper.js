@@ -56,6 +56,25 @@ export async function addAvailableCourse(info) {
       }
 }
 
+export async function delCourse(info) {
+  try {
+      const response = await fetch('http://localhost:6001/admin/notactive/course', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ course_id : info }),
+      });
+      const data = await response.json();
+      if (response.status === 404) {
+        return Promise.reject(data);
+    }
+      return Promise.resolve(data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+}
+
 export async function editCourse(info) {
     try {
         const response = await fetch('http://localhost:6001/admin/editcourse', {
@@ -171,6 +190,44 @@ export async function updateInfoStu(info, id) {
       }
 }
 
+export async function getInfoTeacher(info) {
+  try {
+    const response = await fetch('http://localhost:6001/admin/getteacher', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: info }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
+export async function updateInfoTeacher(info, id) {
+    try {
+        const response = await fetch('http://localhost:6001/admin/update/infoteacher', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ info : info, id : id }),
+        });
+        const data = await response.json();
+        if (response.status === 404) {
+          return Promise.reject(data);
+      }
+        return Promise.resolve(data);
+      } catch (error) {
+        return Promise.reject(error);
+      }
+}
+
 export async function getDeInFac(info) {
     try {
         const response = await fetch('http://localhost:6001/admin/getdeinfac', {
@@ -192,8 +249,8 @@ export async function getDeInFac(info) {
 }
 
 export async function addStudent(info) {
-    const currentYear = ((new Date().getFullYear())+543) - 2500;
-
+    const currentYear = ((new Date().getFullYear())+543);
+    const year = currentYear - 2500;
     function generateStudentId(year, department_id, index) {
       // Format: yyCPE0001
       const yearString = year.toString().slice(-2);
@@ -208,8 +265,8 @@ export async function addStudent(info) {
     const students = [];
     for (let i = 0; i < info.student.length; i++) {
         const pass = generatePassword(7);
-        const studentId = generateStudentId(info.student[i].year, info.student[i].department_id, i+1);
-        students.push({ student_id: studentId, password: pass, year: currentYear - info.student[i].year, 
+        const studentId = generateStudentId(year, info.student[i].department_id, i+1);
+        students.push({ student_id: studentId, password: pass, year: currentYear, 
                         first_name: info.student[i].first_name, last_name: info.student[i].last_name,
                         department_id: info.student[i].department_id, teacher_id: info.student[i].teacher_id });
     }
@@ -231,6 +288,25 @@ export async function addStudent(info) {
       } catch (error) {
         return Promise.reject(error);
       }
+}
+
+export async function delStudent(info) {
+  try {
+      const response = await fetch('http://localhost:6001/admin/notactive/student', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ student_id : info }),
+      });
+      const data = await response.json();
+      if (response.status === 404) {
+        return Promise.reject(data);
+    }
+      return Promise.resolve(data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
 }
 
 export async function addTeacher(info) {
@@ -267,9 +343,47 @@ export async function addTeacher(info) {
     }
 }
 
+export async function delTeacher(info) {
+  try {
+      const response = await fetch('http://localhost:6001/admin/notactive/teacher', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ teacher_id : info }),
+      });
+      const data = await response.json();
+      if (response.status === 404) {
+        return Promise.reject(data);
+    }
+      return Promise.resolve(data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+}
+
 export async function getDeTeacher(info) {
   try {
       const response = await fetch('http://localhost:6001/admin/getdeteacher', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ department_id: info }),
+      });
+      const data = await response.json();
+      if (response.status === 404) {
+        return Promise.reject(data);
+    }
+      return Promise.resolve(data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+}
+
+export async function getDeTeacherAc(info) {
+  try {
+      const response = await fetch('http://localhost:6001/admin/getdeteacherac', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

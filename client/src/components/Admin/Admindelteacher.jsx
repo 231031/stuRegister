@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import tw from 'twin.macro';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import toast, { Toaster } from 'react-hot-toast';
 
-import { delTeacher, getDeTeacher } from '../../helpers/adminHelper';
+import { delTeacher, getDeTeacherAc } from '../../helpers/adminHelper';
 import Headeradmin from './Headeradmin';
 
 export default function Admindelteacher() {
@@ -22,11 +22,11 @@ export default function Admindelteacher() {
                 teacher_id: teacher_id,
                 first_name: first_name,
                 last_name: last_name,
-                department_id : department_id,
+                department_id: department_id,
             });
             const apiTeacher = async () => {
                 try {
-                    const res = await getDeTeacher(location.state.department_id);
+                    const res = await getDeTeacherAc(location.state.department_id);
                     setTeacher(res);
                 } catch (error) {
                     console.error(error);
@@ -40,8 +40,8 @@ export default function Admindelteacher() {
 
     async function handleClick() {
         try {
-            const res = await delTeacher();
-            toast
+            const res = await delTeacher(del_teacher.teacher_id, sel);
+            toast.success(res.msg);
         } catch (error) {
             console.log(error);
         }
@@ -50,6 +50,8 @@ export default function Admindelteacher() {
     return (
         <HelmetProvider>
             <div>
+                <Toaster position='top-center' reverseOrder={false}></Toaster>
+
                 <Helmet>
                     <title>A | TableTeacher</title>
                 </Helmet>

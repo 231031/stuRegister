@@ -343,7 +343,7 @@ export async function getCourseDe(req, res) {
         const token = req.headers.authorization.split(" ")[1];
         const { department_id, year, type } = req.body;
         const month = new Date().getMonth();
-        let term = 2;
+        let term = 1;
         if (month >= 7) term = 1; // after august term 1
 
         const query = `

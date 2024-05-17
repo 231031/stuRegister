@@ -349,13 +349,16 @@ export async function getDeTeacherAc(req, res) {
 
 export async function delTeacher(req, res) {
     try {
-        const query = `
-            UPDATE Teacher SET status = ? WHERE teacher_id = ?
-        `
-        await connection.execute(query, [false, req.body.teacher_id]);
+        const { old_t, new_t } = await req.body;
+        await connection.beginTransaction();
+        await connection.execute('UPDATE Teacher SET status = ? WHERE teacher_id = ?', [false, old_t]);
+        await connection.execute('UPDATE Student SET teacher_id = ? WHERE teacher_id = ?', new_t, old_t);
+        await connection.execute('UPDATE course_detail SET teacher_id = ? WHERE teacher_id = ?', new_t, old_t);
+        await connection.commit();
         connection.release();
-        return res.status(200).send({ msg : 'Not Active Teacher successfully'});
+        return res.status(200).send({ msg : 'Not Active Teacher successfull'});
     } catch (error) {
+        await connection.rollback();
         connection.release();
         return res.status(404).send({ error: error.message });
     }

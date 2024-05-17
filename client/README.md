@@ -70,6 +70,8 @@ table
 -update tb Student, Teacher, Course (add column status) for tell who are available (not have deleted), chnage year to first year of studying
 -update tb Teacher (add column about information)
 
+Student
+-connect Coursedetail to backend
 
 -Admin
 -update component in tb show all students, teachers, courses

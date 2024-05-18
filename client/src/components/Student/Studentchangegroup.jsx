@@ -9,7 +9,7 @@ import Headerstu from './Headerstu';
 import { getInfo, changeGroup, getStuRegisterChange } from '../../helpers/stuhelper';
 import profile from '../../assets/profile.png';
 
-const Row = tw.td`border-2 border-greendark py-1 text-sm`;
+const Row = tw.td`border-2 border-lowbrown py-1 text-sm`;
 export default function Studentchangegroup() {
 
   const navigate = useNavigate();
@@ -112,8 +112,8 @@ export default function Studentchangegroup() {
           <title>Stu | ChangeGroup</title>
         </Helmet>
         <Headerstu data={data} />
-        <div className='h-screen flex bg-lowyellow'>
-          <div className='w-1/4 bg-slate-300 h-[calc(100vh-40px)] p-10'>
+        <div className='h-screen flex bg-white'>
+          <div className='w-1/4 bg-sky h-[calc(100vh-40px)] p-10'>
             <div className='flex flex-col items-center my-10'>
               <img className='rounded-full w-1/2 h-1/2 border-2 border-sky' src={profile} />
             </div>
@@ -188,7 +188,7 @@ export default function Studentchangegroup() {
               }
             </div>
 
-            <button className='my-10 px-3 py-1 bg-greendark rounded-md' onClick={(e) => handleClick()}>SUBMIT</button>
+            <button className='my-10 px-3 py-1 bg-lowbrown rounded-md text-lowyellow' onClick={(e) => handleClick()}>SUBMIT</button>
 
 
           </div>

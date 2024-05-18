@@ -55,13 +55,13 @@ export default function Studentstatusscholar() {
         </Helmet>
         <Headerstu data={data} />
 
-        <div className='flex bg-lowyellow h-[calc(100vh-40px)]'>
+        <div className='flex mt-20 bg-white h-[calc(100vh-40px)]'>
           <div className='w-full flex flex-col items-center'>
             <div className='flex flex-row mt-10 w-1/4 ml-20'>
               <p className='mr-8'>Year</p>
               {
                 (data?.year) ? (
-                  <select className='text-white w-1/2 bg-greendark border-0 rounded-md' onChange={(e) => setSelY(e.target.value)}>
+                  <select className='text-white w-1/2 bg-darkbrown border-0 rounded-md' onChange={(e) => setSelY(e.target.value)}>
                     <option value=''></option>
                     {
                       Array.from({ length: new Date().getFullYear() + 543 - data?.year }, (_, index) => index + 1).map((year) => (
@@ -70,7 +70,7 @@ export default function Studentstatusscholar() {
                     }
                   </select>
                 ) : (
-                  <p className='text-red-500'>Not Have Year Available</p>
+                  <p className=' text-red-500'>Not Have Year Available</p>
                 )
               }
             </div>

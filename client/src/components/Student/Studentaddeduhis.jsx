@@ -72,17 +72,17 @@ export default function Studentaddeduhis() {
           {/* <!-- Left Side --> */}
 
           <div className="container flex flex-row">
-            <div className="w-1/4 bg-gray-800 p-10 " style={{ height: "1500px" }} >
+            <div className="w-1/4 bg-sky p-10 " style={{ height: "1500px" }} >
 
-              <div className="bg-gray-800 p-3 border-t-4 border-gray-800 h-full" >
+              <div className="p-3 border-t-4 border-gray-800 h-full" >
                 <div className="image overflow-hidden">
                   <img className="h-30px w-30px mx-auto"
                     src={profile}
                     alt="" />
                 </div>
                 <h1 className="text-white font-bold text-xl leading-8 my-1">{data?.first_name} {data?.last_name}</h1>
-                <h3 className="text-[#e2e8f0] font-lg text-semibold leading-6">{data?.department_id}</h3>
-                <p className="text-sm text-[#e2e8f0] hover:text-gray-600 leading-6">Year : {data?.year}</p>
+                <h3 className="text-white font-lg text-semibold hover:text-gray-600 leading-6">{data?.department_id}</h3>
+                <p className="text-sm text-white hover:text-gray-600 leading-6">Year : {data?.year}</p>
                 <ul
                   className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                   <li className="flex items-center py-3">

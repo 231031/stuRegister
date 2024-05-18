@@ -20,7 +20,7 @@ export default function Teacherpersonal() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/teacher/login");
+      return <Navigate to={'/teacher/login'} replace={true}></Navigate>
     }
 
     const apiInfo = async () => {
@@ -62,7 +62,7 @@ export default function Teacherpersonal() {
         <Helmet>
           <title>T | UpdatePersonal</title>
         </Helmet>
-        <Headerteacher data={data} />
+        <Headerteacher data={data}/>
         <div className="container px-2 py-24 mx-auto">
           <form onSubmit={formik.handleSubmit}>
             <div id="feedbackModal" className="feedbackModal">
@@ -87,35 +87,37 @@ export default function Teacherpersonal() {
                         <tr>
                           <th
                             scope="col"
-                            className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                            className="text-sm font-medium text-gray-900 px-6 py-4 text-center"
                           >
                             Type
                           </th>
                           <th
                             scope="col"
-                            className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                            className="text-sm font-medium text-gray-900 px-6 py-4 text-center"
                           >
                             Your old Information
                           </th>
 
                           <th
                             scope="col"
-                            className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                          ></th>
+                            className="text-sm font-medium text-gray-900 px-6 py-4 text-center"
+                          >
+                            Fill new information
+                          </th>
                         </tr>
                       </thead>
 
 
                       <tbody>
                         <tr className="bg-slate-100 border-b transition duration-300 ease-in-out hover:bg-gray-100" >
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-center">
                             Email
                           </td>
-                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {data?.email}
+                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
+                            <p>{data?.email}</p>
                           </td>
 
-                          <div class="flex flex-row-reverse mr-10 pt-1">
+                          <div class="flex flex-row justify-center mr-10 pt-1">
                             <div
                               className="bg-white hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border-3 border-lowbrown hover:border-transparent rounded mr-1"
                             ><input
@@ -123,15 +125,15 @@ export default function Teacherpersonal() {
                               onChange={formik.handleChange}
                               onBlur={formik.handleBlur}
                               value={formik.values.email}
-                              className='border-1 border-darkbrown rounded-md my-3 bg-gray' type='text' ></input>
+                              className='border-1 border-darkbrown rounded-md my-3 bg-gray ' type='text'  ></input>
                               {formik.touched.email && formik.errors.email ? (
-                                <p className="text-red-500 text-xs italic">{formik.errors.email}</p>
+                                <p className="text-red-500 text-xs italic ">{formik.errors.email}</p>
                               ) : null}
                             </div>
                           </div>
                         </tr>
 
-                        <tr className="bg-slate-100 border-b transition duration-300 ease-in-out hover:bg-gray-100" >
+                        <tr className="bg-slate-100 border-b transition duration-300 ease-in-out hover:bg-gray-100 text-center" >
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             Phone
                           </td>
@@ -139,7 +141,7 @@ export default function Teacherpersonal() {
                             {data?.phone}
                           </td>
 
-                          < div class="flex flex-row-reverse mr-10 pt-1">
+                          < div class="flex flex-row justify-center mr-10 pt-1">
                             <div
                               className="bg-white hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border-3 border-lowbrown hover:border-transparent rounded mr-1"
                             ><input
@@ -155,7 +157,32 @@ export default function Teacherpersonal() {
                           </div>
                         </tr>
 
-                        <tr className="bg-slate-100 border-b transition duration-300 ease-in-out hover:bg-gray-100" >
+                        <tr className="bg-slate-100 border-b transition duration-300 ease-in-out hover:bg-gray-100 text-center" >
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            Address
+                          </td>
+                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            {data?.address}
+                          </td>
+
+                          < div class="flex flex-row justify-center mr-10 pt-1">
+                            <div
+                              className="bg-white hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border-3 border-lowbrown hover:border-transparent rounded mr-1"
+                            ><input
+                              name="address"
+                              onChange={formik.handleChange}
+                              onBlur={formik.handleBlur}
+                              value={formik.values.address}
+                              className='border-1 border-darkbrown rounded-md my-3 bg-gray' type='text' ></input>
+                              {formik.touched.address && formik.errors.address ? (
+                                <p className="text-red-500 text-xs italic">{formik.errors.address}</p>
+                              ) : null}
+                            </div>
+                          </div>
+                        </tr>
+
+
+                        <tr className="bg-slate-100 border-b transition duration-300 ease-in-out hover:bg-gray-100 text-center" >
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             City
                           </td>
@@ -163,7 +190,7 @@ export default function Teacherpersonal() {
                             {data?.city}
                           </td>
 
-                          < div class="flex flex-row-reverse mr-10 pt-1">
+                          < div class="flex flex-row justify-center mr-10 pt-1">
                             <div
                               className="bg-white hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border-3 border-lowbrown hover:border-transparent rounded mr-1"
                             ><input
@@ -179,7 +206,7 @@ export default function Teacherpersonal() {
                           </div>
                         </tr>
 
-                        <tr className="bg-slate-100 border-b transition duration-300 ease-in-out hover:bg-gray-100" >
+                        <tr className="bg-slate-100 border-b transition duration-300 ease-in-out hover:bg-gray-100 text-center" >
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             State
                           </td>
@@ -187,7 +214,7 @@ export default function Teacherpersonal() {
                             {data?.state}
                           </td>
 
-                          < div class="flex flex-row-reverse mr-10 pt-1">
+                          < div class="flex flex-row justify-center mr-10 pt-1">
                             <div
                               className="bg-white hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border-3 border-lowbrown hover:border-transparent rounded mr-1"
                             ><input
@@ -203,7 +230,7 @@ export default function Teacherpersonal() {
                           </div>
                         </tr>
 
-                        <tr className="bg-slate-100 border-b transition duration-300 ease-in-out hover:bg-gray-100" >
+                        <tr className="bg-slate-100 border-b transition duration-300 ease-in-out hover:bg-gray-100 text-center" >
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             Zip Code
                           </td>
@@ -211,7 +238,7 @@ export default function Teacherpersonal() {
                             {data?.zip_code}
                           </td>
 
-                          < div class="flex flex-row-reverse mr-10 pt-1">
+                          < div class="flex flex-row justify-center mr-10 pt-1">
                             <div
                               className="bg-white hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border-3 border-lowbrown hover:border-transparent rounded mr-1"
                             ><input
@@ -227,29 +254,7 @@ export default function Teacherpersonal() {
                           </div>
                         </tr>
 
-                        <tr className="bg-slate-100 border-b transition duration-300 ease-in-out hover:bg-gray-100" >
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            Address
-                          </td>
-                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {data?.address}
-                          </td>
-
-                          < div class="flex flex-row-reverse mr-10 pt-1">
-                            <div
-                              className="bg-white hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border-3 border-lowbrown hover:border-transparent rounded mr-1"
-                            ><input
-                              name="address"
-                              onChange={formik.handleChange}
-                              onBlur={formik.handleBlur}
-                              value={formik.values.address}
-                              className='border-1 border-darkbrown rounded-md my-3 bg-gray' type='text' ></input>
-                              {formik.touched.address && formik.errors.address ? (
-                                <p className="text-red-500 text-xs italic">{formik.errors.address}</p>
-                              ) : null}
-                            </div>
-                          </div>
-                        </tr>
+                        
                       </tbody>
 
                     </table>

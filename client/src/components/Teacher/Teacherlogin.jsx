@@ -30,8 +30,7 @@ export default function Teacherlogin() {
                     onSubmit={async (values) => {
                         try {
                             const res = await loginTeacher(values);
-                            console.log(res);
-                            if (res === null) toast.error("Username doesn't exist.");
+                            if (res.username === undefined) toast.error(res.msg);
                             else if (res.error) toast.error(res.error);
                             else {
                             if (res) {

@@ -9,9 +9,14 @@ export async function loginTeacher(req, res) {
         const [teacher] = await connection.execute('SELECT * FROM Teacher WHERE teacher_id = ?', [username]);
         connection.release();
         const user = teacher[0];
-
-        if (user !== null) {
-            if (password === user.password && 7 === user.password.length) {
+  
+        if (user === undefined) {
+            return res.status(401).send({
+                msg : "Username doesn't exist.",
+            })
+        } 
+        else {
+            if (password === user.password) {
                 change = false;
                 return res.status(200).send({
                     msg : "Please change password and Fill personal information",
@@ -28,8 +33,8 @@ export async function loginTeacher(req, res) {
                     setPass : change,
                 })
             }) 
-        } 
-        else res.json(user);
+            
+        }
         
     } catch (error) {
         connection.release();

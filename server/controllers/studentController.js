@@ -7,11 +7,16 @@ export async function loginStudent(req, res) {
     try {
         let change = true;
         const { username, password } = req.body;
-        const [stu, fields] = await connection.execute('SELECT * FROM Student WHERE student_id = ?', [username]);
+        const [stu] = await connection.execute('SELECT * FROM Student WHERE student_id = ?', [username]);
         connection.release();
         const user = stu[0];
-        if (user !== null) {
-            if (password === user.password && 7 === user.password.length) {
+        if (user === undefined) {
+            return res.status(401).send({
+                msg: "Username does not exist.",
+            })
+        }
+        else {
+            if (password === user.password) {
                 change = false;
                 return res.status(200).send({
                     msg: "Please change password and Fill personal information",
@@ -33,7 +38,6 @@ export async function loginStudent(req, res) {
                     })
                 })
         }
-        else res.json(user);
 
     } catch (error) {
         connection.release();

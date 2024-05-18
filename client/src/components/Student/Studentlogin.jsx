@@ -31,7 +31,7 @@ export default function Studentlogin() {
                         onSubmit={async (values) => {
                             try {
                                 const res = await loginStudent(values);
-                                if (res.username === undefined) toast.error(res.msg);
+                                if (res.student_id === undefined) toast.error(res.msg);
                                 else if (res.error) toast.error(res.error);
                                 else {
                                     if (res) {

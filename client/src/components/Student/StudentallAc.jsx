@@ -29,37 +29,37 @@ const text_AC = {
 }
 
 const imageMap = {
-  ACC1: ACC1,
-  ACC2: ACC2,
+  ACC7: ACC1,
+  ACC4: ACC2,
   ACC3: ACC3,
-  ACC4: ACC4,
+  ACC8: ACC4,
   ACC5: ACC5,
   ACC6: ACC6,
 };
 
 const linkMap = {
-  ACC1: '/Student/StudentAC1' ,
-  ACC2: '/Student/StudentAC2',
+  ACC7: '/Student/StudentAC1' ,
+  ACC4: '/Student/StudentAC2',
   ACC3: '/Student/StudentAC3',
-  ACC4: '/Student/StudentAC4',
+  ACC8: '/Student/StudentAC4',
   ACC5: '/Student/StudentAC5',
   ACC6: '/Student/StudentAC6',
 };
 
 const header_AC = {
-  ACC1: 'Academic Clubs' ,
-  ACC2: 'Sports Teams',
+  ACC7: 'Academic Clubs' ,
+  ACC4: 'Sports Teams',
   ACC3: 'Creative Arts',
-  ACC4: 'Community Service',
+  ACC8: 'Community Service',
   ACC5:'Cultural Clubs',
   ACC6:'Technology and Innovation Clubs',
 }
 
 const content_AC = {
-  ACC1: 'Expand your knowledge and sharpen your skills with our academic clubs. Whether you are interested in science, math, debate, or language, there is a club for you to thrive in.',
-  ACC2: 'Join our winning teams and experience the thrill of competition! From basketball to soccer, volleyball to swimming, discover your passion for sports and teamwork.',
+  ACC7: 'Expand your knowledge and sharpen your skills with our academic clubs. Whether you are interested in science, math, debate, or language, there is a club for you to thrive in.',
+  ACC4: 'Join our winning teams and experience the thrill of competition! From basketball to soccer, volleyball to swimming, discover your passion for sports and teamwork.',
   ACC3: 'Unleash your creativity and express yourself through our art, music, and drama clubs. Dive into the world of creativity and let your imagination soar.',
-  ACC4: 'Make a difference in the world around you by joining our community service initiatives. From environmental conservation to helping the less fortunate, be a part of something meaningful.',
+  ACC8: 'Make a difference in the world around you by joining our community service initiatives. From environmental conservation to helping the less fortunate, be a part of something meaningful.',
   ACC5: 'Celebrate diversity and learn about different cultures through our cultural clubs. Explore traditions, languages, and cuisines from around the world.',
   ACC6: 'Are you fascinated by the world of technology and innovation? Join our tech clubs where you can explore coding, robotics, and digital design. Be part of groundbreaking projects.'
 }

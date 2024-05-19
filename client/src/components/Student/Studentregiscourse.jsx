@@ -8,7 +8,7 @@ import tw from 'twin.macro';
 import Headerstu from './Headerstu';
 import { getAvailableCourse, getInfo, registerCourse } from '../../helpers/stuhelper';
 import profile from '../../assets/profile.png';
-import sry from '../../assets/sry.png';
+import sorry from '../../assets/sorry.png';
 
 // for student register compulsory courses and courses in tb stu_register will not display in available courses
 const Row = tw.td`border-2 border-sky py-0 text-sm`;
@@ -116,7 +116,7 @@ export default function Studentregiscourse() {
         </Helmet>
         <Headerstu data={data}/>
         <div className='h-[calc(100vh-40px)] flex flex-row '>
-          <div className='w-1/4 bg-slate-300 p-10'>
+          <div className='w-1/4 bg-sky p-10'>
             <div className='flex flex-col items-center my-10'>
               <img className='rounded-full w-1/2 h-1/2 border-2 border-sky' src={profile}/>
             </div>
@@ -202,9 +202,9 @@ export default function Studentregiscourse() {
               </div>
             ) : (
               <div className='flex flex-col items-center justify-center w-full'>
-                <img src={sry} className='w-1/6'/>
+                <img src={sorry} className='w-1/6'/>
                 <p className='my-5'>Sorry, we're not in registration period</p>
-                <button className='p-3 bg-slate-400 text-white rounded-md' type='button' onClick={(e)=>clickDetail()}>Preview Course Detail</button>
+                <button className='p-3 bg-lowbrown text-white rounded-md' type='button' onClick={(e)=>clickDetail()}>Preview Course Detail</button>
               </div>
             )
           }

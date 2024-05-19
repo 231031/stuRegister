@@ -76,8 +76,8 @@ export default function Studentmycourse() {
           <title>Stu | MyCourse</title>
         </Helmet>
         <Headerstu data={data} />
-        <div className='flex bg-lowyellow'>
-          <div className='w-1/4 bg-slate-300 h-[calc(100vh-40px)] p-10'>
+        <div className='flex bg-white'>
+          <div className='w-1/4 bg-sky h-[calc(100vh-40px)] p-10'>
             <div className='flex flex-col items-center my-10'>
               <img className='rounded-full w-1/2 h-1/2 border-2 border-sky' src={profile} />
             </div>
@@ -100,7 +100,7 @@ export default function Studentmycourse() {
               <p className='mr-8'>Year</p>
               {
                 (data?.year) ? (
-                  <select className='text-white w-1/2 bg-greendark border-0 rounded-md' onChange={(e) => setSelY(e.target.value)}>
+                  <select className='text-white w-1/2 bg-darkbrown border-0 rounded-md' onChange={(e) => setSelY(e.target.value)}>
                     <option value=''></option>
                     {
                       Array.from({ length: new Date().getFullYear() + 543 - data?.year }, (_, index) => index + 1).map((year) => (
@@ -116,7 +116,7 @@ export default function Studentmycourse() {
 
             <div className='flex flex-row mt-10 w-1/4'>
               <p className='mr-8'>Semester</p>
-              <select className='text-white w-1/2 bg-greendark border-0 rounded-md' onChange={(e) => setSelT(e.target.value)}>
+              <select className='text-white w-1/2 bg-darkbrown border-0 rounded-md' onChange={(e) => setSelT(e.target.value)}>
                 <option value=''></option>
                 <option value={1}>1</option>
                 <option value={2}>2</option>
@@ -129,7 +129,7 @@ export default function Studentmycourse() {
                 (regis.length > 0) ? (
                   <div className='w-full flex flex-col justify-center items-center'>
                     <p className='text-lg'>Compulsory Courses</p>
-                    <table className='text-center w-11/12 border-2 border-sky mt-10'>
+                    <table className='text-center w-11/12 border-2 border-darkbrown mt-10'>
                       <thead>
                         <tr>
                           <Row>ID</Row>
@@ -174,9 +174,9 @@ export default function Studentmycourse() {
             {
               (data?.year == selY && term == selT && ((term == 1 && month + 1 == 8) || (term == 2 && month + 1 == 1))) ? (
                 <div className='flex flex-row mt-14'>
-                  <button className='mx-10 px-5 py-1 bg-greendark text-white rounded-md hover:bg-sky'
+                  <button className='mx-10 px-5 py-1 bg-lowbrown text-white rounded-md hover:bg-sky'
                     onClick={(e) => clickChange()}>Change Group</button>
-                  <button className='mx-10 px-5 py-1 bg-greendark text-white rounded-md hover:bg-sky'
+                  <button className='mx-10 px-5 py-1 bg-lowbrown text-white rounded-md hover:bg-sky'
                     onClick={(e) => clickDel()}>Withdraw Course</button>
                 </div>
               ) : (

@@ -14,7 +14,7 @@ export default function Teachertablecourse() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/teacher/login");
+      navigate("/teacher/login"); 
     }
 
     const apiInfo = async () => {

@@ -44,7 +44,7 @@ export default function Studentpersonal() {
         </Helmet>
         <Headerstu data={data}/>
         <div className='flex flex-row'>
-          <div className='w-1/4 bg-slate-300 h-[calc(100vh-40px)] p-10'>
+          <div className='w-1/4 bg-sky h-[calc(100vh-40px)] p-10'>
             <div className='flex justify-end m-0'>
               <button className='w-1/12 h-1/12' type='button' onClick={(e)=>handleClick(e.target.value)}>
                 <img src={edit}/>

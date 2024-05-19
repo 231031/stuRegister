@@ -95,8 +95,8 @@ export default function Studentdelcourse() {
           <title>Stu | DelCourse</title>
         </Helmet>
         <Headerstu data={data} />
-        <div className='h-screen flex bg-lowyellow'>
-          <div className='w-1/4 bg-slate-300 h-[calc(100vh-40px)] p-10'>
+        <div className='h-screen flex bg-white'>
+          <div className='w-1/4 bg-sky h-[calc(100vh-40px)] p-10'>
             <div className='flex flex-col items-center my-10'>
               <img className='rounded-full w-1/2 h-1/2 border-2 border-sky' src={profile} />
             </div>
@@ -158,7 +158,7 @@ export default function Studentdelcourse() {
                   </div>
 
                 ) : (
-                  <div className='flex flex-col items-center w-full'>
+                  <div className='flex flex-col items-center w-full mt-20'>
                     <p className='text-red-500'>Not Have Register Course Now</p>
                   </div>
                 )

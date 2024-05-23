@@ -27,6 +27,7 @@ router.route('/gettotalcredit').post(controller.getTotalCredit); // total credit
 
 router.route('/getscholarship').post(controller.getScholar); // sholarship
 router.route('/getstatusscholar').post(controller.getStatusScholar); // status scholar
+router.route('/getavgscholar').post(controller.getAvgScholar); // advanced analysis -> avg gpax and hours of students who get scholar
 
 router.route('/getactivity').post(controller.getActivity);
 router.route('/getarractivity').post(controller.getArrActivity);

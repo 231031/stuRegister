@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import tw from 'twin.macro';
+import Chart from 'react-apexcharts';
 
 const Box = tw.div`w-1/2 h-3/4 bg-lowbrown rounded-2xl mx-10 pt-3 text-center`;
 import Headerstu from './Headerstu';
-import { getInfo, getGpax, getScholar, getTotalCredit } from '../../helpers/stuhelper';
+import { getInfo, getGpax, getTotalCredit, getAvgScholar } from '../../helpers/stuhelper';
 import { getAllActivitys } from '../../helpers/helper';
 
 import bg_stu from '../../assets/home9.jpg';
@@ -14,10 +15,30 @@ export default function Studenthome() {
 
   const navigate = useNavigate();
   const [data, setData] = useState('');
-  const [scholar, setScholar] = useState('');
   const [activity, setActivity] = useState('');
   const [gpax, setGpax] = useState('');
   const [credit, setCredit] = useState('');
+  const [scholar_his, setScholarHis] = useState('');
+  const [graph, setGraph] = useState({
+    options: {
+      chart: {
+        id: 'line'
+      },
+      xaxis: {
+        categories: []
+      }
+    },
+    series: [
+      {
+        name: 'avg_gpax',
+        data: []
+      },
+      {
+        name: 'avg_hours',
+        data: []
+      }
+    ]
+  });
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -27,19 +48,21 @@ export default function Studenthome() {
 
     const fetchData = async () => {
       try {
-        const [infoRes, gpaxRes, scholarRes, activityRes, creditRes] = await Promise.all([
+
+        const [infoRes, gpaxRes, activityRes, creditRes, avgScholar] = await Promise.all([
           getInfo(),
           getGpax(),
-          getScholar(),
           getAllActivitys(),
           getTotalCredit(),
+          getAvgScholar(),
         ]);
 
         setData(infoRes);
         setGpax(gpaxRes.gpax);
-        setScholar(scholarRes);
         setActivity(activityRes);
-        setCredit(creditRes.data.total_credit);
+        setCredit(creditRes.total_credit);
+        setScholarHis(avgScholar);
+
       } catch (error) {
         console.log(error);
       }
@@ -48,6 +71,72 @@ export default function Studenthome() {
     fetchData();
 
   }, []);
+
+  useEffect(() => {
+    
+    if (scholar_his) {
+      const categories = scholar_his?.map(item => item.scholarship_name);
+      const avgGpaxData = scholar_his?.map(item => parseFloat(item.avg_gpax.toFixed(2)));
+      const avgHoursData = scholar_his?.map(item => item.avg_hours);
+
+      setGraph({
+        options: {
+          chart: {
+            id: 'basic-bar'
+          },
+          xaxis: {
+            categories: categories,
+            labels : {
+              style: {
+                colors: '#FFF7FC',
+                fontSize: '10px',
+                fontFamily: 'Helvetica, Arial, sans-serif',
+                fontWeight: 400,
+                cssClass: 'apexcharts-xaxis-label',
+            },
+            },
+           
+          },
+          yaxis: {
+            labels : {
+              style: {
+                colors: '#FFF7FC',
+                fontSize: '10px',
+                fontFamily: 'Helvetica, Arial, sans-serif',
+                fontWeight: 400,
+                cssClass: 'apexcharts-yaxis-label',
+            },
+            },
+           
+          },
+          
+
+        },
+        dataLabels: {
+          enabled : true,
+          style: {
+            fontSize: '14px',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontWeight: 'bold',
+            colors: '#FFF7FC',
+          },
+        },
+        series: [
+          {
+            name: 'avg_gpax',
+            data: avgGpaxData,
+              colors: '#FFF7FC'
+          },
+          {
+            name: 'avg_hours',
+            data: avgHoursData,
+              colors: '#FFF7FC'
+          }
+        ]
+      });
+    }
+
+  }, [scholar_his]);
 
   function handleScholar() {
     navigate('/student/StudentScholarform');
@@ -61,101 +150,110 @@ export default function Studenthome() {
         </Helmet>
         <Headerstu data={data} />
         {/* <div className='flex'> */}
-          <div className='h-80 flex flex-row justify-center items-center text-xl py-8 bg-cover bg-center ;' style={{backgroundImage: `url(${bg_stu})`}}>
-            
-            
-          </div>
-          <div>
-            <div className='flex flex-row justify-center bg-white p-5 rounded-2xl w-fullscreen '>
-                <div className='flex flex-col justify-center w-1/3'>
-                  <div className=' flex p-2 justify-between my-2'>
-                    <p className='font-semibold '>Student ID </p>
-                    <p>{data?.student_id}</p>
-                  </div>
-                  <div className=' flex  p-2 justify-between my-2'>
-                    <p className='font-semibold'>Name</p>
-                    <p >{data?.first_name} {data?.last_name}</p>
-                  </div>
-                  <div className='flex p-2 justify-between my-2'>
-                    <p className='font-semibold'>GPA </p>
-                    <p >{gpax}</p>
-                  </div>
-                  <div className='flex justify-between p-2 my-2'>
-                    <p className='font-semibold'>Total Credit</p>
-                    <p>{credit}</p>
-                  </div>
-                  </div>
-            </div>
-          
-            <div className=' flex justify-center flex-row items-center h-96 '>
-              {
-                (scholar.length > 0) ? (
-                  <Box className='flex flex-col items-center'>
-                    <table className='my-2 table-fixed  w-11/12 text-lg text-white'>
-                      <thead>
-                        <tr className='font-bold'>
-                          <td>Scholarship Name</td>
-                          <td>Limit</td>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {
-                          scholar.map((sList, index) => (
-                            <tr key={index} className='w-11/12 bg-sky text-darkgreen text-sm border-y-8 border-white'>
-                              <td className='py-1'>{sList.scholarship_name}</td>
-                              <td className='py-1'>{sList.finite}</td>
-                            </tr>
+        <div className='h-80 flex flex-row justify-center items-center text-xl py-8 bg-cover bg-center ;' style={{ backgroundImage: `url(${bg_stu})` }}>
 
-                          ))
-                        }
-                      </tbody>
-                    </table>
-                    <button onClick={(e) => handleScholar()}
-                      type='button' className='px-4 my-2 bg-sky text-darkbrown rounded-lg hover:bg-lowyellow hover:text-darkbrown'>Apply</button>
 
-                  </Box>
-                ) : (
-                  <Box>
-                    <p className='mt-5'>No Scholarship Available</p>
-                  </Box>
-                )
-              }
-              {
-                (activity.length > 0) ? (
-                  <Box className='flex flex-col items-center '>
-                    <table className='my-2 table-fixed  w-11/12 text-lg text-white'>
-                      <thead>
-                        <tr className='font-bold'>
-                          <td>Activity Name</td>
-                          <td>Limit</td>
-                          <td>Get Hours</td>
-                          <td>Activity Date</td>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {
-                          activity.map((aList, index) => (
-                            <tr key={index} className='w-11/12 bg-sky text-darkgreen text-sm border-y-8 border-white'>
-                              <td className='py-1'>{aList.activity_name}</td>
-                              <td className='py-1'>{aList.finite}</td>
-                              <td className='py-1'>{aList.hours}</td>
-                              <td className='py-1'>{aList?.date_ac ? new Date(aList.date_ac).toISOString().split('T')[0] : ""}</td>
-                            </tr>
-
-                          ))
-                        }
-                      </tbody>
-                    </table>
-
-                  </Box>
-                ) : (
-                  <Box>
-                    <p className='mt-5'>No Activity Available</p>
-                  </Box>
-                )
-              }
+        </div>
+        <div>
+          <div className='flex flex-row justify-center bg-white p-5 rounded-2xl w-fullscreen '>
+            <div className='flex flex-col justify-center w-1/3'>
+              <div className=' flex p-2 justify-between my-2'>
+                <p className='font-semibold '>Student ID </p>
+                <p>{data?.student_id}</p>
+              </div>
+              <div className=' flex  p-2 justify-between my-2'>
+                <p className='font-semibold'>Name</p>
+                <p >{data?.first_name} {data?.last_name}</p>
+              </div>
+              <div className='flex p-2 justify-between my-2'>
+                <p className='font-semibold'>GPA </p>
+                <p >{gpax}</p>
+              </div>
+              <div className='flex justify-between p-2 my-2'>
+                <p className='font-semibold'>Total Credit</p>
+                <p>{credit}</p>
+              </div>
             </div>
           </div>
+
+          <div className=' flex justify-center flex-row items-center h-auto '>
+            {
+              (scholar_his.length > 0) ? (
+                <Box className='flex flex-col items-center'>
+                  <h3 className='font-bold text-white text-lg'>Scholarship Histoty</h3>
+                  <table className='my-2 table-fixed  w-11/12 text-md text-white'>
+                    <thead>
+                      <tr className='font-bold'>
+                        <td>Scholarship Name</td>
+                        <td>Average GPAX</td>
+                        <td>Average Hours</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        scholar_his.map((sList, index) => (
+                          <tr key={index} className='w-11/12 bg-sky text-darkgreen text-sm border-y-8 border-lowbrown'>
+                            <td className='py-1'>{sList.scholarship_name}</td>
+                            <td className='py-1'>{parseFloat(sList.avg_gpax.toFixed(2))}</td>
+                            <td className='py-1'>{sList.avg_hours}</td>
+                          </tr>
+
+                        ))
+                      }
+                    </tbody>
+                  </table>
+                  {/* <Chart
+                    options={graph?.options}
+                    series={graph?.series}
+                    type="bar"
+                    width="500"
+                  /> */}
+                  <button onClick={(e) => handleScholar()}
+                    type='button' className='px-4 my-4 bg-sky text-darkbrown rounded-lg hover:bg-lowyellow hover:text-darkbrown'>Apply</button>
+
+                </Box>
+              ) : (
+                <Box>
+                  <p className='mt-5'>No Scholarship Available</p>
+                </Box>
+              )
+            }
+            {
+              (activity.length > 0) ? (
+                <Box className='flex flex-col items-center '>
+                  <table className='my-2 table-fixed  w-11/12 text-lg text-white'>
+                    <thead>
+                      <tr className='font-bold'>
+                        <td>Activity Name</td>
+                        <td>Limit</td>
+                        <td>Get Hours</td>
+                        <td>Activity Date</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        activity.map((aList, index) => (
+                          <tr key={index} className='w-11/12 bg-sky text-darkgreen text-sm border-y-8 border-lowbrown'>
+                            <td className='py-1'>{aList.activity_name}</td>
+                            <td className='py-1'>{aList.finite}</td>
+                            <td className='py-1'>{aList.hours}</td>
+                            <td className='py-1'>{aList?.date_ac ? new Date(aList.date_ac).toISOString().split('T')[0] : ""}</td>
+                          </tr>
+
+                        ))
+                      }
+                    </tbody>
+                  </table>
+
+                </Box>
+              ) : (
+                <Box>
+                  <p className='mt-5'>No Activity Available</p>
+                </Box>
+              )
+            }
+          </div>
+        </div>
         {/* </div> */}
       </div>
     </HelmetProvider>

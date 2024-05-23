@@ -173,7 +173,7 @@ export async function updateGrade(req, res) {
             SELECT * FROM edu_term WHERE student_id = ? AND year = ? AND term = ?
         `
         const queryEdu = `
-            UPDATE edu_term SET grade_term = ? WHERE student_id = ? AND year = ? AND term = ?
+            UPDATE edu_term SET grade_term = ?, status = ? WHERE student_id = ? AND year = ? AND term = ?
         `
         await connection.beginTransaction();
         for (const student of req.body.list) {
@@ -191,7 +191,7 @@ export async function updateGrade(req, res) {
             const oldSum = (result.credit_term)*(result.grade_term); // sum of each grade*credit
             sum = sum + oldSum;
             let gpa = sum/result.credit_term;
-            await connection.execute(queryEdu, [gpa, student_id, year, term]);
+            await connection.execute(queryEdu, [gpa, true, student_id, year, term]);
 
         }
         await connection.commit();
@@ -199,6 +199,29 @@ export async function updateGrade(req, res) {
         return res.status(200).send({ msg : 'Update Grade Successfully'});
     } catch (error) {
         await connection.rollback();
+        connection.release();
+        return res.status(404).send({ error: error.message });
+    }
+}
+
+// advanced analysis
+export async function getAvgCourse(req, res) {
+    try {
+        const pre_year = new Date().getFullYear() + 543;
+        const { id } = req.body.teacher_id;
+
+        const query = `
+            SELECT SR.course_id, C.course_name, SR.gr, AVG(SR.grade)
+            FROM course_detail CD INNER JOIN Course C ON C.course_id = CD.course_id
+            INNER JOIN stu_register SR ON CD.course_id = SR.course_id AND CD.gr = SR.gr
+            WHERE CD.teacher_id = ? AND CD.year = ?
+            GROUP BY SR.course_id, SR.gr 
+        `;
+        const [courses] = await pool.execute(query, [id, pre_year - 1]);
+        connection.release();
+        res.json(courses);
+        
+    } catch (error) {
         connection.release();
         return res.status(404).send({ error: error.message });
     }

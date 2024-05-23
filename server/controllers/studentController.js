@@ -770,16 +770,16 @@ export async function getAvgScholar(req, res) {
             const query = `
                 SELECT S.scholarship_name, avg(stu_gpax) AS avg_gpax, avg(SD.hours) AS avg_hours FROM
                 (SELECT S.student_id, avg(ET.grade_term) AS stu_gpax FROM Student S 
-                INNER JOIN edu_term ET ON S.student_id = ET.student_id 
-                GROUP BY S.student_id) AS tb_gpax
+                INNER JOIN edu_term ET ON S.student_id = ET.student_id
+                WHERE ET.status = ? GROUP BY S.student_id) AS tb_gpax
                 INNER JOIN Student SD ON SD.student_id = tb_gpax.student_id
                 INNER JOIN scholar_history SH ON SD.student_id = SH.student_id
                 INNER JOIN Scholarship S ON S.scholarship_id = SH.scholarship_id
-                WHERE SH.get_year = ? AND SH.approve = ?
+                WHERE SH.get_year != ? AND SH.approve = ?
                 GROUP BY S.scholarship_name
             `;
 
-        const [num_student] = await connection.execute(query, [pre_year-1, true]);
+        const [num_student] = await connection.execute(query, [true, pre_year, true]);
         connection.release();
         res.json(num_student);
 

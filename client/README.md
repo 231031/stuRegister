@@ -78,3 +78,9 @@ Student
 -update component for adding data fetch just status=1
 -Course change status delete available_course of this course_id
 -Teacher change status -> update course_detail and Student of this teacher to another
+
+Edit Schema
+-edu_term add column status (use to tell have any teacher start grade or not -> for use in calculating gpax)
+
+Student
+-fetch advanced analysis avg_gpax and avg_hours of each old scholarship

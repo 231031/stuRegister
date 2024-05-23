@@ -106,11 +106,15 @@ export async function updateTeacher(req, res) {
 export async function getCourseTeacher(req, res) {
     try {
         const pre_year = new Date().getFullYear() + 543;
+        const month = new Date().getMonth();
+        let term = 2;
+        if (month >= 7) term = 1;
         const query = `
-            SELECT C.* FROM course_detail CD INNER JOIN Course C ON CD.course_id = C.course_id 
-            WHERE teacher_id = ? AND CD.year = ? GROUP BY C.course_id
+            SELECT C.*, CD.gr FROM course_detail CD INNER JOIN Course C ON CD.course_id = C.course_id
+            INNER JOIN available_course AC ON CD.course_id = AC.course_id 
+            WHERE teacher_id = ? AND CD.year = ?  AND AC.term = ? GROUP BY C.course_id, CD.gr
         `;
-        const [courses] = await pool.execute(query, [req.body.teacher_id, pre_year]);
+        const [courses] = await pool.execute(query, [req.body.teacher_id, pre_year, term]);
         connection.release();
         res.json(courses);
         
@@ -141,18 +145,22 @@ export async function editCourse(req, res) {
 export async function getStuTeacher(req, res) {
     try {
         const pre_year = new Date().getFullYear() + 543;
+        const month = new Date().getMonth();
+        let term = 2;
+        if (month >= 7) term = 1;
         const query = `
             SELECT S.student_id, S.first_name, S.last_name, S.year, C.course_id, C.course_name, C.credit, 
-            D.department_name, F.faculty_name
+            D.department_name, F.faculty_name, CD.gr
             FROM stu_register SR INNER JOIN Student S ON SR.student_id = S.student_id 
             INNER JOIN course_detail CD ON CD.course_id = SR.course_id AND CD.gr = SR.gr AND CD.year = ?
             INNER JOIN Course C ON C.course_id = SR.course_id
             INNER JOIN Department D ON D.department_id = S.department_id
             INNER JOIN Faculty F ON F.faculty_id = D.faculty_id
-            WHERE CD.teacher_id = ? AND CD.course_id = ? AND SR.status_grade = ?
+            INNER JOIN available_course AC ON AC.course_id = CD.course_id
+            WHERE CD.teacher_id = ? AND CD.course_id = ? AND SR.status_grade = ? AND AC.term = ?
             ORDER BY S.student_id
         `;
-        const [courses] = await pool.execute(query, [pre_year, req.body.teacher_id, req.body.course_id, false]);
+        const [courses] = await pool.execute(query, [pre_year, req.body.teacher_id, req.body.course_id, false, term]);
         connection.release();
         res.json(courses);
         

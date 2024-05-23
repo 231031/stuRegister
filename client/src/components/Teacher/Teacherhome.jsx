@@ -64,10 +64,10 @@ export default function Teacherhome() {
           {
             (course.length > 0) ? (
               <Box className='flex flex-col items-center h-auto'>
-                <p className='mt-3'>Responsible Course</p>
+                <p className='mt-3 font-bold'>History Detail of Course in Last Year</p>
                 <table className='my-2 table-fixed  w-11/12'>
                   <thead>
-                    <tr>
+                    <tr className='font-bold'>
                       <td>Course ID</td>
                       <td>Course Name</td>
                       <td>Group</td>
@@ -91,7 +91,7 @@ export default function Teacherhome() {
               </Box>
             ) : (
               <Box className='h-5/6'>
-                  <p className='mt-5'>No Responsible Course Right Now</p>
+                  <p className='mt-5'>No History Detail of Course Right Now</p>
               </Box>
             )
           }

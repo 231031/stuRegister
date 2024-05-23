@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast';
+import tw from 'twin.macro';
 
 import { registerActivity, getFacActivity } from '../../helpers/stuhelper';
 import Headerstu from './Headerstu';
@@ -20,6 +21,8 @@ const text_ACT1 = {
     intro2: 'Unleash Your Intellectual Curiosity: Join Our Academic Clubs!',
 }
 
+
+const Box = tw.div`w-9/12 bg-slate-200 rounded-md mx-10 text-center`;
 
 export default function ACT1() {
 
@@ -141,8 +144,39 @@ export default function ACT1() {
     </div>
     </section>
     
-    <div>
-      
+    <div className='flex flex-col items-center'>
+    {
+            (num.length > 0) ? (
+              <Box className='flex flex-col items-center h-auto'>
+                <p className='mt-3 font-bold'>History Detail of Course in Last Year</p>
+                <table className='my-2 table-fixed  w-11/12'>
+                  <thead>
+                    <tr className='font-bold'>
+                      <td>Faculty ID</td>
+                      <td>Faculty Name</td>
+                      <td>Number</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      num.map((nList, index) => (
+                        <tr key={index} className='w-11/12 bg-blue-200 border-y-8 border-slate-200'>
+                          <td className='py-1'>{nList.faculty_id}</td>
+                          <td className='py-1'>{nList.faculty_name}</td>
+                          <td className='py-1'>{nList.num_student}</td>
+                        </tr>
+
+                      ))
+                    }
+                  </tbody>
+                </table>
+              </Box>
+            ) : (
+              <Box className='h-5/6'>
+                  <p className='mt-5'>No Attendent in This Activity</p>
+              </Box>
+            )
+          }
     </div>
 
 

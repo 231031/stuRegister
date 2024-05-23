@@ -77,8 +77,8 @@ export default function Studentmycourse() {
         </Helmet>
         <Headerstu data={data} />
         <div className='flex bg-white'>
-          <div className='w-1/4 bg-sky h-[calc(100vh-40px)] p-10'>
-            <div className='flex flex-col items-center my-10'>
+          <div className='w-1/4 bg-sky h-screen p-10 '>
+            <div className='flex flex-col items-center my-20'>
               <img className='rounded-full w-1/2 h-1/2 border-2 border-sky' src={profile} />
             </div>
             <div className='flex flex-row flex-wrap justify-between'>
@@ -96,7 +96,7 @@ export default function Studentmycourse() {
           </div>
 
           <div className='w-full flex flex-col items-center'>
-            <div className='flex flex-row mt-10 w-1/4 ml-20'>
+            <div className='flex flex-row mt-40 w-1/4 ml-20'>
               <p className='mr-8'>Year</p>
               {
                 (data?.year) ? (

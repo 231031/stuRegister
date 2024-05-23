@@ -60,7 +60,7 @@ export default function Headerstu({ data }) {
 
   return (
     <div>
-       <nav className=' bg-darkgreen'>
+       <nav className=' bg-darkgreen  fixed w-full z-50'>
         <ul className='flex flex-wrap justify-center items-center '>
           <Btn>
             <NavLink to='/student/home'>Home</NavLink>

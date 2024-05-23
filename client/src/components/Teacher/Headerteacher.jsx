@@ -14,8 +14,8 @@ export default function Headerteacher({ data }) {
   };
   return (
     <div>
-       <nav className=' bg-darkgreen'>
-        <ul className='flex flex-wrap justify-center items-center divide-x-2'>
+       <nav className=' bg-darkgreen fixed w-full z-50'>
+        <ul className='flex flex-wrap justify-center items-center'>
           <Btn>
             <NavLink to='/teacher/home'>Home</NavLink>
           </Btn>
@@ -34,7 +34,7 @@ export default function Headerteacher({ data }) {
             <p>POS : {data?.position}</p>
           </div> */}
           <Dropdown>
-            <Btn onClick={toggleUser}><FontAwesomeIcon className='ml-2' icon="fa-solid fa-circle-user" /></Btn>
+            <Btn onClick={toggleUser}><FontAwesomeIcon className='ml-2 size-9' icon="fa-solid fa-circle-user" /></Btn>
             <div className={isUserOpen ? 'block' : 'hidden'}>
               <List className='w-46'>
                 <li><p>ID : {data?.teacher_id}</p></li>

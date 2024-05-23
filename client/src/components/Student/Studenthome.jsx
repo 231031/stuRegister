@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import tw from 'twin.macro';
-import Chart from 'react-apexcharts';
 
 const Box = tw.div`w-1/2 h-3/4 bg-lowbrown rounded-2xl mx-10 pt-3 text-center`;
 import Headerstu from './Headerstu';
@@ -19,26 +18,6 @@ export default function Studenthome() {
   const [gpax, setGpax] = useState('');
   const [credit, setCredit] = useState('');
   const [scholar_his, setScholarHis] = useState('');
-  const [graph, setGraph] = useState({
-    options: {
-      chart: {
-        id: 'line'
-      },
-      xaxis: {
-        categories: []
-      }
-    },
-    series: [
-      {
-        name: 'avg_gpax',
-        data: []
-      },
-      {
-        name: 'avg_hours',
-        data: []
-      }
-    ]
-  });
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -72,71 +51,7 @@ export default function Studenthome() {
 
   }, []);
 
-  useEffect(() => {
-    
-    if (scholar_his) {
-      const categories = scholar_his?.map(item => item.scholarship_name);
-      const avgGpaxData = scholar_his?.map(item => parseFloat(item.avg_gpax.toFixed(2)));
-      const avgHoursData = scholar_his?.map(item => item.avg_hours);
-
-      setGraph({
-        options: {
-          chart: {
-            id: 'basic-bar'
-          },
-          xaxis: {
-            categories: categories,
-            labels : {
-              style: {
-                colors: '#FFF7FC',
-                fontSize: '10px',
-                fontFamily: 'Helvetica, Arial, sans-serif',
-                fontWeight: 400,
-                cssClass: 'apexcharts-xaxis-label',
-            },
-            },
-           
-          },
-          yaxis: {
-            labels : {
-              style: {
-                colors: '#FFF7FC',
-                fontSize: '10px',
-                fontFamily: 'Helvetica, Arial, sans-serif',
-                fontWeight: 400,
-                cssClass: 'apexcharts-yaxis-label',
-            },
-            },
-           
-          },
-          
-
-        },
-        dataLabels: {
-          enabled : true,
-          style: {
-            fontSize: '14px',
-            fontFamily: 'Helvetica, Arial, sans-serif',
-            fontWeight: 'bold',
-            colors: '#FFF7FC',
-          },
-        },
-        series: [
-          {
-            name: 'avg_gpax',
-            data: avgGpaxData,
-              colors: '#FFF7FC'
-          },
-          {
-            name: 'avg_hours',
-            data: avgHoursData,
-              colors: '#FFF7FC'
-          }
-        ]
-      });
-    }
-
-  }, [scholar_his]);
+  
 
   function handleScholar() {
     navigate('/student/StudentScholarform');
@@ -202,12 +117,6 @@ export default function Studenthome() {
                       }
                     </tbody>
                   </table>
-                  {/* <Chart
-                    options={graph?.options}
-                    series={graph?.series}
-                    type="bar"
-                    width="500"
-                  /> */}
                   <button onClick={(e) => handleScholar()}
                     type='button' className='px-4 my-4 bg-sky text-darkbrown rounded-lg hover:bg-lowyellow hover:text-darkbrown'>Apply</button>
 

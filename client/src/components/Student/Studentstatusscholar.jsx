@@ -55,7 +55,7 @@ export default function Studentstatusscholar() {
         </Helmet>
         <Headerstu data={data} />
 
-        <div className='flex mt-20 bg-white h-[calc(100vh-40px)]'>
+        <div className='flex bg-white h-screen py-20'>
           <div className='w-full flex flex-col items-center'>
             <div className='flex flex-row mt-10 w-1/4 ml-20'>
               <p className='mr-8'>Year</p>

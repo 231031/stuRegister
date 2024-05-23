@@ -3,12 +3,13 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import tw from 'twin.macro';
 
-const Box = tw.div`w-1/2 h-3/4 bg-lowbrown rounded-2xl mx-10 pt-3 text-center`;
+const Box = tw.div`w-1/2 h-auto bg-lowbrown rounded-lg mx-10 py-5 text-center`;
 import Headerstu from './Headerstu';
 import { getInfo, getGpax, getTotalCredit, getAvgScholar } from '../../helpers/stuhelper';
 import { getAllActivitys } from '../../helpers/helper';
 
-import bg_stu from '../../assets/home9.jpg';
+// import bg_stu from '../../assets/home9.jpg';
+import bg_stu from '../../assets/book.jpg';
 
 export default function Studenthome() {
 
@@ -65,13 +66,13 @@ export default function Studenthome() {
         </Helmet>
         <Headerstu data={data} />
         {/* <div className='flex'> */}
-        <div className='h-80 flex flex-row justify-center items-center text-xl py-8 bg-cover bg-center ;' style={{ backgroundImage: `url(${bg_stu})` }}>
+        <div className='h-80 flex flex-row justify-center items-center text-xl py-8 bg-cover  ;' style={{ backgroundImage: `url(${bg_stu})` }}>
 
 
         </div>
         <div>
-          <div className='flex flex-row justify-center bg-white p-5 rounded-2xl w-fullscreen '>
-            <div className='flex flex-col justify-center w-1/3'>
+          <div className='flex flex-row justify-center p-5  w-fullscreen '>
+            <div className='flex flex-col justify-center w-1/4'>
               <div className=' flex p-2 justify-between my-2'>
                 <p className='font-semibold '>Student ID </p>
                 <p>{data?.student_id}</p>
@@ -91,7 +92,7 @@ export default function Studenthome() {
             </div>
           </div>
 
-          <div className=' flex justify-center flex-row items-center h-auto '>
+          <div className=' flex justify-center flex-row py-10  h-auto '>
             {
               (scholar_his.length > 0) ? (
                 <Box className='flex flex-col items-center'>
@@ -130,7 +131,7 @@ export default function Studenthome() {
             {
               (activity.length > 0) ? (
                 <Box className='flex flex-col items-center '>
-                  <table className='my-2 table-fixed  w-11/12 text-lg text-white'>
+                  <table className='my-2table-fixed  w-11/12 text-lg text-white'>
                     <thead>
                       <tr className='font-bold'>
                         <td>Activity Name</td>
@@ -142,7 +143,7 @@ export default function Studenthome() {
                     <tbody>
                       {
                         activity.map((aList, index) => (
-                          <tr key={index} className='w-11/12 bg-sky text-darkgreen text-sm border-y-8 border-lowbrown'>
+                          <tr key={index} className='w-11/12 bg-sky text-darkgreen text-sm border-y-8  border-lowbrown'>
                             <td className='py-1'>{aList.activity_name}</td>
                             <td className='py-1'>{aList.finite}</td>
                             <td className='py-1'>{aList.hours}</td>

@@ -17,7 +17,12 @@ export default {
       'darkbrown': '#4E4A41',
       'black': '#000000',
       'white': '#FFF7FC',
-      'Slate' : '#cbd5e1'
+      'Slate' : '#cbd5e1',
+      // 'course' : '#F1E1C0',
+      // 'course' : '#E9D3B4',
+      'course' : '#FCEFCF',
+      'course1' : '#AD6654',
+      'course2' : '#301D1F'
     },
     flex:{
       

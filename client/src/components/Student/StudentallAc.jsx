@@ -122,8 +122,8 @@ export default function AllActivity() {
       <div>
           <div i>
             <section className=" w-dvw max-h-[80rem] relative">
-              <div className="absolute inset-0 z-[1]">
-                  <img className="h-100 w-full object-cover bg-center mt-0" src={Accimg} alt=""  />
+              <div className="absolute inset-0 z-0">
+                  <img className="h-100 w-full object-cover bg-center mt-0 z-0" src={Accimg} alt=""  />
               </div>
               <div className="max-w-[120rem] mx-auto h-full relative z-[2] px-6 md:px-8 lg:px-10">
                   <div className="h-full w-full  flex flex-col relative space-y-6">

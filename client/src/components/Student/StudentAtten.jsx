@@ -57,7 +57,7 @@ export default function AttendedActivity() {
         {/* <---section1----> */}
 
 
-        <div class="h-[16rem] bg-sky ">
+        <div class="h-1/3 bg-sky pt-20">
           <div class="container mx-auto px-6 py-10">
             <h1 class="text-center text-3xl font-semibold capitalize text-gray-800 dark:text-darkgreen lg:text-4xl">Attended Activity</h1>
 

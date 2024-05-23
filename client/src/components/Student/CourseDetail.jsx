@@ -50,24 +50,24 @@ export default function Detailcourse() {
           <title>Stu | CourseDetail</title>
         </Helmet>
         <Headerstu data={data} />
-        <div className='h-screen bg-white '>
-          <div className=' flex flex-col justify-center bg-contain text-lowyellow' style={{backgroundImage: `url(${selec_course})`}}>
-            <div className='px-20 pt-20 pb-3 font-extrabold text-4xl ml-40 mt-10'>Published Classes</div>
-            <div className='px-20 text-xl mb-20 ml-40'>These classes are available to students.</div>
+        <div className='bg-white '>
+          <div className=' flex flex-col justify-center bg-cover bg-right text-lowyellow ' style={{backgroundImage: `url(${selec_course})`}}>
+            <div className=' pt-20 pb-3 font-extrabold text-4xl ml-40 mt-10 '>Published Classes</div>
+            <div className=' text-xl mb-20 ml-40'>These classes are available to students.</div>
           </div>
-          <div className='flex flex-row flex-wrap justify-first items-start space-x-10 px-20 font-semibold mt-5'>
-            
+          <div className='flex justify-center font-semibold'>
+          <div className='flex flex-row flex-wrap w-10/12 '>
             {
               (course.length > 0) ? (
                 course.map((cList, index) => (
-                  <div key={index} className='ml-20 h-60 w-80 my-10 flex flex-col justify-end  rounded-3xl bg-contain ' style={{ backgroundImage: `url(${imageU1_2})` }}>
+                  <div key={index} className='h-60 w-96 my-10 mx-4 flex flex-col justify-end rounded-3xl bg-course ' >
                     <button 
                     onClick={(e)=>handleClick(cList.course_id)}
-                    className='flex flex-col w-100% bg-lowbrown h-2/5 rounded-b-3xl text-md '>
+                    className='flex flex-col  w-100% bg-[#42272C] h-2/5 rounded-b-3xl text-md'>
                       <div className='text-white ml-4 mt-4'>
                         {cList.course_id}
                       </div>
-                      <div className='text-white ml-4 mt-1.5'>
+                      <div className='text-white ml-4  mt-1.5'>
                         {cList.course_name}
                       </div>
                     </button>
@@ -78,7 +78,7 @@ export default function Detailcourse() {
                   
               )
             }
-
+          </div>
           </div>
         </div>
       </div>

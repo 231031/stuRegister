@@ -747,7 +747,7 @@ export async function getFacActivity(req, res) {
         const { activity_id } = await req.body;
 
         const query = `
-            SELECT count(S.student_id) AS num_student, F.faculty_name
+            SELECT count(S.student_id) AS num_student, F.faculty_name, F.faculty_id
             FROM Activity A INNER JOIN arr_activity AR ON A.activity_id = AR.activity_id
             INNER JOIN Student S ON S.student_id = AR.student_id
             INNER JOIN Department D ON S.department_id = D.department_id

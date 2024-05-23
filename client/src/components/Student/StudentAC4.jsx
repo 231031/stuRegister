@@ -30,7 +30,7 @@ export default function ACT4() {
 
   const location = useLocation();
   const [id, setId] = useState('');
-  
+
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -78,68 +78,103 @@ export default function ACT4() {
       <div>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <Helmet>
-            <title>Stu | AC4</title>
+          <title>Stu | AC4</title>
         </Helmet>
-        <Headerstu data={data}/>
+        <Headerstu data={data} />
 
         {/* <---section1---> */}
         <div className="container mx-auto px-6 py-16 text-center">
-        <div className="mx-auto max-w-lg">
+          <div className="mx-auto max-w-lg">
             <h1 className="text-3xl font-bold text-gray-800 dark:text-[#422006] lg:text-4xl">Community Service</h1>
-                <p className="mt-6 text-gray-500 dark:text-gray-400">{text_ACT1.intro}</p>
-                    <button 
-                    onClick={(e)=>handleClick()}
-                    className="mt-6 rounded-lg bg-[#0d9488] px-6 py-2.5 text-center text-sm font-medium capitalize leading-5 text-white hover:bg-Slate focus:outline-none lg:mx-0 lg:w-auto">
-                      Accept
-                    </button>
-                <p className="mt-3 text-sm text-gray-400">Let it fun! </p>
-            </div>
+            <p className="mt-6 text-gray-500 dark:text-gray-400">{text_ACT1.intro}</p>
+            <button
+              onClick={(e) => handleClick()}
+              className="mt-6 rounded-lg bg-[#0d9488] px-6 py-2.5 text-center text-sm font-medium capitalize leading-5 text-white hover:bg-Slate focus:outline-none lg:mx-0 lg:w-auto">
+              Accept
+            </button>
+            <p className="mt-3 text-sm text-gray-400">Let it fun! </p>
+          </div>
 
-            <div className="mt-10 flex justify-center">
+          <div className="mt-10 flex justify-center">
             <img className="h-96 w-full rounded-xl object-cover lg:w-4/5" src={img1} />
-            
-        </div>
-        <p className="mt-10 text-gray-500 dark:text-gray-400">{text_ACT1.intro1}</p>
-    </div>
 
-    {/* <-----section2-----> */}
-    <section className="bg-white dark:bg-[#fffbeb]">
-    <div className="container mx-auto px-6 py-10">
-        <h1 className="text-center text-3xl font-semibold capitalize text-gray-800 dark:text-[#422006] lg:text-4xl">Activities and events in the club</h1>
-
-        <p className="mt-4 text-center text-gray-500 ">{text_ACT1.intro2}</p>
-
-        <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 xl:mt-12 xl:grid-cols-3 xl:gap-12">
-        <div>
-            <img className="h-96 w-full rounded-lg object-cover" src={img2} />
-            <h2 className="mt-4 text-2xl font-semibold capitalize text-gray-800 dark:text-[#422006]">Clean-up Campaign</h2>
-            <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Public Space Beautification</p>
-            <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Trail Clean-Up</p>
-            <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Neighborhood Clean-Up</p>
-            <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Beach Clean-Up</p>
+          </div>
+          <p className="mt-10 text-gray-500 dark:text-gray-400">{text_ACT1.intro1}</p>
         </div>
 
-        <div>
-            <img className="h-96 w-full rounded-lg object-cover" src={img3} />
-            <h2 className="mt-4 text-2xl font-semibold capitalize text-gray-800 dark:text-[#422006]">Community Garden</h2>
-            <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Garden Planning and Design</p>
-            <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Garden Bed Construction</p>
-            <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Harvest Celebrations</p>
-            <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Community Outreach</p>
+        {/* <-----section2-----> */}
+        <section className="bg-white dark:bg-[#fffbeb]">
+          <div className="container mx-auto px-6 py-10">
+            <h1 className="text-center text-3xl font-semibold capitalize text-gray-800 dark:text-[#422006] lg:text-4xl">Activities and events in the club</h1>
+
+            <p className="mt-4 text-center text-gray-500 ">{text_ACT1.intro2}</p>
+
+            <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 xl:mt-12 xl:grid-cols-3 xl:gap-12">
+              <div>
+                <img className="h-96 w-full rounded-lg object-cover" src={img2} />
+                <h2 className="mt-4 text-2xl font-semibold capitalize text-gray-800 dark:text-[#422006]">Clean-up Campaign</h2>
+                <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Public Space Beautification</p>
+                <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Trail Clean-Up</p>
+                <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Neighborhood Clean-Up</p>
+                <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Beach Clean-Up</p>
+              </div>
+
+              <div>
+                <img className="h-96 w-full rounded-lg object-cover" src={img3} />
+                <h2 className="mt-4 text-2xl font-semibold capitalize text-gray-800 dark:text-[#422006]">Community Garden</h2>
+                <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Garden Planning and Design</p>
+                <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Garden Bed Construction</p>
+                <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Harvest Celebrations</p>
+                <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Community Outreach</p>
+              </div>
+
+              <div>
+                <img className="h-96 w-full rounded-lg object-cover" src={img4} />
+                <h2 className="mt-4 text-2xl font-semibold capitalize text-gray-800 dark:text-[#422006]">Animal Shelter Volunteering</h2>
+                <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Animal Care and Socialization:</p>
+                <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Grooming and Bathing Sessions</p>
+                <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Animal Enrichment Activities</p>
+                <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Adoption Events</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div className='flex flex-col items-center h-96 my-5'>
+          {
+            (num.length > 0) ? (
+              <Box className='flex flex-col items-center  '>
+                <p className='mt-3 font-bold'>The numeber of students in each faculty who will attend this activity</p>
+                <table className='my-2 table-fixed  w-11/12'>
+                  <thead>
+                    <tr className='font-bold'>
+                      <td>Faculty ID</td>
+                      <td>Faculty Name</td>
+                      <td>Number</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      num.map((nList, index) => (
+                        <tr key={index} className='w-11/12 bg-blue-200 border-y-8 border-slate-200'>
+                          <td className='py-1'>{nList.faculty_id}</td>
+                          <td className='py-1'>{nList.faculty_name}</td>
+                          <td className='py-1'>{nList.num_student}</td>
+                        </tr>
+
+                      ))
+                    }
+                  </tbody>
+                </table>
+              </Box>
+            ) : (
+              <Box className='h-auto'>
+                <p className='my-5 font-bold'>No Attendent in This Activity</p>
+              </Box>
+            )
+          }
         </div>
 
-        <div>
-            <img className="h-96 w-full rounded-lg object-cover" src={img4} />
-            <h2 className="mt-4 text-2xl font-semibold capitalize text-gray-800 dark:text-[#422006]">Animal Shelter Volunteering</h2>
-            <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Animal Care and Socialization:</p>
-            <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Grooming and Bathing Sessions</p>
-            <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Animal Enrichment Activities</p>
-            <p className="mt-2 text-lg uppercase tracking-wider text-blue-500 dark:text-gray-400">- Adoption Events</p>
-        </div>
-        </div>
-    </div>
-    </section>
-        
       </div>
     </HelmetProvider>
   )

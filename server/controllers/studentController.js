@@ -99,7 +99,7 @@ export async function updateInfo(req, res) {
 export async function getInfo(req, res) {
     try {
         const query = `
-            SELECT student_id, first_name, last_name, year, department_id, gender, dob, email, city, 
+            SELECT student_id, first_name, last_name, year, department_id, gender, dob, email, city, hours,
             zip_code, state, address, salary, phone, id_card, age, 
             f_age, f_email, f_first_name, f_id, f_last_name, f_phone, f_salary, 
             m_age, m_email, m_first_name, m_id, m_last_name, m_phone, m_salary

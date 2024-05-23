@@ -83,9 +83,13 @@ Edit Schema
 -edu_term add column status (use to tell have any teacher start grade or not -> for use in calculating gpax)
 
 Student
--fetch advanced analysis avg_gpax and avg_hours of each old scholarship
+-fetch advanced analysis avg_gpax and avg_hours of each closed scholarship (Studenthome)*
 -fixed filter year in getStatusScholar used poso instead
 -fixed Studentlogin
+-fetch advanced analysis the number of students in each faculty who will attend this activity (StudentAtten)*
 
 Teacher
--fetch advanced analysis getAvgCourse avg_grade in course
+-fetch advanced analysis getAvgCourse avg_grade in each course (Teacherhome)*
+
+Committee
+-advanced analysis Committeehome 2, Committeetable

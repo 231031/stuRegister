@@ -141,6 +141,41 @@ export default function ACT3() {
         </div>
     </div>
     </section>
+    
+    <div className='flex flex-col items-center h-96 my-5'>
+          {
+            (num.length > 0) ? (
+              <Box className='flex flex-col items-center  '>
+                <p className='mt-3 font-bold'>The numeber of students in each faculty who will attend this activity</p>
+                <table className='my-2 table-fixed  w-11/12'>
+                  <thead>
+                    <tr className='font-bold'>
+                      <td>Faculty ID</td>
+                      <td>Faculty Name</td>
+                      <td>Number</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      num.map((nList, index) => (
+                        <tr key={index} className='w-11/12 bg-blue-200 border-y-8 border-slate-200'>
+                          <td className='py-1'>{nList.faculty_id}</td>
+                          <td className='py-1'>{nList.faculty_name}</td>
+                          <td className='py-1'>{nList.num_student}</td>
+                        </tr>
+
+                      ))
+                    }
+                  </tbody>
+                </table>
+              </Box>
+            ) : (
+              <Box className='h-auto'>
+                <p className='my-5 font-bold'>No Attendent in This Activity</p>
+              </Box>
+            )
+          }
+        </div>
         
         
       </div>

@@ -149,7 +149,7 @@ export default function ACT2() {
           {
             (num.length > 0) ? (
               <Box className='flex flex-col items-center  '>
-                <p className='mt-3 font-bold'>The numeber of students who attend this activity</p>
+                <p className='mt-3 font-bold'>The numeber of students in each faculty who will attend this activity</p>
                 <table className='my-2 table-fixed  w-11/12'>
                   <thead>
                     <tr className='font-bold'>

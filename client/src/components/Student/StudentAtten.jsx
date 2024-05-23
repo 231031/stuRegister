@@ -3,7 +3,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 
 import Headerstu from './Headerstu';
-import { getArrActivity } from '../../helpers/stuhelper';
+import { getArrActivity, getInfo } from '../../helpers/stuhelper';
 
 
 const text = {
@@ -20,11 +20,16 @@ export default function AttendedActivity() {
       navigate('/student/login');
     }
     const [department_id, year, student_id] = token.split('-');
-    setData({
-      department_id: department_id,
-      year: year,
-      student_id: student_id,
-    });
+    const apiInfo = async () => {
+      try {
+        const res = await getInfo(student_id);
+        setData(res);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (student_id) apiInfo();
+
   }, []);
 
   useEffect(() => {
@@ -121,13 +126,17 @@ export default function AttendedActivity() {
                       </tbody>
                     </table>
                   ) : (
-                    <p className=''></p>
+                    <p className='font-bold text-darkgreen'>No Attended Activity</p>
                   )
                 }
 
               </div>
             </div>
           </div>
+        </div>
+
+        <div className='mx-10 my-3'>
+          <p className='font-bold text-darkgreen'>Total of Activity Hours : {data?.hours}</p>
         </div>
 
 

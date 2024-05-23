@@ -66,23 +66,25 @@ export default function Studentaddeduhis() {
         <Headerstu data={data} />
 
 
-        <div className="md:flex no-wrap md:-mx-2 ">
+        <div className="flex px-20 py-20 bg-white">
 
 
           {/* <!-- Left Side --> */}
 
-          <div className="container flex flex-row">
-            <div className="w-1/4 bg-sky p-10 " style={{ height: "1500px" }} >
-
-              <div className="p-3 border-t-4 border-gray-800 h-full" >
+          <div className="flex w-full">
+            <div className="w-1/4 bg-sky " >
+              <div className="p-3 border-t-4 h-screen" >
+                <div className='flex flex-col space-y-10 p-3 '>
                 <div className="image overflow-hidden">
-                  <img className="h-30px w-30px mx-auto"
+                  <img className="h-3/4 w-3/4 mx-auto"
                     src={profile}
                     alt="" />
                 </div>
-                <h1 className="text-white font-bold text-xl leading-8 my-1">{data?.first_name} {data?.last_name}</h1>
-                <h3 className="text-white font-lg text-semibold hover:text-gray-600 leading-6">{data?.department_id}</h3>
-                <p className="text-sm text-white hover:text-gray-600 leading-6">Year : {data?.year}</p>
+                <h1 className="text-black font-bold text-xl  ">{data?.first_name} {data?.last_name}</h1>
+                <h3 className="text-white text-lg  hover:text-gray-600 ">{data?.department_id}</h3>
+                <p className="text-lg text-white hover:text-gray-600 ">Year : {data?.year}</p>
+                </div>
+                
                 <ul
                   className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                   <li className="flex items-center py-3">
@@ -96,18 +98,10 @@ export default function Studentaddeduhis() {
                 </ul>
                 <br />
                 <div className="flex items-center space-x-3 font-semibold text-white text-xl leading-8">
-
                   <span>GPAX: {gpax}</span>
-
-
                 </div>
               </div>
-
-
-
-
-
-            </div>
+          </div>
             {/* <!-- End of profile card --> */}
 
 

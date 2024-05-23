@@ -78,21 +78,21 @@ export default function Studentregister() {
 
 
 
-                <div className="container mx-auto my-5 p-5  ">
-                    <div className="md:flex no-wrap md:-mx-2 ">
+                <div >
+                    <div className="flex px-20 py-20 ">
                         {/* <!-- Left Side --> */}
                         <div className="w-full md:w-3/12 md:mx-2">
                             {/* <!-- Profile Card --> */}
-                            <div className="bg-white p-3 border-t-4 border-sky">
+                            <div className="flex flex-col space-y-10 p-3 border-t-4 border-sky">
                                 <div className="image overflow-hidden">
-                                    <img className="h-auto w-full mx-auto"
+                                    <img className="h-3/4 w-3/4 mx-auto"
                                         src={profile}
                                         alt="" />
                                 </div>
                                 <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">{data?.first_name} {data?.last_name}</h1>
-                                <h3 className="text-gray-600 font-lg text-semibold leading-6">ID {data?.student_id}</h3>
-                                <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">{data?.department_id}</p>
-                                <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">Year {new Date().getFullYear() + 543 - data?.year}</p>
+                                <h3 className="text-gray-600 font-lg text-semibold text-lg leading-6">ID {data?.student_id}</h3>
+                                <h3 className="text-lg text-gray-500 hover:text-gray-600  leading-6">{data?.department_id}</h3>
+                                <h3 className="text-lg text-gray-500 hover:text-gray-600  leading-6">Year {new Date().getFullYear() + 543 - data?.year}</h3>
                                 <ul
                                     className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                                     <li className="flex items-center py-3">
@@ -547,11 +547,10 @@ export default function Studentregister() {
                                 {/* <!-- End of profile tab --> */}
 
                                 {/* button */}
-                                <div className='grid-container grid-gap-10'>
-                                    <div className='flex ' style={{ padding: 30 }} >
-                                        <div className='grid-item ' ></div>
+                                <div className='flex'>
+                                    <div className='flex py-5 ' >
                                         <button type='submit'
-                                            className="bg-sky hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 border border-sky hover:border-transparent rounded mr-1">
+                                            className="bg-sky hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 border border-sky hover:border-transparent rounded">
                                             Submit
                                         </button>
                                     </div>

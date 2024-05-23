@@ -105,14 +105,14 @@ export default function Committeeeva() {
               </div>
 
             ) : (
-              <p className='my-5'>No Scholarship for Choose Right Now</p>
+              <p className='my-5 font-bold text-darkbrown'>No Scholarship for Choose Right Now</p>
             )
           }
           <div className='mt-10'></div>
           {
             (stu.length) > 0 ? (
               <div className='flex flex-col items-center'>
-                <table className='my-2 table-fixed border-collapse border border-slate-500 text-center'>
+                <table className='my-2 table-fixed border-collapse border border-lowbrown text-center'>
                   <thead>
                     <tr>
                       <Row>Num</Row>
@@ -143,12 +143,12 @@ export default function Committeeeva() {
                   </tbody>
                 </table>
                 <button onClick={(e) => handleUpdate()} type="button"
-                  className="px-3 py-1 bg-greendark rounded-md my-10">SUBMIT</button>
+                  className="px-3 py-1 bg-sky rounded-md my-10">SUBMIT</button>
               </div>
             ) : (
               <div className='my-5 h-72'>
-                <h3 className='ml-7 text-xl text-blue-900'>Evaluation</h3>
-                <h2 className='my-4 ml-7 text-md text-blue-600 flex justify-center'>Choose Scholarship</h2>
+                <h3 className='ml-7 text-xl text-darkbrown font-bold'>Evaluation</h3>
+                <h2 className='my-4 ml-7 text-md text-lowbrown flex justify-center font-bold'>Choose Scholarship</h2>
               </div>
             )
           }

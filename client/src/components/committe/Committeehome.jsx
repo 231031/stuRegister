@@ -43,21 +43,20 @@ export default function Committeehome() {
                     <title>C | Home</title>
                 </Helmet>
                 <Headercom />
-                <div className="w-full flex flex-row bg-yellow-100  h-[calc(100vh-40px)] ">
+                <div className="w-full flex flex-row bg-white  h-[calc(100vh-40px)] ">
                     <div className="w-1/2 flex flex-col items-center my-10">
-                        <h3 className="font-bold mt-3">Advanced Analysis</h3>
-                        <h3 className="font-bold">The Average Mother's Salary of Each Faculty</h3>
+                        <h3 className="font-bold">The Average Father's Salary of Each Faculty</h3>
                         {
                             (salary_f.length > 0) ? (
-                                <table className='w-3/4 my-3 table-fixed border-collapse border border-slate-500 text-center'>
+                                <table className='w-3/4 my-3 table-fixed border-collapse border border-lowbrown-500 text-center'>
                                     <thead>
                                         <tr className='font-bold'>
                                             <Row>Num</Row>
-                                            <Row>Student ID</Row>
-                                            <Row>Student Name</Row>
+                                            <Row>Faculty Name</Row>
+                                            <Row>Average Salary</Row>   
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody> 
                                         {
                                             salary_f.map((fList, index) => (
                                                 <tr key={index}>
@@ -76,11 +75,10 @@ export default function Committeehome() {
 
                     </div>
                     <div className="w-1/2 flex flex-col items-center my-10">
-                        <h3 className="font-bold mt-3">Advanced Analysis</h3>
                         <h3 className="font-bold">The Average Mother's Salary of Each Faculty</h3>
                         {
                             (salary_m.length > 0) ? (
-                                <table className=' w-3/4 my-3 table-fixed border-collapse border border-slate-500 text-center'>
+                                <table className=' w-3/4 my-3 table-fixed border-collapse border border-lowbrown-500 text-center'>
                                     <thead>
                                         <tr className='font-bold'>
                                             <Row>Num</Row>

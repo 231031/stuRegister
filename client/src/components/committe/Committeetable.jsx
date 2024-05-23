@@ -74,7 +74,7 @@ export default function Committeetable() {
               <div className='flex flex-col w-2/6 mt-5'>
                 <label htmlFor='sel' className="text-center">Select Scholarship</label>
                 <select
-                  className='border-2 border-sky rounded-md w-full mt-2 text-center' id='sel'
+                  className='border-2 border-lowbrown rounded-md w-full mt-2 text-center' id='sel'
                   onChange={(e) => setSel(e.target.value)}>
                   <option value=''></option>
                   {
@@ -96,8 +96,8 @@ export default function Committeetable() {
 
             (stu.length) > 0 ? (
               <div className='mt-10 flex flex-col items-center'>
-                <h3 className="font-bold">Applicant</h3>
-                <table className='my-2 table-fixed border-collapse border border-slate-500 text-center w-3/4'>
+                <h3 className="font-bold">Applicant : Year {stu[0]?.get_year}</h3>
+                <table className='my-2 table-fixed border-collapse border border-lowbrown-500 text-center w-3/4'>
                   <thead>
                     <tr>
                       <Row>Num</Row>
@@ -125,8 +125,8 @@ export default function Committeetable() {
                               )
                             }
                           </Row>
-                          <Row className='cursor-pointer hover:bg-blue-300'>
-                            <button className='text-green-600 ' onClick={(e) => handleClick(stuList.student_id)}>Click</button>
+                          <Row className='cursor-pointer hover:bg-sky'>
+                            <button className='text-lowbrown ' onClick={(e) => handleClick(stuList.student_id)}>Click</button>
                           </Row>
                         </tr>
                       ))
@@ -136,8 +136,8 @@ export default function Committeetable() {
               </div>
             ) : (
               <div className='mt-20 h-72 font-bold'>
-                <h3 className='ml-7 text-xl text-blue-900'>Applicant</h3>
-                <h2 className='my-4 ml-7 text-md text-blue-600 flex justify-center'>Choose Scholarship</h2>
+                <h3 className='ml-7 text-xl text-lowbrown'>Applicant</h3>
+                <h2 className='my-4 ml-7 text-md text-lowbrown flex justify-center'>Choose Scholarship</h2>
               </div>
             )
           }
@@ -147,8 +147,8 @@ export default function Committeetable() {
           {
             (count_fac.length) > 0 ? (
               <div className='mt-10 flex flex-col items-center'>
-                <h3 className="font-bold">The number of people who got scholarship in each faculty</h3>
-                <table className='my-2 table-fixed border-collapse border border-slate-500 text-center w-3/4'>
+                <h3 className="font-bold">The number of students who got scholarship in each faculty</h3>
+                <table className='my-2 table-fixed border-collapse border border-lowbrown-500 text-center w-3/4'>
                   <thead>
                     <tr>
                       <Row>Num</Row>
@@ -171,8 +171,8 @@ export default function Committeetable() {
               </div>
             ) : (
               <div className='mt-15 h-72 font-bold'>
-                <h3 className='ml-7 text-xl text-blue-900'>Scholarship in each faculty</h3>
-                <h2 className='my-4 ml-7 text-md text-blue-600 flex justify-center'>Choose Scholarship</h2>
+                <h3 className='ml-7 text-xl text-darkbrown'>Scholarship in each faculty</h3>
+                <h2 className='my-4 ml-7 text-md text-darkbrown flex justify-center'>Choose Scholarship</h2>
               </div>
             )
           }

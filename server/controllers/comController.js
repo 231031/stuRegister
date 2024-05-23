@@ -24,14 +24,14 @@ export async function getApplicant(req, res) {
     try {
         const pre_year = new Date().getFullYear() + 543;
         const query = `
-            SELECT SH.*, SD.first_name, SD.last_name, D.department_name, F.faculty_name
+            SELECT SH.*, SD.first_name, SD.last_name, D.department_name, F.faculty_name, SH.get_year
             FROM Scholarship S INNER JOIN scholar_history SH ON S.scholarship_id = SH.scholarship_id
             INNER JOIN Student SD ON SD.student_id = SH.student_id 
             INNER JOIN Department D ON SD.department_id = D.department_id
             INNER JOIN Faculty F ON F.faculty_id = D.faculty_id
-            WHERE SH.scholarship_id = ? AND SH.get_year = ? ORDER BY SH.status 
+            WHERE SH.scholarship_id = ? ORDER BY SH.status 
         `;
-        const [student] = await pool.execute(query, [req.body.id, pre_year]);
+        const [student] = await pool.execute(query, [req.body.id]);
         connection.release();
         res.json(student);
 
@@ -75,13 +75,13 @@ export async function updateCheck(req, res) {
                 );
     
                 await connection.execute(
-                    'UPDATE scholar_history SET status = ?, approve = ? WHERE scholarship_id = ? AND student_id = ? AND get_year = ?', 
-                    [true, true, id, stu.student_id, stu.get_year]
+                    'UPDATE scholar_history SET status = ?, approve = ? WHERE scholarship_id = ? AND student_id = ?', 
+                    [true, true, id, stu.student_id]
                 );
             } else {
                 await connection.execute(
-                    'UPDATE scholar_history SET status = ? HERE scholarship_id = ? AND student_id = ? AND get_year = ?', 
-                    [true, id, stu.student_id, stu.get_year]
+                    'UPDATE scholar_history SET status = ? WHERE scholarship_id = ? AND student_id = ?', 
+                    [true, id, stu.student_id]
                 );
             }
         }
@@ -145,21 +145,18 @@ export async function getStuScholar(req, res) {
 
 // 1
 // get the number of students in each faculty who get shcolarship
-// the scholarships can apply every year in range of time and reset count every year
-// get_year is year that the student gets shcolarship
 export async function getCountFaculty(req, res) {
     try {
-        const pre_year = new Date().getFullYear() + 543;
         const query = `
-            SELECT F.faculty_name, count(SD.student_id) AS count_student
+            SELECT F.faculty_id, F.faculty_name, count(SD.student_id) AS count_student
             FROM Scholarship S INNER JOIN scholar_history SH ON S.scholarship_id = SH.scholarship_id
             INNER JOIN Student SD ON SD.student_id = SH.student_id 
             INNER JOIN Department D ON D.department_id = SD.department_id
             INNER JOIN Faculty F ON F.faculty_id = D.faculty_id
-            WHERE S.scholarship_id = ? AND SH.approve = ? AND SH.get_year = ?
-            GROUP BY F.faculty_name
+            WHERE S.scholarship_id = ? AND SH.approve = ?
+            GROUP BY F.faculty_id
         `;
-        const [student] = await pool.execute(query, [req.body.id, true, pre_year]);
+        const [student] = await pool.execute(query, [req.body.id, true]);
         connection.release();
         res.json(student);
 
@@ -173,11 +170,11 @@ export async function getCountFaculty(req, res) {
 export async function getAvgF(req, res) {
     try {
         const query = `
-            SELECT F.faculty_name, avg(S.f_salary) AS avg_salary
+            SELECT F.faculty_id, F.faculty_name, avg(S.f_salary) AS avg_salary
             From Student S
             INNER JOIN Department D ON D.department_id = S.department_id
             INNER JOIN Faculty F ON F.faculty_id = D.faculty_id
-            GROUP BY F.faculty_name
+            GROUP BY F.faculty_id
         `;
         const [avg_salary_f] = await pool.execute(query);
         connection.release();
@@ -193,11 +190,11 @@ export async function getAvgF(req, res) {
 export async function getAvgM(req, res) {
     try {
         const query = `
-            SELECT F.faculty_name, avg(S.m_salary) AS avg_salary
+            SELECT F.faculty_id, F.faculty_name, avg(S.m_salary) AS avg_salary
             From Student S
             INNER JOIN Department D ON D.department_id = S.department_id
             INNER JOIN Faculty F ON F.faculty_id = D.faculty_id
-            GROUP BY F.faculty_name
+            GROUP BY F.faculty_id   
         `;
         const [avg_salary_m] = await pool.execute(query);
         connection.release();

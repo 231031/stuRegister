@@ -36,7 +36,7 @@ export default function Studentstatusscholar() {
   useEffect(() => {
     const apiScholar = async () => {
       try {
-        const res = await getStutusScholar(selY);
+        const res = await getStutusScholar(selY, data.year);
         setScholar(res);
       } catch (error) {
         console.log(error);

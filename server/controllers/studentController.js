@@ -28,7 +28,7 @@ export async function loginStudent(req, res) {
             }
             bcrypt.compare(password, user.password)
                 .then(match => {
-                    if (!match) return res.status(400).send({ error: "invalid password!" });
+                    if (!match) return res.status(400).send({ msg : "invalid password!" });
                     return res.status(200).send({
                         msg: "Login successful",
                         student_id: user.student_id,
@@ -246,12 +246,15 @@ export async function getScholar(req, res) {
 export async function getStatusScholar(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
+        const { enYear, year } = req.body;
+        const pre_year = enYear + (year - 1);
+
         const query = `
             SELECT scholarship_name, status, approve 
             FROM scholar_history SH INNER JOIN Scholarship S ON SH.scholarship_id = S.scholarship_id
             WHERE student_id = ? AND get_year = ?
         `;
-        const [scholarRows] = await pool.execute(query, [token, req.body.year]);
+        const [scholarRows] = await pool.execute(query, [token, pre_year]);
         connection.release();
         res.json(scholarRows);
     } catch (error) {
@@ -744,7 +747,7 @@ export async function getFacActivity(req, res) {
         const { activity_id } = await req.body;
 
         const query = `
-            SELECT count(S.student_id) AS num_student
+            SELECT count(S.student_id) AS num_student, F.faculty_name
             FROM Activity A INNER JOIN arr_activity AR ON A.activity_id = AR.activity_id
             INNER JOIN Student S ON S.student_id = AR.student_id
             INNER JOIN Department D ON S.department_id = D.department_id

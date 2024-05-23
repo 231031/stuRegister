@@ -109,7 +109,7 @@ export default function Studenthome() {
                         scholar_his.map((sList, index) => (
                           <tr key={index} className='w-11/12 bg-sky text-darkgreen text-sm border-y-8 border-lowbrown'>
                             <td className='py-1'>{sList.scholarship_name}</td>
-                            <td className='py-1'>{parseFloat(sList.avg_gpax.toFixed(2))}</td>
+                            <td className='py-1'>{sList.avg_gpax}</td>
                             <td className='py-1'>{sList.avg_hours}</td>
                           </tr>
 

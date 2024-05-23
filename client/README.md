@@ -84,3 +84,8 @@ Edit Schema
 
 Student
 -fetch advanced analysis avg_gpax and avg_hours of each old scholarship
+-fixed filter year in getStatusScholar used poso instead
+-fixed Studentlogin
+
+Teacher
+-fetch advanced analysis getAvgCourse avg_grade in course

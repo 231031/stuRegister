@@ -32,7 +32,6 @@ export default function Studentlogin() {
                             try {
                                 const res = await loginStudent(values);
                                 if (res.student_id === undefined) toast.error(res.msg);
-                                else if (res.error) toast.error(res.error);
                                 else {
                                     if (res) {
                                         const month = new Date().getMonth()

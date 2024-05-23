@@ -177,6 +177,26 @@ export async function getStuTeacher(info, id) {
   }
 }
 
+export async function getAvgCourse(id) {
+  try {
+    const response = await fetch('http://localhost:6001/teacher/course/getavgcourse', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: id }),
+    });
+    const data = await response.json();
+    if (response.status === 404) {
+      console.log(data);
+      return Promise.reject(data);
+    }
+    return Promise.resolve(data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
 export async function updateGrade(info, term) {
   console.log(info);
   console.log(term);

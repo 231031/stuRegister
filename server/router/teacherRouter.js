@@ -11,6 +11,7 @@ router.route('/info').post(controller.getInfo);
 // query
 router.route('/course/getstudent').post(controller.getStuTeacher);
 router.route('/course/getcourse').post(controller.getCourseTeacher);
+router.route('/course/getavgcourse').post(controller.getAvgCourse);
 
 
 // get

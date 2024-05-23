@@ -208,10 +208,10 @@ export async function updateGrade(req, res) {
 export async function getAvgCourse(req, res) {
     try {
         const pre_year = new Date().getFullYear() + 543;
-        const { id } = req.body.teacher_id;
+        const { id } = req.body;
 
         const query = `
-            SELECT SR.course_id, C.course_name, SR.gr, AVG(SR.grade)
+            SELECT SR.course_id, C.course_name, SR.gr, AVG(SR.grade) AS avg_grade
             FROM course_detail CD INNER JOIN Course C ON C.course_id = CD.course_id
             INNER JOIN stu_register SR ON CD.course_id = SR.course_id AND CD.gr = SR.gr
             WHERE CD.teacher_id = ? AND CD.year = ?

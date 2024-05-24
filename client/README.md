@@ -93,3 +93,10 @@ Teacher
 
 Committee
 -advanced analysis Committeehome 2, Committeetable
+
+Student
+-edit Studentstatusscholar changing format of year for filter to poso
+-update StudentAc
+-edit regis course -> set can register right now
+-edit fetch of Studenteduhis have all years
+-add display type of course in CourseDetail

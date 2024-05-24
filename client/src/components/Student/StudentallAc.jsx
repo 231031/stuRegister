@@ -98,7 +98,7 @@ export default function AllActivity() {
     async function handleClick(id) {
       try {
         const res = await registerActivity(id, data.student_id);
-        toast.success(res.msg);
+        window.location.reload();
       } catch (error) {
         console.log(error);
       }

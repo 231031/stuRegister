@@ -64,17 +64,18 @@ export default function Detailcourse() {
                     <button 
                     onClick={(e)=>handleClick(cList.course_id)}
                     className='flex flex-col  w-100% bg-[#42272C] h-2/5 rounded-b-3xl text-md'>
-                      <div className='text-white ml-4 mt-4'>
-                        {cList.course_id}
+                      <div className='text-white ml-4 mt-4 flex flex-row'>
+                        <p className='mr-3'>{cList.course_id}</p>
+                        <p className='text-sm text-red-200 font-light italic'>{cList.type}</p> 
                       </div>
                       <div className='text-white ml-4  mt-1.5'>
-                        {cList.course_name}
+                        {cList.course_name} 
                       </div>
                     </button>
                   </div>
                 ))
               ) : (
-                      <p className='font-bold text-red-800 italic text-center my-10 text-center mt-40'>You have no class available</p>
+                      <p className='font-bold text-red-800 italic text-center my-10 mt-40'>You have no class available</p>
                   
               )
             }

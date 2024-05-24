@@ -156,7 +156,7 @@ export async function getAvgScholar() {
   }
 }
 
-export async function getStutusScholar(selY, enYear) {
+export async function getStatusScholar(selY) {
   try {
     const token = localStorage.getItem('token');
     const [department_id, year, student_id] = token.split('-');
@@ -166,7 +166,7 @@ export async function getStutusScholar(selY, enYear) {
         'Content-Type': 'application/json',
         "Authorization": `Bearer ${student_id}`,
       },
-      body: JSON.stringify({ year : selY, enYear : enYear }),
+      body: JSON.stringify({ year : selY }),
     });
     const data = await response.json();
     if (response.status === 404) {

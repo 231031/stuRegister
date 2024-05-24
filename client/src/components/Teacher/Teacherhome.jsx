@@ -64,20 +64,20 @@ export default function Teacherhome() {
           {
             (course.length > 0) ? (
               <Box className='flex flex-col items-center h-auto'>
-                <p className='mt-3 font-bold'>History Detail of Course in Last Year</p>
+                <p className='mt-3 font-bold'>Conclusion of Courses in Last Year</p>
                 <table className='my-2 table-fixed  w-11/12'>
                   <thead>
                     <tr className='font-bold'>
                       <td>Course ID</td>
                       <td>Course Name</td>
                       <td>Group</td>
-                      <td>Average Grade</td>
+                      <td>Average Grade of Students</td>
                     </tr>
                   </thead>
                   <tbody>
                     {
                       course.map((cList, index) => (
-                        <tr key={index} className='w-11/12 bg-blue-200 border-y-8 border-slate-200'>
+                        <tr key={index} className='w-11/12 bg-sky border-y-8 border-slate-200'>
                           <td className='py-1'>{cList.course_id}</td>
                           <td className='py-1'>{cList.course_name}</td>
                           <td className='py-1'>{cList.gr}</td>

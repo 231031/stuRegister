@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast';
+import tw from 'twin.macro';
 
 import { registerActivity, getFacActivity } from '../../helpers/stuhelper';
 import Headerstu from './Headerstu';
@@ -21,6 +22,7 @@ import img2 from '../../assets/Clean.jpeg';
 import img3 from '../../assets/Garden.webp';
 import img4 from '../../assets/pet.jpeg';
 
+const Box = tw.div`w-9/12 bg-slate-200 rounded-md mx-10 text-center`;
 
 export default function ACT4() {
 
@@ -55,7 +57,7 @@ export default function ACT4() {
   useEffect(() => {
     const apiNum = async () => {
       try {
-        const res = getFacActivity(id);
+        const res = await getFacActivity(id);
         setNum(res);
       } catch (error) {
         console.log(error);
@@ -144,7 +146,7 @@ export default function ACT4() {
           {
             (num.length > 0) ? (
               <Box className='flex flex-col items-center  '>
-                <p className='mt-3 font-bold'>The numeber of students in each faculty who will attend this activity</p>
+                <p className='mt-3 font-bold'>The numeber of students in each faculty who will attend Community Service</p>
                 <table className='my-2 table-fixed  w-11/12'>
                   <thead>
                     <tr className='font-bold'>
@@ -156,7 +158,7 @@ export default function ACT4() {
                   <tbody>
                     {
                       num.map((nList, index) => (
-                        <tr key={index} className='w-11/12 bg-blue-200 border-y-8 border-slate-200'>
+                        <tr key={index} className='w-11/12 bg-sky border-y-8 border-slate-200'>
                           <td className='py-1'>{nList.faculty_id}</td>
                           <td className='py-1'>{nList.faculty_name}</td>
                           <td className='py-1'>{nList.num_student}</td>

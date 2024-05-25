@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import tw from 'twin.macro';
 
-import { getInfo, getStutusScholar } from '../../helpers/stuhelper';
+import { getInfo, getStatusScholar } from '../../helpers/stuhelper';
 import Headerstu from './Headerstu';
 
 const Row = tw.td`border-2 border-sky py-1 text-sm`;
@@ -36,7 +36,7 @@ export default function Studentstatusscholar() {
   useEffect(() => {
     const apiScholar = async () => {
       try {
-        const res = await getStutusScholar(selY, data.year);
+        const res = await getStatusScholar(selY, data.year);
         setScholar(res);
       } catch (error) {
         console.log(error);
@@ -64,9 +64,10 @@ export default function Studentstatusscholar() {
                   <select className='text-white w-1/2 bg-darkbrown border-0 rounded-md' onChange={(e) => setSelY(e.target.value)}>
                     <option value=''></option>
                     {
-                      Array.from({ length: new Date().getFullYear() + 543 - data?.year }, (_, index) => index + 1).map((year) => (
-                        <option key={year} value={year}>{year}</option>
-                      ))
+                      Array.from({ length: new Date().getFullYear() + 543 - parseInt(data?.year, 10) + 1 },
+                        (_, index) => parseInt(data?.year, 10) + index).map((year) => (
+                          <option key={year} value={year}>{year}</option>
+                        ))
                     }
                   </select>
                 ) : (

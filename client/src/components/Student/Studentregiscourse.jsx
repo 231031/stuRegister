@@ -46,7 +46,7 @@ export default function Studentregiscourse() {
   useEffect(() => {
       const apiCourse = async () => {
         try {
-          if (month == 4 && date < 15) {
+          if (month == 4 && date < 27) {
             const detail = await getAvailableCourse(data.department_id, data.year, 'compulsory');
             setAvailable(detail); 
           } 
@@ -58,8 +58,12 @@ export default function Studentregiscourse() {
       if (data) apiCourse();
   }, [data]);
 
-  function clickDetail() {
+  function clickDetail(e) {
     navigate('/student/moredetail', { state: { course_id: e } });
+  }
+
+  function clickAvaiDetail() {
+    navigate('/student/courses');
   }
 
   function selCourseGroup(id, credit, group, index, ind) {
@@ -135,12 +139,12 @@ export default function Studentregiscourse() {
           </div>
           
           {
-            (month == 4 && date < 15) ? (
+            (month == 4 && date < 27) ? (
               <div className='w-3/4 flex justify-center '>
               {
                 (available.length > 0)? (
                   <div className='w-3/4 flex flex-col justify-center items-center'>
-                    <p className='text-lg'>Compulsory Courses</p>
+                    <p className='text-lg font-bold'>Compulsory Courses</p>
                     <table className='text-center w-11/12 border-2 border-sky mt-10'>
                     <thead>
                       <tr>
@@ -178,8 +182,7 @@ export default function Studentregiscourse() {
                               {aList.Coursedetails[list[ind]]?.class_id}
                           </Row>
                           <Row>
-                            <Link>More Detail</Link>
-                            {/* Link to page detail of this course fetch detail of this course */}
+                            <button type='button' className='text-darkbrown italic' onClick={(e)=>clickDetail(aList.course_id)}>More Detail</button>
                           </Row>
                         </tr>
                         
@@ -188,7 +191,7 @@ export default function Studentregiscourse() {
                     }
                     </tbody>
                     </table>
-                    <button className='mt-10 py-1 px-2 bg-teal-500 rounded-md border-2 border-slate-500' 
+                    <button className='mt-10 py-1 px-2 bg-sky rounded-md border-2 border-darkbrown' 
                     type='button' onClick={(e)=>handleSubmit()}>SUBMIT</button>
                   </div>
                   
@@ -203,7 +206,7 @@ export default function Studentregiscourse() {
               <div className='flex flex-col items-center justify-center w-full'>
                 <img src={sorry} className='w-1/6'/>
                 <p className='my-5'>Sorry, we're not in registration period</p>
-                <button className='p-3 bg-lowbrown text-white rounded-md' type='button' onClick={(e)=>clickDetail()}>Preview Course Detail</button>
+                <button className='p-3 bg-lowbrown text-white rounded-md' type='button' onClick={(e)=>clickAvaiDetail()}>Preview Course Detail</button>
               </div>
             )
           }

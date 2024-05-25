@@ -151,14 +151,13 @@ export async function getStuTerm(req, res) {
                 AND ET.term = courses.term
             WHERE 
                 ET.student_id = ? 
-                AND ET.year = ?
             GROUP BY 
                 ET.student_id, ET.year;
 
         `
-        const [regis] = await connection.execute(query, [req.body.student_id, req.body.year]);
+        const [regis] = await connection.execute(query, [req.body.student_id]);
         connection.release();
-        res.json(regis[0]);
+        res.json(regis);
     } catch (error) {
         connection.release();
         return res.status(404).send({ error: error.message });
@@ -169,34 +168,13 @@ export async function getGpax(req, res) {
     try {
         
         const query = `
-                SELECT S.student_id,
-                    JSON_ARRAYAGG(
-                        JSON_OBJECT(
-                            'grade', SR.grade,
-                            'credit', C.credit        
-                        )
-                    ) AS register
-                    FROM Course C INNER JOIN stu_register SR ON C.course_id = SR.course_id 
-                    INNER JOIN Student S ON S.student_id = SR.student_id WHERE S.student_id = ?
-                    GROUP BY S.student_id
+            SELECT student_id, avg(grade_term) AS gpax 
+            FROM edu_term WHERE status = ? AND student_id = ?
             `;
-        const [student] = await pool.execute(query, [req.body.student_id]);
+        const [student] = await pool.execute(query, [true, req.body.student_id]);
         connection.release();
 
-        let total_credit = 0;
-        let sum = 0;
-        let gpax = 0;
-        if (student.length > 0) {
-            const { register } = student[0];
-            for (let i = 0; i < register.length; i++) {
-                sum += (register[i].credit * register[i].grade);
-                total_credit += register[i].credit;
-            }
-            gpax = sum / total_credit;
-
-            return res.status(200).send({ gpax: gpax });
-        }
-        else return res.status(200).send({ gpax: gpax });
+        res.json(student[0]);
         
     } catch (error) {
         connection.release();
@@ -246,15 +224,14 @@ export async function getScholar(req, res) {
 export async function getStatusScholar(req, res) {
     try {
         const token = req.headers.authorization.split(" ")[1];
-        const { enYear, year } = req.body;
-        const pre_year = enYear + (year - 1);
+        const { year } = req.body;
 
         const query = `
             SELECT scholarship_name, status, approve 
             FROM scholar_history SH INNER JOIN Scholarship S ON SH.scholarship_id = S.scholarship_id
             WHERE student_id = ? AND get_year = ?
         `;
-        const [scholarRows] = await pool.execute(query, [token, pre_year]);
+        const [scholarRows] = await pool.execute(query, [token, year]);
         connection.release();
         res.json(scholarRows);
     } catch (error) {
@@ -350,7 +327,7 @@ export async function getCourseDe(req, res) {
         const token = req.headers.authorization.split(" ")[1];
         const { department_id, year, type } = req.body;
         const month = new Date().getMonth();
-        let term = 1;
+        let term = 2;
         if (month >= 7) term = 1; // after august term 1
 
         const query = `
@@ -515,7 +492,8 @@ export async function getArrActivity(req, res) {
 
             const query = `
                 SELECT * FROM arr_activity AR INNER JOIN Activity A ON A.activity_id = AR.activity_id 
-                WHERE student_id = ? AND status = ? AND ? > date_ac + ac_day AND ? - date_ac + ac_day < 10
+                WHERE student_id = ? AND status = ? AND DATE_ADD(date_ac, INTERVAL ac_day DAY) < ?
+                AND DATEDIFF(?, DATE_ADD(date_ac, INTERVAL ac_day DAY)) < 10
             `
             const [arr] = await connection.execute(query, [token, evaluate, new Date(), new Date()]);
             connection.release();

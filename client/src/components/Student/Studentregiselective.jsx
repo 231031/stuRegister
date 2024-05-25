@@ -36,7 +36,7 @@ export default function Studentregiselective() {
         console.log(error);
       }
     }
-
+    apiInfo();
     setDate(new Date().getDate());
     setMonth(new Date().getMonth());
   }, []);
@@ -104,7 +104,10 @@ export default function Studentregiselective() {
     }
   }
 
-
+  function clickDetail(e) {
+    navigate('/student/moredetail', { state: { course_id: e } });
+  }
+  
   return (
     <HelmetProvider>
       <div>
@@ -139,7 +142,7 @@ export default function Studentregiselective() {
                 {
                   (available.length > 0) ? (
                     <div className='w-full flex flex-col justify-center items-center'>
-                      <p className='text-lg'>Elective Courses</p>
+                      <p className='text-lg font-bold'>Elective Courses</p>
                       <table className='text-center w-11/12 border-2 border-sky mt-10'>
                         <thead>
                           <tr>
@@ -177,8 +180,7 @@ export default function Studentregiselective() {
                                   {aList.Coursedetails[list[ind]]?.class_id}
                                 </Row>
                                 <Row>
-                                  <Link>More Detail</Link>
-                                  {/* Link to page detail of this course fetch detail of this course */}
+                                  <button type='button' className='text-darkbrown italic' onClick={(e)=>clickDetail(aList.course_id)}>More Detail</button>
                                 </Row>
                               </tr>
 
@@ -187,7 +189,7 @@ export default function Studentregiselective() {
                           }
                         </tbody>
                       </table>
-                      <button className='mt-10 py-1 px-2 bg-teal-500 rounded-md border-2 border-slate-500'
+                      <button className='mt-10 py-1 px-2 bg-sky rounded-md border-2 border-darkbrown'
                         type='button' onClick={(e) => handleSubmit()}>SUBMIT</button>
                     </div>
 

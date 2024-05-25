@@ -96,7 +96,7 @@ export default function Studenthome() {
             {
               (scholar_his.length > 0) ? (
                 <Box className='flex flex-col items-center'>
-                  <h3 className='font-bold text-white text-lg'>Scholarship Histoty</h3>
+                  <h3 className='font-bold text-white text-lg'>The avg gpax and hours of students who got closed scholarships</h3>
                   <table className='my-2 table-fixed  w-11/12 text-md text-white'>
                     <thead>
                       <tr className='font-bold'>
@@ -110,8 +110,8 @@ export default function Studenthome() {
                         scholar_his.map((sList, index) => (
                           <tr key={index} className='w-11/12 bg-sky text-darkgreen text-sm border-y-8 border-lowbrown'>
                             <td className='py-1'>{sList.scholarship_name}</td>
-                            <td className='py-1'>{sList.avg_gpax}</td>
-                            <td className='py-1'>{sList.avg_hours}</td>
+                            <td className='py-1'>{parseFloat(sList.avg_gpax).toFixed(2)}</td>
+                            <td className='py-1'>{parseFloat(sList.avg_hours).toFixed(2)}</td>
                           </tr>
 
                         ))

@@ -24,12 +24,14 @@ export default function Landing() {
   }
   return (
     <HelmetProvider>
-      <div className='flex flex-col justify-center items-center h-screen w-full '>
+      <div className='flex flex-col justify-center bg-darkgreen items-center h-screen w-full '>
         <Helmet>
           <title >Registration</title>
         </Helmet>
-        <h2 className='text-4xl text-bold '>Registration System</h2>
-        <div className='flex flex-row justify-center mt-14'>
+        <h2 className='text-5xl font- text-lowyellow f mb-10'>Registration System | KMUTT</h2>
+        <div className='flex flex-col items-center bg-slate-200 rounded-xl p-8 space-y-8'>
+        
+        <div className='flex flex-row justify-center '>
           <Btn>
             <FontAwesomeIcon onClick={(e)=>admin()}
             className='size-20 mx-8 p-10 rounded-full bg-orange-300 cursor-pointer hover:bg-orange-500' icon="fa-solid fa-user-gear " />
@@ -43,7 +45,7 @@ export default function Landing() {
           <Btn>
             <FontAwesomeIcon onClick={(e)=>committee()}
             className='size-20 mx-8 p-10 rounded-full bg-red-300 cursor-pointer hover:bg-red-500' icon="fa-solid fa-user-check" />
-            <p className='mt-4 text-blue-800 text-2xl'>Committee</p>
+            <p className='mt-4 text-red-300 text-2xl'>Committee</p>
           </Btn>
           <Btn>
             <FontAwesomeIcon onClick={(e)=>student()}
@@ -51,6 +53,7 @@ export default function Landing() {
             <p className='mt-4 text-lime-800 text-2xl '>Student</p>
           </Btn>
           
+        </div>
         </div>
       </div>
     </HelmetProvider>

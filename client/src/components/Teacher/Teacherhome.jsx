@@ -6,6 +6,7 @@ import tw from 'twin.macro';
 
 import Headerteacher from './Headerteacher';
 import { getInfoTeacher, getAvgCourse } from '../../helpers/teacherHelper';
+import bg_stu from '../../assets/bghome1.jpg';
 
 const Box = tw.div`w-9/12 bg-slate-200 rounded-md mx-10 text-center`;
 
@@ -55,10 +56,11 @@ export default function Teacherhome() {
           <title>T | Home</title>
         </Helmet>
         <Headerteacher data={data} />
-        <div className='flex flex-col items-center bg-slate-200 py-4'>
-          <p className='my-2'>Teacher ID : {data?.teacher_id}</p>
-          <p className='my-2'>Name :  {data?.first_name} {data?.last_name}</p>
-          <p className='my-2'>Position : {data?.position}</p>
+        <div className='h-80 flex flex-col justify-center text-xl  bg-top  px-20 ' style={{ backgroundImage: `url(${bg_stu})` }}>
+          <p className='text-7xl font-semi mb-5 mt-14 text-lowyellow'>Welcome Teacher</p>
+          <p className='text-white text-xl ml-2'> {data?.teacher_id}</p>
+          <p className='text-white text-xl ml-2'> {data?.first_name} {data?.last_name}</p>
+          <p className='text-white text-xl ml-2'> {data?.position}</p>
         </div>
         <div className='flex flex-row justify-center items-center h-96'>
           {

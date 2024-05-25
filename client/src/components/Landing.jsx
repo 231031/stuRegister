@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import tw from 'twin.macro';
 import { useNavigate } from 'react-router-dom';
 
+import bg_stu from '../assets/michigan.jpeg';
+
 const Btn = tw.div`flex flex-col items-center text-xl text-center`;
 export default function Landing() {
   const navigate = useNavigate();
@@ -24,12 +26,12 @@ export default function Landing() {
   }
   return (
     <HelmetProvider>
-      <div className='flex flex-col justify-center bg-darkgreen items-center h-screen w-full '>
+      <div className='flex flex-col justify-center bg-darkgreen items-center h-screen w-full ' >
         <Helmet>
           <title >Registration</title>
         </Helmet>
-        <h2 className='text-5xl font- text-lowyellow f mb-10'>Registration System | KMUTT</h2>
-        <div className='flex flex-col items-center bg-slate-200 rounded-xl p-8 space-y-8'>
+        <h2 className='text-5xl font- text-lowyellow mb-10'>Registration System | KMUTT</h2>
+        <div className='flex flex-col items-center bg-white rounded-xl p-8 justify-center'>
         
         <div className='flex flex-row justify-center '>
           <Btn>

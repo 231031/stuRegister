@@ -10,6 +10,7 @@ import { loginStudent } from '../../helpers/stuhelper';
 import { LoginSchema } from '../../Validations/validation';
 
 const Alert = tw.div`text-sm`;
+
 export default function Studentlogin() {
 
     const navigate = useNavigate();
@@ -59,14 +60,14 @@ export default function Studentlogin() {
                                 <Form>
                                     <div className='flex flex-col w-96 '>
                                         <div className='text-4xl flex justify-center mb-4 text-darkgreen '>Student Login</div>
-                                        <Field className='my-3 p-5 w-full h-16 rounded-xl bg-slate-200 hover:placeholder:text-slate-50 hover:outline-none hover:ring hover:bg-darkgreen hover:ring-darkgreen
+                                        <Field className='my-3 p-5 w-full h-16 rounded-xl bg-white hover:placeholder:text-slate-50 hover:outline-none hover:ring hover:bg-darkgreen hover:ring-darkgreen
                                                       focus:outline-none focus:ring focus:bg-gray-50 focus:ring-darkgreen focus:placeholder:text-gray-500' type='text' name='username' placeholder='username'></Field>
                                         <div className='flex justify-end pr-6 text-red-700'>
                                             {errors.username && touched.username ? (
                                                 <Alert>{errors.username}</Alert>
                                             ) : null}
                                         </div>
-                                        <Field className='my-3 p-5 w-full h-16 rounded-xl bg-slate-200 hover:placeholder:text-slate-50 hover:outline-none hover:ring hover:bg-darkgreen hover:ring-darkgreen
+                                        <Field className='my-3 p-5 w-full h-16 rounded-xl bg-white hover:placeholder:text-slate-50 hover:outline-none hover:ring hover:bg-darkgreen hover:ring-darkgreen
                                                       focus:outline-none focus:ring focus:bg-gray-50 focus:ring-darkgreen focus:placeholder:text-gray-500' type='password' name='password' placeholder='password'></Field>
                                         <div className='flex justify-end pr-6'>
                                             <a href=''>Reset Password</a>

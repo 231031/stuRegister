@@ -30,20 +30,20 @@ export default function Adminlogin() {
 
   return (
     <HelmetProvider>
-      <div className='flex justify-center flex-col h-screen'>
+      <div className='flex justify-center flex-col h-screen bg-darkgreen items-center'>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <Helmet>
             <title>A | Login</title>
         </Helmet>
-        <h3 className='text-center py-5 text-4xl text-bold'>Admin Login</h3>
-        <div className='flex justify-center'>
+        {/* <h3 className='text-center py-5 text-4xl text-bold'>Admin Login</h3> */}
+        <div className='flex justify-center  bg-sky rounded-xl p-10'>
           <form onSubmit={(e)=>handleSubmit(e)}>
+          <div className='text-4xl flex justify-center mb-4 text-darkgreen '>Admin Login</div>
             <div className='flex flex-col w-96'>
-            <input className='my-3 p-5 w-full h-16 rounded-full 
-            bg-gray-200 hover:outline-none hover:ring hover:bg-orange-500 hover:ring-orange-500 hover:placeholder:text-white
-            focus:outline-none focus:ring focus:bg-gray-50 focus:ring-orange-500 focus:placeholder:text-gray-500 ' type='text' id='key' placeholder='Id Key' onChange={(e)=>setKey(e.target.value)}/>
+            <input className='my-3 p-5 w-full h-16 rounded-xl bg-white hover:placeholder:text-slate-50 hover:outline-none hover:ring hover:bg-darkgreen hover:ring-darkgreen
+            focus:outline-none focus:ring focus:bg-gray-50 focus:ring-darkgreen focus:placeholder:text-gray-500' type='text' id='key' placeholder='Id Key' onChange={(e)=>setKey(e.target.value)}/>
               <div className='flex justify-center'>
-                  <button type="submit" className="my-3 w-1/3 h-10 rounded-full hover:bg-orange-500 text-white bg-orange-800">Login</button>
+                  <button type="submit" className="my-3 w-1/3 h-10 rounded-xl hover:bg-lowyellow hover:text-darkgreen text-lowyellow bg-darkgreen">Login</button>
               </div>
             </div>
           </form>

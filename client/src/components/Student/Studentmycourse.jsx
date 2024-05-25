@@ -77,7 +77,7 @@ export default function Studentmycourse() {
         </Helmet>
         <Headerstu data={data} />
         <div className='pl-5 py-10 flex flex-row bg-white'>
-          <div className='w-96 py-20 mt-10 bg-sky h-screen flex flex-col space-y-10 p-3'>
+          <div className='w-96 py-20 mt-10 bg-sky h-screen flex flex-col space-y-10 p-5'>
             <div className='image overflow-hidden '>
               <img className='h-3/4 mx-auto' src={profile} />
             </div>

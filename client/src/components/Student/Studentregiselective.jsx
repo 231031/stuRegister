@@ -44,7 +44,7 @@ export default function Studentregiselective() {
   useEffect(() => {
     const apiCourse = async () => {
       try {
-        if (month == 4 && date < 15) {
+        if (month == 4 && date < 30) {
           const detail = await getAvailableCourse(data.department_id, data.year, 'elective');
           setAvailable(detail);
         }
@@ -137,7 +137,7 @@ export default function Studentregiselective() {
 
           </div>
           {
-            (month == 4 && date < 15) ? (
+            (month == 4 && date < 30) ? (
               <div className='w-3/4 flex'>
                 {
                   (available.length > 0) ? (

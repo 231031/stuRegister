@@ -46,7 +46,7 @@ export default function Studentregiscourse() {
   useEffect(() => {
       const apiCourse = async () => {
         try {
-          if (month == 4 && date < 27) {
+          if (month == 4 && date < 30) {
             const detail = await getAvailableCourse(data.department_id, data.year, 'compulsory');
             setAvailable(detail); 
           } 
@@ -139,7 +139,7 @@ export default function Studentregiscourse() {
           </div>
           
           {
-            (month == 4 && date < 27) ? (
+            (month == 4 && date < 30) ? (
               <div className='w-3/4 flex justify-center '>
               {
                 (available.length > 0)? (

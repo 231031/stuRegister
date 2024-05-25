@@ -5,6 +5,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 
 import { getAvgF, getAvgM } from "../../helpers/comHelper";
 import Headercom from "./Headercom";
+import pic from '../../assets/scholarpic3.webp';
 
 const Row = tw.td`border-2 border-slate-600 py-1 px-2 text-sm`;
 
@@ -43,6 +44,11 @@ export default function Committeehome() {
                     <title>C | Home</title>
                 </Helmet>
                 <Headercom />
+                <div className="h-48 flex flex-col justify-center text-xl px-20 bg-center bg-clip-border border-b-4 border-darkgreen" style={{ backgroundImage: `url(${pic})` }}>
+                    <p className="font-bold text-darkgreen text-4xl">Welcome Committee</p>
+                    <p className="font-bold text-darkgreen text-2xl">Home</p>
+                </div>
+
                 <div className="w-full flex flex-row bg-white  h-[calc(100vh-40px)] ">
                     <div className="w-1/2 flex flex-col items-center my-10">
                         <h3 className="font-bold">The Average Father's Salary of Each Faculty</h3>
@@ -53,10 +59,10 @@ export default function Committeehome() {
                                         <tr className='font-bold'>
                                             <Row>Num</Row>
                                             <Row>Faculty Name</Row>
-                                            <Row>Average Salary</Row>   
+                                            <Row>Average Salary</Row>
                                         </tr>
                                     </thead>
-                                    <tbody> 
+                                    <tbody>
                                         {
                                             salary_f.map((fList, index) => (
                                                 <tr key={index}>

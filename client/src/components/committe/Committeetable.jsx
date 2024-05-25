@@ -136,8 +136,8 @@ export default function Committeetable() {
               </div>
             ) : (
               <div className='mt-20 h-72 font-bold'>
-                <h3 className='ml-7 text-xl text-lowbrown'>Applicant</h3>
-                <h2 className='my-4 ml-7 text-md text-lowbrown flex justify-center'>Choose Scholarship</h2>
+                <h3 className='ml-7 text-xl text-darkbrown'>Applicant</h3>
+                <h2 className='my-4 ml-7 text-md text-darkbrown flex justify-center'>Choose Scholarship</h2>
               </div>
             )
           }
@@ -147,7 +147,7 @@ export default function Committeetable() {
           {
             (count_fac.length) > 0 ? (
               <div className='mt-10 flex flex-col items-center'>
-                <h3 className="font-bold">The number of students who got scholarship in each faculty</h3>
+                <h3 className="font-bold">The number of students who got {sel} in each faculty</h3>
                 <table className='my-2 table-fixed border-collapse border border-lowbrown-500 text-center w-3/4'>
                   <thead>
                     <tr>

@@ -7,8 +7,9 @@ import toast, { Toaster } from "react-hot-toast";
 import Headercom from "./Headercom";
 import { getAllScholarships } from "../../helpers/helper";
 import { getScholarHis, updateCheck } from "../../helpers/comHelper";
+import pic from '../../assets/scholarpic3.webp';
 
-const Row = tw.td`border border-slate-600 py-1 px-2 text-sm`;
+const Row = tw.td`border border-lowbrown border-2 py-1 px-2 text-sm`;
 export default function Committeeeva() {
 
   const [data, setData] = useState("");
@@ -87,11 +88,15 @@ export default function Committeeeva() {
         </Helmet>
         <Headercom />
 
-        <div className='flex flex-col items-center'>
+        <div className="h-48 flex flex-col justify-center text-xl px-20 bg-center bg-clip-border border-b-4 border-darkgreen" style={{ backgroundImage: `url(${pic})` }}>
+          <p className="font-bold text-darkgreen text-4xl">Committee</p>
+          <p className="font-bold text-darkgreen text-2xl">Evaluation Applicant</p>
+        </div>
+        <div className='flex flex-col items-center w-full'>
           {
             (data.length > 0) ? (
               <div className='flex flex-col w-2/6 mt-5'>
-                <label htmlFor='sel' className="text-center">Select Scholarship</label>
+                <label htmlFor='sel' className="text-center font-bold text-darkbrown">Select Scholarship</label>
                 <select
                   className='border-2 border-sky rounded-md w-full mt-2 text-center' id='sel'
                   onChange={(e) => setSel(e.target.value)}>
@@ -112,9 +117,9 @@ export default function Committeeeva() {
           {
             (stu.length) > 0 ? (
               <div className='flex flex-col items-center'>
-                <table className='my-2 table-fixed border-collapse border border-lowbrown text-center'>
+                <table className='my-2 table-fixed border-collapse border border-lowbrown text-center w-1/2'>
                   <thead>
-                    <tr>
+                    <tr className="font-bold">
                       <Row>Num</Row>
                       <Row>Student Name</Row>
                       <Row>Department</Row>
@@ -131,9 +136,11 @@ export default function Committeeeva() {
                           <Row>{stuList.department_name}</Row>
                           <Row>{stuList.faculty_name}</Row>
                           <Row>
-                            <select onChange={(e) => handleChange(index, stuList.student_id, e.target.value, stuList.get_year)}>
+                            <select 
+                            className="border-2 rounded-md border-darkbrown hover:border-sky"
+                            onChange={(e) => handleChange(index, stuList.student_id, e.target.value, stuList.get_year)}>
                               <option value=''></option>
-                              <option value={true} className="text-greendark">pass</option>
+                              <option value={true} className="text-green-500">pass</option>
                               <option value={false} className="text-red-500">reject</option>
                             </select>
                           </Row>
@@ -143,12 +150,12 @@ export default function Committeeeva() {
                   </tbody>
                 </table>
                 <button onClick={(e) => handleUpdate()} type="button"
-                  className="px-3 py-1 bg-sky rounded-md my-10">SUBMIT</button>
+                  className="px-3 py-1 bg-sky rounded-md my-10 border-2 border-lowbrown hover:bg-lowbrown">SUBMIT</button>
               </div>
             ) : (
               <div className='my-5 h-72'>
                 <h3 className='ml-7 text-xl text-darkbrown font-bold'>Evaluation</h3>
-                <h2 className='my-4 ml-7 text-md text-lowbrown flex justify-center font-bold'>Choose Scholarship</h2>
+                <h2 className='my-4 ml-7 text-md text-darkbrown flex justify-center font-bold'>Choose Scholarship</h2>
               </div>
             )
           }

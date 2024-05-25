@@ -3,13 +3,13 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import tw from 'twin.macro';
 
-const Box = tw.div`w-1/2 h-auto bg-lowbrown rounded-lg mx-10 py-5 text-center`;
+const Box = tw.div`w-1/2 h-auto bg-sky  rounded-lg mx-10 py-5 text-center`;
 import Headerstu from './Headerstu';
 import { getInfo, getGpax, getTotalCredit, getAvgScholar } from '../../helpers/stuhelper';
 import { getAllActivitys } from '../../helpers/helper';
 
 // import bg_stu from '../../assets/home9.jpg';
-import bg_stu from '../../assets/book.jpg';
+import bg_stu from '../../assets/bghome1.jpg';
 
 export default function Studenthome() {
 
@@ -66,38 +66,30 @@ export default function Studenthome() {
         </Helmet>
         <Headerstu data={data} />
         {/* <div className='flex'> */}
-        <div className='h-80 flex flex-row justify-center items-center text-xl py-8 bg-cover  ;' style={{ backgroundImage: `url(${bg_stu})` }}>
-
-
+        <div className='h-80 flex flex-col justify-center text-xl  bg-top  px-20 ' style={{ backgroundImage: `url(${bg_stu})` }}>
+          <div className='text-7xl font-semi mb-5 mt-14 text-lowyellow'> Welcome Student </div>
+          <div className='text-white text-xl ml-2  '>
+          {data?.first_name} {data?.last_name}
+          </div>
+          <div className='text-white text-xl ml-2'>
+            <p>{data?.student_id}</p>
+          </div>
+          <div>
+            <p className='text-white text-xl ml-2'>GPA {gpax}</p>
+          </div>
+          <div className='text-white text-xl ml-2'>
+          <p>Total Credit {credit}</p>
+          </div>
         </div>
         <div>
-          <div className='flex flex-row justify-center p-5  w-fullscreen '>
-            <div className='flex flex-col justify-center w-1/4'>
-              <div className=' flex p-2 justify-between my-2'>
-                <p className='font-semibold '>Student ID </p>
-                <p>{data?.student_id}</p>
-              </div>
-              <div className=' flex  p-2 justify-between my-2'>
-                <p className='font-semibold'>Name</p>
-                <p >{data?.first_name} {data?.last_name}</p>
-              </div>
-              <div className='flex p-2 justify-between my-2'>
-                <p className='font-semibold'>GPA </p>
-                <p >{gpax}</p>
-              </div>
-              <div className='flex justify-between p-2 my-2'>
-                <p className='font-semibold'>Total Credit</p>
-                <p>{credit}</p>
-              </div>
-            </div>
-          </div>
+          
 
-          <div className=' flex justify-center flex-row py-10  h-auto '>
+          <div className=' flex justify-center flex-row py-10 h-auto bg-slate-100 '>
             {
               (scholar_his.length > 0) ? (
                 <Box className='flex flex-col items-center'>
-                  <h3 className='font-bold text-white text-lg'>The avg gpax and hours of students who got closed scholarships</h3>
-                  <table className='my-2 table-fixed  w-11/12 text-md text-white'>
+                  <h3 className='font-bold text-lg'>The avg gpax and hours of students who got closed scholarships</h3>
+                  <table className='my-2 table-fixed  w-11/12 text-md '>
                     <thead>
                       <tr className='font-bold'>
                         <td>Scholarship Name</td>
@@ -108,7 +100,7 @@ export default function Studenthome() {
                     <tbody>
                       {
                         scholar_his.map((sList, index) => (
-                          <tr key={index} className='w-11/12 bg-sky text-darkgreen text-sm border-y-8 border-lowbrown'>
+                          <tr key={index} className='w-11/12 bg-slate-200 text-darkgreen rounded- text-sm border-y-8 border-sky'>
                             <td className='py-1'>{sList.scholarship_name}</td>
                             <td className='py-1'>{parseFloat(sList.avg_gpax).toFixed(2)}</td>
                             <td className='py-1'>{parseFloat(sList.avg_hours).toFixed(2)}</td>
@@ -119,7 +111,7 @@ export default function Studenthome() {
                     </tbody>
                   </table>
                   <button onClick={(e) => handleScholar()}
-                    type='button' className='px-4 my-4 bg-sky text-darkbrown rounded-lg hover:bg-lowyellow hover:text-darkbrown'>Apply</button>
+                    type='button' className='px-4 my-4 bg-slate-200 h-10 text-darkbrown rounded-lg hover:bg-lowyellow hover:text-darkbrown'>Apply</button>
 
                 </Box>
               ) : (
@@ -131,9 +123,9 @@ export default function Studenthome() {
             {
               (activity.length > 0) ? (
                 <Box className='flex flex-col items-center '>
-                  <table className='my-2table-fixed  w-11/12 text-lg text-white'>
+                  <table className='my-2table-fixed  w-11/12 text-lg '>
                     <thead>
-                      <tr className='font-bold'>
+                      <tr className='font-bold '>
                         <td>Activity Name</td>
                         <td>Limit</td>
                         <td>Get Hours</td>
@@ -143,7 +135,7 @@ export default function Studenthome() {
                     <tbody>
                       {
                         activity.map((aList, index) => (
-                          <tr key={index} className='w-11/12 bg-sky text-darkgreen text-sm border-y-8  border-lowbrown'>
+                          <tr key={index} className='w-11/12 bg-slate-200 text-darkgre text-sm border-y-8  border-sky'>
                             <td className='py-1'>{aList.activity_name}</td>
                             <td className='py-1'>{aList.finite}</td>
                             <td className='py-1'>{aList.hours}</td>
@@ -161,10 +153,14 @@ export default function Studenthome() {
                   <p className='mt-5'>No Activity Available</p>
                 </Box>
               )
+              
             }
           </div>
         </div>
         {/* </div> */}
+        <div className='flex justify-center items-center text-lowbrown text-3xl bg-lowyellow h-32'>
+          Student Register | KMUTT
+        </div>
       </div>
     </HelmetProvider>
 

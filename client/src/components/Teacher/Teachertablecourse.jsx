@@ -53,20 +53,16 @@ export default function Teachertablecourse() {
       {/* <----textheader----> */}
       <div className="container px-2 py-24 mx-auto">
         <div id="feedbackModal" className="feedbackModal">
-          <div className="modalContent">
-            <h1 className="text-center text-3xl font-semibold capitalize text-sky dark:text-sky lg:text-4xl">
-              My Course
-            </h1>
-            <h2 style={{ textAlign: "center", marginTop: "0px" }}>
-              KMUTT UNIVERSITY
-            </h2>
-
-            <div className="container mt-3">
-              <h1 className="text-center  text-gray-600  ">
-                Enhancing Your Learning Journey: Manage My Course
+          <div className="flex flex-col justify-center text-center space-y-8">
+              <h1 className="text-3xl font-semibold capitalize text-sky dark:text-sky lg:text-4xl ">
+                My Course
               </h1>
-              <br />
-            </div>
+              <h2 className="">
+                KMUTT UNIVERSITY
+              </h2>
+              <h1 className="text-gray-600  ">
+                  Enhancing Your Learning Journey: Manage My Course
+              </h1>  
           </div>
         </div>
 
@@ -82,13 +78,13 @@ export default function Teachertablecourse() {
                       <tr>
                         <th
                           scope="col"
-                          className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                          className="text-base font-semibold text-gray-900 px-6 py-4 text-left"
                         >
-                          #
+                          No.
                         </th>
                         <th
                           scope="col"
-                          className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                          className="text-base font-semibold text-gray-900 px-6 py-4 text-left"
                         >
                           My course
                         </th>

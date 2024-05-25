@@ -67,10 +67,10 @@ export default function Teacherpersonal() {
           <form onSubmit={formik.handleSubmit}>
             <div id="feedbackModal" className="feedbackModal">
               <div className="modalContent">
-                <h1 className="text-center text-3xl font-semibold capitalize text-sky dark:text-sky lg:text-4xl">
+                <h1 className="text-center text-3xl font-semibold capitalize text-sky dark:text-sky lg:text-4xl mb-5">
                   Edit
                 </h1>
-                <h2 style={{ textAlign: "center", marginTop: "0px" }}>
+                <h2 className='text-lg' style={{ textAlign: "center", marginTop: "0px" }}>
                   Your Information
                 </h2>
               </div>
@@ -87,20 +87,20 @@ export default function Teacherpersonal() {
                         <tr>
                           <th
                             scope="col"
-                            className="text-sm font-medium text-gray-900 px-6 py-4 text-center"
+                            className="text-base font-semibold text-gray-900 px-6 py-4 text-center"
                           >
                             Type
                           </th>
                           <th
                             scope="col"
-                            className="text-sm font-medium text-gray-900 px-6 py-4 text-center"
+                            className="text-base font-semibold text-gray-900 px-6 py-4 text-center"
                           >
                             Your old Information
                           </th>
 
                           <th
                             scope="col"
-                            className="text-sm font-medium text-gray-900 px-6 py-4 text-center"
+                            className="text-base font-semibold text-gray-900 px-6 py-4 text-center"
                           >
                             Fill new information
                           </th>
@@ -119,15 +119,15 @@ export default function Teacherpersonal() {
 
                           <div class="flex flex-row justify-center mr-10 pt-1">
                             <div
-                              className="bg-white hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border-3 border-lowbrown hover:border-transparent rounded mr-1"
+                              className=" hover:bg-Slate ml-10 font-semibold hover:text-black py-2 px-4 pt-1 border-3 border-lowbrown hover:border-transparent rounded mr-1"
                             ><input
                               name="email"
                               onChange={formik.handleChange}
                               onBlur={formik.handleBlur}
                               value={formik.values.email}
-                              className='border-1 border-darkbrown rounded-md my-3 bg-gray ' type='text'  ></input>
+                              className='border-1 border-darkbrown rounded-md my-3 p-2 bg-gray h-10 ' type='text'  ></input>
                               {formik.touched.email && formik.errors.email ? (
-                                <p className="text-red-500 text-xs italic ">{formik.errors.email}</p>
+                                <p className="text-red-500 text-center text-xs italic ">{formik.errors.email}</p>
                               ) : null}
                             </div>
                           </div>
@@ -143,13 +143,13 @@ export default function Teacherpersonal() {
 
                           < div class="flex flex-row justify-center mr-10 pt-1">
                             <div
-                              className="bg-white hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border-3 border-lowbrown hover:border-transparent rounded mr-1"
+                              className=" hover:bg-Slate font-semibold ml-10 hover:text-black py-2 px-4 pt-1 border-3 border-lowbrown hover:border-transparent rounded mr-1"
                             ><input
                               name="phone"
                               onChange={formik.handleChange}
                               onBlur={formik.handleBlur}
                               value={formik.values.phone}
-                              className='border-1 border-darkbrown rounded-md my-3 bg-gray' type='text' ></input>
+                              className='border-1 border-darkbrown rounded-md my-3 p-2 h-10 bg-gray' type='text' ></input>
                               {formik.touched.phone && formik.errors.phone ? (
                                 <p className="text-red-500 text-xs italic">{formik.errors.phone}</p>
                               ) : null}
@@ -167,13 +167,13 @@ export default function Teacherpersonal() {
 
                           < div class="flex flex-row justify-center mr-10 pt-1">
                             <div
-                              className="bg-white hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border-3 border-lowbrown hover:border-transparent rounded mr-1"
+                              className=" hover:bg-Slate font-semibold ml-10 hover:text-black py-2 px-4 pt-1 border-3 border-lowbrown hover:border-transparent rounded mr-1"
                             ><input
                               name="address"
                               onChange={formik.handleChange}
                               onBlur={formik.handleBlur}
                               value={formik.values.address}
-                              className='border-1 border-darkbrown rounded-md my-3 bg-gray' type='text' ></input>
+                              className='border-1 border-darkbrown rounded-md my-3 bg-gray h-10 p-2' type='text' ></input>
                               {formik.touched.address && formik.errors.address ? (
                                 <p className="text-red-500 text-xs italic">{formik.errors.address}</p>
                               ) : null}
@@ -192,13 +192,13 @@ export default function Teacherpersonal() {
 
                           < div class="flex flex-row justify-center mr-10 pt-1">
                             <div
-                              className="bg-white hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border-3 border-lowbrown hover:border-transparent rounded mr-1"
+                              className=" hover:bg-Slate  font-semibold ml-10 hover:text-black py-2 px-4 pt-1 border-3 border-lowbrown hover:border-transparent rounded mr-1"
                             ><input
                               name="city"
                               onChange={formik.handleChange}
                               onBlur={formik.handleBlur}
                               value={formik.values.city}
-                              className='border-1 border-darkbrown rounded-md my-3 bg-gray' type='text' ></input>
+                              className='border-1 border-darkbrown rounded-md my-3  p-2 h-10 bg-gray' type='text' ></input>
                               {formik.touched.city && formik.errors.city ? (
                                 <p className="text-red-500 text-xs italic">{formik.errors.city}</p>
                               ) : null}
@@ -216,13 +216,13 @@ export default function Teacherpersonal() {
 
                           < div class="flex flex-row justify-center mr-10 pt-1">
                             <div
-                              className="bg-white hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border-3 border-lowbrown hover:border-transparent rounded mr-1"
+                              className=" hover:bg-Slate  font-semibold ml-10 hover:text-black py-2 px-4 pt-1 border-3 border-lowbrown hover:border-transparent rounded mr-1"
                             ><input
                               name="state"
                               onChange={formik.handleChange}
                               onBlur={formik.handleBlur}
                               value={formik.values.state}
-                              className='border-1 border-darkbrown rounded-md my-3 bg-gray' type='text' ></input>
+                              className='border-1 border-darkbrown rounded-md my-3 h-10 p-2 bg-gray' type='text' ></input>
                               {formik.touched.state && formik.errors.state ? (
                                 <p className="text-red-500 text-xs italic">{formik.errors.state}</p>
                               ) : null}
@@ -240,13 +240,13 @@ export default function Teacherpersonal() {
 
                           < div class="flex flex-row justify-center mr-10 pt-1">
                             <div
-                              className="bg-white hover:bg-Slate text-white font-semibold hover:text-black py-2 px-4 pt-1 border-3 border-lowbrown hover:border-transparent rounded mr-1"
+                              className=" hover:bg-Slate  font-semibold ml-10 hover:text-black py-2 px-4 pt-1 border-3 border-lowbrown hover:border-transparent rounded mr-1"
                             ><input
                               name="zip_code"
                               onChange={formik.handleChange}
                               onBlur={formik.handleBlur}
                               value={formik.values.zip_code}
-                              className='border-1 border-darkbrown rounded-md my-3 bg-gray' type='text' ></input>
+                              className='border-1 border-darkbrown rounded-md my-3 p-2 h-10 bg-gray' type='text' ></input>
                               {formik.touched.zip_code && formik.errors.zip_code ? (
                                 <p className="text-red-500 text-xs italic">{formik.errors.zip_code}</p>
                               ) : null}
@@ -263,7 +263,7 @@ export default function Teacherpersonal() {
               </div>
             </div>
             <div className='flex justify-center'>
-              <button type="submit" className="btn border-2 bg-lowbrown text-white rounded-md my-3 w-1/5 ">SUBMIT</button>
+              <button type="submit" className="btn border-2 bg-lowbrown text-white rounded-lg w-28 h-12  my-3  hover:bg-sky  ">SUBMIT</button>
             </div>
           </form>
         </div>

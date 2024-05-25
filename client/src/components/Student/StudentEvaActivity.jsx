@@ -65,7 +65,7 @@ export default function EvaluateActivity() {
 
         <div className="h-1/3 bg-sky dark:bg-sky pt-20">
           <div className="container mx-auto px-6 py-10">
-            <h1 className="text-center text-3xl font-semibold capitalize text-darkgreen dark:text-darkgreen lg:text-4xl">Evaluate Activity</h1>
+            <h1 className="text-center text-3xl font-semibold capitalize text-darkgren dark:text-darkgreen lg:text-4xl">Evaluate Activity</h1>
 
             <div className="mx-auto mt-6 flex justify-center">
               <span className="inline-block h-1 w-40 rounded-full bg-darkbrown"></span>
@@ -88,14 +88,14 @@ export default function EvaluateActivity() {
                     <table className="min-w-full">
                       <thead className="bg-gray-200 border-b">
                         <tr>
-                          <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                            #
+                          <th scope="col" className="text-base font-semibold text-gray-900 px-6 py-4 text-left">
+                            No.
                           </th>
-                          <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                          <th scope="col" className="text-base font-semibold text-gray-900 px-6 py-4 text-left">
                             Activity
                           </th>
 
-                          <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                          <th scope="col" className="text-base font-semibold text-gray-900 px-6 py-4 text-left">
 
                           </th>
                         </tr>

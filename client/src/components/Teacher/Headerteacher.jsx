@@ -34,7 +34,7 @@ export default function Headerteacher({ data }) {
             <p>POS : {data?.position}</p>
           </div> */}
           <Dropdown>
-            <Btn onClick={toggleUser}><FontAwesomeIcon className='ml-2 size-9' icon="fa-solid fa-circle-user" /></Btn>
+            <Btn onClick={toggleUser}><FontAwesomeIcon className='ml-2 size-9 ' icon="fa-solid fa-circle-user" /></Btn>
             <div className={isUserOpen ? 'block' : 'hidden'}>
               <List className='w-46'>
                 <li><p>ID : {data?.teacher_id}</p></li>

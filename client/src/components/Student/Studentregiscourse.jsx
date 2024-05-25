@@ -120,7 +120,7 @@ export default function Studentregiscourse() {
         </Helmet>
         <Headerstu data={data}/>
         <div className='pl-5 py-10 flex flex-row bg-white'>
-          <div className='w-96 py-20 mt-10 bg-sky h-screen flex flex-col space-y-10 p-5 '>
+          <div className='w-80 py-20 mt-10 bg-sky h-screen flex flex-col space-y-10 p-5 '>
             <div className='image overflow-hidden '>
               <img className=' h-3/4 mx-auto' src={profile}/>
             </div>
@@ -144,7 +144,7 @@ export default function Studentregiscourse() {
               {
                 (available.length > 0)? (
                   <div className='w-3/4 flex flex-col justify-center items-center'>
-                    <p className='text-lg font-bold'>Compulsory Courses</p>
+                    <p className='text-2xl font-bold'>Compulsory Courses</p>
                     <table className='text-center w-11/12 border-2 border-sky mt-10'>
                     <thead>
                       <tr>
@@ -191,7 +191,7 @@ export default function Studentregiscourse() {
                     }
                     </tbody>
                     </table>
-                    <button className='mt-10 py-1 px-2 bg-sky rounded-md border-2 border-darkbrown' 
+                    <button className='mt-10 py-1 px-2 bg-sky rounded-md h-10 w-20 hover:bg-slate-200' 
                     type='button' onClick={(e)=>handleSubmit()}>SUBMIT</button>
                   </div>
                   

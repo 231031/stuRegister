@@ -80,14 +80,14 @@ export default function AttendedActivity() {
                     <table className="min-w-full">
                       <thead className="bg-gray-200 border-b">
                         <tr>
-                          <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                            #
+                          <th scope="col" className="text-base  font-semibold text-gray-900 px-6 py-4 text-left">
+                            No.
                           </th>
-                          <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                          <th scope="col" className="text-base font-semibold text-gray-900 px-6 py-4 text-left">
                             Activity
                           </th>
 
-                          <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                          <th scope="col" className="text-base font-semibold  text-gray-900 px-6 py-4 text-left">
 
                           </th>
                         </tr>

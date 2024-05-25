@@ -81,11 +81,11 @@ export default function Studentmycourse() {
             <div className='image overflow-hidden '>
               <img className='h-3/4 mx-auto' src={profile} />
             </div>
-            <div className='flex flex-row flex-wrap justify-between'>
+            <div className='flex flex-row  justify-between'>
               <p>Student ID</p>
               <p>{data?.student_id}</p>
             </div>
-            <div className='flex flex-row flex-wrap justify-between'>
+            <div className='flex flex-row justify-between'>
               <p>Year</p>
               <p>{new Date().getFullYear() + 543 - data?.year}</p>
             </div>
@@ -100,7 +100,7 @@ export default function Studentmycourse() {
               <p className='mr-8'>Year</p>
               {
                 (data?.year) ? (
-                  <select className='text-white w-1/2 bg-darkbrown border-0 rounded-md' onChange={(e) => setSelY(e.target.value)}>
+                  <select className='text-white w-1/2 h-8 bg-darkbrown border-0 rounded-md' onChange={(e) => setSelY(e.target.value)}>
                     <option value=''></option>
                     {
                       Array.from({ length: new Date().getFullYear() + 543 - data?.year }, (_, index) => index + 1).map((year) => (
@@ -114,7 +114,7 @@ export default function Studentmycourse() {
               }
             </div>
 
-            <div className='flex flex-row mt-10 w-1/4'>
+            <div className='flex flex-row mt-10 h-8 w-1/4'>
               <p className='mr-8'>Semester</p>
               <select className='text-white w-1/2 bg-darkbrown border-0 rounded-md' onChange={(e) => setSelT(e.target.value)}>
                 <option value=''></option>

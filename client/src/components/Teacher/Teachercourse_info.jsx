@@ -61,14 +61,17 @@ export default function Teachercourse() {
       {/* <----textheader----> */}
       <div className='container px-2 py-24 mx-auto'>
         <div id="feedbackModal" className="feedbackModal">
-                <div className="modalContent">
-                  <h1 className="text-center text-3xl font-semibold capitalize text-sky dark:text-sky lg:text-4xl">{course?.course_id}: {course?.course_name}</h1>
-                  <h2 style={{ textAlign: 'center', marginTop: '0px' }}>KMUTT UNIVERSITY</h2>
+                <div className="flex flex-col justify-center text-center space-y-8">
+                  <h1 className="text-3xl font-semibold capitalize text-sky dark:text-sky lg:text-4xl">{course?.course_id}: {course?.course_name}</h1>
+                  <h2>KMUTT UNIVERSITY</h2>
 
 
-                  <div className = 'container mt-3'>
-                      <h1  className='text-center  text-gray-600 text-2xl  '>DESCRIPTION</h1><br />
-                      <p className='text-center'>{course?.description}</p>
+                  <div className="bg-sky flex flex-col mx-10">
+                      <h1  className=' text-black text-xl font-semibold text-left m-4'>DESCRIPTION</h1>
+                    <div className="bg-slate-100">
+                      <p className='text-left m-4'>{course?.description}</p>
+                    </div>
+                      
                   </div>
                 </div>
           </div>

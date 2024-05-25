@@ -121,19 +121,16 @@ export default function AllActivity() {
 
       <div>
           <div i>
-            <section className=" w-dvw max-h-[80rem] relative">
-              <div className="absolute inset-0 z-0">
-                  <img className="h-100 w-full object-cover bg-center mt-0 z-0" src={Accimg} alt=""  />
-              </div>
-              <div className="max-w-[120rem] mx-auto h-full relative z-[2] px-6 md:px-8 lg:px-10">
-                  <div className="h-full w-full  flex flex-col relative space-y-6">
-                      <div className="mt-10 mb-0 text-gray-50 md:pb-36 space-y-10 ">
-                          <span className="font-light text-sm text-accent-500 ">Unlock Your Potential</span>
-                          <h1 className="text-3xl md:text-5xl max-w-[30rem] font-medium">Activity </h1>
+            <section className=" w-dvw relative">
+              
+              <div className="max-w-[120rem] bg-red-500 mx-auto h-96 relative z-[2] px-6 md:px-8 lg:px-10 bg-cover bg-bottom"  style={{ backgroundImage: `url(${Accimg})` }}>
+                  <div className="  flex flex-col relative space-y-6">
+                      <div className="mt-20 flex flex-col  mb-0 text-gray-50 md:pb-36 space-y-10  ">
+                          <span className="font-light text-sm text-accent-500 ml-4">Unlock Your Potential</span>
+                          <h1 className="text-3xl md:text-5xl max-w-[30rem] ml-4 font-medium">Activity </h1>
                           <p className="max-w-[30rem] font-light ml-4 before:content-[''] relative before:absolute before:w-px before:h-full before:left-0 before:top-0 before:-translate-x-4 before:bg-accent-500 md:text-base text-sm">{text_AC.AC1}{text_AC.AC2}</p>
-                          
                       </div>
-                      <div className="md:absolute md:right-0 md:bottom-32 text-gray-50 my-16">
+                      <div className="md:absolute md:right-0 md:bottom-32 text-gray-50 my-10">
                           <ul className="flex md:flex-col items-center justify-center gap-2">
                               <li className="h-6 w-6 block rounded-full bg-accent-400 text-gray-50">
                                   <a href="" className="block h-full w-full p-1">
@@ -148,7 +145,7 @@ export default function AllActivity() {
       </div>
 
         {/* <----section3-----> */}
-        <section className="text-gray-400 body-font">
+        <section className="text-gray-400  px-12 body-font">
       <div className="container px-2 py-24 mx-auto">
           {/* <div className="h-1 bg-gray-800 rounded overflow-hidden">
             <div className="w-24 h-full bg-indigo-500"></div>

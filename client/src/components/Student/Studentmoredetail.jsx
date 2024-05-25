@@ -51,13 +51,18 @@ export default function Studentmoredetail() {
         </Helmet>
         <Headerstu data={data} />
 
-        <div className='mt-10 flex flex-col justify-start items-center bg-white h-[calc(100vh-40px)]'>
+        <div className='py-10 flex flex-col justify-start items-center bg-white h-screen'>
           {
             (course) ? (
-                <div className='w-9/12'>
+                <div className='w-9/12 '>
                   <div className='text-4xl text-bold mb-5 underline underline-offset-2 my-20 '>{course?.course_name}</div>
-                  <div className='text-xl text-white p-5  rounded-2xl bg-lowbrown'>
-                    {course?.description}
+                  <div className='flex flex-col bg-sky rounded-lg'>
+                    <div className='flex justify-start text-xl p-4 font-semibold items-center'>
+                      Description
+                     </div>
+                    <div className='text-lg text-black p-4  bg-slate-100 rounded-b-lg'>
+                      {course?.description}
+                    </div>
                   </div>
                 </div>
 

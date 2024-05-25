@@ -111,16 +111,16 @@ export default function Teacherscore() {
       {/* <----textheader----> */}
       <div className="container px-2 py-24 mx-auto">
         <div id="feedbackModal" className="feedbackModal">
-          <div className="modalContent">
-            <h1 className="text-center text-3xl font-semibold capitalize text-sky dark:text-sky lg:text-4xl">
+          <div className="flex flex-col justify-center text-center space-y-8">
+            <h1 className="text-3xl font-semibold capitalize text-sky dark:text-sky lg:text-4xl">
               Submit score
             </h1>
-            <h2 style={{ textAlign: "center", marginTop: "0px" }}>
+            <h2 >
               KMUTT UNIVERSITY
             </h2>
 
-            <div className="container mt-3">
-              <h1 className="text-center  text-gray-600 text-2xl  ">
+            <div className="">
+              <h1 className="text-gray-600 text-2xl  ">
                 {student[0]?.course_id}: {student[0]?.course_name}
               </h1>
               <br />
@@ -140,25 +140,25 @@ export default function Teacherscore() {
                       <tr>
                         <th
                           scope="col"
-                          className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                          className="text-base font-semibold text-gray-900 px-6 py-4 text-left"
                         >
                           Student ID
                         </th>
                         <th
                           scope="col"
-                          className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                          className="text-base font-semibold text-gray-900 px-6 py-4 text-left"
                         >
                           Student Name
                         </th>
                         <th
                           scope="col"
-                          className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                          className="text-base font-semibold text-gray-900 px-6 py-4 text-left"
                         >
                           Department Name
                         </th>
                         <th
                           scope="col"
-                          className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                          className="text-base font-semibold text-gray-900 px-6 py-4 text-left"
                         >
                           Faculty Name
                         </th>
@@ -166,7 +166,7 @@ export default function Teacherscore() {
                         <div className="flex flex-row-reverse mr-10 pt-1">
                           <th
                             scope="col"
-                            className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                            className="text-base font-semibold text-gray-900 px-6 py-4 text-left"
                           >
                             Grade
                           </th>

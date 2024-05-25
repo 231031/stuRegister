@@ -81,16 +81,16 @@ export default function TeacherEditcourse() {
       {/* <----textheader----> */}
       <div className="container px-2 py-24 mx-auto">
         <div id="feedbackModal" className="feedbackModal">
-          <div className="modalContent">
-            <h1 className="text-center text-3xl font-semibold capitalize text-sky dark:text-sky lg:text-4xl">
+          <div className="flex flex-col justify-center text-center space-y-8">
+            <h1 className=" text-3xl font-semibold capitalize text-sky dark:text-sky lg:text-4xl">
               Edit Course
             </h1>
-            <h2 style={{ textAlign: "center", marginTop: "0px" }}>
+            <h2 >
               KMUTT UNIVERSITY
             </h2>
 
-            <div className="container mt-3">
-              <h1 className="text-center  text-gray-600 text-2xl  ">
+            <div>
+              <h1 className=" text-gray-600 text-2xl  ">
                 Edit Information & Course Name
               </h1>
               <br />

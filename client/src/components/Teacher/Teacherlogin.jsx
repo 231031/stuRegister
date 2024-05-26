@@ -15,7 +15,7 @@ export default function Teacherlogin() {
   const navigate = useNavigate();
   return (
     <HelmetProvider>
-      <div className='flex justify-center flex-col h-screen bg-darkgreen items-center'>
+      <div className='flex justify-center flex-col h-screen bg-white items-center'>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <Helmet>
             <title>T | Login</title>

@@ -116,10 +116,10 @@ export default function Studentregiselective() {
           <title>Stu | RegisterCourse</title>
         </Helmet>
         <Headerstu data={data} />
-        <div className='container flex flex-row'>
-          <div className='w-1/4 bg-slate-300 h-[calc(100vh-40px)] p-10'>
-            <div className='flex flex-col items-center my-10'>
-              <img className='rounded-full w-1/2 h-1/2 border-2 border-sky' src={profile} />
+        <div className='pl-5 py-10 flex flex-row bg-whit'>
+          <div className='w-80 py-20 mt-10 bg-sky h-screen flex flex-col space-y-10 p-5 '>
+            <div className='image overflow-hidden'>
+              <img className='h-3/4 mx-auto' src={profile} />
             </div>
             <div className='flex flex-row justify-between'>
               <p>Student ID</p>
@@ -189,7 +189,7 @@ export default function Studentregiselective() {
                           }
                         </tbody>
                       </table>
-                      <button className='mt-10 py-1 px-2 bg-sky rounded-md border-2 border-darkbrown'
+                      <button className='mt-10 py-1 px-2 bg-sky rounded-md h-10 w-20 hover:bg-slate-200'
                         type='button' onClick={(e) => handleSubmit()}>SUBMIT</button>
                     </div>
 

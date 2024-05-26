@@ -83,7 +83,7 @@ export default function Scholarform() {
 
       <form onSubmit={formik.handleSubmit}>
         {/* <-----section1-----> */}
-        <div className="mt-10 md:container md:mx-auto">
+        <div className="py-20 px-20 md:container md:mx-auto">
         <label className="block uppercase tracking-wide text-gray-700 text-xl font-bold " htmlFor="Agent Register">
         Agent Register
         </label>

@@ -40,15 +40,16 @@ export default function Landing() {
             <p className='mt-4 text-white text-2xl '>Admin</p>
           </Btn>
           <Btn>
-            <FontAwesomeIcon onClick={(e)=>teacher()}
-            className='size-20 mx-8 p-10 rounded-full bg-blue-300 cursor-pointer hover:bg-blue-500' icon="fa-solid fa-chalkboard-user" />
-            <p className='mt-4 text-white text-2xl'>Teacher</p>
-          </Btn>
-          <Btn>
             <FontAwesomeIcon onClick={(e)=>committee()}
             className='size-20 mx-8 p-10 rounded-full bg-red-300 cursor-pointer hover:bg-red-500' icon="fa-solid fa-user-check" />
             <p className='mt-4 text-white text-2xl'>Committee</p>
           </Btn>
+          <Btn>
+            <FontAwesomeIcon onClick={(e)=>teacher()}
+            className='size-20 mx-8 p-10 rounded-full bg-blue-300 cursor-pointer hover:bg-blue-500' icon="fa-solid fa-chalkboard-user" />
+            <p className='mt-4 text-white text-2xl'>Teacher</p>
+          </Btn>
+          
           <Btn>
             <FontAwesomeIcon onClick={(e)=>student()}
             className='size-20 mx-8 p-10 rounded-full bg-lime-300 cursor-pointer hover:bg-lime-500 ' icon="fa-solid fa-user-graduate" />

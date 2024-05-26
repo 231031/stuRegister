@@ -50,7 +50,7 @@ export default function Detailcourse() {
           <title>Stu | CourseDetail</title>
         </Helmet>
         <Headerstu data={data} />
-        <div className='bg-white py-10 h-screen'>
+        <div className=' pt-10 h-screen'>
           <div className='relative flex flex-col justify-end bg-right text-white h-2/5 bg-brightness-50' style={{backgroundImage: `url(${selec_course})`}}>
             <div className='absolute inset-0 bg-cover bg-brightness-50'></div>
             <div className=' font-extrabold text-4xl ml-40 text-lowyellow'>Published Classes</div>
